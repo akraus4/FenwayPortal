@@ -1,0 +1,40 @@
+
+.selectTeamOrMemberDrop{
+    margin-top:55px;
+}
+.selectSprint{
+    /* margin-left: 35px; */
+    width:100%;
+}
+
+#formCompleteButton{
+    margin-left: 35px;
+    font-weight: bold;
+    margin-top: 15px;
+    min-width: 70%;
+}
+#metricsPageRadio{
+    margin-top: 25px;
+    margin-left: 43%;
+}
+#barGraphMetricsPageDiv{
+    margin-top: 2px;
+}
+#barGraphMetricsUpdateBtn{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+#metricsPageRadioRight{
+    margin-left: 5px;
+}
+#gridGraphMetricsPageDiv {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 300px;
+  overflow: auto;
+  max-height: 475px;
+  margin-bottom: 20px;
+}
+
+
