@@ -1,0 +1,107 @@
+<div class="row">
+    <div class="col-sm-12">
+        <header number=0></header>
+    </div>
+</div>
+
+<div class="selectTeamOrMemberDrop" class="row">
+  <div class="col-3">
+    <!--  This is the drop down to select the team/ teams   -->
+    <mat-form-field class="selectSprint">
+      <mat-select placeholder="Select Teams" [formControl]="Team" multiple>
+        <mat-option *ngFor="let TeamChoice of TeamChoices" [value]="team">{{TeamChoice}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-3">
+    <!--  This is the drop down to select the sprints from   -->
+    <mat-form-field class="selectSprint">
+      <mat-select placeholder='Sprints From:'>
+        <mat-option *ngFor="let SprintsFrom of SprintsFromChoices" [value]="SprintsFrom.value">
+          {{ SprintsFrom.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-3">
+    <!-- This is the drop down to select the sprints to.   -->
+    <mat-form-field class="selectSprint">
+      <mat-select placeholder="Sprints To:">
+        <mat-option *ngFor="let SprintsTo of SprintsToChoices" [value]="SprintsTo.value">
+          {{ SprintsTo.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-3">
+    <!-- This is the button to search the metrics   -->
+    <button mat-button id="formCompleteButton">Display</button>
+  </div>
+</div>
+
+
+<div class="row" id="metricsPageRadio">
+    <div class="col-12">
+  <!-- These are the radio buttons to determine grid or bar graph  -->
+  <mat-radio-group>
+      <mat-radio-button (change)="showBarGraph();" type="radio" value="1" checked="true">Bar </mat-radio-button>
+      <mat-radio-button (change)="showGridGraph();" type="radio" id="metricsPageRadioRight" value="2">Grid</mat-radio-button>
+    </mat-radio-group>
+      </div>
+</div>
+
+
+<div class="row" id="barGraphMetricsPageDiv">
+    <div class="col-12">
+      <!-- This is the Bar Graph for the Metrics Page. -->
+            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+              [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+          <button id="BarGraphMetricsPageUpdateBtn" (click)="randomize()">Update</button>
+    </div>
+  </div>
+
+
+  <div class="row" id="gridGraphMetricsPageDiv">
+      <div class="col-12">
+          <mat-table #table [dataSource]="dataSource">
+
+              <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+          
+              <!-- Position Column -->
+              <ng-container matColumnDef="position">
+                <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+              </ng-container>
+          
+              <!-- Name Column -->
+              <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+              </ng-container>
+          
+              <!-- Weight Column -->
+              <ng-container matColumnDef="weight">
+                <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+              </ng-container>
+          
+              <!-- Symbol Column -->
+              <ng-container matColumnDef="symbol">
+                <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+              </ng-container>
+          
+              <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+              <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+            </mat-table>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
