@@ -12,47 +12,97 @@ var connection = mysql.createConnection({
 // 	password: '6UhjVvAgM_Jm',
 // 	database: 'fg_metrics_dev2'
 
-connection.connect(function() {
-	console.log("Database connected");
+connection.connect(function () {
+	// console.log("Database connected");
 });
 
-// // //This pulls back sprints from the sprint table.
-module.exports.findAllSprints = function(callback) {
-	var queryString = 'SELECT * FROM agile_sprint ORDER BY agile_sprint_id DESC';
-	connection.query(queryString, function(err, rows, fields) {
+//  This pulls back all Team Names from system table
+module.exports.findAllTeams = function (callback) {
+	var queryString = 'SELECT * FROM agile_system ORDER BY agile_system_name ASC';
+	connection.query(queryString, function (err, rows, fields) {
 		if (err) throw err;
-	 callback(err, rows, fields)
+		callback(err, rows, fields)
+		for (var i in rows) {
+			//  console.log('Teams: ', rows[i]);
+		}
+	});
+}
+
+// // //This pulls back sprints from the sprint table.
+module.exports.findAllSprints = function (callback) {
+	var queryString = 'SELECT * FROM agile_sprint ORDER BY agile_sprint_id ASC';
+	connection.query(queryString, function (err, rows, fields) {
+		if (err) throw err;
+		callback(err, rows, fields)
+		for (var i in rows) {
+			// console.log('Sprints: ', rows[i]);
+		}
+	});
+}
+
+// // //This pulls back sprints by system.
+module.exports.findAllSprintsBySystem = function (system_id, callback) {
+	var queryString = "SELECT * FROM agile_sprint WHERE agile_system_id = '" + system_id + "' ORDER BY agile_sprint_name ASC";
+	console.log(queryString);
+	connection.query(queryString, function (err, rows, fields) {
+		if (err) throw err;
+		callback(err, rows, fields)
 		for (var i in rows) {
 			console.log('Sprints: ', rows[i]);
 		}
 	});
 }
 
-//  This pulls back all Team Names from system table
- module.exports.findAllTeams = function(callback) {
- var queryString = 'SELECT * FROM agile_system ORDER BY agile_system_id DESC';
- connection.query(queryString, function(err, rows, fields) {
-     if (err) throw err;
-  callback(err, rows, fields)
-     for (var i in rows) {
-         console.log('Teams: ', rows[i]);
-     }
- });
-}
+// // // //This pulls back sprints by system.
+// module.exports.findAllStoriesBySprint = function (sprint_id, callback) {
+// 	var queryString = "SELECT * FROM agile_story WHERE agile_sprint_id = '" + sprint_id + "' ORDER BY agile_story_name ASC";
+// 	console.log(queryString);
+// 	connection.query(queryString, function (err, rows, fields) {
+// 		if (err) throw err;
+// 		callback(err, rows, fields)
+// 		for (var i in rows) {
+// 			console.log('story: ', rows[i]);
+// 		}
+// 	});
+// }
 
+// // //This pulls back stories from the story table
+// module.exports.findAllStories = function (callback) {
+// 	var queryString = 'SELECT * FROM agile_story ORDER BY agile_sprint_id DESC';
+// 	connection.query(queryString, function (err, rows, fields) {
+// 		if (err) throw err;
+// 		callback(err, rows, fields)
+// 		for (var i in rows) {
+// 			// console.log('Stories: ', rows[i]);
+// 		}
+// 	});
+// }
 
-
-	// //This pulls back stories from the story table
-module.exports.findAllStories = function(callback) {
-	var queryString = 'SELECT * FROM agile_story ORDER BY agile_sprint_id DESC';
-	connection.query(queryString, function(err, rows, fields) {
+// //This pulls back all from agile_story_system_user.
+module.exports.findAllUsersByStory = function (story_id, callback) {
+	var queryString = "SELECT * FROM agile_story_agile_system_user WHERE agile_story_id = '" + story_id + "'";
+	console.log(queryString);
+	connection.query(queryString, function (err, rows, fields) {	
 		if (err) throw err;
-	 callback(err, rows, fields)
+		callback(err, rows, fields)
 		for (var i in rows) {
-			console.log('Stories: ', rows[i]);
+			console.log('story: ', rows[i]);
 		}
 	});
-	}
+}
+
+// // //This pulls back sprints and users by system.
+module.exports.findAllStoriesBySprint = function (sprint_id, callback) {
+	var queryString = "SELECT * FROM agile_story WHERE agile_sprint_id = '" + sprint_id + "' ORDER BY agile_story_name ASC";
+	console.log(queryString);
+	connection.query(queryString, function (err, rows, fields) {
+		if (err) throw err;
+		callback(err, rows, fields)
+		for (var i in rows) {
+			console.log('story: ', rows[i]);
+		}
+	});
+}
 
 // module.exports.findAll = function(callback) {
 // 	connection.query("SELECT * FROM users ORDER BY id DESC", callback);
@@ -60,24 +110,24 @@ module.exports.findAllStories = function(callback) {
 // }
 
 
-module.exports.addUser = function(data, callback) {
+module.exports.addUser = function (data, callback) {
 	connection.query("INSERT INTO users SET ?", data, callback);
 }
 
-module.exports.findByUsername = function(username, callback) {
+module.exports.findByUsername = function (username, callback) {
 	connection.query("SELECT * FROM users WHERE username = '" + username + "'", callback);
 }
 
-module.exports.encrypt = function(data, callback) {
-	bcrypt.genSalt(10, function(err, salt) {
+module.exports.encrypt = function (data, callback) {
+	bcrypt.genSalt(10, function (err, salt) {
 		bcrypt.hash(data.password, salt, callback);
 	})
 }
 
-module.exports.sendResponse = function(success, res) {
-	if(success) {
-		res.send({'success': 'true'});
+module.exports.sendResponse = function (success, res) {
+	if (success) {
+		res.send({ 'success': 'true' });
 	} else {
-		res.send({'success': 'false'});
+		res.send({ 'success': 'false' });
 	}
 }
