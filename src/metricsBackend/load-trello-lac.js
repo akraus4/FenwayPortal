@@ -69,13 +69,13 @@ getTrello.getList("5a7dd1e8a8fca8c51103c593").then((listResult) => {
                 //console.log(stories)
                 // console.log(storyMember)
                 // database.postTimecards(result)
-                var path = "A:\\Metrics\\Exports\\lac_" + sprintName + ".json";
+                var path = "A:\\Metrics\\Exports\\LACD_" + sprintName + ".json";
                 fs.writeFile(path, JSON.stringify(stories, null, 4), (err) => {
                         if (err) {
                                 console.error(err);
                                 return;
                         };
-                        console.log("File has been loggged to lac_" + sprintName + ".json");
+                        console.log("File has been loggged to LACD_" + sprintName + ".json");
                 });
         })
 })
