@@ -16,7 +16,7 @@
   <div class="col-3">
 
     <mat-form-field class="selectSprint">
-      <mat-select placeholder='Select Sprints' [formControl]="Sprint" (change)="getAllStoriesBySprint($event.value.agile_sprint_id)">
+      <mat-select placeholder='Select Sprints' [formControl]="Sprint" (change)="storeSprintId($event.value.agile_sprint_id)">
         <mat-option *ngFor="let SprintChoice of SprintChoices" [value]="SprintChoice">
           {{ SprintChoice.agile_sprint_name }}
         </mat-option>
@@ -27,7 +27,7 @@
   <div class="col-3">  
     
     <!-- This is the button to search the metrics   -->
-    <button mat-button id="formCompleteButton">Display</button>
+    <button mat-button id="formCompleteButton" (click)='getAllStoriesWithUsersBySprint()' >Search</button>
   </div>
 </div>
 
@@ -36,8 +36,9 @@
     <div class="col-12">
   <!-- These are the radio buttons to determine grid or bar graph  -->
   <mat-radio-group>
-      <mat-radio-button (change)="showBarGraph();" type="radio" value="1" checked="true">Bar </mat-radio-button>
-      <mat-radio-button (change)="showGridGraph();" type="radio" id="metricsPageRadioRight" value="2">Grid</mat-radio-button>
+    
+      <mat-radio-button (change)="showGridGraph();" type="radio" id="metricsPageRadioRight" value="1" checked="true">Grid</mat-radio-button>
+      <mat-radio-button (change)="showBarGraph();" type="radio" value="2" >Bar </mat-radio-button>
     </mat-radio-group>
       </div>
 </div>
@@ -87,7 +88,14 @@
               <!-- Story Points Column -->
               <ng-container matColumnDef="story_points">
                 <mat-header-cell *matHeaderCellDef> Story Points </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.story_points}} </mat-cell>
+                <mat-cell *matCellDef="let element"> {{element.agile_system_user_story_points}} </mat-cell>
+              </ng-container>
+
+              <!-- Story Points Column -->
+              <ng-container matColumnDef="agile_system_user_id">
+                <mat-header-cell *matHeaderCellDef> User </mat-header-cell>
+                <mat-cell *matCellDef="let element"> {{element.agile_system_user_id}} </mat-cell>
+                <!-- <mat-cell *matCellDef="let element"> {{element.users}} </mat-cell> -->
               </ng-container>
           
               <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

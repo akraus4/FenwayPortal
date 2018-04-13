@@ -16,6 +16,7 @@ export class MetricsComponent implements OnInit {
   metricsService: any;
   SprintChoices = [];
   StoryChoices = [];
+  currentSprintId: string;
   constructor(@Inject(MetricsService) metricsService) {
     this.metricsService = metricsService;
   }
@@ -37,17 +38,23 @@ export class MetricsComponent implements OnInit {
       .subscribe((results) => this.TeamChoices = results);
   }
 
- 
+
   getAllSprintsByTeam(system_id) {
-    console.log(system_id);
+    // console.log(system_id);
     this.metricsService.getAllSprintsBySystem(system_id)
       .map(res => { console.log(res); return res.json(); })
       .subscribe((results) => this.SprintChoices = results);
   }
 
-  getAllStoriesBySprint(sprint_id) {
-    console.log("Sprint ID = " + sprint_id);
-    this.metricsService.getAllStoriesBySprint(sprint_id)
+  storeSprintId(sprint_id) {
+    // console.log("Sprint ID = " + sprint_id);
+    this.currentSprintId = sprint_id;
+  }
+
+  getAllStoriesWithUsersBySprint() {
+    console.log('made');
+    // console.log("Sprint ID = " + this.currentSprintId);
+    this.metricsService.getAllStoriesWithUsersBySprint(this.currentSprintId)
       .map(res => { console.log(res); return res.json(); })
       .subscribe((results) => this.StoryChoices = results);
   }
@@ -106,8 +113,7 @@ export class MetricsComponent implements OnInit {
     clone[0].data = data;
     this.barChartData = clone;
   }
-  displayedColumns = ['agile_story_id', 'agile_story_name', 'agile_sprint_id', 'story_type', 'story_points'];
-  dataSource = this.StoryChoices;
+  displayedColumns = ['agile_story_id', 'agile_story_name', 'agile_sprint_id', 'story_type', 'story_points', 'agile_system_user_id'];
 }
 export interface Element {
   agile_story_id: string;
@@ -115,6 +121,8 @@ export interface Element {
   agile_sprint_id: string;
   story_type: string;
   story_points: string;
+  agile_system_user_id: string;
+  // users: [string];
 }
 // const ELEMENT_DATA: Element[] = [
 //   { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
