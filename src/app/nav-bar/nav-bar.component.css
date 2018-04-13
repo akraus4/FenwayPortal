@@ -1,0 +1,388 @@
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.8s ease;
+    -moz-transition: all 0.8s ease;
+    -o-transition: all 0.8s ease;
+    transition: all 0.8s ease;
+}
+
+#sidebar-wrapper {
+    z-index: 1000;
+    position: fixed;
+    left: 0;
+    /*height: 100%;*/
+    top: 89.5px;
+    bottom: 0;
+    overflow-y: auto;
+    background-color: #858585;
+    transition: all 0.8s ease;
+}
+
+img{
+    max-width: 80%;
+    padding-top: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.toggled img{
+    display: none;
+}
+
+#navMenu{
+    pointer-events:auto;
+}
+
+#infoRegistered {
+    display: none;
+}
+
+#infoSupplier {
+    display: none;
+}
+
+
+/* Sidebar Styles */
+
+/*Initial positioning of the sidebar*/
+
+#homePageTab {
+    margin-top: 80px; 
+}
+
+
+
+.sidebar-nav {
+    top: 0;
+    right: 15px;
+    width: 225px;
+    height: 125px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin-left: 0;
+}
+
+.navLabels {
+    color: white;
+    margin-left: 10px;
+}
+
+/*User info at the top of the navbar*/
+/* #userInfoDiv {
+    display: block;
+    font-size: 15px;
+    margin: 10px;
+    padding-top: 30px;
+    color: white;
+} */
+
+span{
+    margin-left: 15px;
+    vertical-align: middle;
+}
+
+#menu-toggle {
+    margin: 0 !important;
+    margin-top: 20px;
+    float: right;
+    color: #ffffff;
+}
+
+.toggled #menu-toggle {
+    margin-left: 10px !important;
+}
+
+#toggleIconDiv {
+    font-size: 20px !Important;
+    margin-left: 206px;
+    top: -90px;
+}
+
+.toggled #toggleIconDiv {
+    font-size: 20px !Important;
+    margin-left: 0;
+    margin-top: 20px;
+}
+
+.toggled #medicaidProvider {
+    padding: 0;
+    margin-left: 10px;
+}
+
+.toggled .sidebar-brand {
+    margin-top: -20px;
+    padding-bottom: 60px;
+}
+
+p {
+    line-height: 5px;
+    color: white;
+}
+
+i {
+    font-size: 22px;
+}
+
+/*Spacing of menu items*/
+.sidebar-nav li {
+    text-indent: 2px;
+    line-height: 40px;
+}
+
+    /*Styling for the menu links*/
+    .sidebar-nav li a {
+        padding-left: 10px;
+        font-family: "Roboto";
+        display: block;
+        text-decoration: none;
+        color: #f3f3f4;
+    }
+
+
+
+        /*Styling form hovering over menu items*/
+        .sidebar-nav li a:hover {
+            width: 100%;
+            text-decoration: none;
+            color: #ffffff;
+            background: rgb(207, 16, 45);
+        }
+
+/*Styling for selected menu item*/
+.primaryListItem.link-active {
+    width: 108%;
+    background: #1a3b68 !important;
+    text-decoration: none;
+}
+
+/*Position of hamburger button*/
+.sidebar-nav > .sidebar-brand {
+    height: 110px;
+    padding-left: 7px;
+}
+
+    /*Removes hover styling from hamburger button*/
+    .sidebar-nav > .sidebar-brand a:hover {
+        color: #fff;
+        background: none;
+        padding-right: 21.2px;
+    }
+
+#wrapper {
+    padding-left: 220px;
+}
+
+    #wrapper.toggled {
+        padding-left: 0;
+        transition: 0.5s;
+    }
+
+#sidebar-wrapper {
+    /*height:83.9vh;*/
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    padding-right: 15px;
+    overflow-x:hidden;
+    overflow-y:scroll
+}
+
+#wrapper.toggled .sidebar-brand {
+    width: 240px;
+    padding-right: 15px;
+    height: 65px;
+}
+
+#wrapper.toggled #userInfoDiv {
+    visibility: hidden;
+}
+
+#wrapper.toggled #homePageTab {
+    margin-top: 0; 
+}
+
+
+#wrapper.toggled .sidebar-nav > .sidebar-brand a:hover {
+    width: 225px;
+    padding-right: 15px;
+}
+
+
+#wrapper.toggled .sidebar-nav li a:hover {
+    width: 240px;
+    padding-right: 15px;
+}
+
+#wrapper.toggled .sidebar-nav li a {
+    width: 225px;
+}
+
+#wrapper.toggled .sidebar-nav {
+    width: 225px;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+    width: 45px;
+}
+
+#wrapper.toggled span {
+    visibility: hidden;
+}
+
+span.crosshair {
+    cursor: crosshair;
+}
+
+#healthResourceMenuItem, #idcards, #infoView, #messageCen {
+    cursor: pointer;
+}
+
+#firstCareIcon {
+    height: 9%;
+    width: 9%;
+}
+#firstCareIcon2 {
+    height: 7%;
+    width: 7%;
+}
+
+    #firstCareIcon:hover {
+    }
+
+#iconWrapper {
+    line-height: 40px;
+    margin-bottom: 0;
+}
+
+    #iconWrapper:hover {
+    }
+
+
+li.primaryListItem {
+    min-width: 240px;
+    width: 100%;
+}
+
+
+
+@media(min-width:769px) {
+    #sidebar-wrapper {
+        top: 0;
+    }
+
+    /*#wrapper {
+        width: 50px;
+    }
+
+    #userInfoDiv {
+        display: none;
+    }
+
+    #homePageTab {
+        margin-top: -40px;
+    }
+
+    .submenu.open {
+        margin-top: -40px;
+        position: fixed;
+        left: 50px;
+        width: 35%;
+    }
+
+    ul .submenu.open {
+        padding: 0;
+    }
+
+    #divNav.toggled {
+        display: block;
+        margin-left: -5%;
+        padding-left: 0;
+    }*/
+}
+
+@media(max-width:575px) {
+
+/*     
+    #sidebar-wrapper {
+        top: 115px;
+    } */
+
+  
+}
+
+@media(min-width:770px) {
+    #divNav.toggled {
+        display: block;
+        margin-left: -5%;
+        padding-left: 0;
+    }
+}
+
+
+/*#region Scroll*/
+
+ .scrollable-content {
+     overflow-x:hidden;
+     overflow-y: hidden;
+   }
+    .scrollable-content::-webkit-scrollbar {
+      width:0;
+      padding: 0;
+    }
+    .scrollable-content::-webkit-scrollbar * {
+      background:transparent;
+    }
+    .scrollable-content::-webkit-scrollbar-thumb {
+      background:#999 !important;
+      opacity:0.52;
+    }
+    .scrollable-content::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+html {
+    overflow: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 0px; 
+    height: 130px; 
+    overflow-x: scroll;
+    background: transparent;  
+}
+
+/*#endregion*/
+
+/*#region IE Responsiveness*/
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+
+    .submenu.open.toggled {
+            position: -ms-page;
+        }
+
+}
+/*#endregion*/
+
+/*#region Ipad_Styling*/
+/*@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px)  {
+    .sidebar-brand {
+        height: 40px !important;
+    }
+
+    #menu-toggle {
+        margin: 0 !important;
+        margin-left: 10px !important;
+    }
+
+    #userInfoDiv {
+        display: none !important;
+    }
+
+    #toggleIconDiv {
+        margin-left: 206px;
+    }
+
+}*/
+/*#endregion*/
