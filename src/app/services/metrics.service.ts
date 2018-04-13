@@ -41,19 +41,23 @@ export class MetricsService {
 
 	}
 
-	getAllStoriesBySprint(sprint_id) {
+	getAllStoriesWithUsersBySprint(sprint_id) {
 		// let headers = new Headers();
 		// headers.append('Content-Type', 'application/json');
 		// headers.append('system_id', system_id);
 		// let params = new URLSearchParams();
 		// params.append("system_id", system_id)
 		// let result = this.http.get('http://localhost:3000/findAllSprintsBySystem', {headers: headers, search: params});
-		let result = this.http.get('http://localhost:3000/findAllStoriesBySprint/' + sprint_id);
+		let result = this.http.get('http://localhost:3000/findAllStoriesWithUsersBySprint/' + sprint_id);
 		// console.log(JSON.stringify(result));
 		return result
 
 	}
 
+	getAllStoriesAndUsersBySprint(sprint_id, story_id){
+		let result = this.http.get('http://localhost:3000/findAllStoriesAndUsersBySprint/' + sprint_id + story_id);
+		return result
+	}
 
 	// addUser(data) {
 	// 	let headers = new Headers({"Content-Type": "application/json"});
