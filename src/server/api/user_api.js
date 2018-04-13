@@ -7,7 +7,21 @@ var express = require('express')
 var user = require('../models/user');
 
 // API Routes
-app.get('/', function(req, res) {
+
+app.get('/findAllTeams', function(req, res) {
+
+	    user.findAllTeams(function(err, rows, fields) {
+		if(err) throw err;
+		// var teamName = []; console.log(rows);
+		// for(i=0; i< rows.length; i++){
+		// teamName[i] = rows[i].agile_system_name;      			
+		// }
+		// console.log(teamName);
+		res.json(rows);
+	})
+});
+
+app.get('/findAllSprints', function(req, res) {
 
 	console.log('ok'); user.findAllSprints(function(err, rows, fields) {
 		if(err) throw err;
@@ -15,18 +29,28 @@ app.get('/', function(req, res) {
 	})
 });
 
-app.get('/', function(req, res) {
-
-	console.log('ok'); user.findAllTeams(function(err, rows, fields) {
+app.get('/findAllSprintsBySystem/:system_id', function(req, res) {
+var system_id = req.params.system_id;
+	console.log(system_id);
+	 user.findAllSprintsBySystem(system_id, function(err, rows, fields) {
 		if(err) throw err;
 		res.json(rows);
 	})
 });
 
+app.get('/findAllStoriesBySprint/:sprint_id', function(req, res) {
+	var sprint_id = req.params.sprint_id;
+		console.log(sprint_id);
+		 user.findAllStoriesBySprint(sprint_id, function(err, rows, fields) {
+			if(err) throw err;
+			res.json(rows);
+		})
+	});
 
 app.get('/', function(req, res) {
 
-	console.log('ok'); user.findAllStories(function(err, rows, fields) {
+	// console.log('ok'); 
+	user.findAllStories(function(err, rows, fields) {
 		if(err) throw err;
 		res.json(rows);
 	})

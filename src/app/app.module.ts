@@ -23,7 +23,7 @@ import { Observable } from'rxjs/Observable';
 import { HttpClient } from'@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
-import { UserService } from './services/user.service';
+import { MetricsService } from './services/metrics.service';
 import 'rxjs/add/operator/map';
 
 
@@ -69,7 +69,7 @@ import 'rxjs/add/operator/map';
     FormsModule
   ],
 
-  providers: [UserService],
+  providers: [MetricsService],
   bootstrap: [AppComponent]
 })
 

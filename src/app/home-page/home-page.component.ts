@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { UserService } from '../services/user.service';
+import { MetricsService } from '../services/metrics.service';
 
 @Component({
   selector: 'app-home-page',
@@ -13,40 +13,40 @@ export class HomePageComponent implements OnInit {
 	username: string;
 	password: string;
 	results = [];
-	userService: any;
+	metricsService: any;
 
-	constructor(@Inject(UserService) userService) {
-	  this.userService = userService;
+	constructor(@Inject(MetricsService) metricsService) {
+	  this.metricsService = metricsService;
 	}
 
 	ngOnInit() {
 		this.results = [];
 		
-		this.getUsers();
+		// this.getUsers();
 		
 	}
 
-	getUsers() {
-	  this.userService.getUsers()
-	  .map(res => {console.log(); return res.json();  })
-		.subscribe((results) => this.results = results);
-	}
+	// getUsers() {
+	//   this.metricsService.getUsers()
+	//   .map(res => {console.log(); return res.json();  })
+	// 	.subscribe((results) => this.results = results);
+	// }
 
-	addUser(username, password) {
-		var data = {
-			username: username,
-			password: password
-		};
+	// addUser(username, password) {
+	// 	var data = {
+	// 		username: username,
+	// 		password: password
+	// 	};
 
-	  var result = this.userService.addUser(data)
-	    .subscribe(res => {
-	    	if(res.success == "true") {
-	    		this.results.unshift(data);
-	    	}
-	      this.password = "";
-	      this.username = "";
-	      console.log(res);
-	    });
-	}
+	//   var result = this.metricsService.addUser(data)
+	//     .subscribe(res => {
+	//     	if(res.success == "true") {
+	//     		this.results.unshift(data);
+	//     	}
+	//       this.password = "";
+	//       this.username = "";
+	//       console.log(res);
+	//     });
+	// }
 	
 }
