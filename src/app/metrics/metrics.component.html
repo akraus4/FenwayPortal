@@ -36,8 +36,9 @@
     <div class="col-12">
   <!-- These are the radio buttons to determine grid or bar graph  -->
   <mat-radio-group>
-      <mat-radio-button (change)="showBarGraph();" type="radio" value="1" checked="true">Bar </mat-radio-button>
-      <mat-radio-button (change)="showGridGraph();" type="radio" id="metricsPageRadioRight" value="2">Grid</mat-radio-button>
+    
+      <mat-radio-button (change)="showGridGraph();" type="radio" id="metricsPageRadioRight" value="1" checked="true">Grid</mat-radio-button>
+      <mat-radio-button (change)="showBarGraph();" type="radio" value="2" >Bar </mat-radio-button>
     </mat-radio-group>
       </div>
 </div>
