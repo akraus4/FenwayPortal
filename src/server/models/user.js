@@ -1,16 +1,16 @@
 var bcrypt = require('bcrypt');
 var mysql = require('mysql');
 var connection = mysql.createConnection({
-	host: 'localhost',
-	user: 'root',
-	password: 'new_password',
-	database: 'webpackcli'
+    host: '52.55.14.143',
+	user: 'fg_user_dev2',
+	password: '6UhjVvAgM_Jm',
+	database: 'fg_metrics_dev2'
 });
 
-// host: '52.55.14.143',
-// 	user: 'fg_user_dev2',
-// 	password: '6UhjVvAgM_Jm',
-// 	database: 'fg_metrics_dev2'
+	// host: 'localhost',
+	// user: 'root',
+	// password: 'new_password',
+	// database: 'webpackcli'
 
 connection.connect(function () {
 	// console.log("Database connected");
@@ -82,8 +82,8 @@ module.exports.findAllStoriesBySprint = function (sprint_id, callback) {
 module.exports.findAllStoriesWithUsersBySprint = function (sprint_id, callback) {
 	//var queryString = "SELECT * FROM agile_story_agile_system_user WHERE agile_story_id = '" + story_id + "'";
 	var queryString =
-	// "select agile_story.agile_story_id,agile_story.agile_story_name,agile_story.agile_sprint_id,agile_story.story_type,agile_story.story_points,agile_story_agile_system_user.agile_system_user_id from webpackcli.agile_story inner join webpackcli.agile_story_agile_system_user on agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id where agile_story.agile_story_id = '" + story_id + "';"
-	"select * from webpackcli.agile_story inner join webpackcli.agile_story_agile_system_user on agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id where agile_story.agile_sprint_id = '" + sprint_id +  "' and agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id;"
+	// "select agile_story.agile_story_id,agile_story.agile_story_name,agile_story.agile_sprint_id,agile_story.story_type,agile_story.story_points,agile_story_agile_system_user.agile_system_user_id from fg_metrics_dev2.agile_story inner join fg_metrics_dev2.agile_story_agile_system_user on agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id where agile_story.agile_story_id = '" + story_id + "';"
+	"select * from fg_metrics_dev2.agile_story inner join fg_metrics_dev2.agile_story_agile_system_user on agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id where agile_story.agile_sprint_id = '" + sprint_id +  "' and agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id;"
  
 	//console.log(queryString);
 	connection.query(queryString, function (err, rows, fields) {	
