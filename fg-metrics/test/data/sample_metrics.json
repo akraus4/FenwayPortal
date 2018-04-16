@@ -1,0 +1,45 @@
+{
+  "ref:agile_system": {
+    "agile_system_id": "SALTNS",
+    "agile_system_type": "JIRA",
+    "agile_system_name": "SALTNS",
+    "ref:agile_system_user": [
+      {
+        "agile_system_user_id": "jmasch",
+        "agile_system_id": "SALTNS",
+        "work_user_id": "00292975dbafcb000b96f2b6ae9619a4"
+      },
+      {
+        "agile_system_user_id": "dbarbier",
+        "agile_system_id": "SALTNS",
+        "work_user_id": "01e23048dbbc3a0034a679daae96199d"
+      }
+    ],
+    "ref:agile_sprint": [
+      {
+        "agile_sprint_id": "12345",
+        "agile_system_id": "SALTNS",
+        "agile_sprint_name": "Sprint 1",
+        "sprint_start_date": "",
+        "sprint_end_date": "",
+        "ref:agile_story": [
+          {
+            "agile_story_id": "S1",
+            "agile_sprint_id": "12345",
+            "agile_story_name": "",
+            "story_type": "",
+            "story_points": "",
+            "ref:agile_story_agile_system_user": [
+              {
+                "agile_story_agile_system_user_id": "54321",
+                "agile_story_id": "S1",
+                "agile_system_user_id": "e93709b8-3362-11e8-b696-03dcf7b7b73f",
+                "agile_system_user_story_points": ""
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
