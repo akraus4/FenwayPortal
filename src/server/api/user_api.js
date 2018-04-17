@@ -21,6 +21,32 @@ app.get('/findAllTeams', function (req, res) {
 	})
 });
 
+app.get('/findSystemWithSystemUserWithWorkTeam', function (req, res) {
+
+	user.findSystemWithSystemUserWithWorkTeam(function (err, rows, fields) {
+		if (err) throw err;
+		// var teamName = []; console.log(rows);
+		// for(i=0; i< rows.length; i++){
+		// teamName[i] = rows[i].agile_system_name;      			
+		// }
+		// console.log(teamName);
+		res.json(rows);
+	})
+});
+
+app.get('/findSystemUserWithSystemWithTeamMemberWithWorkUser', function (req, res) {
+
+	user.findSystemUserWithSystemWithTeamMemberWithWorkUser(function (err, rows, fields) {
+		if (err) throw err;
+		// var teamName = []; console.log(rows);
+		// for(i=0; i< rows.length; i++){
+		// teamName[i] = rows[i].agile_system_name;      			
+		// }
+		// console.log(teamName);
+		res.json(rows);
+	})
+});
+
 app.get('/findAllSprints', function (req, res) {
 
 	console.log('ok'); user.findAllSprints(function (err, rows, fields) {

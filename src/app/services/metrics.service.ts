@@ -22,6 +22,7 @@ export class MetricsService {
 		return result
 
 	}
+
 	getAllSprints() {
 		let result = this.http.get('http://localhost:3000/findAllSprints');
 		console.log(JSON.stringify(result));
