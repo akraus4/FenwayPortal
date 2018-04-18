@@ -13,10 +13,20 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <div class="col-3">
 
+  <!-- <div class="col-3">
     <mat-form-field class="selectSprint">
-      <mat-select placeholder='Select Sprints' [formControl]="Sprint" (change)="storeSprintId($event.value.agile_sprint_id)">
+      <mat-select placeholder='Select Team Member' [formControl]="Team" (change)="storeTeamMemberId($event.value.agile_system_user_id)">
+        <mat-option *ngFor="let TeamMemberChoice of TeamMemberChoices" [value]="TeamMemberChoice">
+          {{ TeamMemberChoice.agile_system_user_name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div> -->
+
+  <div class="col-3">
+    <mat-form-field class="selectSprint">
+      <mat-select placeholder='Select Sprints' [formControl]="Sprint" (change)="storeSprintId($event.value)" multiple>
         <mat-option *ngFor="let SprintChoice of SprintChoices" [value]="SprintChoice">
           {{ SprintChoice.agile_sprint_name }}
         </mat-option>
@@ -24,10 +34,12 @@
     </mat-form-field>
   </div>
 
+
+
   <div class="col-3">  
     
     <!-- This is the button to search the metrics   -->
-    <button mat-button id="formCompleteButton" (click)='getAllStoriesWithUsersBySprint()' >Search</button>
+    <button mat-button id="formCompleteButton" (click)='getAllStoriesWithUsersBySprint()' disabled>Search</button>
   </div>
 </div>
 
@@ -52,11 +64,16 @@
           <button id="BarGraphMetricsPageUpdateBtn" (click)="randomize()">Update</button>
     </div>
   </div>
-
-
+  <div class="row">
+  <div class="col-3">
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
+  </div>
+</div>
   <div class="row" id="gridGraphMetricsPageDiv">
       <div class="col-12">
-          <mat-table #table [dataSource]="StoryChoices">
+          <mat-table #table [dataSource]="dataSource">
 
               <!--- Note that these columns can be defined in any order.
                     The actual rendered columns are set as a property on the row definition" -->
@@ -94,7 +111,7 @@
               <!-- Story Points Column -->
               <ng-container matColumnDef="agile_system_user_id">
                 <mat-header-cell *matHeaderCellDef> User </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.agile_system_user_id}} </mat-cell>
+                <mat-cell *matCellDef="let element"> {{element.agile_system_user_name}} </mat-cell>
                 <!-- <mat-cell *matCellDef="let element"> {{element.users}} </mat-cell> -->
               </ng-container>
           

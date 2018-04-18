@@ -24,6 +24,7 @@ import { HttpClient } from'@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { MetricsService } from './services/metrics.service';
+import {MatInputModule} from '@angular/material';
 import 'rxjs/add/operator/map';
 
 
@@ -50,6 +51,7 @@ import 'rxjs/add/operator/map';
     ReactiveFormsModule,
     ChartsModule,
     MatRadioModule,
+    MatInputModule,
     MatTableModule,
     MatSelectModule,
     RouterModule.forRoot([
