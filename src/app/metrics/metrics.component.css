@@ -1,3 +1,7 @@
+#page{
+    background-color: #d3d3d3;
+}
+
 
 .selectTeam{
     margin-top:55px;
@@ -14,8 +18,10 @@
     min-width: 70%;
 }
 #metricsPageRadio{
-    margin-top: 25px;
-    margin-left: 43%;
+    margin-top: 2%;
+    margin-left: 41%;
+    position: absolute;
+    z-index: 1;
 }
 #barGraphMetricsPageDiv{
     margin-top: 2px;
@@ -36,5 +42,87 @@
   max-height: 475px;
   margin-bottom: 20px;
 }
+.box h3{
+    text-align:center;
+      position:relative;
+      top:80px;
+  }
+  .box {
+      width:70%;
+      height:200px;
+      background:#FFF;
+      margin:40px auto;
+  }
+  /* .effect7
+{
+    position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+       -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+            box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+} */
+.effect7:before, .effect7:after
+{
+    content:"";
+    position:absolute;
+    z-index:-1;
+    -webkit-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    -moz-box-shadow:0 0 20px rgba(0,0,0,0.8);
+    box-shadow:0 0 20px rgba(0,0,0,0.8);
+    top:0;
+    bottom:0;
+    left:10px;
+    right:10px;
+    -moz-border-radius:100px / 10px;
+    border-radius:100px / 10px;
+}
+.effect7:after
+{
+    right:10px;
+    left:auto;
+    -webkit-transform:skew(8deg) rotate(3deg);
+       -moz-transform:skew(8deg) rotate(3deg);
+        -ms-transform:skew(8deg) rotate(3deg);
+         -o-transform:skew(8deg) rotate(3deg);
+            transform:skew(8deg) rotate(3deg);
+}
+#searchWidgetContainer{
+    background-color: white;
+    padding-top: 7px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 0px;
+    margin-bottom: 26px;
+    margin-left: 0px;
+    margin-right: 0px;
+    border-radius: 3px;
+    position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+#gridWidgetContainer{
+    background-color: white;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    border-radius: 3px;
+    position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+/*This is where you change the color of every odd row in grid*/
+/deep/ .dx-datagrid-rowsview .dx-row:nth-child(odd) 
+{
+   background-color: #cccccc;
+}
 
+/*format for header of grid*/
+/deep/ .dx-datagrid-headers .dx-row {
+    font-family: 'Roboto';
+    font-size: 1rem;
+    background-color: #1a3b68;
+    color: white;
+}
 
