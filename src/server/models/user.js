@@ -66,6 +66,19 @@ module.exports.findAllStoriesBySprint = function (sprint_id, callback) {
 	});
 }
 
+// // //This pulls back sprints by system.
+module.exports.findAllUsersBySystem = function (system_id, callback) {
+	var queryString = "SELECT * FROM agile_system_user WHERE agile_system_id = '" + system_id + "' ORDER BY agile_system_user_name ASC";
+	console.log(queryString);
+	connection.query(queryString, function (err, rows, fields) {
+		if (err) throw err;
+		callback(err, rows, fields)
+		for (var i in rows) {
+			// console.log('story: ', rows[i]);
+		}
+	});
+}
+
 // // //This pulls back stories from the story table
 // module.exports.findAllStories = function (callback) {
 // 	var queryString = 'SELECT * FROM agile_story ORDER BY agile_sprint_id DESC';
@@ -79,13 +92,25 @@ module.exports.findAllStoriesBySprint = function (sprint_id, callback) {
 // }
 
 // //This pulls back all from agile_story_system_user.
-module.exports.findAllStoriesWithUsersBySprint = function (sprint_id, callback) {
-	//var queryString = "SELECT * FROM agile_story_agile_system_user WHERE agile_story_id = '" + story_id + "'";
+module.exports.findAllStoriesWithUsersBySprint = function (sprint_ids, callback) {
+	var sprintIds = ''; 
+	console.log('sprint length = ' +  sprint_ids.length);
+	for(i=0; i < sprint_ids.length; i++){ 
+		if(i == 0){
+			sprintIds = sprint_ids[i];
+			console.log('sprint1 = ' +  sprint_ids[i]);
+		}else{
+			sprintIds = sprintIds + "', '" + sprint_ids[i];
+			console.log('sprint2 = ' +  sprint_ids[i]);
+		}
+	
+	}
 	var queryString =
-	// "select agile_story.agile_story_id,agile_story.agile_story_name,agile_story.agile_sprint_id,agile_story.story_type,agile_story.story_points,agile_story_agile_system_user.agile_system_user_id from webpackcli.agile_story inner join webpackcli.agile_story_agile_system_user on agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id where agile_story.agile_story_id = '" + story_id + "';"
-	"select * from webpackcli.agile_story inner join webpackcli.agile_story_agile_system_user on agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id where agile_story.agile_sprint_id = '" + sprint_id +  "' and agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id;"
- 
-	//console.log(queryString);
+	// "select * from webpackcli.agile_story inner join webpackcli.agile_story_agile_system_user on agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id where agile_story.agile_sprint_id = '" + sprint_id +  "' and agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id;"
+	// "select * from agile_story inner join agile_story_agile_system_user on agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id inner join agile_system_user on agile_system_user.agile_system_user_id = agile_story_agile_system_user.agile_system_user_id where agile_story.agile_sprint_id = '" + sprint_id + "' and agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id and agile_story_agile_system_user.agile_system_user_id = agile_system_user.agile_system_user_id;";
+	"select * from agile_story inner join agile_story_agile_system_user on agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id inner join agile_system_user on agile_system_user.agile_system_user_id = agile_story_agile_system_user.agile_system_user_id where agile_story.agile_sprint_id in ('" + sprintIds + "') and agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id and agile_story_agile_system_user.agile_system_user_id = agile_system_user.agile_system_user_id;";
+
+	console.log(queryString);
 	connection.query(queryString, function (err, rows, fields) {	
 		if (err) throw err;
 		callback(err, rows, fields)
@@ -93,6 +118,7 @@ module.exports.findAllStoriesWithUsersBySprint = function (sprint_id, callback) 
 			 console.log('story: ', rows);
 		// }
 	});
+// }
 }
 
 // // // //This pulls back sprints and users by system.

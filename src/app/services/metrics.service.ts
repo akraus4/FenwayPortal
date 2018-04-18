@@ -29,32 +29,38 @@ export class MetricsService {
 
 	}
 	getAllSprintsBySystem(system_id) {
-		// let headers = new Headers();
-		// headers.append('Content-Type', 'application/json');
-		// headers.append('system_id', system_id);
-		// let params = new URLSearchParams();
-		// params.append("system_id", system_id)
-		// let result = this.http.get('http://localhost:3000/findAllSprintsBySystem', {headers: headers, search: params});
 		let result = this.http.get('http://localhost:3000/findAllSprintsBySystem/' + system_id);
+		// console.log(JSON.stringify(result));
+		return result
+	}
+
+	getAllUsersBySystem(system_id) {
+		let result = this.http.get('http://localhost:3000/findAllUsersBySystem/' + system_id);
 		// console.log(JSON.stringify(result));
 		return result
 
 	}
 
 	getAllStoriesWithUsersBySprint(sprint_id) {
-		// let headers = new Headers();
-		// headers.append('Content-Type', 'application/json');
-		// headers.append('system_id', system_id);
-		// let params = new URLSearchParams();
-		// params.append("system_id", system_id)
-		// let result = this.http.get('http://localhost:3000/findAllSprintsBySystem', {headers: headers, search: params});
-		let result = this.http.get('http://localhost:3000/findAllStoriesWithUsersBySprint/' + sprint_id);
-		// console.log(JSON.stringify(result));
-		return result
+		// var stories = [];
+		// var num: number = 0;
+		// var i: number;
+		// var factorial = 1;
 
+		// for (i = num; i < sprint_id.length; i++) {
+		// 	console.log("sprint id = " + sprint_id[i].agile_sprint_id)
+			let result = this.http.get('http://localhost:3000/findAllStoriesWithUsersBySprint/' + sprint_id);
+			// console.log("result = " + result)
+			// stories.push(result);
+			// console.log(JSON.stringify(stories))
+			// console.log(JSON.stringify(result));
+			return result
+	//	}
+		// console.log(stories)
+		// return stories;
 	}
 
-	getAllStoriesAndUsersBySprint(sprint_id, story_id){
+	getAllStoriesAndUsersBySprint(sprint_id, story_id) {
 		let result = this.http.get('http://localhost:3000/findAllStoriesAndUsersBySprint/' + sprint_id + story_id);
 		return result
 	}
