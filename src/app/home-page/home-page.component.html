@@ -12,16 +12,3 @@
 </form>
 <br>
 
-<div>
-	<div class="panel panel-default">
-		<dx-data-grid [dataSource]="customers" keyExpr="ID">
-			<dxi-column dataField="CompanyName"></dxi-column>
-			<dxi-column dataField="City"></dxi-column>
-			<dxi-column dataField="State"></dxi-column>
-		</dx-data-grid>
-	</div>
-	<div *ngFor="let user of results" class="panel panel-body">
-		Username: {{user.username}}
-	</div>
-	<br>
-</div>

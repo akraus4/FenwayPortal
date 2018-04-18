@@ -26,17 +26,7 @@ export class HomePageComponent implements OnInit {
 		
 	}
 
-	customers = [{
-        ID: 1,
-        CompanyName: "Super Mart of the West",
-        City: "Bentonville",
-        State: "Arkansas"
-    }, {
-        ID: 2,
-        CompanyName: "Electronics Depot",
-        City: "Atlanta",
-        State: "Georgia"
-    }];
+
 
 	// getUsers() {
 	//   this.metricsService.getUsers()

@@ -2,16 +2,16 @@ var bcrypt = require('bcrypt');
 var mysql = require('mysql');
 
 var connection = mysql.createConnection({
-	host: 'localhost',
-	user: 'root',
-	password: 'new_password',
-	database: 'webpackcli'
+	host: '52.55.14.143',
+	user: 'fg_user_dev2',
+	password: '6UhjVvAgM_Jm',
+	database: 'fg_metrics_dev2'
+	// host: 'localhost',
+	// user: 'root',
+	// password: 'new_password',
+	// database: 'webpackcli'
 });
 
-// host: '52.55.14.143',
-// 	user: 'fg_user_dev2',
-// 	password: '6UhjVvAgM_Jm',
-// 	database: 'fg_metrics_dev2'
 
 connection.connect(function () {
 	// console.log("Database connected");
