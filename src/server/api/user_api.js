@@ -12,11 +12,6 @@ app.get('/findAllTeams', function (req, res) {
 
 	user.findAllTeams(function (err, rows, fields) {
 		if (err) throw err;
-		// var teamName = []; console.log(rows);
-		// for(i=0; i< rows.length; i++){
-		// teamName[i] = rows[i].agile_system_name;      			
-		// }
-		// console.log(teamName);
 		res.json(rows);
 	})
 });
@@ -38,16 +33,28 @@ app.get('/findAllSprintsBySystem/:system_id', function (req, res) {
 	})
 });
 
+app.get('/findAllUsersBySystem/:system_id', function (req, res) {
+	var system_id = req.params.system_id;
+	console.log(system_id);
+	user.findAllUsersBySystem(system_id, function (err, rows, fields) {
+		if (err) throw err;
+		res.json(rows);
+	})
+});
+
 
 // 
 app.get('/findAllStoriesWithUsersBySprint/:sprint_id', function (req, res) {
 	var sprint_id = req.params.sprint_id;
 	// var stories = [];
-	user.findAllStoriesWithUsersBySprint(sprint_id, function (err, rows, fields) {
-		if (err) throw err;
-		res.json(rows);
-		// Array passed to front end
-	})
+	// for (i = 0; i < sprint_id; i++) {
+		user.findAllStoriesWithUsersBySprint(sprint_id, function (err, rows, fields) {
+			if (err) throw err;
+			// stories.push(rows)
+			res.json(rows);
+			// Array passed to front end
+		})
+	// }
 });
 
 // app.get('/findAllStoriesBySprint/:sprint_id', function (req, res) {
