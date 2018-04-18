@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { Component, NgModule, enableProdMode } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 import {MatSelectModule} from '@angular/material/select';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -25,6 +25,10 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { MetricsService } from './services/metrics.service';
 import {MatInputModule} from '@angular/material';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {DxButtonModule} from 'devextreme-angular';
+import notify from 'devextreme/ui/notify';
+import { DxDataGridModule } from 'devextreme-angular';
 import 'rxjs/add/operator/map';
 
 
@@ -39,7 +43,9 @@ import 'rxjs/add/operator/map';
     ViewScoreComponent,
     ScorecardComponent,
     DataComponent,
-    DemoComponent
+    DemoComponent,
+
+    
     
   ],
 
@@ -53,7 +59,9 @@ import 'rxjs/add/operator/map';
     MatRadioModule,
     MatInputModule,
     MatTableModule,
+    DxDataGridModule,
     MatSelectModule,
+    DxButtonModule,
     RouterModule.forRoot([
       { path: "", redirectTo: "home", pathMatch: "full" },
       { path: "home", component: HomePageComponent },

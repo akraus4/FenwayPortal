@@ -2,6 +2,13 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MetricsService } from '../services/metrics.service';
 import { MatTableDataSource } from '@angular/material';
+import { DxButtonModule } from 'devextreme-angular';
+import { DxDataGridModule } from 'devextreme-angular';
+
+
+// if(!/localhost/.test(document.location.host)) {
+//   enableProdMode();
+// }
 
 
 @Component({
@@ -19,6 +26,8 @@ export class MetricsComponent implements OnInit {
   TeamMemberChoices = [];
   currentSprintId = [];
   currentTeamMemberId: string;
+  // dataSource = this.StoryChoices;
+  // dataSource: WeekData[];
   constructor(@Inject(MetricsService) metricsService) {
     this.metricsService = metricsService;
   }
@@ -34,16 +43,16 @@ export class MetricsComponent implements OnInit {
 
   };
 
-  displayedColumns = ['agile_story_id', 'agile_story_name', 'agile_sprint_id', 'story_type', 'story_points', 'agile_system_user_id'];
-  dataSource = new MatTableDataSource(this.StoryChoices);
+  // displayedColumns = ['agile_story_id', 'agile_story_name', 'agile_sprint_id', 'story_type', 'story_points', 'agile_system_user_id'];
+  // dataSource = new MatTableDataSource(this.StoryChoices);
 
-  applyFilter(filterValue: string) {
-    filterValue = filterValue.trim(); // Remove whitespace
-    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-    //this.StoryChoices = JSON.stringify(this.StoryChoices);
-    console.log(this.dataSource + " dataSource")
-    this.dataSource.filter = filterValue;
-  }
+  // applyFilter(filterValue: string) {
+  //   filterValue = filterValue.trim(); // Remove whitespace
+  //   filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+  //   //this.StoryChoices = JSON.stringify(this.StoryChoices);
+  //   console.log(this.dataSource + " dataSource")
+  //   // this.dataSource.filter = filterValue;
+  // }
 
   getAllTeams() {
     this.metricsService.getAllTeams()
@@ -88,7 +97,7 @@ export class MetricsComponent implements OnInit {
   getAllStoriesWithUsersBySprint() {
     this.metricsService.getAllStoriesWithUsersBySprint(this.currentSprintId)
       .map(res => { console.log(res); return res.json(); })
-      .subscribe((results) => this.dataSource = results);
+      .subscribe((results) => this.StoryChoices = results);
   }
 
   showBarGraph() {
@@ -145,15 +154,16 @@ export class MetricsComponent implements OnInit {
   }
 
 }
-export interface Element {
-  agile_story_id: string;
-  agile_story_name: string;
-  agile_sprint_id: string;
-  story_type: string;
-  story_points: string;
-  agile_system_user_id: string;
-  // users: [string];
-}
+
+// export interface Element {
+//   agile_story_id: string;
+//   agile_story_name: string;
+//   agile_sprint_id: string;
+//   story_type: string;
+//   story_points: string;
+//   agile_system_user_id: string;
+//   // users: [string];
+// }
 // const ELEMENT_DATA: Element[] = [
 //   { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
 //   { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
