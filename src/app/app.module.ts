@@ -30,6 +30,9 @@ import {DxButtonModule} from 'devextreme-angular';
 import notify from 'devextreme/ui/notify';
 import { DxDataGridModule } from 'devextreme-angular';
 import 'rxjs/add/operator/map';
+import { LoadingPanelComponent } from './loading-panel/loading-panel.component';
+import { DxLoadPanelModule } from 'devextreme-angular';
+
 
 
 @NgModule({
@@ -44,6 +47,7 @@ import 'rxjs/add/operator/map';
     ScorecardComponent,
     DataComponent,
     DemoComponent,
+    LoadingPanelComponent,
 
     
     
@@ -76,7 +80,8 @@ import 'rxjs/add/operator/map';
     ]),
     BrowserModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    DxLoadPanelModule
   ],
 
   providers: [MetricsService],

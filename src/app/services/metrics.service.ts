@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 
@@ -15,6 +16,11 @@ export class MetricsService {
 	// let result = this.http.get('http://localhost:3000/');console.log(JSON.stringify(result)); return result
 
 	// }
+
+
+
+
+     
 
 	getAllTeams() {
 		let result = this.http.get('http://localhost:3000/findAllTeams');
@@ -72,4 +78,18 @@ export class MetricsService {
 	// 	return this.http.post('http://localhost:3000/adduser', JSON.stringify(data), options)
 	// 		.map(res => res.json());
 	// }
+
+
+	loadingVisible = new BehaviorSubject<boolean>(false);
+  
+
+	showLoadingPanel(): void {
+        this.loadingVisible.next(true);
+        
+    }
+
+    hideLoadingPanel(): void {
+        this.loadingVisible.next(false);
+    }
+
 }

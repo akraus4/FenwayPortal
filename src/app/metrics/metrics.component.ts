@@ -16,6 +16,8 @@ import { DxDataGridModule } from 'devextreme-angular';
   templateUrl: './metrics.component.html',
   styleUrls: ['./metrics.component.css']
 })
+
+  
 export class MetricsComponent implements OnInit {
 
   title = 'POST Request'
@@ -30,15 +32,19 @@ export class MetricsComponent implements OnInit {
   // dataSource: WeekData[];
   constructor(@Inject(MetricsService) metricsService) {
     this.metricsService = metricsService;
+   
   }
 
   ngOnInit() {
     // document.getElementById('barGraphMetricsPageDiv').style.display = 'block';
     // document.getElementById('gridGraphMetricsPageDiv').style.display = 'none';
 
+    this.metricsService.showLoadingPanel();
     document.getElementById('gridGraphMetricsPageDiv').style.display = 'block';
     document.getElementById('barGraphMetricsPageDiv').style.display = 'none';
     this.getAllTeams();
+    this.metricsService.hideLoadingPanel();
+
     // this.getAllSprints();
 
   };
@@ -95,7 +101,7 @@ export class MetricsComponent implements OnInit {
   }
 
   getAllStoriesWithUsersBySprint() {
-    this.metricsService.getAllStoriesWithUsersBySprint(this.currentSprintId)
+      this.metricsService.getAllStoriesWithUsersBySprint(this.currentSprintId)
       .map(res => { console.log(res); return res.json(); })
       .subscribe((results) => this.StoryChoices = results);
   }
