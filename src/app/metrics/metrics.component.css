@@ -15,9 +15,16 @@
  
 }
 
+.searchInterface{
+    float:left;
+    top: 116px;
+    z-index: 1;
+    left: 2.5%;
+}
+
 #formCompleteButton{
     font-weight: bold;
-    min-width: 100%;
+    min-width: 13%;
     margin-top: 6%;
 
 }
