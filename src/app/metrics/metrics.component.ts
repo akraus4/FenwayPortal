@@ -25,6 +25,12 @@ export class MetricsComponent implements OnInit {
   StoryChoices;
   TeamMemberChoices = [];
   currentSprintId = [];
+  storyCount = 0;
+  sprintCount = 0;
+  storiesBySprintCount = 0;
+  usersPoints;
+  storiesBySprint = [];
+
   currentTeamMemberId: string;
   // dataSource = this.StoryChoices;
   // dataSource: WeekData[];
@@ -37,29 +43,17 @@ export class MetricsComponent implements OnInit {
     // document.getElementById('gridGraphMetricsPageDiv').style.display = 'none';
 
     document.getElementById('gridGraphMetricsPageDiv').style.display = 'block';
-    document.getElementById('barGraphMetricsPageDiv').style.display = 'none';
+    // document.getElementById('barGraphMetricsPageDiv').style.display = 'none';
     this.getAllTeams();
     // this.getAllSprints();
 
   };
-
-  // displayedColumns = ['agile_story_id', 'agile_story_name', 'agile_sprint_id', 'story_type', 'story_points', 'agile_system_user_id'];
-  // dataSource = new MatTableDataSource(this.StoryChoices);
-
-  // applyFilter(filterValue: string) {
-  //   filterValue = filterValue.trim(); // Remove whitespace
-  //   filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
-  //   //this.StoryChoices = JSON.stringify(this.StoryChoices);
-  //   console.log(this.dataSource + " dataSource")
-  //   // this.dataSource.filter = filterValue;
-  // }
 
   getAllTeams() {
     this.metricsService.getAllTeams()
       .map(res => { return res.json(); })
       .subscribe((results) => this.TeamChoices = results);
   }
-
 
   getAllSprintsByTeam(system_id) {
     // console.log(system_id);
@@ -86,7 +80,6 @@ export class MetricsComponent implements OnInit {
     //Says there is an error here, but does not throw an error when it runs
     // document.getElementById("formCompleteButton").disabled = false;
     (<HTMLInputElement>document.getElementById("formCompleteButton")).disabled = false;
-
   }
 
   storeTeamMemberId(team_member_id) {
@@ -97,24 +90,110 @@ export class MetricsComponent implements OnInit {
   getAllStoriesWithUsersBySprint() {
     this.metricsService.getAllStoriesWithUsersBySprint(this.currentSprintId)
       .map(res => { console.log(res); return res.json(); })
-      .subscribe((results) => this.StoryChoices = results);
-  }
+      .subscribe((results) => {
+        this.StoryChoices = results;
+        this.getStoryCount()
+        this.getUsersPoints()
+      });
+    }
 
-  showBarGraph() {
-    document.getElementById('barGraphMetricsPageDiv').style.display = 'block';
-    document.getElementById('gridGraphMetricsPageDiv').style.display = 'none';
-  }
-  showGridGraph() {
-    document.getElementById('barGraphMetricsPageDiv').style.display = 'none';
-    document.getElementById('gridGraphMetricsPageDiv').style.display = 'block';
+    getUsersPoints() {
+      this.StoryChoices.sort(function (obj1, obj2) {
+        // Ascending: first age less than the previous
+        return obj1.agile_system_user - obj2.agile_system_user;
+      });
+      var i;
+      var lastUser = '';
+      var totalPoints = 0;
+      for (i = 0; i < this.StoryChoices.length; i++) {
+        if (lastUser == this.StoryChoices[i].agile_system_user) {
+          totalPoints = totalPoints + this.StoryChoices[i].agile_system_user_story_points;
+        } else {
+          if (lastUser != '') {
+            let userWithTotalPoints = {
+              'user': lastUser,
+              'totalPoints': totalPoints
+            }
+            this.usersPoints.push(userWithTotalPoints);
+          }
+          lastUser = this.StoryChoices[i].agile_system_user;
+          totalPoints = this.StoryChoices[i].agile_system_user_story_points;
+        }
+      }
+      console.log("Users Points: " + JSON.stringify(this.usersPoints));
+    }
 
-  }
+    getStoryCount() {
+      var i;
+      var j;
+      this.storiesBySprint = [];
+      this.storyCount = 0;
+      this.storiesBySprintCount = 0;
+      var lastStory = "";
+      var lastSprint = "";
+      var numberOfStories = this.StoryChoices.length - 1;
 
-  //This is the array for the team selection.
-  Team = new FormControl();
-  // TeamChoices = this.allTeams;
-  //This is the array for select from.
-  Sprint = new FormControl();
+      for (i = 0; i < this.StoryChoices.length; i++) {
+        console.log('i = ' + i + ' number of stories = ' + numberOfStories)
+        if (lastSprint == this.StoryChoices[i].agile_sprint_id || lastSprint == "") {
+
+          if (lastStory != this.StoryChoices[i].agile_story_id) {
+            this.storiesBySprintCount++;
+            lastStory = this.StoryChoices[i].agile_story_id;
+          }
+
+          if (i == numberOfStories) {
+            var getStoriesBySprint = {
+              "arg": this.StoryChoices[i - 1].agile_sprint_name,
+              "val": this.storiesBySprintCount
+            };
+            this.storiesBySprint.push(getStoriesBySprint);
+          }
+
+        } else {
+
+          var getStoriesBySprint = {
+            "arg": this.StoryChoices[i - 1].agile_sprint_name,
+            "val": this.storiesBySprintCount
+          };
+
+          this.storiesBySprint.push(getStoriesBySprint);
+          this.storiesBySprintCount = 0;
+        }
+
+        lastSprint = this.StoryChoices[i].agile_sprint_id;
+      }
+      console.log("StoriesBySprint: " + JSON.stringify(this.storiesBySprint))
+    }
+
+    // getStoriesBySprints() {
+    //   var i;
+    //   this.sprintCount = 0;
+    //   var lastSprint = "";
+    //   for (i = 0; i < this.StoryChoices.length; i++) {
+    //     if (lastSprint != this.StoryChoices[i].agile_sprint_name) {
+    //       this.sprintCount++;
+    //       lastSprint = this.StoryChoices[i].agile_sprint_name;
+    //     }
+    //   }
+    //   console.log("sprint Count = " + this.sprintCount);
+    // }
+
+    showBarGraph() {
+      document.getElementById('barGraphMetricsPageDiv').style.display = 'block';
+      document.getElementById('gridGraphMetricsPageDiv').style.display = 'none';
+    }
+    showGridGraph() {
+      document.getElementById('barGraphMetricsPageDiv').style.display = 'none';
+      document.getElementById('gridGraphMetricsPageDiv').style.display = 'block';
+
+    }
+
+    //This is the array for the team selection.
+    Team = new FormControl();
+    // TeamChoices = this.allTeams;
+    //This is the array for select from.
+    Sprint = new FormControl();
 
   public barChartOptions: any = {
     scaleShowVerticalLines: false,

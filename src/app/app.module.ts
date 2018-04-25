@@ -28,8 +28,9 @@ import {MatInputModule} from '@angular/material';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {DxButtonModule} from 'devextreme-angular';
 import notify from 'devextreme/ui/notify';
-import { DxDataGridModule } from 'devextreme-angular';
+import { DxDataGridModule, DxPieChartModule } from 'devextreme-angular';
 import 'rxjs/add/operator/map';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import 'rxjs/add/operator/map';
     ScorecardComponent,
     DataComponent,
     DemoComponent,
+    SignInComponent,
 
     
     
@@ -62,6 +64,7 @@ import 'rxjs/add/operator/map';
     DxDataGridModule,
     MatSelectModule,
     DxButtonModule,
+    DxPieChartModule,
     RouterModule.forRoot([
       { path: "", redirectTo: "home", pathMatch: "full" },
       { path: "home", component: HomePageComponent },
