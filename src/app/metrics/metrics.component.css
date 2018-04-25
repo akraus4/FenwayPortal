@@ -64,6 +64,7 @@
       background:#FFF;
       margin:40px auto;
   }
+
   /* .effect7
 {
     position:relative;
@@ -96,21 +97,10 @@
          -o-transform:skew(8deg) rotate(3deg);
             transform:skew(8deg) rotate(3deg);
 }
-#searchWidgetContainer{
-    background-color: white;
-    padding-top: 7px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 0px;
-    margin-bottom: 26px;
-    margin-left: 0px;
-    margin-right: 0px;
-    border-radius: 3px;
-    position:relative;
-    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-    -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
-}
+ #searchWidgetContainer{
+z-index: 1;
+margin-top: 10px;
+} 
 #gridWidgetContainer{
     background-color: white;
     padding-top: 25px;
@@ -147,3 +137,31 @@
      color: transparent;
 }
 
+#storiesBySprintDoughnut {
+    height: 150px;
+} 
+#storiesBySprintDoughnutLabel {
+    height: 100px;
+} 
+/deep/ .dxc-legend{
+    -ms-transform: translate(-30px, 0); /* IE 9 */
+    -webkit-transform: translate(-30px, 0); /* Safari */
+    transform: translate(-30px, 0);
+} 
+
+#storiesBySprintDoughnutContainer{
+    background-color: white;
+    padding-top: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+    margin-left: 0px;
+    margin-right: 400px;
+
+    border-radius: 3px;
+    position:relative;
+    -webkit-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}

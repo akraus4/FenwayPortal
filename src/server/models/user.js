@@ -104,12 +104,21 @@ module.exports.findAllStoriesWithUsersBySprint = function (sprint_ids, callback)
 			sprintIds = sprintIds + "', '" + sprint_ids[i];
 			console.log('sprint2 = ' +  sprint_ids[i]);
 		}
-	
+	 
 	}
 	var queryString =
 	// "select * from webpackcli.agile_story inner join webpackcli.agile_story_agile_system_user on agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id where agile_story.agile_sprint_id = '" + sprint_id +  "' and agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id;"
 	// "select * from agile_story inner join agile_story_agile_system_user on agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id inner join agile_system_user on agile_system_user.agile_system_user_id = agile_story_agile_system_user.agile_system_user_id where agile_story.agile_sprint_id = '" + sprint_id + "' and agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id and agile_story_agile_system_user.agile_system_user_id = agile_system_user.agile_system_user_id;";
-	"select * from agile_story inner join agile_story_agile_system_user on agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id inner join agile_system_user on agile_system_user.agile_system_user_id = agile_story_agile_system_user.agile_system_user_id where agile_story.agile_sprint_id in ('" + sprintIds + "') and agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id and agile_story_agile_system_user.agile_system_user_id = agile_system_user.agile_system_user_id;";
+	"select * from agile_story "
+	+ "inner join agile_story_agile_system_user "
+	+ "on agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id "
+	+ "inner join agile_system_user "
+	+ "on agile_system_user.agile_system_user_id = agile_story_agile_system_user.agile_system_user_id "
+	+ "inner join agile_sprint "
+    + "on agile_story.agile_sprint_id = agile_sprint.agile_sprint_id "
+	+ "where agile_story.agile_sprint_id in ('" + sprintIds + "') "
+	+ "and agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id "
+	+ "and agile_story_agile_system_user.agile_system_user_id = agile_system_user.agile_system_user_id;";
 
 	console.log(queryString);
 	connection.query(queryString, function (err, rows, fields) {	

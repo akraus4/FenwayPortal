@@ -28,11 +28,11 @@ import {MatInputModule} from '@angular/material';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import {DxButtonModule} from 'devextreme-angular';
 import notify from 'devextreme/ui/notify';
-import { DxDataGridModule } from 'devextreme-angular';
+import { DxDataGridModule, DxPieChartModule } from 'devextreme-angular';
 import 'rxjs/add/operator/map';
 import { LoadingPanelComponent } from './loading-panel/loading-panel.component';
 import { DxLoadPanelModule } from 'devextreme-angular';
-
+import { SignInComponent } from './sign-in/sign-in.component';
 
 
 @NgModule({
@@ -48,6 +48,7 @@ import { DxLoadPanelModule } from 'devextreme-angular';
     DataComponent,
     DemoComponent,
     LoadingPanelComponent,
+    SignInComponent
 
     
     
@@ -66,6 +67,7 @@ import { DxLoadPanelModule } from 'devextreme-angular';
     DxDataGridModule,
     MatSelectModule,
     DxButtonModule,
+    DxPieChartModule,
     RouterModule.forRoot([
       { path: "", redirectTo: "home", pathMatch: "full" },
       { path: "home", component: HomePageComponent },
