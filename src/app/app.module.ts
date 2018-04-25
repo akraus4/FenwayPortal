@@ -30,9 +30,10 @@ import {DxButtonModule} from 'devextreme-angular';
 import notify from 'devextreme/ui/notify';
 import { DxDataGridModule, DxPieChartModule } from 'devextreme-angular';
 import 'rxjs/add/operator/map';
+import { SignInComponent } from './sign-in/sign-in.component';
 import { LoadingPanelComponent } from './loading-panel/loading-panel.component';
 import { DxLoadPanelModule } from 'devextreme-angular';
-import { SignInComponent } from './sign-in/sign-in.component';
+
 
 
 @NgModule({
@@ -47,8 +48,8 @@ import { SignInComponent } from './sign-in/sign-in.component';
     ScorecardComponent,
     DataComponent,
     DemoComponent,
-    LoadingPanelComponent,
-    SignInComponent
+    SignInComponent,
+    LoadingPanelComponent
 
     
     
