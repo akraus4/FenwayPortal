@@ -1,5 +1,5 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { Component, NgModule, enableProdMode } from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 import {MatSelectModule} from '@angular/material/select';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
@@ -24,7 +24,16 @@ import { HttpClient } from'@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { MetricsService } from './services/metrics.service';
+import {MatInputModule} from '@angular/material';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {DxButtonModule} from 'devextreme-angular';
+import notify from 'devextreme/ui/notify';
+import { DxDataGridModule } from 'devextreme-angular';
 import 'rxjs/add/operator/map';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { LoadingPanelComponent } from './loading-panel/loading-panel.component';
+import { DxLoadPanelModule } from 'devextreme-angular';
+
 
 
 @NgModule({
@@ -38,7 +47,10 @@ import 'rxjs/add/operator/map';
     ViewScoreComponent,
     ScorecardComponent,
     DataComponent,
-    DemoComponent
+    DemoComponent,
+    LoadingPanelComponent,
+
+    
     
   ],
 
@@ -50,9 +62,17 @@ import 'rxjs/add/operator/map';
     ReactiveFormsModule,
     ChartsModule,
     MatRadioModule,
+    MatInputModule,
     MatTableModule,
+    DxDataGridModule,
     MatSelectModule,
+<<<<<<< HEAD
+    ModalModule.forRoot(),
+        RouterModule.forRoot([
+=======
+    DxButtonModule,
     RouterModule.forRoot([
+>>>>>>> 12fd66b5ec7799c9722e3e9280ba0d541c11a135
       { path: "", redirectTo: "home", pathMatch: "full" },
       { path: "home", component: HomePageComponent },
       { path: "scorecard", component: ScorecardComponent },
@@ -66,7 +86,8 @@ import 'rxjs/add/operator/map';
     ]),
     BrowserModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    DxLoadPanelModule
   ],
 
   providers: [MetricsService],

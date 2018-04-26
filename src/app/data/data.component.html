@@ -1,3 +1,59 @@
-<p>
-  data works!
-</p>
+<h1 id="title"> {{title}} </h1>
+<br />
+
+<div id="table">
+  <mat-form-field class="selectTables">
+    <mat-select placeholder="Select a Table" (change)="storeCurrentTable($event.value)">
+      <mat-option *ngFor="let table of tables" [value]="table">{{table.viewValue}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button id="search" mat-button> Search Tables </button>
+  <button id="addRow" mat-button (click)="openModal(template)"> Add New Row</button>
+</div>
+
+<div id="gridWidgetContainer" class="effect7">
+  <div class="row" id="gridGraphMetricsPageDiv">
+    <div class="col-12">
+      <dx-data-grid id="gridContainer" [dataSource]="StoryChoices" [showRowLines]="true" [showBorders]="true" [columns]="columns">
+        <dxo-export [enabled]="true" fileName="Employees" [allowExportSelectedData]="true"></dxo-export>
+        <dxo-selection mode="multiple"></dxo-selection>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+        <dxo-sorting mode="none"></dxo-sorting>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+
+          <dxi-column *ngFor="let col of columns" [dataField]="col.dataField" [caption]="col.caption"></dxi-column>
+      </dx-data-grid>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    This is a modal.
+  </div>
+</ng-template>

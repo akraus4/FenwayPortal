@@ -1,0 +1,33 @@
+#addRow {
+    margin-left: 5px;
+    font-weight: bold;
+    margin-top: 15px;
+   float: right;
+}
+#gridLoadData {
+    display: flex;
+    flex-direction: column;
+    max-height: 500px;
+    min-width: 300px;
+    overflow: auto;
+    max-height: 475px;
+    margin-bottom: 20px;
+}
+#title {
+    text-align: center;
+    font-size: 50px;
+    color: #1a3b68;
+    font-family: 'Roboto';
+    font-weight: bold;
+    padding-top: 25px;
+}
+
+#table {
+   margin-left: 300px;
+
+}
+#search {
+    margin-left: 155px;
+    font-weight: bold;
+    margin-top: 15px;
+}

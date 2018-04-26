@@ -26,6 +26,8 @@ export class HomePageComponent implements OnInit {
 		
 	}
 
+
+
 	// getUsers() {
 	//   this.metricsService.getUsers()
 	//   .map(res => {console.log(); return res.json();  })

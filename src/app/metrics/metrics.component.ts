@@ -1,7 +1,14 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MetricsService } from '../services/metrics.service';
+import { MatTableDataSource } from '@angular/material';
+import { DxButtonModule } from 'devextreme-angular';
+import { DxDataGridModule } from 'devextreme-angular';
 
+
+// if(!/localhost/.test(document.location.host)) {
+//   enableProdMode();
+// }
 
 
 @Component({
@@ -9,32 +16,53 @@ import { MetricsService } from '../services/metrics.service';
   templateUrl: './metrics.component.html',
   styleUrls: ['./metrics.component.css']
 })
+
+  
 export class MetricsComponent implements OnInit {
 
   title = 'POST Request'
   TeamChoices = [];
   metricsService: any;
   SprintChoices = [];
-  StoryChoices = [];
-  currentSprintId: string;
+  StoryChoices;
+  TeamMemberChoices = [];
+  currentSprintId = [];
+  currentTeamMemberId: string;
+  // dataSource = this.StoryChoices;
+  // dataSource: WeekData[];
   constructor(@Inject(MetricsService) metricsService) {
     this.metricsService = metricsService;
+   
   }
 
   ngOnInit() {
     // document.getElementById('barGraphMetricsPageDiv').style.display = 'block';
     // document.getElementById('gridGraphMetricsPageDiv').style.display = 'none';
 
+    this.metricsService.showLoadingPanel();
     document.getElementById('gridGraphMetricsPageDiv').style.display = 'block';
     document.getElementById('barGraphMetricsPageDiv').style.display = 'none';
     this.getAllTeams();
+    this.metricsService.hideLoadingPanel();
+
     // this.getAllSprints();
 
   };
 
+  // displayedColumns = ['agile_story_id', 'agile_story_name', 'agile_sprint_id', 'story_type', 'story_points', 'agile_system_user_id'];
+  // dataSource = new MatTableDataSource(this.StoryChoices);
+
+  // applyFilter(filterValue: string) {
+  //   filterValue = filterValue.trim(); // Remove whitespace
+  //   filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+  //   //this.StoryChoices = JSON.stringify(this.StoryChoices);
+  //   console.log(this.dataSource + " dataSource")
+  //   // this.dataSource.filter = filterValue;
+  // }
+
   getAllTeams() {
     this.metricsService.getAllTeams()
-      .map(res => { console.log(); return res.json(); })
+      .map(res => { return res.json(); })
       .subscribe((results) => this.TeamChoices = results);
   }
 
@@ -42,28 +70,45 @@ export class MetricsComponent implements OnInit {
   getAllSprintsByTeam(system_id) {
     // console.log(system_id);
     this.metricsService.getAllSprintsBySystem(system_id)
-      .map(res => { console.log(res); return res.json(); })
+      .map(res => { return res.json(); })
       .subscribe((results) => this.SprintChoices = results);
+    this.getAllUsersByTeam(system_id);
   }
 
-  storeSprintId(sprint_id) {
+  getAllUsersByTeam(system_id) {
+    // console.log(system_id);
+    this.metricsService.getAllUsersBySystem(system_id)
+      .map(res => { return res.json(); })
+      .subscribe((results) => this.TeamMemberChoices = results);
+  }
+
+  storeSprintId(sprint_ids) {
+    // console.log('Incoming sprint ids = ' + JSON.stringify(sprint_ids));
+    var i = 0;
+    this.currentSprintId = [];
+    for (i = 0; i < sprint_ids.length; i++) {
+      this.currentSprintId.push(sprint_ids[i].agile_sprint_id);
+    }
+    //Says there is an error here, but does not throw an error when it runs
+    // document.getElementById("formCompleteButton").disabled = false;
+    (<HTMLInputElement>document.getElementById("formCompleteButton")).disabled = false;
+
+  }
+
+  storeTeamMemberId(team_member_id) {
     // console.log("Sprint ID = " + sprint_id);
-    this.currentSprintId = sprint_id;
+    this.currentTeamMemberId = team_member_id
   }
 
   getAllStoriesWithUsersBySprint() {
-    console.log('made');
-    // console.log("Sprint ID = " + this.currentSprintId);
-    this.metricsService.getAllStoriesWithUsersBySprint(this.currentSprintId)
+      this.metricsService.getAllStoriesWithUsersBySprint(this.currentSprintId)
       .map(res => { console.log(res); return res.json(); })
       .subscribe((results) => this.StoryChoices = results);
   }
 
-
   showBarGraph() {
     document.getElementById('barGraphMetricsPageDiv').style.display = 'block';
     document.getElementById('gridGraphMetricsPageDiv').style.display = 'none';
-
   }
   showGridGraph() {
     document.getElementById('barGraphMetricsPageDiv').style.display = 'none';
@@ -113,17 +158,18 @@ export class MetricsComponent implements OnInit {
     clone[0].data = data;
     this.barChartData = clone;
   }
-  displayedColumns = ['agile_story_id', 'agile_story_name', 'agile_sprint_id', 'story_type', 'story_points', 'agile_system_user_id'];
+
 }
-export interface Element {
-  agile_story_id: string;
-  agile_story_name: string;
-  agile_sprint_id: string;
-  story_type: string;
-  story_points: string;
-  agile_system_user_id: string;
-  // users: [string];
-}
+
+// export interface Element {
+//   agile_story_id: string;
+//   agile_story_name: string;
+//   agile_sprint_id: string;
+//   story_type: string;
+//   story_points: string;
+//   agile_system_user_id: string;
+//   // users: [string];
+// }
 // const ELEMENT_DATA: Element[] = [
 //   { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
 //   { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
