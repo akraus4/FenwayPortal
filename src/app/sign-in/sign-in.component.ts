@@ -1,5 +1,7 @@
 import { Component, ElementRef, AfterViewInit } from '@angular/core';
 declare const gapi: any;
+declare const signedIn: any;
+// declare var profileImage: any;
 
 @Component({
   selector: 'app-sign-in',
@@ -7,8 +9,9 @@ declare const gapi: any;
   styleUrls: ['./sign-in.component.css']
 })
 export class SignInComponent implements AfterViewInit {
-  private clientId:string = '409167539692-4eqnaq2jd1itl211gsgh3m2k7i02aefa.apps.googleusercontent.com';
-  
+
+  private clientId: string = '409167539692-4eqnaq2jd1itl211gsgh3m2k7i02aefa.apps.googleusercontent.com';
+
   private scope = [
     'profile',
     'email',
@@ -26,27 +29,34 @@ export class SignInComponent implements AfterViewInit {
         cookiepolicy: 'single_host_origin',
         scope: that.scope
       });
-      that.attachSignin(that.element.nativeElement.firstChild);
+        that.attachSignin(that.element.nativeElement.firstChild);
     });
   }
   public attachSignin(element) {
+    var profileImage;
     let that = this;
     this.auth2.attachClickHandler(element, {},
       function (googleUser) {
-
         let profile = googleUser.getBasicProfile();
+        // profileImage = profile.getImageUrl();
+        //this.setProfileImage(profile.getImageUrl());
         console.log('Token || ' + googleUser.getAuthResponse().id_token);
         console.log('ID: ' + profile.getId());
         console.log('Name: ' + profile.getName());
         console.log('Image URL: ' + profile.getImageUrl());
         console.log('Email: ' + profile.getEmail());
-        //YOUR CODE HERE
+        // console.log('Profile: ' + profileImage);
 
-
-      }, function (error) {
+      },
+      function (error) {
         console.log(JSON.stringify(error, undefined, 2));
       });
+
   }
+
+  // setProfileImage(p){
+  //   console.log('Profile: ' + JSON.stringify(p));
+  // }
 
   constructor(private element: ElementRef) {
     console.log('ElementRef: ', this.element);
