@@ -3,18 +3,18 @@
 
 <div id="table">
   <mat-form-field class="selectTables">
-    <mat-select placeholder="Select a Table" (change)="storeCurrentTable($event.value)">
+    <mat-select placeholder="Select a Table" (change)="storeCurrentTable($event.value.viewValue)">
       <mat-option *ngFor="let table of tables" [value]="table">{{table.viewValue}}</mat-option>
     </mat-select>
   </mat-form-field>
-  <button id="search" mat-button> Search Tables </button>
+  <button id="search" mat-button (click)="getTableData()"> Search Tables </button>
   <button id="addRow" mat-button (click)="openModal(template)"> Add New Row</button>
 </div>
 
 <div id="gridWidgetContainer" class="effect7">
   <div class="row" id="gridGraphMetricsPageDiv">
     <div class="col-12">
-      <dx-data-grid id="gridContainer" [dataSource]="StoryChoices" [showRowLines]="true" [showBorders]="true" [columns]="columns">
+      <dx-data-grid id="gridContainer" [dataSource]="TableChoices" [showRowLines]="true" [showBorders]="true" [columns]="columnChoices">
         <dxo-export [enabled]="true" fileName="Employees" [allowExportSelectedData]="true"></dxo-export>
         <dxo-selection mode="multiple"></dxo-selection>
         <dxo-header-filter [visible]="true"></dxo-header-filter>
@@ -22,7 +22,7 @@
         <dxo-sorting mode="none"></dxo-sorting>
         <dxo-paging [pageSize]="10"></dxo-paging>
 
-          <dxi-column *ngFor="let col of columns" [dataField]="col.dataField" [caption]="col.caption"></dxi-column>
+          <dxi-column *ngFor="let col of columnChoices" [dataField]="col.dataField" [caption]="col.caption"></dxi-column>
       </dx-data-grid>
     </div>
   </div>

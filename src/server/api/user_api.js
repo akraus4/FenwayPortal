@@ -18,7 +18,7 @@ app.get('/findAllTeams', function (req, res) {
 		// }
 		// console.log(teamName);
 		res.json(rows);
-	})
+	});
 });
 
 app.get('/findSystemWithSystemUserWithWorkTeam', function (req, res) {

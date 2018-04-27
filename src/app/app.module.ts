@@ -24,15 +24,15 @@ import { HttpClient } from'@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { MetricsService } from './services/metrics.service';
+import { DataService } from './services/data.service';
 import {MatInputModule} from '@angular/material';
 import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {DxButtonModule} from 'devextreme-angular';
+import {DxButtonModule, DxLoadPanelModule, DxDataGridModule, } from 'devextreme-angular';
 import notify from 'devextreme/ui/notify';
-import { DxDataGridModule } from 'devextreme-angular';
 import 'rxjs/add/operator/map';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { LoadingPanelComponent } from './loading-panel/loading-panel.component';
-import { DxLoadPanelModule } from 'devextreme-angular';
+
 
 
 
@@ -66,13 +66,9 @@ import { DxLoadPanelModule } from 'devextreme-angular';
     MatTableModule,
     DxDataGridModule,
     MatSelectModule,
-<<<<<<< HEAD
-    ModalModule.forRoot(),
-        RouterModule.forRoot([
-=======
     DxButtonModule,
+    ModalModule.forRoot(),
     RouterModule.forRoot([
->>>>>>> 12fd66b5ec7799c9722e3e9280ba0d541c11a135
       { path: "", redirectTo: "home", pathMatch: "full" },
       { path: "home", component: HomePageComponent },
       { path: "scorecard", component: ScorecardComponent },
@@ -90,7 +86,7 @@ import { DxLoadPanelModule } from 'devextreme-angular';
     DxLoadPanelModule
   ],
 
-  providers: [MetricsService],
+  providers: [MetricsService, DataService],
   bootstrap: [AppComponent]
 })
 

@@ -39,11 +39,11 @@ export class MetricsComponent implements OnInit {
     // document.getElementById('barGraphMetricsPageDiv').style.display = 'block';
     // document.getElementById('gridGraphMetricsPageDiv').style.display = 'none';
 
-    this.metricsService.showLoadingPanel();
+   
     document.getElementById('gridGraphMetricsPageDiv').style.display = 'block';
     document.getElementById('barGraphMetricsPageDiv').style.display = 'none';
     this.getAllTeams();
-    this.metricsService.hideLoadingPanel();
+  
 
     // this.getAllSprints();
 
@@ -65,6 +65,7 @@ export class MetricsComponent implements OnInit {
       .map(res => { return res.json(); })
       .subscribe((results) => this.TeamChoices = results);
   }
+  
 
 
   getAllSprintsByTeam(system_id) {
@@ -115,6 +116,8 @@ export class MetricsComponent implements OnInit {
     document.getElementById('gridGraphMetricsPageDiv').style.display = 'block';
 
   }
+
+  
 
   //This is the array for the team selection.
   Team = new FormControl();

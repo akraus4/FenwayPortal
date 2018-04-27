@@ -19,9 +19,9 @@ export class LoadingPanelComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.metricsService.loadingVisible.subscribe(
-      (loadIndicator) => this.loadingVisible = loadIndicator
-  );
+  //   this.metricsService.loadingVisible.subscribe(
+  //     (loadIndicator) => this.loadingVisible = loadIndicator
+  // );
   }
 
 

@@ -9,7 +9,8 @@ export class DataService {
 
 	constructor(@Inject(Http) http) {
 		this.http = http;
-    }
+	}
+	
     //Not pulling data because our work team ID's do not match with work team tables.
     getSystemWithSystemUserWithWorkTeam() {
 		let result = this.http.get('http://localhost:3000/findSystemWithSystemUserWithWorkTeam');
@@ -17,6 +18,7 @@ export class DataService {
 		return result
 
 	}
+
 	getSystemUserWithSystemWithTeamMemberWithWorkUser() {
 		let result = this.http.get('http://localhost:3000/findSystemUserWithSystemWithTeamMemberWithWorkUser');
 		console.log(JSON.stringify(result));

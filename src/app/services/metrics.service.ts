@@ -60,6 +60,8 @@ export class MetricsService {
 		return result
 	}
 
+
+
 	// addUser(data) {
 	// 	let headers = new Headers({"Content-Type": "application/json"});
 	// 	let options = new RequestOptions({ headers: headers });
