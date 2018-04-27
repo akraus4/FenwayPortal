@@ -2,7 +2,7 @@ import { Component, ElementRef, AfterViewInit } from '@angular/core';
 declare const gapi: any;
 declare const signedIn: any;
 // declare var profileImage: any;
-
+//component
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
