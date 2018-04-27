@@ -45,21 +45,35 @@ export class MetricsComponent implements OnInit {
     // document.getElementById('barGraphMetricsPageDiv').style.display = 'block';
     // document.getElementById('gridGraphMetricsPageDiv').style.display = 'none';
 
-    this.metricsService.showLoadingPanel();
+  
+   
     document.getElementById('gridGraphMetricsPageDiv').style.display = 'block';
     // document.getElementById('barGraphMetricsPageDiv').style.display = 'none';
     this.getAllTeams();
-    this.metricsService.hideLoadingPanel();
+   
+  
 
     // this.getAllSprints();
 
   };
+
+  // displayedColumns = ['agile_story_id', 'agile_story_name', 'agile_sprint_id', 'story_type', 'story_points', 'agile_system_user_id'];
+  // dataSource = new MatTableDataSource(this.StoryChoices);
+
+  // applyFilter(filterValue: string) {
+  //   filterValue = filterValue.trim(); // Remove whitespace
+  //   filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+  //   //this.StoryChoices = JSON.stringify(this.StoryChoices);
+  //   console.log(this.dataSource + " dataSource")
+  //   // this.dataSource.filter = filterValue;
+  // }
 
   getAllTeams() {
     this.metricsService.getAllTeams()
       .map(res => { return res.json(); })
       .subscribe((results) => this.TeamChoices = results);
   }
+  
 
   getAllSprintsByTeam(system_id) {
     // console.log(system_id);
@@ -86,6 +100,7 @@ export class MetricsComponent implements OnInit {
     //Says there is an error here, but does not throw an error when it runs
     // document.getElementById("formCompleteButton").disabled = false;
     (<HTMLInputElement>document.getElementById("formCompleteButton")).disabled = false;
+
   }
 
   storeTeamMemberId(team_member_id) {

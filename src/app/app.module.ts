@@ -24,15 +24,16 @@ import { HttpClient } from'@angular/common/http';
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { MetricsService } from './services/metrics.service';
-import {MatInputModule} from '@angular/material';
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {DxButtonModule} from 'devextreme-angular';
-import notify from 'devextreme/ui/notify';
-import { DxDataGridModule, DxPieChartModule } from 'devextreme-angular';
 import 'rxjs/add/operator/map';
 import { SignInComponent } from './sign-in/sign-in.component';
+import { DataService } from './services/data.service';
+import {MatInputModule} from '@angular/material';
+import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import {DxButtonModule, DxLoadPanelModule, DxDataGridModule, DxPieChartModule  } from 'devextreme-angular';
+import notify from 'devextreme/ui/notify';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { LoadingPanelComponent } from './loading-panel/loading-panel.component';
-import { DxLoadPanelModule } from 'devextreme-angular';
+
 
 
 
@@ -48,8 +49,7 @@ import { DxLoadPanelModule } from 'devextreme-angular';
     ScorecardComponent,
     DataComponent,
     DemoComponent,
-    SignInComponent,
-    LoadingPanelComponent
+    LoadingPanelComponent,
 
     
     
@@ -69,6 +69,7 @@ import { DxLoadPanelModule } from 'devextreme-angular';
     MatSelectModule,
     DxButtonModule,
     DxPieChartModule,
+    ModalModule.forRoot(),
     RouterModule.forRoot([
       { path: "", redirectTo: "home", pathMatch: "full" },
       { path: "home", component: HomePageComponent },
@@ -87,7 +88,7 @@ import { DxLoadPanelModule } from 'devextreme-angular';
     DxLoadPanelModule
   ],
 
-  providers: [MetricsService],
+  providers: [MetricsService, DataService],
   bootstrap: [AppComponent]
 })
 

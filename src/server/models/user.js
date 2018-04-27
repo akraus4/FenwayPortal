@@ -29,6 +29,30 @@ module.exports.findAllTeams = function (callback) {
 	});
 }
 
+//  This pulls back agile_system with agile system user
+module.exports.findSystemWithSystemUserWithWorkTeam = function (callback) {
+	var queryString = 'SELECT * FROM agile_system LEFT OUTER JOIN agile_system_user ON agile_system.agile_system_id = agile_system_user.agile_system_id LEFT OUTER JOIN work_team ON agile_system.work_team_id = work_team.work_team_id';
+	connection.query(queryString, function (err, rows, fields) {
+		if (err) throw err;
+		callback(err, rows, fields)
+		for (var i in rows) {
+			//  console.log(rows);
+		}
+	});
+}
+
+//  This pulls back agile_system_user with agile system.
+module.exports.findSystemUserWithSystemWithTeamMemberWithWorkUser = function (callback) {
+	var queryString = 'SELECT * FROM agile_system_user LEFT OUTER JOIN agile_system ON agile_system_user.agile_system_id = agile_system.agile_system_id LEFT OUTER JOIN work_team_member ON agile_system_user.work_team_member_id = work_team_member.work_team_member_id LEFT OUTER JOIN work_user ON agile_system_user.work_user_id = work_user.work_user_id ';
+	connection.query(queryString, function (err, rows, fields) {
+		if (err) throw err;
+		callback(err, rows, fields)
+		for (var i in rows) {
+			//  console.log(rows);
+		}
+	});
+}
+
 // // //This pulls back sprints from the sprint table.
 module.exports.findAllSprints = function (callback) {
 	var queryString = 'SELECT * FROM agile_sprint ORDER BY agile_sprint_id ASC';
@@ -121,6 +145,10 @@ module.exports.findAllStoriesWithUsersBySprint = function (sprint_ids, callback)
 	+ "and agile_story_agile_system_user.agile_system_user_id = agile_system_user.agile_system_user_id;";
 
 	console.log(queryString);
+	// "select agile_story.agile_story_id,agile_story.agile_story_name,agile_story.agile_sprint_id,agile_story.story_type,agile_story.story_points,agile_story_agile_system_user.agile_system_user_id from fg_metrics_dev2.agile_story inner join fg_metrics_dev2.agile_story_agile_system_user on agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id where agile_story.agile_story_id = '" + story_id + "';"
+	"select * from fg_metrics_dev2.agile_story inner join fg_metrics_dev2.agile_story_agile_system_user on agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id where agile_story.agile_sprint_id = '" + sprint_id +  "' and agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id;"
+ 
+	//console.log(queryString);
 	connection.query(queryString, function (err, rows, fields) {	
 		if (err) throw err;
 		callback(err, rows, fields)

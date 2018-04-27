@@ -13,6 +13,32 @@ app.get('/findAllTeams', function (req, res) {
 	user.findAllTeams(function (err, rows, fields) {
 		if (err) throw err;
 		res.json(rows);
+	});
+});
+
+app.get('/findSystemWithSystemUserWithWorkTeam', function (req, res) {
+
+	user.findSystemWithSystemUserWithWorkTeam(function (err, rows, fields) {
+		if (err) throw err;
+		// var teamName = []; console.log(rows);
+		// for(i=0; i< rows.length; i++){
+		// teamName[i] = rows[i].agile_system_name;      			
+		// }
+		// console.log(teamName);
+		res.json(rows);
+	})
+});
+
+app.get('/findSystemUserWithSystemWithTeamMemberWithWorkUser', function (req, res) {
+
+	user.findSystemUserWithSystemWithTeamMemberWithWorkUser(function (err, rows, fields) {
+		if (err) throw err;
+		// var teamName = []; console.log(rows);
+		// for(i=0; i< rows.length; i++){
+		// teamName[i] = rows[i].agile_system_name;      			
+		// }
+		// console.log(teamName);
+		res.json(rows);
 	})
 });
 
