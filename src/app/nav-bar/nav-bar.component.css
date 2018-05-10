@@ -18,6 +18,26 @@
     transition: all 0.8s ease;
 }
 
+/* .gradient {
+    background-image:
+      linear-gradient(
+        45deg, 
+        red, #f06d06
+      );
+  } */
+
+/* .gradient {
+    background-image:
+      linear-gradient(
+        5deg, 
+        #858585,#696969
+      );
+  } */
+
+  #mainMenu{
+      box-shadow: inset;
+  }
+
 img{
     max-width: 80%;
     padding-top: 10px;

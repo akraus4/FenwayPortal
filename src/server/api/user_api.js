@@ -72,6 +72,7 @@ app.get('/findAllUsersBySystem/:system_id', function (req, res) {
 // 
 app.get('/findAllStoriesWithUsersBySprint/:sprint_id', function (req, res) {
 	var sprint_id = req.params.sprint_id;
+	console.log('@@@@@@@@@@ ' + sprint_id.length )
 	// var stories = [];
 	// for (i = 0; i < sprint_id; i++) {
 		user.findAllStoriesWithUsersBySprint(sprint_id, function (err, rows, fields) {
@@ -150,14 +151,14 @@ app.get('/findAllStoriesWithUsersBySprint/:sprint_id', function (req, res) {
 // 		})
 // 	});
 
-app.get('/', function (req, res) {
+// app.get('/', function (req, res) {
 
-	// console.log('ok'); 
-	user.findAllStories(function (err, rows, fields) {
-		if (err) throw err;
-		res.json(rows);
-	})
-});
+// 	// console.log('ok'); 
+// 	user.findAllStories(function (err, rows, fields) {
+// 		if (err) throw err;
+// 		res.json(rows);
+// 	})
+// });
 
 app.post('/adduser', function (req, res, next) {
 

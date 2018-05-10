@@ -3,9 +3,13 @@ var mysql = require('mysql');
 
 var connection = mysql.createConnection({
     host: '52.55.14.143',
-    user: 'fg_user_dev2',
-    password: '6UhjVvAgM_Jm',
-    database: 'fg_metrics_dev2'
+    user: 'fg_user',
+    password: 'uXQ1pgjZlne7',
+    database: 'fg_metrics'
+    // host: '52.55.14.143',
+    // user: 'fg_user_dev2',
+    // password: '6UhjVvAgM_Jm',
+    // database: 'fg_metrics_dev2'
     // host: 'localhost',
     // user: 'root',
     // password: 'new_password',
@@ -95,14 +99,14 @@ module.exports.findAllUsersBySystem = function (system_id, callback) {
 // //This pulls back all from agile_story_system_user.
 module.exports.findAllStoriesWithUsersBySprint = function (sprint_ids, callback) {
     var sprintIds = ''; 
-    console.log('sprint length = ' +  sprint_ids.length);
-    for(i=0; i < sprint_ids.length; i++){ 
+    var newSprintIds = sprint_ids.split(',');
+    for(i=0; i < newSprintIds.length; i++){ 
         if(i == 0){
-            sprintIds = sprint_ids[i];
-            console.log('sprint1 = ' +  sprint_ids[i]);
+            sprintIds = newSprintIds[i];
+            console.log('sprint1 = ' +  newSprintIds[i]);
         }else{
-            sprintIds = sprintIds + "', '" + sprint_ids[i];
-            console.log('sprint2 = ' +  sprint_ids[i]);
+            sprintIds = sprintIds + "', '" + newSprintIds[i];
+            console.log('sprint2 = ' +  newSprintIds[i]);
         }
      
     }

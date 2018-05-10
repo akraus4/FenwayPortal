@@ -56,6 +56,7 @@ export class MetricsService {
 
 		// for (i = num; i < sprint_id.length; i++) {
 		// 	console.log("sprint id = " + sprint_id[i].agile_sprint_id)
+		// console.log('@@@@@@@@@@ ' + sprint_id.length )
 			let result = this.http.get('http://localhost:3000/findAllStoriesWithUsersBySprint/' + sprint_id);
 			// console.log("result = " + result)
 			// stories.push(result);

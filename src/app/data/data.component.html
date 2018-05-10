@@ -1,17 +1,39 @@
-<h1 id="title"> {{title}} </h1>
+<!-- <h1 id="title"> {{title}} </h1> -->
+<div class="row">
+    <div class="col-sm-12">
+        <h1 id="title"> {{title}} </h1>
+      <app-sign-in></app-sign-in>
+    </div>
+  </div>
 <br />
 
-<div id="table">
-  <mat-form-field class="selectTables">
-    <mat-select placeholder="Select a Table" (change)="storeCurrentTable($event.value.viewValue)">
-      <mat-option *ngFor="let table of tables" [value]="table">{{table.viewValue}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-  <button id="search" mat-button (click)="getTableData()"> Search Tables </button>
-  <button id="addRow" mat-button (click)="openModal(template)"> Add New Row</button>
-</div>
-
 <div id="gridWidgetContainer" class="effect7">
+  <div class="selectTeam" class="row" id="searchWidgetContainer">
+    <div class="col-sm-3">
+        <mat-form-field class="selectTables">
+            <mat-select placeholder="Select a Table" (change)="storeCurrentTable($event.value.viewValue)">
+              <mat-option *ngFor="let table of tables" [value]="table">{{table.viewValue}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+    </div>
+    <div class="col-sm-1">
+        <button id="search" mat-button class='dataBtn' (click)="getTableData()">
+            <i class="fas fa-search"></i>
+          </button>
+      </div>
+      <div class="col-sm-1">
+          <button id="addRow" mat-button class='dataBtn' (click)="openModal(template)">
+              <i class="fas fa-plus-circle"></i>
+            </button>
+        </div>
+
+
+    <!-- <div id="table">
+      
+      
+      
+    </div> -->
+  </div>
   <div class="row" id="gridGraphMetricsPageDiv">
     <div class="col-12">
       <dx-data-grid id="gridContainer" [dataSource]="TableChoices" [showRowLines]="true" [showBorders]="true" [columns]="columnChoices">
@@ -22,24 +44,11 @@
         <dxo-sorting mode="none"></dxo-sorting>
         <dxo-paging [pageSize]="10"></dxo-paging>
 
-          <dxi-column *ngFor="let col of columnChoices" [dataField]="col.dataField" [caption]="col.caption"></dxi-column>
+        <dxi-column *ngFor="let col of columnChoices" [dataField]="col.dataField" [caption]="col.caption"></dxi-column>
       </dx-data-grid>
     </div>
   </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
