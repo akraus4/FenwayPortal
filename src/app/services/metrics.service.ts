@@ -5,7 +5,9 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 
 export class MetricsService {
-
+	developmentURL = 'http://localhost:5000'
+	productionURL = ''
+	url = this.developmentURL
 	http: any;
 
 	constructor(@Inject(Http) http) {
@@ -14,50 +16,42 @@ export class MetricsService {
 
 	// getUsers() {
 	// let result = this.http.get('http://localhost:3000/');console.log(JSON.stringify(result)); return result
-
 	// }
 
 
-
-
-     
-
 	getAllTeams() {
-		let result = this.http.get('http://localhost:3000/findAllTeams');
-		console.log(JSON.stringify(result));
+		let result = this.http.get(this.url + '/findAllTeams');
+		console.log("JSON: " + JSON.stringify(result));
 		return result
-
 	}
 
 	getAllSprints() {
-		let result = this.http.get('http://localhost:3000/findAllSprints');
+		let result = this.http.get(this.url + '/findAllSprints');
 		console.log(JSON.stringify(result));
 		return result
-
 	}
+
 	getAllSprintsBySystem(system_id) {
-		let result = this.http.get('http://localhost:3000/findAllSprintsBySystem/' + system_id);
+		let result = this.http.get(this.url + '/findAllSprintsBySystem/' + system_id);
 		// console.log(JSON.stringify(result));
 		return result
 	}
 
-	getAllUsersBySystem(system_id) {
-		let result = this.http.get('http://localhost:3000/findAllUsersBySystem/' + system_id);
-		// console.log(JSON.stringify(result));
-		return result
-
-	}
+	// getAllUsersBySystem(system_id) {
+	// 	let result = this.http.get(this.url +'/findAllUsersBySystem/' + system_id);
+	// 	// console.log(JSON.stringify(result));
+	// 	return result
+	// }
 
 	getAllStoriesWithUsersBySprint(sprint_id) {
 		// var stories = [];
 		// var num: number = 0;
 		// var i: number;
 		// var factorial = 1;
-
 		// for (i = num; i < sprint_id.length; i++) {
 		// 	console.log("sprint id = " + sprint_id[i].agile_sprint_id)
 		// console.log('@@@@@@@@@@ ' + sprint_id.length )
-			let result = this.http.get('http://localhost:3000/findAllStoriesWithUsersBySprint/' + sprint_id);
+			let result = this.http.get(this.url + '/findAllStoriesWithUsersBySprint/' + sprint_id);
 			// console.log("result = " + result)
 			// stories.push(result);
 			// console.log(JSON.stringify(stories))
@@ -69,7 +63,7 @@ export class MetricsService {
 	}
 
 	getAllStoriesAndUsersBySprint(sprint_id, story_id) {
-		let result = this.http.get('http://localhost:3000/findAllStoriesAndUsersBySprint/' + sprint_id + story_id);
+		let result = this.http.get(this.url + '/findAllStoriesAndUsersBySprint/' + sprint_id + story_id);
 		return result
 	}
 
@@ -78,7 +72,6 @@ export class MetricsService {
 	// addUser(data) {
 	// 	let headers = new Headers({"Content-Type": "application/json"});
 	// 	let options = new RequestOptions({ headers: headers });
-
 	// 	return this.http.post('http://localhost:3000/adduser', JSON.stringify(data), options)
 	// 		.map(res => res.json());
 	// }
@@ -89,11 +82,9 @@ export class MetricsService {
 
 	showLoadingPanel(): void {
         this.loadingVisible.next(true);
-        
     }
 
     hideLoadingPanel(): void {
         this.loadingVisible.next(false);
     }
-
 }

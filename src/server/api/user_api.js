@@ -13,6 +13,7 @@ app.get('/findAllTeams', function (req, res) {
 	user.findAllTeams(function (err, rows, fields) {
 		if (err) throw err;
 		res.json(rows);
+		console.log(rows);
 	});
 });
 
