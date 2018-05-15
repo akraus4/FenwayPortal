@@ -21,13 +21,11 @@ export class MetricsService {
 
 	getAllTeams() {
 		let result = this.http.get(this.url + '/findAllTeams');
-		console.log("JSON: " + JSON.stringify(result));
 		return result
 	}
 
 	getAllSprints() {
 		let result = this.http.get(this.url + '/findAllSprints');
-		console.log(JSON.stringify(result));
 		return result
 	}
 

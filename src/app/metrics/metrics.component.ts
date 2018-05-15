@@ -71,7 +71,7 @@ export class MetricsComponent implements OnInit {
   getAllTeams() {
     this.metricsService.getAllTeams()
       .map(res => { return res.json(); })
-      .subscribe((results) =>{console.log("Results: " + results); this.TeamChoices = results});
+      .subscribe((results) =>{this.TeamChoices = results});
   }
   
 
@@ -129,6 +129,7 @@ export class MetricsComponent implements OnInit {
       var i;
       var lastUser = '';
       var totalPoints = 0;
+      console.log(this.StoryChoices)
       for (i = 0; i < this.StoryChoices.length; i++) {
         if (lastUser == this.StoryChoices[i].agile_system_user) {
           totalPoints = totalPoints + this.StoryChoices[i].agile_system_user_story_points;
