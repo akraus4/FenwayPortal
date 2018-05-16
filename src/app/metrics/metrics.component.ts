@@ -71,7 +71,7 @@ export class MetricsComponent implements OnInit {
   getAllTeams() {
     this.metricsService.getAllTeams()
       .map(res => { return res.json(); })
-      .subscribe((results) => this.TeamChoices = results);
+      .subscribe((results) =>{this.TeamChoices = results});
   }
   
 
@@ -80,22 +80,25 @@ export class MetricsComponent implements OnInit {
     this.metricsService.getAllSprintsBySystem(system_id)
       .map(res => { return res.json(); })
       .subscribe((results) => this.SprintChoices = results);
-    this.getAllUsersByTeam(system_id);
+    // this.getAllUsersByTeam(system_id);
   }
 
-  getAllUsersByTeam(system_id) {
-    // console.log(system_id);
-    this.metricsService.getAllUsersBySystem(system_id)
-      .map(res => { return res.json(); })
-      .subscribe((results) => this.TeamMemberChoices = results);
-  }
+  // getAllUsersByTeam(system_id) {
+  //   // console.log(system_id);
+  //   this.metricsService.getAllUsersBySystem(system_id)
+  //     .map(res => { return res.json(); })
+  //     .subscribe((results) => this.TeamMemberChoices = results);
+  // }
 
   storeSprintId(sprint_ids) {
     // console.log('Incoming sprint ids = ' + JSON.stringify(sprint_ids));
     var i = 0;
     this.currentSprintId = [];
     for (i = 0; i < sprint_ids.length; i++) {
+         
       this.currentSprintId.push(sprint_ids[i].agile_sprint_id);
+      console.log('******** ' + this.currentSprintId )
+      // console.log('@@@@@@@@@@ ' + this.currentSprintId.length )
     }
     //Says there is an error here, but does not throw an error when it runs
     // document.getElementById("formCompleteButton").disabled = false;
@@ -126,6 +129,7 @@ export class MetricsComponent implements OnInit {
       var i;
       var lastUser = '';
       var totalPoints = 0;
+      console.log(this.StoryChoices)
       for (i = 0; i < this.StoryChoices.length; i++) {
         if (lastUser == this.StoryChoices[i].agile_system_user) {
           totalPoints = totalPoints + this.StoryChoices[i].agile_system_user_story_points;

@@ -66,10 +66,10 @@ getTrello.getList("59395d4f04c5416b8e7ed9a9").then((listResult) => {
                         "sprint_end_date": sprintEndDate,
                         "stories: ": newStories
                 };
-                //console.log(stories)
-                // console.log(storyMember)
-                // database.postTimecards(result)
-                var path = "A:\\Metrics\\Exports\\NoJs_" + sprintName + ".json";
+                
+                
+                //must create a Metrics folder on your C drive to work
+                var path = "C:\\Metrics\\NoJs_" + sprintName + ".json";
                 fs.writeFile(path, JSON.stringify(stories, null, 4), (err) => {
                         if (err) {
                                 console.error(err);

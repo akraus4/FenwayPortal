@@ -30,7 +30,8 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 #FIRST: Open terminal and type:
 cd src
 cd server
-npm run dev
+python server.py
+<!-- npm run dev -->
 
 #SECOND: In a new terminal type:
 ng serve --open

@@ -14,7 +14,7 @@ import { DataService } from '../services/data.service'
 
 export class DataComponent implements OnInit {
   modalRef: BsModalRef;
-  title: string = "Load Data";
+  title: string = "Data Management";
   columnChoices: Array<any> = [];
   currentTable;
   table: string;
@@ -67,7 +67,7 @@ export class DataComponent implements OnInit {
   }
   constructor(private modalService: BsModalService,@Inject(DataService) dataService) {
     this.dataService = dataService;
-    this.columnChoices = this.columns;
+    this.columnChoices = this.columns
    }
   
 
@@ -140,11 +140,4 @@ export class DataComponent implements OnInit {
   { dataField: "story_points", caption: "Story Points"},
   { dataField: "agile_story_agile-system_user_id", caption: "Story System User ID"},
   { dataField: "agile_system_user_story_points", caption: "System User Story Points"},];
-
-
-
-
-
-
-
 };

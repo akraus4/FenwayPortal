@@ -33,6 +33,7 @@ import {DxButtonModule, DxLoadPanelModule, DxDataGridModule, DxPieChartModule  }
 import notify from 'devextreme/ui/notify';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { LoadingPanelComponent } from './loading-panel/loading-panel.component';
+import { TeamComponent } from './team/team.component';
 
 
 
@@ -51,6 +52,7 @@ import { LoadingPanelComponent } from './loading-panel/loading-panel.component';
     DemoComponent,
     LoadingPanelComponent,
     SignInComponent,
+    TeamComponent,
 
     
     
@@ -80,6 +82,7 @@ import { LoadingPanelComponent } from './loading-panel/loading-panel.component';
       { path: "metrics", component: MetricsComponent },
       { path: "demo", component: DemoComponent },
       { path: "view-score", component: ViewScoreComponent },
+      { path: "team", component: TeamComponent },
       { path: "**", redirectTo: "home" }
 
     ]),
