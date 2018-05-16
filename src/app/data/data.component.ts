@@ -67,6 +67,7 @@ export class DataComponent implements OnInit {
   }
   constructor(private modalService: BsModalService,@Inject(DataService) dataService) {
     this.dataService = dataService;
+    this.columnChoices = this.columns;
    }
   
 

@@ -9,23 +9,18 @@ export class MetricsService {
 	http: any;
 
 	constructor(@Inject(Http) http) {
-		this.http = http;
+		this.http = http;	
 	}
 
 	// getUsers() {
 	// let result = this.http.get('http://localhost:3000/');console.log(JSON.stringify(result)); return result
 
 	// }
-
-
-
-
-     
-
+  
 	getAllTeams() {
 		let result = this.http.get('http://localhost:3000/findAllTeams');
 		console.log(JSON.stringify(result));
-		return result
+		return result 
 
 	}
 
