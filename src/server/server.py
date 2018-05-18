@@ -5,62 +5,66 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 db = MySQLdb.connect(
-    host="52.55.14.143",  # your host
-    user="fg_user_dev2",  # username
-    passwd="6UhjVvAgM_Jm",  # password
-    db="fg_metrics_dev2")
-#  host= "52.55.14.143",
-# user= "fg_user",
-# passwd= "uXQ1pgjZlne7",
-# db= "fg_metrics")  # name of the database
+                    host="52.55.14.143",  # your host
+                    user="fg_user_dev2",  # username
+                    passwd="6UhjVvAgM_Jm",  # password
+                    db="fg_metrics_dev2") # name of the database
+                    # host= "52.55.14.143",
+                    # user= "fg_user",
+                    # passwd= "uXQ1pgjZlne7",
+                    # db= "fg_metrics")  
 
 # Create a Cursor object to execute queries.
 cur = db.cursor()
 
-
+#Create list of JSON objects for Select Team drop down in View Metrics Page
 @app.route("/findAllTeams")
 def findAllTeams():
-    allTeams = []
-    individualTeam = {}
-    i = 0
+    jsonList = []
+    addObject = {}
+    i=0
+
     cur.execute("SELECT * FROM agile_system ORDER BY agile_system_name ASC")
+    
     for row in cur.fetchall():
-        individualTeam['agile_system_id'] = row[0]
-        individualTeam['agile_system_name'] = row[1]
-        individualTeam['agile_system_type'] = row[2]
-        individualTeam['work_team_id'] = row[3]
-        allTeams.insert(i, individualTeam)
-        individualTeam = {}
-        i = i+1
-    return json.dumps(allTeams)
+     
+        addObject['agile_system_id'] = row[0]
+        addObject['agile_system_name'] = row[1]
+        addObject['agile_system_type'] = row[2] 
+        addObject['work_team_id'] = row[3]
+        jsonList.insert(i, addObject)
+        addObject = {}
+        i=i+1
 
+    return json.dumps(jsonList)
 
+#Create list of JSON objects for Select sprint drop down in View Metrics Page
 @app.route("/findAllSprintsBySystem/<system_id>")
 def findAllSprintsBySystem(system_id):
-    allSprints = []
-    individualSprint = {}
-    i = 0
-    cur.execute("SELECT * FROM agile_sprint WHERE agile_system_id = '" +
-                system_id + "' ORDER BY agile_sprint_name ASC")
+    jsonList = []
+    addObject = {}
+    i=0
+    cur.execute("SELECT * FROM agile_sprint WHERE agile_system_id = '" + system_id + "' ORDER BY agile_sprint_name ASC")
+
     for row in cur.fetchall():
-        individualSprint['agile_sprint_id'] = row[0]
-        individualSprint['agile_sprint_name'] = row[1]
-        individualSprint['agile_system_id'] = row[2]
-        individualSprint['sprint_description'] = row[3]
-        individualSprint['sprint_start_date'] = row[4]
-        individualSprint['sprint_end_date'] = row[5]
-        allSprints.insert(i, individualSprint)
-        individualSprint = {}
-        i = i+1
-    return json.dumps(allSprints)
+        addObject['agile_sprint_id'] = row[0]
+        addObject['agile_sprint_name'] = row[1]
+        addObject['agile_system_id'] = row[2] 
+        addObject['sprint_description'] = row[3]
+        addObject['sprint_start_date'] = row[4]
+        addObject['sprint_end_date'] = row[5]
+        jsonList.insert(i, addObject)
+        addObject = {}
+        i=i+1
 
+    return json.dumps(jsonList)
 
+#Create list of JSON objects for table in View Metrics Page
 @app.route("/findAllStoriesWithUsersBySprint/<sprint_id>")
 def findAllStoriesWithUsersBySprint(sprint_id):
-    allSprints = []
-    individualSprint = {}
-    i = 0
-
+    jsonList = []
+    addObject = {}
+    i=0
     cur.execute("select * from agile_story "
                 + "inner join agile_story_agile_system_user "
                 + "on agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id "
@@ -73,15 +77,237 @@ def findAllStoriesWithUsersBySprint(sprint_id):
                 + "and agile_story_agile_system_user.agile_system_user_id = agile_system_user.agile_system_user_id;")
 
     for row in cur.fetchall():
-        individualSprint['agile_story_id'] = row[0]
-        individualSprint['agile_sprint_name'] = row[1]
-        individualSprint['story_type'] = row[2]
-        individualSprint['agile_system_user_story_points'] = row[3]
-        individualSprint['agile_system_user_name'] = row[4]
-        allSprints.insert(i, individualSprint)
-        individualSprint = {}
-        i = i+1
-    return json.dumps(allSprints)
+        addObject['agile_story_id'] = row[0]
+        addObject['agile_story_name'] = row[1]
+        addObject['agile_sprint_id'] = row[2]
+        addObject['story_Description'] = row[3]
+        addObject['story_type'] = row[4]
+        addObject['story_Status'] = row[5]
+        addObject['story_points'] = row[6]
+        addObject['agile_story_agile_system_user_id'] = row[7]
+        addObject['agile_story_id_1'] = row[8]
+        addObject['agiel_system_user_id'] = row[9]
+        addObject['agile_system_user_story_points'] = row[10]
+        addObject['agile_system_user_id_1'] = row[11]
+        addObject['agile_system_user_name'] = row[12]
+        addObject['agile_system_id'] = row[13]
+        addObject['work_team_member_id'] = row[14]
+        addObject['work_user_id'] = row[15]
+        addObject['agile_sprint_id_1'] = row[16]
+        addObject['agile_sprint_name'] = row[17]
+        addObject['agile_system_id_1'] = row[18]
+        addObject['sprint_description'] = row[19]
+        addObject['sprint_start_date'] = row[20]
+        addObject['sprint_end_date'] = row[21]
+        jsonList.insert(i, addObject)
+        addObject = {}
+        i=i+1
+
+    return json.dumps(jsonList)
+
+#Create list of JSON objects for table in Data Management Page
+@app.route("/findTableData/<table_name>")
+def findTableData(table_name):
+    
+    print("Paramater: " + table_name)
+
+
+    if table_name == "work_user":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('SELECT * FROM work_user')
+        for row in cur.fetchall():
+            addObject['work_user_id'] = row[0]
+            addObject['firstname'] = row[1]
+            addObject['lastname'] = row[2] 
+            addObject['email'] = row[3]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i=i+1
+
+    elif table_name == "work_team":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('SELECT * FROM work_team')
+        for row in cur.fetchall():
+            addObject['work_team_id'] = row[0]
+            addObject['work_team_name'] = row[1]
+            addObject['project_id'] = row[2] 
+            addObject['project_name'] = row[3]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i=i+1
+        
+    elif table_name == "work_team_member":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('')
+        for row in cur.fetchall():
+            addObject['agile_system_id'] = row[0]
+            addObject['agile_system_name'] = row[1]
+            addObject['agile_system_type'] = row[2] 
+            addObject['work_team_id'] = row[3]
+            addObject['agile_system_user_id'] = row[4]
+            addObject['agile_system_user_name'] = row[5]
+            addObject['agile_system_id_1'] = row[6]
+            addObject['work_team_member_id'] = row[7]
+            addObject['work_user_id'] = row[8]
+            addObject['work_team_id_1'] = row[9]
+            addObject['work_team_name'] = row[10]
+            addObject['project_id'] = row[11]
+            addObject['project_name'] = row[12]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i=i+1
+
+
+    elif table_name == "work_dailyhours":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('')
+        for row in cur.fetchall():
+            addObject['agile_system_id'] = row[0]
+            addObject['agile_system_name'] = row[1]
+            addObject['agile_system_type'] = row[2] 
+            addObject['work_team_id'] = row[3]
+            addObject['agile_system_user_id'] = row[4]
+            addObject['agile_system_user_name'] = row[5]
+            addObject['agile_system_id_1'] = row[6]
+            addObject['work_team_member_id'] = row[7]
+            addObject['work_user_id'] = row[8]
+            addObject['work_team_id_1'] = row[9]
+            addObject['work_team_name'] = row[10]
+            addObject['project_id'] = row[11]
+            addObject['project_name'] = row[12]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i=i+1
+
+
+    elif table_name == "agile_system":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('SELECT * FROM agile_system LEFT OUTER JOIN agile_system_user ON agile_system.agile_system_id = agile_system_user.agile_system_id LEFT OUTER JOIN work_team ON agile_system.work_team_id = work_team.work_team_id')
+        for row in cur.fetchall():
+            addObject['agile_system_id'] = row[0]
+            addObject['agile_system_name'] = row[1]
+            addObject['agile_system_type'] = row[2] 
+            addObject['work_team_id'] = row[3]
+            addObject['agile_system_user_id'] = row[4]
+            addObject['agile_system_user_name'] = row[5]
+            addObject['agile_system_id_1'] = row[6]
+            addObject['work_team_member_id'] = row[7]
+            addObject['work_user_id'] = row[8]
+            addObject['work_team_id_1'] = row[9]
+            addObject['work_team_name'] = row[10]
+            addObject['project_id'] = row[11]
+            addObject['project_name'] = row[12]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i=i+1
+
+    elif table_name == "agile_system_user":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('')
+        for row in cur.fetchall():
+            addObject['agile_system_id'] = row[0]
+            addObject['agile_system_name'] = row[1]
+            addObject['agile_system_type'] = row[2] 
+            addObject['work_team_id'] = row[3]
+            addObject['agile_system_user_id'] = row[4]
+            addObject['agile_system_user_name'] = row[5]
+            addObject['agile_system_id_1'] = row[6]
+            addObject['work_team_member_id'] = row[7]
+            addObject['work_user_id'] = row[8]
+            addObject['work_team_id_1'] = row[9]
+            addObject['work_team_name'] = row[10]
+            addObject['project_id'] = row[11]
+            addObject['project_name'] = row[12]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i=i+1
+
+    elif table_name == "agile_sprint":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('')
+        for row in cur.fetchall():
+            addObject['agile_system_id'] = row[0]
+            addObject['agile_system_name'] = row[1]
+            addObject['agile_system_type'] = row[2] 
+            addObject['work_team_id'] = row[3]
+            addObject['agile_system_user_id'] = row[4]
+            addObject['agile_system_user_name'] = row[5]
+            addObject['agile_system_id_1'] = row[6]
+            addObject['work_team_member_id'] = row[7]
+            addObject['work_user_id'] = row[8]
+            addObject['work_team_id_1'] = row[9]
+            addObject['work_team_name'] = row[10]
+            addObject['project_id'] = row[11]
+            addObject['project_name'] = row[12]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i=i+1
+
+            
+
+    elif table_name == "agile_story":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('SELECT * FROM agile_story LEFT OUTER JOIN agile_sprint ON agile_story.agile_sprint_id = agile_sprint.agile_sprint_id')
+        for row in cur.fetchall():
+            addObject['agile_story_id'] = row[0]
+            addObject['agile_story_name'] = row[1]
+            addObject['agile_sprint_id'] = row[2] 
+            addObject['story_description'] = row[3]
+            addObject['story_type'] = row[4]
+            addObject['story_status'] = row[5]
+            addObject['story_points'] = row[6]
+            addObject['agile_sprint_id_1'] = row[7]
+            addObject['agile_sprint_name'] = row[8]
+            addObject['agile_system_id'] = row[9]
+            addObject['sprint_description'] = row[10]
+            addObject['sprint_start_date'] = row[11]
+            addObject['sprint_end_date'] = row[12]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i=i+1
+
+
+    elif table_name == "agile_story_agile_system_user":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('')
+        for row in cur.fetchall():
+            addObject['agile_system_id'] = row[0]
+            addObject['agile_system_name'] = row[1]
+            addObject['agile_system_type'] = row[2] 
+            addObject['work_team_id'] = row[3]
+            addObject['agile_system_user_id'] = row[4]
+            addObject['agile_system_user_name'] = row[5]
+            addObject['agile_system_id_1'] = row[6]
+            addObject['work_team_member_id'] = row[7]
+            addObject['work_user_id'] = row[8]
+            addObject['work_team_id_1'] = row[9]
+            addObject['work_team_name'] = row[10]
+            addObject['project_id'] = row[11]
+            addObject['project_name'] = row[12]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i=i+1
+
+    return json.dumps(jsonList)
+
 
 
 # @app.route("/getColumnData/<tableName>")
