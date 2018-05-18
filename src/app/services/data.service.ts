@@ -25,4 +25,16 @@ export class DataService {
 		return result
 
 	}
+
+	getColumnData() {
+		let result = this.http.get('http://localhost:5000/getColumnData');
+		console.log(JSON.stringify(result));
+		return result
+	}
+
+
+
+
+
+
 }

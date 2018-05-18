@@ -81,7 +81,7 @@ export class DataComponent implements OnInit {
 
   getTableData(){
     console.log("numero uno    " + this.currentTable);
-    if (this.currentTable == 'Agile System'){
+    if (this.currentTable == 'Agile Sprint'){
       this.dataService.getSystemWithSystemUserWithWorkTeam()
       .map(res => { console.log("catsrgyd    " + res); return res.json(); })
       .subscribe((results) => {this.TableChoices = results; console.log("hey    " + results); this.getColumns();});
