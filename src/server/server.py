@@ -97,7 +97,7 @@ def findAllStoriesWithUsersBySprint(sprint_id):
 # 	    column['sprint_end_date']= row[5]
 #     return json.dumps(column)   
 
-@app.route("/getColumnData/<tableName>")
+@app.route("/getColumnData")
 def getColumnData():
     allTeams = []
     individualTeam = {}

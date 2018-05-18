@@ -82,7 +82,7 @@ export class DataComponent implements OnInit {
   getTableData(){
     console.log("numero uno    " + this.currentTable);
     if (this.currentTable == 'Agile Sprint'){
-      this.dataService.getSystemWithSystemUserWithWorkTeam()
+      this.dataService.getColumnData()
       .map(res => { console.log("catsrgyd    " + res); return res.json(); })
       .subscribe((results) => {this.TableChoices = results; console.log("hey    " + results); this.getColumns();});
 
@@ -107,37 +107,66 @@ export class DataComponent implements OnInit {
         { dataField: "agile_system_type", caption: "System Type" },
         { dataField: "work_team_id", caption: "Team" }
       ];
-    };
+    } else if (this.currentTable == "Agile Sprint"){
+      this.columnChoices = [
+        { dataField: "agile_sprint_id", caption: "Sprint ID" },
+        { dataField: "agile_sprint_name", caption: "Sprint Name" },
+        { dataField: "agile_system_id", caption: "System ID" },
+        { dataField: "sprint_description", caption: "Description" },
+        { dataField: "sprint_start_date", caption: "Start Date" },
+        { dataField: "sprint_end_date", caption: "End Date" }
+      ];
+    } else if (this.currentTable == ""){
+      this.columnChoices = [
+
+      ];
+    } else if (this.currentTable == ""){
+      this.columnChoices = [
+
+      ];
+  } else if (this.currentTable == ""){
+    this.columnChoices = [
+
+    ];
+  } else if (this.currentTable == ""){
+    this.columnChoices = [
+
+    ];
+  } else if (this.currentTable == ""){
+    this.columnChoices = [
+
+    ];
   };
 
-  allColumns = [{ dataField: "work_user_id", caption: "Work User ID"},
-  { dataField: "first_name", caption: "First Name"},
-  { dataField: "last_name", caption: "Last Name"},
-  { dataField: "email", caption: "Email"},
-  { dataField: "work_team_id", caption: "Work Team ID"},
-  { dataField: "work_team_name", caption: "Work Team Name"},
-  { dataField: "project_id", caption: "Project ID"},
-  { dataField: "project_name", caption: "Project Name"},
-  { dataField: "work_team_member_id", caption: "Work Team Member ID"},
-  { dataField: "work_daily_hours_id", caption: "Work Daily Hours ID"},
-  { dataField: "work_date", caption: "Work Date"},
-  { dataField: "hours", caption: "Hours"},
-  { dataField: "agile_system_id", caption: "Agile System ID"},
-  { dataField: "agile_system_name", caption: "Agile System Name"},
-  { dataField: "agile_system_type", caption: "Agile System Type"},
-  { dataField: "agile_system_user_id", caption: "Agile System User ID"},
-  { dataField: "agile_system_user_name", caption: "Agile System User Name"},
-  { dataField: "agile_sprint_id", caption: "Agile Sprint ID"},
-  { dataField: "agile_sprint_name", caption: "Agile Sprint Name"},
-  { dataField: "sprint_description", caption: "Sprint Description"},
-  { dataField: "sprint_start_date", caption: "Sprint Start Date"},
-  { dataField: "sprint_end_date", caption: "Sprint End Date"},
-  { dataField: "agile_story_id", caption: "Agile Story ID"},
-  { dataField: "agile_story_name", caption: "Agile Story Name"},
-  { dataField: "story_description", caption: "Story Description"},
-  { dataField: "story_type", caption: "Story Type"},
-  { dataField: "story_status", caption: "Story Status"},
-  { dataField: "story_points", caption: "Story Points"},
-  { dataField: "agile_story_agile-system_user_id", caption: "Story System User ID"},
-  { dataField: "agile_system_user_story_points", caption: "System User Story Points"},];
-};
+//   allColumns = [{ dataField: "work_user_id", caption: "Work User ID"},
+//   { dataField: "first_name", caption: "First Name"},
+//   { dataField: "last_name", caption: "Last Name"},
+//   { dataField: "email", caption: "Email"},
+//   { dataField: "work_team_id", caption: "Work Team ID"},
+//   { dataField: "work_team_name", caption: "Work Team Name"},
+//   { dataField: "project_id", caption: "Project ID"},
+//   { dataField: "project_name", caption: "Project Name"},
+//   { dataField: "work_team_member_id", caption: "Work Team Member ID"},
+//   { dataField: "work_daily_hours_id", caption: "Work Daily Hours ID"},
+//   { dataField: "work_date", caption: "Work Date"},
+//   { dataField: "hours", caption: "Hours"},
+//   { dataField: "agile_system_id", caption: "Agile System ID"},
+//   { dataField: "agile_system_name", caption: "Agile System Name"},
+//   { dataField: "agile_system_type", caption: "Agile System Type"},
+//   { dataField: "agile_system_user_id", caption: "Agile System User ID"},
+//   { dataField: "agile_system_user_name", caption: "Agile System User Name"},
+//   { dataField: "agile_sprint_id", caption: "Agile Sprint ID"},
+//   { dataField: "agile_sprint_name", caption: "Agile Sprint Name"},
+//   { dataField: "sprint_description", caption: "Sprint Description"},
+//   { dataField: "sprint_start_date", caption: "Sprint Start Date"},
+//   { dataField: "sprint_end_date", caption: "Sprint End Date"},
+//   { dataField: "agile_story_id", caption: "Agile Story ID"},
+//   { dataField: "agile_story_name", caption: "Agile Story Name"},
+//   { dataField: "story_description", caption: "Story Description"},
+//   { dataField: "story_type", caption: "Story Type"},
+//   { dataField: "story_status", caption: "Story Status"},
+//   { dataField: "story_points", caption: "Story Points"},
+//   { dataField: "agile_story_agile-system_user_id", caption: "Story System User ID"},
+//   { dataField: "agile_system_user_story_points", caption: "System User Story Points"},];
+ };
+}
