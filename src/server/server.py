@@ -130,14 +130,15 @@ def findTableData(table_name):
         i=0
         cur.execute('SELECT * FROM work_team')
         for row in cur.fetchall():
-            addObject['work_team_id'] = row[0]
-            addObject['work_team_name'] = row[1]
-            addObject['project_id'] = row[2] 
-            addObject['project_name'] = row[3]
+            addObject['work_team_id'.decode('windows-1252')] = row[0]
+            addObject['work_team_name'.decode('windows-1252')] = row[1]
+            addObject['project_id'.decode('windows-1252')] = row[2] 
+            addObject['project_name'.decode('windows-1252')] = row[3]
             jsonList.insert(i, addObject)
             addObject = {}
             i=i+1
         
+
     elif table_name == "work_team_member":
         jsonList = []
         addObject = {}
@@ -255,7 +256,6 @@ def findTableData(table_name):
             addObject = {}
             i=i+1
 
-            
 
     elif table_name == "agile_story":
         jsonList = []
@@ -279,7 +279,7 @@ def findTableData(table_name):
             jsonList.insert(i, addObject)
             addObject = {}
             i=i+1
-
+        
 
     elif table_name == "agile_story_agile_system_user":
         jsonList = []
