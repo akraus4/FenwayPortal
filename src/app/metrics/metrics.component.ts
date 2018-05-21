@@ -91,14 +91,13 @@ export class MetricsComponent implements OnInit {
   // }
 
   storeSprintId(sprint_ids) {
-    // console.log('Incoming sprint ids = ' + JSON.stringify(sprint_ids));
+    // if more than one sprint id need to add "OR" between to enable SQL statement to understand multipule inputs
     var i = 0;
     this.currentSprintId = [];
     for (i = 0; i < sprint_ids.length; i++) {
          
       this.currentSprintId.push(sprint_ids[i].agile_sprint_id);
       console.log('******** ' + this.currentSprintId )
-      // console.log('@@@@@@@@@@ ' + this.currentSprintId.length )
     }
     //Says there is an error here, but does not throw an error when it runs
     // document.getElementById("formCompleteButton").disabled = false;
