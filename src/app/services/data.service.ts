@@ -4,7 +4,9 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 @Injectable()
 
 export class DataService {
-
+	developmentURL = 'http://localhost:5000'
+	productionURL = ''
+	url = this.developmentURL
 	http: any;
 
 	constructor(@Inject(Http) http) {
@@ -12,29 +14,18 @@ export class DataService {
 	}
 	
     //Not pulling data because our work team ID's do not match with work team tables.
-    getSystemWithSystemUserWithWorkTeam() {
-		let result = this.http.get('http://localhost:3000/findSystemWithSystemUserWithWorkTeam');
+    findTableData(table_name) {
+		let result = this.http.get(this.url + '/findTableData/' + table_name);
 		console.log(JSON.stringify(result));
 		return result
 
 	}
-
-	getSystemUserWithSystemWithTeamMemberWithWorkUser() {
-		let result = this.http.get('http://localhost:3000/findSystemUserWithSystemWithTeamMemberWithWorkUser');
-		console.log(JSON.stringify(result));
-		return result
-
-	}
-
-	getColumnData() {
-		let result = this.http.get('http://localhost:5000/getColumnData');
-		console.log(JSON.stringify(result));
-		return result
-	}
-
-
-
-
-
-
 }
+
+// 	getSystemUserWithSystemWithTeamMemberWithWorkUser() {
+// 		let result = this.http.get(this.url + '/findSystemUserWithSystemWithTeamMemberWithWorkUser');
+// 		console.log(JSON.stringify(result));
+// 		return result
+
+// 	}
+// }
