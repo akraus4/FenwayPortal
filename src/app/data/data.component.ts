@@ -156,10 +156,12 @@ export class DataComponent implements OnInit {
 
     else if (this.currentTable == "Agile Sprint") {
       this.columnChoices = [
-        { dataField: "agile_system_id", caption: "System ID" },
+        { dataField: "agile_sprint_id", caption: "Sprint ID" },
+        { dataField: "agile_sprint_name", caption: "Sprint Name" },
         { dataField: "agile_system_name", caption: "System Name" },
-        { dataField: "agile_system_type", caption: "System Type" },
-        { dataField: "work_team_name", caption: "Team" }
+        { dataField: "sprint_description", caption: "Sprint Description" },
+        { dataField: "sprint_start_date", caption: "Sprint Start Date" },
+        { dataField: "sprint_end_date", caption: "Sprint End Date" }
       ];
     }
 
