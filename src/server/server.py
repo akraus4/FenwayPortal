@@ -215,21 +215,21 @@ def findTableData(table_name):
         jsonList = []
         addObject = {}
         i=0
-        cur.execute('')
+        cur.execute('SELECT * FROM agile_system_user LEFT OUTER JOIN agile_system ON agile_system_user.agile_system_id = agile_system.agile_system_id LEFT OUTER JOIN work_user ON agile_system_user.work_user_id = work_user.work_user_id')
         for row in cur.fetchall():
-            addObject['agile_system_id'] = row[0]
-            addObject['agile_system_name'] = row[1]
-            addObject['agile_system_type'] = row[2] 
-            addObject['work_team_id'] = row[3]
-            addObject['agile_system_user_id'] = row[4]
-            addObject['agile_system_user_name'] = row[5]
-            addObject['agile_system_id_1'] = row[6]
-            addObject['work_team_member_id'] = row[7]
-            addObject['work_user_id'] = row[8]
-            addObject['work_team_id_1'] = row[9]
-            addObject['work_team_name'] = row[10]
-            addObject['project_id'] = row[11]
-            addObject['project_name'] = row[12]
+            addObject['agile_system_user_id'] = row[0]
+            addObject['agile_system_user_name'] = row[1]
+            addObject['agile_system_id'] = row[2]
+            addObject['work_team_member_id'] = row[3]
+            addObject['work_user_id'] = row[4]
+            addObject['agile_system_id_1'] = row[5]
+            addObject["agile_system_name"] = row[6]
+            addObject["agile_system_type"] = row[7]
+            addObject["work_team_id"] = row[8]
+            addObject["work_user_id_1"] = row[9]
+            addObject["firstname"] = row[10]
+            addObject["lastname"] = row[11]
+            addObject["email"] = row[12]
             jsonList.insert(i, addObject)
             addObject = {}
             i=i+1
