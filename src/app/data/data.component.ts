@@ -128,11 +128,10 @@ export class DataComponent implements OnInit {
 
     else if (this.currentTable == "Work Daily Hours") {
       this.columnChoices = [
-        { dataField: "agile_story_id", caption: "Story ID" },
-        { dataField: "agile_sprint_name", caption: "Sprint Name" },
-        { dataField: "story_type", caption: "Story Type" },
-        { dataField: "story_status", caption: "Story status" },
-        { dataField: "story_points", caption: "Story Points" },
+        { dataField: "work_dailyhours_id", caption: "Work Daily Hours ID" },
+        { dataField: "work_team_member_id", caption: "Work Team Member ID" },
+        { dataField: "work_date", caption: "Work Date" },
+        { dataField: "hours", caption: "Hours" }
       ];
     } 
 
