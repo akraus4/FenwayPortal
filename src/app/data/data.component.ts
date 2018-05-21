@@ -147,9 +147,9 @@ export class DataComponent implements OnInit {
 
     else if (this.currentTable == "Agile System User") {
       this.columnChoices = [
-        { dataField: "agile_system_id", caption: "System ID" },
-        { dataField: "agile_system_name", caption: "System Name" },
-        { dataField: "agile_system_type", caption: "System Type" },
+        { dataField: "agile_system__user_id", caption: "System ID" },
+        { dataField: "agile_system_user_name", caption: "System Name" },
+        { dataField: "agile_system_user_type", caption: "System Type" },
         { dataField: "work_team_name", caption: "Team" }
       ];
     }
