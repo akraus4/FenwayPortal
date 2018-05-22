@@ -118,11 +118,12 @@ export class DataComponent implements OnInit {
 
     else if (this.currentTable == "Work Team Member") {
       this.columnChoices = [
-        { dataField: "agile_story_id", caption: "Story ID" },
-        { dataField: "agile_sprint_name", caption: "Sprint Name" },
-        { dataField: "story_type", caption: "Story Type" },
-        { dataField: "story_status", caption: "Story status" },
-        { dataField: "story_points", caption: "Story Points" },
+        { dataField: "work_team_member_id", caption: "Team Member ID" },
+        { dataField: "work_team_id", caption: "Work Team ID" },
+        { dataField: "work_user_id", caption: "Work User ID" },
+        { dataField: "work_team_name", caption: "Work Team Name"},
+        { dataField: "firstname", caption: "First Name"},
+        { dataField: "lastname", caption: "Last Name"},
       ];
     } 
 
@@ -143,7 +144,8 @@ export class DataComponent implements OnInit {
         { dataField: "agile_system_type", caption: "System Type" },
         { dataField: "work_team_name", caption: "Team" }
       ];
-     } else if (this.currentTable == "Agile System User") {
+     } 
+     else if (this.currentTable == "Agile System User") {
       this.columnChoices = [
         { dataField: "agile_system_id", caption: "System ID" },
         { dataField: "agile_system_name", caption: "System Name" },
@@ -151,16 +153,16 @@ export class DataComponent implements OnInit {
         { dataField: "work_team_name", caption: "Team" }
       ];
     }
-
     else if (this.currentTable == "Agile Sprint") {
       this.columnChoices = [
+        { dataField: "agile_sprint_id", caption: "Sprint ID" },
+        { dataField: "agile_sprint_name", caption: "Sprint Name" },
         { dataField: "agile_system_id", caption: "System ID" },
-        { dataField: "agile_system_name", caption: "System Name" },
-        { dataField: "agile_system_type", caption: "System Type" },
-        { dataField: "work_team_name", caption: "Team" }
+        { dataField: "sprint_description", caption: "Description" },,
+        { dataField: "sprint_start_date", caption: "Start Date" },
+        { dataField: "sprint_end_date", caption: "End Date"},
       ];
     }
-
     else if (this.currentTable == "Agile Story") {
       this.columnChoices = [
         { dataField: "agile_story_id", caption: "Story ID" },

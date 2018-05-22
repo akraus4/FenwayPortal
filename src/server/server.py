@@ -130,7 +130,7 @@ def findTableData(table_name):
         jsonList = []
         addObject = {}
         i=0
-        cur.execute('SELECT * FROM work_team')
+        cur.execute("SELECT * FROM work_team")
         for row in cur.fetchall():
             addObject['work_team_id'] = row[0]
             addObject['work_team_name'] = row[1]
@@ -144,21 +144,11 @@ def findTableData(table_name):
         jsonList = []
         addObject = {}
         i=0
-        cur.execute('')
+        cur.execute('SELECT work_team_member.work_team_member_id, work_team.work_team_id, work_user.work_user_id, work_team.work_team_name, work_user.firstname, work_user.lastname FROM work_team LEFT OUTER JOIN work_team_member ON work_team.work_team_id = work_team_member.work_team_id LEFT OUTER JOIN work_user ON work_user.work_user_id = work_team_member.work_user_id')
         for row in cur.fetchall():
-            addObject['agile_system_id'] = row[0]
-            addObject['agile_system_name'] = row[1]
-            addObject['agile_system_type'] = row[2] 
-            addObject['work_team_id'] = row[3]
-            addObject['agile_system_user_id'] = row[4]
-            addObject['agile_system_user_name'] = row[5]
-            addObject['agile_system_id_1'] = row[6]
-            addObject['work_team_member_id'] = row[7]
-            addObject['work_user_id'] = row[8]
-            addObject['work_team_id_1'] = row[9]
-            addObject['work_team_name'] = row[10]
-            addObject['project_id'] = row[11]
-            addObject['project_name'] = row[12]
+            addObject['work_team_member_id'] = row[0]
+            addObject['work_team_id'] = row[1]
+            addObject['work_user_id'] = row[2]
             jsonList.insert(i, addObject)
             addObject = {}
             i=i+1
@@ -238,26 +228,17 @@ def findTableData(table_name):
         jsonList = []
         addObject = {}
         i=0
-        cur.execute('')
+        cur.execute('SELECT * FROM agile_sprint;')
         for row in cur.fetchall():
-            addObject['agile_system_id'] = row[0]
-            addObject['agile_system_name'] = row[1]
-            addObject['agile_system_type'] = row[2] 
-            addObject['work_team_id'] = row[3]
-            addObject['agile_system_user_id'] = row[4]
-            addObject['agile_system_user_name'] = row[5]
-            addObject['agile_system_id_1'] = row[6]
-            addObject['work_team_member_id'] = row[7]
-            addObject['work_user_id'] = row[8]
-            addObject['work_team_id_1'] = row[9]
-            addObject['work_team_name'] = row[10]
-            addObject['project_id'] = row[11]
-            addObject['project_name'] = row[12]
+            addObject['agile_sprint_id'] = row[0]
+            addObject['agile_sprint_name'] = row[1]
+            addObject['agile_system_id'] = row[2] 
+            addObject['sprint_description'] = row[3]
+            addObject['sprint_start_date'] = row[4]
+            addObject['sprint_end_date'] = row[5]
             jsonList.insert(i, addObject)
             addObject = {}
             i=i+1
-
-            
 
     elif table_name == "agile_story":
         jsonList = []
@@ -323,23 +304,23 @@ def findTableData(table_name):
 # 	    column['sprint_end_date']= row[5]
 #     return json.dumps(column)   
 
-@app.route("/getColumnData")
-def getColumnData():
-    allTeams = []
-    individualTeam = {}
-    i = 0
-    cur.execute("SELECT * FROM agile_sprint")
-    for row in cur.fetchall():
-        individualTeam['agile_sprint_id'] = row[0]
-        individualTeam['agile_sprint_name'] = row[1]
-        individualTeam['agile_system_id'] = row[2]
-        individualTeam['sprint_description'] = row[3]
-        individualTeam['sprint_start_date'] = row[4]
-        individualTeam['sprint_end_date'] = row[5]
-        allTeams.insert(i, individualTeam)
-        individualTeam = {}
-        i = i+1
-    return json.dumps(allTeams)       
+# @app.route("/getColumnData")
+# def getColumnData():
+#     allTeams = []
+#     individualTeam = {}
+#     i = 0
+#     cur.execute("SELECT * FROM agile_sprint")
+#     for row in cur.fetchall():
+#         individualTeam['agile_sprint_id'] = row[0]
+#         individualTeam['agile_sprint_name'] = row[1]
+#         individualTeam['agile_system_id'] = row[2]
+#         individualTeam['sprint_description'] = row[3]
+#         individualTeam['sprint_start_date'] = row[4]
+#         individualTeam['sprint_end_date'] = row[5]
+#         allTeams.insert(i, individualTeam)
+#         individualTeam = {}
+#         i = i+1
+#     return json.dumps(allTeams)       
 
 if __name__ == "__main__":
      app.run()
