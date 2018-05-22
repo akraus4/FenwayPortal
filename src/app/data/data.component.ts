@@ -142,7 +142,8 @@ export class DataComponent implements OnInit {
         { dataField: "agile_system_type", caption: "System Type" },
         { dataField: "work_team_name", caption: "Team" }
       ];
-    } else if (this.currentTable == "Agile System User") {
+     } 
+     else if (this.currentTable == "Agile System User") {
       this.columnChoices = [
         { dataField: "agile_system_user_id", caption: "Agile System ID" },
         { dataField: "agile_system_user_name", caption: "User System Name" },
@@ -156,10 +157,10 @@ export class DataComponent implements OnInit {
       this.columnChoices = [
         { dataField: "agile_sprint_id", caption: "Sprint ID" },
         { dataField: "agile_sprint_name", caption: "Sprint Name" },
-        { dataField: "agile_system_name", caption: "System Name" },
-        { dataField: "sprint_description", caption: "Sprint Description" },
-        { dataField: "sprint_start_date", caption: "Sprint Start Date" },
-        { dataField: "sprint_end_date", caption: "Sprint End Date" }
+        { dataField: "agile_system_id", caption: "System ID" },
+        { dataField: "sprint_description", caption: "Description" },,
+        { dataField: "sprint_start_date", caption: "Start Date" },
+        { dataField: "sprint_end_date", caption: "End Date"},
       ];
     }
     else if (this.currentTable == "Agile Story") {

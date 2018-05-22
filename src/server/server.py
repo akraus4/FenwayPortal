@@ -2,7 +2,7 @@
 import MySQLdb
 from flask import Flask, json, jsonify, request
 from flask_cors import CORS
-import sys
+import doubledecode
 
 app = Flask(__name__)
 CORS(app)
@@ -234,14 +234,9 @@ def findTableData(table_name):
             addObject['sprint_description'] = row[3]
             addObject['sprint_start_date'] = row[4]
             addObject['sprint_end_date'] = row[5]
-            addObject['agile_system_id_1'] = row[6]
-            addObject['agile_system_name'] = row[7]
-            addObject['agile_system_type'] = row[8]
-            addObject['work_team_id'] = row[9]
             jsonList.insert(i, addObject)
             addObject = {}
             i=i+1
-
 
     elif table_name == "agile_story":
         jsonList = []
@@ -331,4 +326,5 @@ def findTableData(table_name):
 #     return json.dumps(allTeams)       
 
 if __name__ == "__main__":
+    
      app.run()
