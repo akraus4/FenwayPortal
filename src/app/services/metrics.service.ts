@@ -11,7 +11,7 @@ export class MetricsService {
 	http: any;
 
 	constructor(@Inject(Http) http) {
-		this.http = http;
+		this.http = http;	
 	}
 
 	// getUsers() {
