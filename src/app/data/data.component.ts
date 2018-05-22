@@ -129,11 +129,10 @@ export class DataComponent implements OnInit {
 
     else if (this.currentTable == "Work Daily Hours") {
       this.columnChoices = [
-        { dataField: "agile_story_id", caption: "Story ID" },
-        { dataField: "agile_sprint_name", caption: "Sprint Name" },
-        { dataField: "story_type", caption: "Story Type" },
-        { dataField: "story_status", caption: "Story status" },
-        { dataField: "story_points", caption: "Story Points" },
+        { dataField: "work_dailyhours_id", caption: "Work Daily Hours ID" },
+        { dataField: "work_team_member_id", caption: "Work Team Member ID" },
+        { dataField: "work_date", caption: "Work Date" },
+        { dataField: "hours", caption: "Hours" }
       ];
     } 
 
@@ -157,10 +156,10 @@ export class DataComponent implements OnInit {
       this.columnChoices = [
         { dataField: "agile_sprint_id", caption: "Sprint ID" },
         { dataField: "agile_sprint_name", caption: "Sprint Name" },
-        { dataField: "agile_system_id", caption: "System ID" },
-        { dataField: "sprint_description", caption: "Description" },,
-        { dataField: "sprint_start_date", caption: "Start Date" },
-        { dataField: "sprint_end_date", caption: "End Date"},
+        { dataField: "agile_system_name", caption: "System Name" },
+        { dataField: "sprint_description", caption: "Sprint Description" },
+        { dataField: "sprint_start_date", caption: "Sprint Start Date" },
+        { dataField: "sprint_end_date", caption: "Sprint End Date" }
       ];
     }
     else if (this.currentTable == "Agile Story") {
