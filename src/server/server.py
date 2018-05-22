@@ -2,7 +2,6 @@
 import MySQLdb
 from flask import Flask, json, jsonify, request
 from flask_cors import CORS
-import sys
 
 app = Flask(__name__)
 CORS(app)
@@ -156,6 +155,9 @@ def findTableData(table_name):
             addObject['work_team_member_id'] = row[0]
             addObject['work_team_id'] = row[1]
             addObject['work_user_id'] = row[2]
+            addObject['work_team_name'] = row[3]
+            addObject['firstname'] = row[4]
+            addObject['lastname'] = row[5]
             jsonList.insert(i, addObject)
             addObject = {}
             i=i+1
