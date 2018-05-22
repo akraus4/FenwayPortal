@@ -59,41 +59,41 @@ export class DataComponent implements OnInit {
     this.currentTable = tableName;
     // console.log("Made it here!!!" + tableName);
   }
-  setupTable(){
+  setupTable() {
     if (this.currentTable == 'Work User') {
       this.table_name = "work_user"
     }
-    else if(this.currentTable == 'Work Team'){
+    else if (this.currentTable == 'Work Team') {
       this.table_name = "work_team"
     }
-    else if(this.currentTable == 'Work Team Member'){
+    else if (this.currentTable == 'Work Team Member') {
       this.table_name = "work_team_member"
     }
-    else if(this.currentTable == 'Work Daily Hours'){
+    else if (this.currentTable == 'Work Daily Hours') {
       this.table_name = "work_dailyhours"
     }
-    else if(this.currentTable == 'Agile System'){
+    else if (this.currentTable == 'Agile System') {
       this.table_name = "agile_system"
     }
-    else if(this.currentTable == 'Agile System User'){
+    else if (this.currentTable == 'Agile System User') {
       this.table_name = "agile_system_user"
     }
-    else if(this.currentTable == 'Agile Sprint'){
+    else if (this.currentTable == 'Agile Sprint') {
       this.table_name = "agile_sprint"
     }
-    else if(this.currentTable == 'Agile Story'){
+    else if (this.currentTable == 'Agile Story') {
       this.table_name = "agile_story"
     }
-    else if(this.currentTable == 'Agile Story Agile System User'){
+    else if (this.currentTable == 'Agile Story Agile System User') {
       this.table_name = "agile_story_agile_system_user"
     }
     this.getTableData(this.table_name)
   }
 
   getTableData(table_name) {
-      this.dataService.findTableData(this.table_name)
-        .map(res => { return res.json(); })
-        .subscribe((results) => { this.TableChoices = results; this.getColumns(); });
+    this.dataService.findTableData(this.table_name)
+      .map(res => { return res.json(); })
+      .subscribe((results) => { this.TableChoices = results; this.getColumns(); });
   }
 
   getColumns() {
@@ -104,8 +104,8 @@ export class DataComponent implements OnInit {
         { dataField: "lastname", caption: "Last Name" },
         { dataField: "email", caption: "Email" },
       ];
-    } 
-     
+    }
+
     else if (this.currentTable == "Work Team") {
       this.columnChoices = [
         { dataField: "work_team_id", caption: "Work Team ID" },
@@ -113,7 +113,7 @@ export class DataComponent implements OnInit {
         { dataField: "project_id", caption: "Project ID" },
         { dataField: "project_name", caption: "Project Name" },
       ];
-    }  
+    }
 
     else if (this.currentTable == "Work Team Member") {
       this.columnChoices = [
@@ -124,7 +124,7 @@ export class DataComponent implements OnInit {
         { dataField: "firstname", caption: "First Name"},
         { dataField: "lastname", caption: "Last Name"},
       ];
-    } 
+    }
 
     else if (this.currentTable == "Work Daily Hours") {
       this.columnChoices = [
@@ -133,7 +133,7 @@ export class DataComponent implements OnInit {
         { dataField: "work_date", caption: "Work Date" },
         { dataField: "hours", caption: "Hours" }
       ];
-    } 
+    }
 
     else if (this.currentTable == "Agile System") {
       this.columnChoices = [
@@ -145,10 +145,12 @@ export class DataComponent implements OnInit {
      } 
      else if (this.currentTable == "Agile System User") {
       this.columnChoices = [
-        { dataField: "agile_system_id", caption: "System ID" },
+        { dataField: "agile_system_user_id", caption: "Agile System ID" },
+        { dataField: "agile_system_user_name", caption: "User System Name" },
         { dataField: "agile_system_name", caption: "System Name" },
-        { dataField: "agile_system_type", caption: "System Type" },
-        { dataField: "work_team_name", caption: "Team" }
+        { dataField: "work_team_member_id", caption: "Work Team Member ID" },
+        { dataField: "firstname", caption: "First Name" },
+        { dataField: "lastname", caption: "Last Name" },
       ];
     }
     else if (this.currentTable == "Agile Sprint") {
@@ -175,10 +177,10 @@ export class DataComponent implements OnInit {
 
     else if (this.currentTable == "Agile Story Agile System User") {
       this.columnChoices = [
-        { dataField: "agile_system_id", caption: "System ID" },
-        { dataField: "agile_system_name", caption: "System Name" },
-        { dataField: "agile_system_type", caption: "System Type" },
-        { dataField: "work_team_name", caption: "Team" }
+        { dataField: "agile_story_agile_system_user_id", caption: "Agile Story Agile System User ID" },
+        { dataField: "agile_story_id", caption: "Story ID" },
+        { dataField: "agile_system_user_name", caption: "User System Name" },
+        { dataField: "agile_system_user_story_points", caption: "User Story Points" }
       ];
     }
 
