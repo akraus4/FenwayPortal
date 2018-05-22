@@ -5,14 +5,14 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 db = MySQLdb.connect(
-                    host="52.55.14.143",  # your host
-                    user="fg_user_dev2",  # username
-                    passwd="6UhjVvAgM_Jm",  # password
-                    db="fg_metrics_dev2") # name of the database
-                    # host= "52.55.14.143",
-                    # user= "fg_user",
-                    # passwd= "uXQ1pgjZlne7",
-                    # db= "fg_metrics")  
+                    # host="52.55.14.143",  # your host
+                    # user="fg_user_dev2",  # username
+                    # passwd="6UhjVvAgM_Jm",  # password
+                    # db="fg_metrics_dev2") # name of the database
+                     host= "52.55.14.143",
+                     user= "fg_user",
+                     passwd= "uXQ1pgjZlne7",
+                     db= "fg_metrics")  
 
 # Create a Cursor object to execute queries.
 cur = db.cursor()
