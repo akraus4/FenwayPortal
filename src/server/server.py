@@ -2,17 +2,23 @@
 import MySQLdb
 from flask import Flask, json, jsonify, request
 from flask_cors import CORS
+import sys
+
 app = Flask(__name__)
 CORS(app)
+    
+
 db = MySQLdb.connect(
-                    host="52.55.14.143",  # your host
-                    user="fg_user_dev2",  # username
-                    passwd="6UhjVvAgM_Jm",  # password
-                    db="fg_metrics_dev2") # name of the database
-                    # host= "52.55.14.143",
-                    # user= "fg_user",
-                    # passwd= "uXQ1pgjZlne7",
-                    # db= "fg_metrics")  
+                    # host="52.55.14.143",  # your host
+                    # user="fg_user_dev2",  # username
+                    # passwd="6UhjVvAgM_Jm",  # password
+                    # db="fg_metrics_dev2" # name of the database
+                    # ) 
+                    host= "52.55.14.143",
+                    user= "fg_user",
+                    passwd= "uXQ1pgjZlne7",
+                    db= "fg_metrics",
+                    charset = "utf8")  
 
 # Create a Cursor object to execute queries.
 cur = db.cursor()
@@ -130,14 +136,14 @@ def findTableData(table_name):
         i=0
         cur.execute('SELECT * FROM work_team')
         for row in cur.fetchall():
-            addObject['work_team_id'.decode('windows-1252')] = row[0]
-            addObject['work_team_name'.decode('windows-1252')] = row[1]
-            addObject['project_id'.decode('windows-1252')] = row[2] 
-            addObject['project_name'.decode('windows-1252')] = row[3]
+            addObject['work_team_id'] = row[0]
+            addObject['work_team_name'] = row[1]
+            addObject['project_id'] = row[2] 
+            addObject['project_name'] = row[3]
             jsonList.insert(i, addObject)
             addObject = {}
             i=i+1
-        
+
 
     elif table_name == "work_team_member":
         jsonList = []

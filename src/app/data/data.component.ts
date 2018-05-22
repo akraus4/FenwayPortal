@@ -107,7 +107,6 @@ export class DataComponent implements OnInit {
     } 
      
     else if (this.currentTable == "Work Team") {
-      console.log("get columns")
       this.columnChoices = [
         { dataField: "work_team_id", caption: "Work Team ID" },
         { dataField: "work_team_name", caption: "Work Team Name" },
