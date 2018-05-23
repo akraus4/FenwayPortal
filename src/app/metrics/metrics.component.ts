@@ -111,12 +111,14 @@ export class MetricsComponent implements OnInit {
   }
 
   getAllStoriesWithUsersBySprint() {
+    this.metricsService.showLoadingPanel()
       this.metricsService.getAllStoriesWithUsersBySprint(this.currentSprintId)
       .map(res => { console.log(res); return res.json(); })
       .subscribe((results) => {
         this.StoryChoices = results;
-        this.getStoryCount()
-        this.getUsersPoints()
+        // this.getStoryCount()
+        // this.getUsersPoints()
+        this.metricsService.hideLoadingPanel()
       });
     }
 

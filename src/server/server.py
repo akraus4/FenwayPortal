@@ -21,7 +21,7 @@ db = MySQLdb.connect(
 
 # Create a Cursor object to execute queries.
 cur = db.cursor()
-
+    
 #Create list of JSON objects for Select Team drop down in View Metrics Page
 @app.route("/findAllTeams")
 def findAllTeams():

@@ -5,6 +5,8 @@ import { DxButtonModule } from 'devextreme-angular';
 import { DxDataGridModule } from 'devextreme-angular';
 import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { DataService } from '../services/data.service'
+import { MetricsService } from '../services/metrics.service'
+
 
 @Component({
   selector: 'app-data',
@@ -21,8 +23,13 @@ export class DataComponent implements OnInit {
   dataService: any;
   table_name: any;
   TableChoices;
+  metricsService: any;
 
-
+  constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
+    this.dataService = dataService;
+    this.columnChoices = this.columns;
+    this.metricsService = metricsService;
+  }
   //Dropdonw choices for 'Select Table"
   tables = [
     { value: 0, viewValue: "Work User" },
@@ -46,10 +53,7 @@ export class DataComponent implements OnInit {
 
   ngOnInit() {
   }
-  constructor(private modalService: BsModalService, @Inject(DataService) dataService) {
-    this.dataService = dataService;
-    this.columnChoices = this.columns
-  }
+ 
 
 
   openModal(template: TemplateRef<any>) {
@@ -60,6 +64,7 @@ export class DataComponent implements OnInit {
     // console.log("Made it here!!!" + tableName);
   }
   setupTable() {
+    this.metricsService.showLoadingPanel()
     if (this.currentTable == 'Work User') {
       this.table_name = "work_user"
     }
@@ -93,7 +98,7 @@ export class DataComponent implements OnInit {
   getTableData(table_name) {
     this.dataService.findTableData(this.table_name)
       .map(res => { return res.json(); })
-      .subscribe((results) => { this.TableChoices = results; this.getColumns(); });
+      .subscribe((results) => { this.TableChoices = results; this.getColumns(); this.metricsService.hideLoadingPanel();});
   }
 
   getColumns() {
@@ -104,6 +109,7 @@ export class DataComponent implements OnInit {
         { dataField: "lastname", caption: "Last Name" },
         { dataField: "email", caption: "Email" },
       ];
+      
     }
 
     else if (this.currentTable == "Work Team") {
