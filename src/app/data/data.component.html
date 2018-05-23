@@ -1,31 +1,31 @@
 <!-- <h1 id="title"> {{title}} </h1> -->
 <div class="row">
-    <div class="col-sm-12">
-        <h1 id="title"> {{title}} </h1>
-      <app-sign-in></app-sign-in>
-    </div>
+  <div class="col-sm-12">
+    <h1 id="title"> {{title}} </h1>
+    <app-sign-in></app-sign-in>
   </div>
+</div>
 <br />
 
 <div id="gridWidgetContainer" class="effect7">
   <div class="selectTeam" class="row" id="searchWidgetContainer">
     <div class="col-sm-3">
-        <mat-form-field class="selectTables">
-            <mat-select placeholder="Select a Table" (change)="storeCurrentTable($event.value.viewValue)">
-              <mat-option *ngFor="let table of tables" [value]="table">{{table.viewValue}}</mat-option>
-            </mat-select>
-          </mat-form-field>
+      <mat-form-field class="selectTables">
+        <mat-select placeholder="Select a Table" (change)="storeCurrentTable($event.value.viewValue)">
+          <mat-option *ngFor="let table of tables" [value]="table">{{table.viewValue}}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
     <div class="col-sm-1">
-        <button id="search" mat-button class='dataBtn' (click)="setupTable()">
-            <i class="fas fa-search"></i>
-          </button>
-      </div>
-      <div class="col-sm-1">
-          <button id="addRow" mat-button class='dataBtn' (click)="openModal(template)">
-              <i class="fas fa-plus-circle"></i>
-            </button>
-        </div>
+      <button id="search" mat-button class='dataBtn' (click)="setupTable()">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+    <div class="col-sm-1">
+      <button id="addRow" mat-button class='dataBtn' (click)="openModal(template)">
+        <i class="fas fa-plus-circle"></i>
+      </button>
+    </div>
 
 
     <!-- <div id="table">
@@ -37,6 +37,7 @@
   <div class="row" id="gridGraphMetricsPageDiv">
     <div class="col-12">
       <dx-data-grid id="gridContainer" [dataSource]="TableChoices" [showRowLines]="true" [showBorders]="true" [columns]="columnChoices">
+        <dxo-editing mode="row" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true"></dxo-editing>>
         <dxo-export [enabled]="true" fileName="Employees" [allowExportSelectedData]="true"></dxo-export>
         <dxo-selection mode="multiple"></dxo-selection>
         <dxo-header-filter [visible]="true"></dxo-header-filter>
@@ -57,12 +58,20 @@
 
 <ng-template #template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Modal</h4>
+    <h4 class="modal-title pull-left">Insert New Row</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
   </div>
   <div class="modal-body">
     This is a modal.
+  </div>
+</ng-template>
+
+
+<ng-template #workTeam>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Add New Row</h4>
+
   </div>
 </ng-template>
