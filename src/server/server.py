@@ -8,16 +8,16 @@ CORS(app)
     
 
 db = MySQLdb.connect(
-                    # host="52.55.14.143",  # your host
-                    # user="fg_user_dev2",  # username
-                    # passwd="6UhjVvAgM_Jm",  # password
-                    # db="fg_metrics_dev2" # name of the database
-                    # ) 
-                    host= "52.55.14.143",
-                    user= "fg_user",
-                    passwd= "uXQ1pgjZlne7",
-                    db= "fg_metrics",
-                    charset = "utf8")  
+                     host="52.55.14.143",  # your host
+                     user="fg_user_dev2",  # username
+                     passwd="6UhjVvAgM_Jm",  # password
+                     db="fg_metrics_dev2" # name of the database
+                     ) 
+                    # host= "52.55.14.143",
+                    # user= "fg_user",
+                    # passwd= "uXQ1pgjZlne7",
+                    # db= "fg_metrics",
+                    # charset = "utf8")  
 
 # Create a Cursor object to execute queries.
 cur = db.cursor()
@@ -167,12 +167,13 @@ def findTableData(table_name):
         jsonList = []
         addObject = {}
         i=0
-        cur.execute('SELECT * FROM work_dailyhours')
+        cur.execute('select work_dailyhours.work_dailyhours_id, work_team_member.work_team_member_id, work_dailyhours.work_date, work_dailyhours.hours, work_user.firstname, work_user.lastname from work_dailyhours left outer join work_team_member on work_team_member.work_team_member_id = work_dailyhours.work_team_member_id left outer join work_user on work_user.work_user_id = work_team_member.work_user_id')
         for row in cur.fetchall():
             addObject['work_dailyhours_id'] = row[0]
             addObject['work_team_member_id'] = row[1]
             addObject['work_date'] = row[2] 
             addObject['hours'] = row[3]
+            addObject['name'] = row[4] + ' ' + row[5]
             jsonList.insert(i, addObject)
             addObject = {}
             i=i+1

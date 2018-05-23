@@ -131,7 +131,8 @@ export class DataComponent implements OnInit {
         { dataField: "work_dailyhours_id", caption: "Work Daily Hours ID" },
         { dataField: "work_team_member_id", caption: "Work Team Member ID" },
         { dataField: "work_date", caption: "Work Date" },
-        { dataField: "hours", caption: "Hours" }
+        { dataField: "hours", caption: "Hours" },
+        { dataField: "name", caption: "Name"}
       ];
     }
 
