@@ -21,8 +21,12 @@ export class DataComponent implements OnInit {
   dataService: any;
   table_name: any;
   TableChoices;
+  key: string;
 
-
+keys = [
+{value: 0, viewValue: "This Foreign Key"},
+{value: 1, viewValue: "That Foreign Key"}
+]
   //Dropdonw choices for 'Select Table"
   tables = [
     { value: 0, viewValue: "Work User" },

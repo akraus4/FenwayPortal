@@ -11,7 +11,8 @@ db = MySQLdb.connect(
                      host="52.55.14.143",  # your host
                      user="fg_user_dev2",  # username
                      passwd="6UhjVvAgM_Jm",  # password
-                     db="fg_metrics_dev2" # name of the database
+                     db="fg_metrics_dev2",# name of the database
+                     charset = "utf8"
                      ) 
                     # host= "52.55.14.143",
                     # user= "fg_user",

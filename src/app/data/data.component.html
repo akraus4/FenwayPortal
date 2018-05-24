@@ -36,15 +36,17 @@
   </div>
   <div class="row" id="gridGraphMetricsPageDiv">
     <div class="col-12">
-      <dx-data-grid id="gridContainer" [dataSource]="TableChoices" [showRowLines]="true" [showBorders]="true" [columns]="columnChoices">
-        <dxo-editing mode="row" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true"></dxo-editing>>
+      <dx-data-grid id="gridContainer" [dataSource]="TableChoices" [showRowLines]="true" [showBorders]="true" [columns]="columnChoices"
+        [allowColumnReordering]="true" (onEditingStart)="logEvent('EditingStart')" (onInitNewRow)="logEvent('InitNewRow')"
+        (onRowInserting)="logEvent('RowInserting')" (onRowInserted)="logEvent('RowInserted')" (onRowUpdating)="logEvent('RowUpdating')"
+        (onRowUpdated)="logEvent('RowUpdated')" (onRowRemoving)="logEvent('RowRemoving')" (onRowRemoved)="logEvent('RowRemoved')">
+        <dxo-editing mode="form" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true"></dxo-editing>>
         <dxo-export [enabled]="true" fileName="Employees" [allowExportSelectedData]="true"></dxo-export>
         <dxo-selection mode="multiple"></dxo-selection>
         <dxo-header-filter [visible]="true"></dxo-header-filter>
 
         <dxo-sorting mode="none"></dxo-sorting>
         <dxo-paging [pageSize]="10"></dxo-paging>
-
         <dxi-column *ngFor="let col of columnChoices" [dataField]="col.dataField" [caption]="col.caption"></dxi-column>
       </dx-data-grid>
     </div>
@@ -52,11 +54,7 @@
 </div>
 
 
-
-
-
-
-<ng-template #template>
+<ng-template #workUser >
   <div class="modal-header">
     <h4 class="modal-title pull-left">Insert New Row</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -64,14 +62,83 @@
     </button>
   </div>
   <div class="modal-body">
-    This is a modal.
+  Work User ID:<input type="text" name="Work User ID">
+  <br />
+  First Name:<input type="text" name="First Name">
+  <br />
+  Last Name: <input type="text" name="Last Name">
+  <br />
+  Email: <input type="text" name="email">
   </div>
 </ng-template>
-
 
 <ng-template #workTeam>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Add New Row</h4>
-
+  <div class = "modal-header">
+    <h4 class="modal-title pull-left"> Work Team</h4>
+  </div>
+  <div class = "modal-body">
+    Work Team ID:<input type="text" name="Work Team ID">
+    Work Team Name:<input type="text" name="Work Team Name">
+    Project ID:<input type="text" name="Project ID">
+    Project Name:<input type="text" name="Project Name">
   </div>
 </ng-template>
+
+<ng-template #workTeamMember>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Work Team Member</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+  Work Team Member ID:<input type="text" name="Work User ID">
+  <br />
+  Work Team ID:<mat-form-field class = "selectKey">
+    <mat-select placeholder = "Select a Foreign Key">
+      <mat-option *ngFor = "let key of keys" [value] = "key">
+         {{key.viewValue}} 
+        </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br />
+ Work User ID : <mat-form-field>
+    <mat-select placeholder="Select a Foreign Key">
+      <mat-option *ngFor="let key of keys" [value]="key.value">
+        {{ key.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <br />
+  Work Team Name: <input type="text" name="email">
+  <br />
+  First Name:<input type="text" name="First Name">
+  <br />
+  Last Name: <input type="text" name="Last Name">
+  <br />
+  </div>
+</ng-template>
+
+<ng-template #template>
+    <div class = "modal-header">
+      <h4 class="modal-title pull-left"> Work Daily Hours</h4>
+    </div>
+    <div class = "modal-body">
+      Work Daily Hours ID:<input type="text" name="Work Daily Hours ID">
+      <br />
+      Work Team Member ID: <mat-form-field>
+          <mat-select placeholder="Select a Foreign Key">
+            <mat-option *ngFor="let key of keys" [value]="key.value">
+              {{ key.viewValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <br />
+      Work Date :<input type="text" name="Work Date">
+      <br />
+      Hours:<input type="text" name = "Hours">
+      <br />
+      Name:<input type="text" name="Name">
+      <br />
+    </div>
+  </ng-template>
