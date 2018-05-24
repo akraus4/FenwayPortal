@@ -1,37 +1,32 @@
 <!-- <h1 id="title"> {{title}} </h1> -->
 <div class="row">
-    <div class="col-sm-12">
-        <h1 id="title"> {{title}} </h1>
-      <app-sign-in></app-sign-in>
-    </div>
+  <div class="col-sm-12">
+    <h1 id="title"> {{title}} </h1>
+    <app-sign-in></app-sign-in>
   </div>
+</div>
 <br />
 
 <div id="gridWidgetContainer" class="effect7">
   <div class="selectTeam" class="row" id="searchWidgetContainer">
     <div class="col-sm-3">
-        <mat-form-field class="selectTables">
-            <mat-select placeholder="Select a Table" (change)="storeCurrentTable($event.value.viewValue)">
-              <mat-option *ngFor="let table of tables" [value]="table">{{table.viewValue}}</mat-option>
-            </mat-select>
-          </mat-form-field>
+      <mat-form-field class="selectTables">
+        <mat-select placeholder="Select a Table" (change)="storeCurrentTable($event.value.viewValue)">
+          <mat-option *ngFor="let table of tables" [value]="table">{{table.viewValue}}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
     <div class="col-sm-1">
-        <button id="search" mat-button class='dataBtn' (click)="setupTable()">
-            <i class="fas fa-search"></i>
-          </button>
-      </div>
-      <div class="col-sm-1">
-          <button id="addRow" mat-button class='dataBtn' (click)="openModal(template)">
-              <i class="fas fa-plus-circle"></i>
-            </button>
-        </div>
-
-
+      <button id="search" mat-button class='dataBtn' (click)="setupTable()">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+    <div class="col-sm-1">
+      <button id="addRow" mat-button class='dataBtn' (click)="openModal(agileSystem)" >
+        <i class="fas fa-plus-circle"></i>
+      </button>
+    </div>
     <!-- <div id="table">
-      
-      
-      
     </div> -->
   </div>
   <div class="row" id="gridGraphMetricsPageDiv">
@@ -50,12 +45,8 @@
   </div>
 </div>
 
-
-
-
-
-
-<ng-template #template>
+<ng-template #agileSystem>
+  <datalist="agile"
   <div class="modal-header">
     <h4 class="modal-title pull-left">Modal</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -63,7 +54,125 @@
     </button>
   </div>
   <div class="modal-body">
-    This is a modal.
+    System ID:
+    <input type="text" name="">
+    <br/> 
+    System Name:
+    <input type="" name="">
+  <br/> 
+  System Type:
+  <input type="text" name="">
+  <br/> 
+  Team :
+  <input type="text" name="">
+  <br/>
+</div>  
+</ng-template>
+
+<ng-template #agileSystemUser>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
   </div>
+  <div class="modal-body">
+    Agile System ID:
+    <input type="text" name="">
+    <br/> 
+    User System Name:
+    <input type="" name="">
+  <br/> 
+  System Name:
+  <input type="text" name="">
+  <br/> 
+  Work Team Member ID :
+  <input type="dropdown" name="">
+  <br/>
+  First Name:
+  <input type="text" name="">
+  <br/> 
+  Last Name:
+  <input type="text" name="">
+  <br/> 
+</div>  
+</ng-template>
+
+<ng-template #agileSprint>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Sprint ID:
+    <input type="text" name="">
+    <br/> 
+    Sprint Name:
+    <input type="" name="">
+  <br/> 
+  System Name:
+  <input type="text" name="">
+  <br/> 
+  Sprint Description :
+  <input type="text" name="">
+  <br/>
+  Sprint Start Date:
+  <input type="text" name="">
+  <br/> 
+  Spirnt End Date:
+  <input type="text" name="">
+  <br/> 
+</div>  
+</ng-template>
+
+<ng-template #agileStory>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Story ID:
+    <input type="text" name="">
+    <br/> 
+    Sprint Name:
+    <input type="" name="">
+  <br/> 
+  Story Type:
+  <input type="text" name="">
+  <br/> 
+  Story Status :
+  <input type="text" name="">
+  <br/>
+  Story Points:
+  <input type="text" name="">
+  <br/> 
+</div>  
+</ng-template>
+
+<ng-template #agilestoryagilesystemUser>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    Agile Story Agile System User ID:
+    <input type="text" name="">
+    <br/> 
+    Story ID:
+    <input type="dropdown" name="">
+  <br/> 
+  User System Name:
+  <input type="text" name="">
+  <br/> 
+  User Story Points :
+  <input type="text" name="">
+  <br/>
+</div>  
 </ng-template>
 <app-loading-panel></app-loading-panel>
