@@ -22,6 +22,13 @@
     font-weight: bold;
     padding-top: 25px;
 }
+input {
+    text-align: relative;
+    font-family: 'Roboto';
+    font-weight: bold;
+    padding-top: 1px;
+    margin: 50 px;
+}
 
 .dataBtn{
     border-radius: 3px;

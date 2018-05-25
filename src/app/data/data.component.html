@@ -22,7 +22,7 @@
       </button>
     </div>
     <div class="col-sm-1">
-      <button id="addRow" mat-button class='dataBtn' (click)="openModal(agileSystem)" >
+      <button id="addRow" mat-button class='dataBtn' (click)="openModal(agileSystem)">
         <i class="fas fa-plus-circle"></i>
       </button>
     </div>
@@ -46,7 +46,6 @@
 </div>
 
 <ng-template #agileSystem>
-  <datalist="agile"
   <div class="modal-header">
     <h4 class="modal-title pull-left">Modal</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
@@ -56,17 +55,18 @@
   <div class="modal-body">
     System ID:
     <input type="text" name="">
-    <br/> 
-    System Name:
+    <br/>
+    <br/> System Name:
     <input type="" name="">
-  <br/> 
-  System Type:
-  <input type="text" name="">
-  <br/> 
-  Team :
-  <input type="text" name="">
-  <br/>
-</div>  
+    <br/>
+    <br/> System Type:
+    <input type="text" name="">
+    <br/>
+    <br/> Team :
+    <input type="text" name="">
+    <br/>
+    <br/>
+  </div>
 </ng-template>
 
 <ng-template #agileSystemUser>
@@ -79,23 +79,22 @@
   <div class="modal-body">
     Agile System ID:
     <input type="text" name="">
-    <br/> 
-    User System Name:
+    <br/> User System Name:
     <input type="" name="">
-  <br/> 
-  System Name:
-  <input type="text" name="">
-  <br/> 
-  Work Team Member ID :
-  <input type="dropdown" name="">
-  <br/>
-  First Name:
-  <input type="text" name="">
-  <br/> 
-  Last Name:
-  <input type="text" name="">
-  <br/> 
-</div>  
+    <br/> System Name:
+    <input type="text" name="">
+    <br/> Work Team Member ID :
+    <mat-form-field class="selectTables">
+      <mat-select placeholder="Select a Table" (change)="storeCurrentTable($event.value.viewValue)">
+        <mat-option *ngFor="let table of tables" [value]="table">{{table.viewValue}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <br/> First Name:
+    <input type="text" name="">
+    <br/> Last Name:
+    <input type="text" name="">
+    <br/>
+  </div>
 </ng-template>
 
 <ng-template #agileSprint>
@@ -108,23 +107,18 @@
   <div class="modal-body">
     Sprint ID:
     <input type="text" name="">
-    <br/> 
-    Sprint Name:
+    <br/> Sprint Name:
     <input type="" name="">
-  <br/> 
-  System Name:
-  <input type="text" name="">
-  <br/> 
-  Sprint Description :
-  <input type="text" name="">
-  <br/>
-  Sprint Start Date:
-  <input type="text" name="">
-  <br/> 
-  Spirnt End Date:
-  <input type="text" name="">
-  <br/> 
-</div>  
+    <br/> System Name:
+    <input type="text" name="">
+    <br/> Sprint Description :
+    <input type="text" name="">
+    <br/> Sprint Start Date:
+    <input type="text" name="">
+    <br/> Spirnt End Date:
+    <input type="text" name="">
+    <br/>
+  </div>
 </ng-template>
 
 <ng-template #agileStory>
@@ -137,20 +131,16 @@
   <div class="modal-body">
     Story ID:
     <input type="text" name="">
-    <br/> 
-    Sprint Name:
+    <br/> Sprint Name:
     <input type="" name="">
-  <br/> 
-  Story Type:
-  <input type="text" name="">
-  <br/> 
-  Story Status :
-  <input type="text" name="">
-  <br/>
-  Story Points:
-  <input type="text" name="">
-  <br/> 
-</div>  
+    <br/> Story Type:
+    <input type="text" name="">
+    <br/> Story Status :
+    <input type="text" name="">
+    <br/> Story Points:
+    <input type="text" name="">
+    <br/>
+  </div>
 </ng-template>
 
 <ng-template #agilestoryagilesystemUser>
@@ -163,16 +153,13 @@
   <div class="modal-body">
     Agile Story Agile System User ID:
     <input type="text" name="">
-    <br/> 
-    Story ID:
+    <br/> Story ID:
     <input type="dropdown" name="">
-  <br/> 
-  User System Name:
-  <input type="text" name="">
-  <br/> 
-  User Story Points :
-  <input type="text" name="">
-  <br/>
-</div>  
+    <br/> User System Name:
+    <input type="text" name="">
+    <br/> User Story Points :
+    <input type="text" name="">
+    <br/>
+  </div>
 </ng-template>
 <app-loading-panel></app-loading-panel>
