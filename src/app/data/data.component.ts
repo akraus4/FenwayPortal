@@ -4,7 +4,8 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { DxButtonModule } from 'devextreme-angular';
 import { DxDataGridModule } from 'devextreme-angular';
 import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
-import { DataService } from '../services/data.service'
+import { DataService } from '../services/data.service';
+import { DxTextBoxModule } from 'devextreme-angular';
 
 @Component({
   selector: 'app-data',
@@ -22,7 +23,12 @@ export class DataComponent implements OnInit {
   table_name: any;
   templateName: any;
   TableChoices;
+  key: string;
 
+keys = [
+{value: 0, viewValue: "This Foreign Key"},
+{value: 1, viewValue: "That Foreign Key"}
+]
   //Dropdonw choices for 'Select Table"
   tables = [
     { value: 0, viewValue: "Work User" },
@@ -159,7 +165,8 @@ export class DataComponent implements OnInit {
         { dataField: "work_dailyhours_id", caption: "Work Daily Hours ID" },
         { dataField: "work_team_member_id", caption: "Work Team Member ID" },
         { dataField: "work_date", caption: "Work Date" },
-        { dataField: "hours", caption: "Hours" }
+        { dataField: "hours", caption: "Hours" },
+        { dataField: "name", caption: "Name"}
       ];
     }
 

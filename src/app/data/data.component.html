@@ -1,21 +1,22 @@
 <!-- <h1 id="title"> {{title}} </h1> -->
 <div class="row">
-    <div class="col-sm-12">
-        <h1 id="title"> {{title}} </h1>
-      <app-sign-in></app-sign-in>
-    </div>
+  <div class="col-sm-12">
+    <h1 id="title"> {{title}} </h1>
+    <app-sign-in></app-sign-in>
   </div>
+</div>
 <br />
 
 <div id="gridWidgetContainer" class="effect7">
   <div class="selectTeam" class="row" id="searchWidgetContainer">
     <div class="col-sm-3">
-        <mat-form-field class="selectTables">
-            <mat-select placeholder="Select a Table" (change)="storeCurrentTable($event.value.viewValue)">
-              <mat-option *ngFor="let table of tables" [value]="table">{{table.viewValue}}</mat-option>
-            </mat-select>
-          </mat-form-field>
+      <mat-form-field class="selectTables">
+        <mat-select placeholder="Select a Table" (change)="storeCurrentTable($event.value.viewValue)">
+          <mat-option *ngFor="let table of tables" [value]="table">{{table.viewValue}}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
+
     <div class="col-sm-1">
         <button id="search" mat-button class='dataBtn' (click)="setupTable()">
             <i class="fas fa-search"></i>
@@ -140,7 +141,7 @@
 
 <ng-template #agileStoryAgileSystemUser>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Modal</h4>
+    <h4 class="modal-title pull-left">Work Team Member</h4>
     <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -149,3 +150,24 @@
     agileStoryAgileSystemUser
   </div>
 </ng-template>
+
+<ng-template #template>
+    <div class = "modal-header">
+      <h4 class="modal-title pull-left"> Work Daily Hours</h4>
+    </div>
+    <div class = "modal-body">
+      Work Daily Hours ID:<dx-number-box></dx-number-box>
+      <br />
+      Work Team Member ID:      <dx-select-box
+      [items]="['left', 'top']"
+      [(value)]="labelLocation"></dx-select-box>
+        <br />
+      Work Date :<dx-number-box></dx-number-box>
+      <br />
+      Hours:<dx-number-box></dx-number-box>
+      <br />
+      Name:<dx-number-box></dx-number-box>
+      <br />
+    </div>
+  </ng-template>
+

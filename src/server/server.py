@@ -166,12 +166,13 @@ def findTableData(table_name):
         jsonList = []
         addObject = {}
         i=0
-        cur.execute('SELECT * FROM work_dailyhours')
+        cur.execute('select work_dailyhours.work_dailyhours_id, work_team_member.work_team_member_id, work_dailyhours.work_date, work_dailyhours.hours, work_user.firstname, work_user.lastname from work_dailyhours left outer join work_team_member on work_team_member.work_team_member_id = work_dailyhours.work_team_member_id left outer join work_user on work_user.work_user_id = work_team_member.work_user_id')
         for row in cur.fetchall():
             addObject['work_dailyhours_id'] = row[0]
             addObject['work_team_member_id'] = row[1]
             addObject['work_date'] = row[2] 
             addObject['hours'] = row[3]
+            addObject['name'] = row[4] + ' ' + row[5]
             jsonList.insert(i, addObject)
             addObject = {}
             i=i+1
