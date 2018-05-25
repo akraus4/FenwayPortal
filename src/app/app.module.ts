@@ -34,6 +34,14 @@ import notify from 'devextreme/ui/notify';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { LoadingPanelComponent } from './loading-panel/loading-panel.component';
 import { TeamComponent } from './team/team.component';
+import{
+  DxCheckBoxModule,
+  DxSelectBoxModule,
+  DxNumberBoxModule,
+  DxFormModule,
+  DxTextBoxModule,
+  DxTemplateModule
+} from'devextreme-angular';
 
 
 
@@ -64,6 +72,12 @@ import { TeamComponent } from './team/team.component';
     MatFormFieldModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    DxCheckBoxModule,
+    DxSelectBoxModule,
+    DxNumberBoxModule,
+    DxFormModule,
+    DxTextBoxModule,
+    DxTemplateModule,
     ChartsModule,
     MatRadioModule,
     MatInputModule,

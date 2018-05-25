@@ -1,165 +1,138 @@
 <!-- <h1 id="title"> {{title}} </h1> -->
 <div class="row">
-  <div class="col-sm-12">
-    <h1 id="title"> {{title}} </h1>
-    <app-sign-in></app-sign-in>
-  </div>
-</div>
-<br />
-
-<div id="gridWidgetContainer" class="effect7">
-  <div class="selectTeam" class="row" id="searchWidgetContainer">
-    <div class="col-sm-3">
-      <mat-form-field class="selectTables">
-        <mat-select placeholder="Select a Table" (change)="storeCurrentTable($event.value.viewValue)">
-          <mat-option *ngFor="let table of tables" [value]="table">{{table.viewValue}}</mat-option>
-        </mat-select>
-      </mat-form-field>
+    <div class="col-sm-12">
+      <h1 id="title"> {{title}} </h1>
+      <app-sign-in></app-sign-in>
     </div>
-    <div class="col-sm-1">
-      <button id="search" mat-button class='dataBtn' (click)="setupTable()">
-        <i class="fas fa-search"></i>
+  </div>
+  <br />
+  
+  <div id="gridWidgetContainer" class="effect7">
+    <div class="selectTeam" class="row" id="searchWidgetContainer">
+      <div class="col-sm-3">
+        <mat-form-field class="selectTables">
+          <mat-select placeholder="Select a Table" (change)="storeCurrentTable($event.value.viewValue)">
+            <mat-option *ngFor="let table of tables" [value]="table">{{table.viewValue}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div class="col-sm-1">
+        <button id="search" mat-button class='dataBtn' (click)="setupTable()">
+          <i class="fas fa-search"></i>
+        </button>
+      </div>
+      <div class="col-sm-1">
+        <button id="addRow" mat-button class='dataBtn' (click)="openModal(template)">
+          <i class="fas fa-plus-circle"></i>
+        </button>
+      </div>
+  
+  
+      <!-- <div id="table">
+        
+        
+        
+      </div> -->
+    </div>
+    <div class="row" id="gridGraphMetricsPageDiv">
+      <div class="col-12">
+        <dx-data-grid id="gridContainer" [dataSource]="TableChoices" [showRowLines]="true" [showBorders]="true" [columns]="columnChoices"
+          [allowColumnReordering]="true" (onEditingStart)="logEvent('EditingStart')" (onInitNewRow)="logEvent('InitNewRow')"
+          (onRowInserting)="logEvent('RowInserting')" (onRowInserted)="logEvent('RowInserted')" (onRowUpdating)="logEvent('RowUpdating')"
+          (onRowUpdated)="logEvent('RowUpdated')" (onRowRemoving)="logEvent('RowRemoving')" (onRowRemoved)="logEvent('RowRemoved')">
+          <dxo-editing mode="form" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true"></dxo-editing>>
+          <dxo-export [enabled]="true" fileName="Employees" [allowExportSelectedData]="true"></dxo-export>
+          <dxo-selection mode="multiple"></dxo-selection>
+          <dxo-header-filter [visible]="true"></dxo-header-filter>
+  
+          <dxo-sorting mode="none"></dxo-sorting>
+          <dxo-paging [pageSize]="10"></dxo-paging>
+          <dxi-column *ngFor="let col of columnChoices" [dataField]="col.dataField" [caption]="col.caption"></dxi-column>
+        </dx-data-grid>
+      </div>
+    </div>
+  </div>
+  
+  
+  <ng-template #workUser >
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Insert New Row</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="col-sm-1">
-      <button id="addRow" mat-button class='dataBtn' (click)="openModal(agileSystem)">
-        <i class="fas fa-plus-circle"></i>
+    <div class="modal-body">
+    Work User ID:<input type="text" name="Work User ID">
+    <br />
+    First Name:<input type="text" name="First Name">
+    <br />
+    Last Name: <input type="text" name="Last Name">
+    <br />
+    Email: <input type="text" name="email">
+    </div>
+  </ng-template>
+  
+  <ng-template #workTeam>
+    <div class = "modal-header">
+      <h4 class="modal-title pull-left"> Work Team</h4>
+    </div>
+    <div class = "modal-body">
+      Work Team ID:<input type="text" name="Work Team ID">
+      Work Team Name:<input type="text" name="Work Team Name">
+      Project ID:<input type="text" name="Project ID">
+      Project Name:<input type="text" name="Project Name">
+    </div>
+  </ng-template>
+  
+  <ng-template #workTeamMember>
+    <div class="modal-header">
+      <h4 class="modal-title pull-left">Work Team Member</h4>
+      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+        <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <!-- <div id="table">
-    </div> -->
-  </div>
-  <div class="row" id="gridGraphMetricsPageDiv">
-    <div class="col-12">
-      <dx-data-grid id="gridContainer" [dataSource]="TableChoices" [showRowLines]="true" [showBorders]="true" [columns]="columnChoices">
-        <dxo-export [enabled]="true" fileName="Employees" [allowExportSelectedData]="true"></dxo-export>
-        <dxo-selection mode="multiple"></dxo-selection>
-        <dxo-header-filter [visible]="true"></dxo-header-filter>
-
-        <dxo-sorting mode="none"></dxo-sorting>
-        <dxo-paging [pageSize]="10"></dxo-paging>
-
-        <dxi-column *ngFor="let col of columnChoices" [dataField]="col.dataField" [caption]="col.caption"></dxi-column>
-      </dx-data-grid>
-    </div>
-  </div>
-</div>
-
-<ng-template #agileSystem>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Modal</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    System ID:
-    <input type="text" name="">
-    <br/>
-    <br/> System Name:
-    <input type="" name="">
-    <br/>
-    <br/> System Type:
-    <input type="text" name="">
-    <br/>
-    <br/> Team :
-    <input type="text" name="">
-    <br/>
-    <br/>
-  </div>
-</ng-template>
-
-<ng-template #agileSystemUser>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Modal</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    Agile System ID:
-    <input type="text" name="">
-    <br/> User System Name:
-    <input type="" name="">
-    <br/> System Name:
-    <input type="text" name="">
-    <br/> Work Team Member ID :
-    <mat-form-field class="selectTables">
-      <mat-select placeholder="Select a Table" (change)="storeCurrentTable($event.value.viewValue)">
-        <mat-option *ngFor="let table of tables" [value]="table">{{table.viewValue}}</mat-option>
+    <div class="modal-body">
+    Work Team Member ID:<input type="text" name="Work User ID">
+    <br />
+    Work Team ID:<mat-form-field class = "selectKey">
+      <mat-select placeholder = "Select a Foreign Key">
+        <mat-option *ngFor = "let key of keys" [value] = "key">
+           {{key.viewValue}} 
+          </mat-option>
       </mat-select>
     </mat-form-field>
-    <br/> First Name:
-    <input type="text" name="">
-    <br/> Last Name:
-    <input type="text" name="">
-    <br/>
-  </div>
-</ng-template>
-
-<ng-template #agileSprint>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Modal</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    Sprint ID:
-    <input type="text" name="">
-    <br/> Sprint Name:
-    <input type="" name="">
-    <br/> System Name:
-    <input type="text" name="">
-    <br/> Sprint Description :
-    <input type="text" name="">
-    <br/> Sprint Start Date:
-    <input type="text" name="">
-    <br/> Spirnt End Date:
-    <input type="text" name="">
-    <br/>
-  </div>
-</ng-template>
-
-<ng-template #agileStory>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Modal</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    Story ID:
-    <input type="text" name="">
-    <br/> Sprint Name:
-    <input type="" name="">
-    <br/> Story Type:
-    <input type="text" name="">
-    <br/> Story Status :
-    <input type="text" name="">
-    <br/> Story Points:
-    <input type="text" name="">
-    <br/>
-  </div>
-</ng-template>
-
-<ng-template #agilestoryagilesystemUser>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Modal</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-    Agile Story Agile System User ID:
-    <input type="text" name="">
-    <br/> Story ID:
-    <input type="dropdown" name="">
-    <br/> User System Name:
-    <input type="text" name="">
-    <br/> User Story Points :
-    <input type="text" name="">
-    <br/>
-  </div>
-</ng-template>
-<app-loading-panel></app-loading-panel>
+    <br />
+   Work User ID :<dx-select-box
+   [items]="['left', 'top']"
+   [(value)]="labelLocation"></dx-select-box>
+    <br />
+    Work Team Name: <input type="text" name="email">
+    <br />
+    First Name:<input type="text" name="First Name">
+    <br />
+    Last Name: <input type="text" name="Last Name">
+    <br />
+    </div>
+  </ng-template>
+  
+  <ng-template #template>
+      <div class = "modal-header">
+        <h4 class="modal-title pull-left"> Work Daily Hours</h4>
+      </div>
+      <div class = "modal-body">
+        Work Daily Hours ID:<dx-number-box></dx-number-box>
+        <br />
+        Work Team Member ID:      <dx-select-box
+        [items]="['left', 'top']"
+        [(value)]="labelLocation"></dx-select-box>
+          <br />
+        Work Date :<dx-number-box></dx-number-box>
+        <br />
+        Hours:<dx-number-box></dx-number-box>
+        <br />
+        Name:<dx-number-box></dx-number-box>
+        <br />
+      </div>
+    </ng-template>
+  
+  
