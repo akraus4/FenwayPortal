@@ -6,6 +6,8 @@ import { DxDataGridModule } from 'devextreme-angular';
 import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { DataService } from '../services/data.service';
 import { DxTextBoxModule } from 'devextreme-angular';
+import { MetricsService } from '../services/metrics.service'
+
 
 @Component({
   selector: 'app-data',
@@ -24,12 +26,21 @@ export class DataComponent implements OnInit {
   templateName: any;
   TableChoices;
   key: string;
+  metricsService: any;
 
-keys = [
-{value: 0, viewValue: "This Foreign Key"},
-{value: 1, viewValue: "That Foreign Key"}
-]
-  //Dropdonw choices for 'Select Table"
+
+  constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
+    this.dataService = dataService;
+    this.columnChoices = this.columns;
+    this.metricsService = metricsService;
+  }
+
+  keys = [
+    {value: 0, viewValue: "This Foreign Key"},
+    {value: 1, viewValue: "That Foreign Key"}
+    ]
+
+  //Dropdown choices for 'Select Table"
   tables = [
     { value: 0, viewValue: "Work User" },
     { value: 1, viewValue: "Work Team" },
@@ -52,10 +63,7 @@ keys = [
 
   ngOnInit() {
   }
-  constructor(private modalService: BsModalService, @Inject(DataService) dataService) {
-    this.dataService = dataService;
-    this.columnChoices = this.columns
-  }
+ 
 
 
 
@@ -94,6 +102,7 @@ keys = [
   }
 
   setupTable() {
+    this.metricsService.showLoadingPanel()
     if (this.currentTable == 'Work User') {
       this.table_name = "work_user"
     }
@@ -127,7 +136,7 @@ keys = [
   getTableData(table_name) {
     this.dataService.findTableData(this.table_name)
       .map(res => { return res.json(); })
-      .subscribe((results) => { this.TableChoices = results; this.getColumns(); });
+      .subscribe((results) => { this.TableChoices = results; this.getColumns(); this.metricsService.hideLoadingPanel();});
   }
 
   getColumns() {
@@ -138,6 +147,7 @@ keys = [
         { dataField: "lastname", caption: "Last Name" },
         { dataField: "email", caption: "Email" },
       ];
+      
     }
 
     else if (this.currentTable == "Work Team") {

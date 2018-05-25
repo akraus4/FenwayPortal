@@ -90,6 +90,7 @@ export class MetricsComponent implements OnInit {
   }
 
   getAllStoriesWithUsersBySprint() {
+    this.metricsService.showLoadingPanel()
       this.metricsService.getAllStoriesWithUsersBySprint(this.currentSprintId)
       .map(res => { console.log(res); return res.json(); })
       .subscribe((results) => {
@@ -98,6 +99,7 @@ export class MetricsComponent implements OnInit {
         this.StoryChoices = this.storyData;
         this.getStoryCount()
         this.getUsersPoints()
+        this.metricsService.hideLoadingPanel()
       });
     }
   
