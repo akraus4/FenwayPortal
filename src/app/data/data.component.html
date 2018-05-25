@@ -56,66 +56,69 @@
 
 <ng-template #workUser >
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Insert New Row</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
+    <h4 class="modal-title pull-left">Work User</h4></div>
   <div class="modal-body">
-  Work User ID:<input type="text" name="Work User ID">
+  Work User ID:<dx-text-box></dx-text-box>
   <br />
-  First Name:<input type="text" name="First Name">
+  First Name:<dx-text-box id = "fName"></dx-text-box>
   <br />
-  Last Name: <input type="text" name="Last Name">
+  Last Name:<dx-text-box></dx-text-box>
   <br />
-  Email: <input type="text" name="email">
+  Email:<dx-text-box id = "email"></dx-text-box>
   </div>
+  <div class = "buttons">
+      <button type="submit">Submit</button>
+      <button>Cancel</button>
+    </div>
+    <br />
+
 </ng-template>
 
 <ng-template #workTeam>
   <div class = "modal-header">
-    <h4 class="modal-title pull-left"> Work Team</h4>
-  </div>
+    <h4 class="modal-title pull-left"> Work Team</h4></div>
   <div class = "modal-body">
-    Work Team ID:<input type="text" name="Work Team ID">
-    Work Team Name:<input type="text" name="Work Team Name">
-    Project ID:<input type="text" name="Project ID">
-    Project Name:<input type="text" name="Project Name">
+    Work Team ID:<dx-text-box></dx-text-box>
+    Work Team Name:<dx-text-box></dx-text-box>
+    Project ID:<dx-text-box></dx-text-box>
+    Project Name:<dx-text-box></dx-text-box>
   </div>
+  <div class = "buttons">
+      <button type="submit">Submit</button>
+      <button>Cancel</button>
+    </div>
 </ng-template>
 
-<ng-template #workTeamMember>
+<ng-template #template>
   <div class="modal-header">
-    <h4 class="modal-title pull-left">Work Team Member</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
+    <h4 class="modal-title pull-left">Work Team Member</h4></div>
   <div class="modal-body">
-  Work Team Member ID:<input type="text" name="Work User ID">
+  Work Team Member ID:<dx-text-box></dx-text-box>
   <br />
-  Work Team ID:<mat-form-field class = "selectKey">
-    <mat-select placeholder = "Select a Foreign Key">
-      <mat-option *ngFor = "let key of keys" [value] = "key">
-         {{key.viewValue}} 
-        </mat-option>
-    </mat-select>
-  </mat-form-field>
+  Work Team ID:<dx-select-box
+  [items]="['left', 'top']"
+  [(value)]="labelLocation"></dx-select-box>
   <br />
  Work User ID :<dx-select-box
  [items]="['left', 'top']"
  [(value)]="labelLocation"></dx-select-box>
   <br />
-  Work Team Name: <input type="text" name="email">
+  Work Team Name:<dx-text-box></dx-text-box>
   <br />
-  First Name:<input type="text" name="First Name">
+  First Name:<dx-text-box></dx-text-box>
   <br />
-  Last Name: <input type="text" name="Last Name">
+  Last Name:<dx-text-box></dx-text-box>
   <br />
   </div>
+  <div class = "buttons">
+      <button type="submit">Submit</button>
+      <button>Cancel</button>
+      <br />
+    </div>
+    <br />
 </ng-template>
 
-<ng-template #template>
+<ng-template #workDailyHours>
     <div class = "modal-header">
       <h4 class="modal-title pull-left"> Work Daily Hours</h4>
     </div>
@@ -132,6 +135,10 @@
       <br />
       Name:<dx-text-box></dx-text-box>
       <br />
+    </div>
+    <div class = "buttons">
+      <button type="submit">Submit</button>
+      <button>Cancel</button>
     </div>
   </ng-template>
 
