@@ -102,13 +102,9 @@
     </mat-select>
   </mat-form-field>
   <br />
- Work User ID : <mat-form-field>
-    <mat-select placeholder="Select a Foreign Key">
-      <mat-option *ngFor="let key of keys" [value]="key.value">
-        {{ key.viewValue }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
+ Work User ID :<dx-select-box
+ [items]="['left', 'top']"
+ [(value)]="labelLocation"></dx-select-box>
   <br />
   Work Team Name: <input type="text" name="email">
   <br />
@@ -124,26 +120,18 @@
       <h4 class="modal-title pull-left"> Work Daily Hours</h4>
     </div>
     <div class = "modal-body">
-      Work Daily Hours ID:<input type="text" name="Work Daily Hours ID">
+      Work Daily Hours ID:<dx-number-box></dx-number-box>
       <br />
-      Work Team Member ID: <mat-form-field>
-          <mat-select placeholder="Select a Foreign Key">
-            <mat-option *ngFor="let key of keys" [value]="key.value">
-              {{ key.viewValue }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
+      Work Team Member ID:      <dx-select-box
+      [items]="['left', 'top']"
+      [(value)]="labelLocation"></dx-select-box>
         <br />
-      Work Date :<input type="text" name="Work Date">
+      Work Date :<dx-number-box></dx-number-box>
       <br />
-      Hours:<input type="text" name = "Hours">
+      Hours:<dx-number-box></dx-number-box>
       <br />
-      Name:<input type="text" name="Name">
+      Name:<dx-number-box></dx-number-box>
       <br />
     </div>
   </ng-template>
-
-
-
-
 
