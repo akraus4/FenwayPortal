@@ -20,8 +20,8 @@ export class DataComponent implements OnInit {
   table: string;
   dataService: any;
   table_name: any;
+  templateName: any;
   TableChoices;
-
 
   //Dropdonw choices for 'Select Table"
   tables = [
@@ -52,13 +52,41 @@ export class DataComponent implements OnInit {
   }
 
 
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template);
+
+  openModal(workUser: TemplateRef<any>, workTeam: TemplateRef<any>, workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>,agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>) {
+    if (this.table_name == "work_user") {
+    this.modalRef = this.modalService.show(workUser)
+    } 
+    else if (this.table_name == "work_team") {
+      this.modalRef = this.modalService.show(workTeam)
+    }
+    else if (this.table_name == "work_team_member") {
+      this.modalRef = this.modalService.show(workTeamMember)
+    }
+    else if (this.table_name == "work_dailyhours") {
+      this.modalRef = this.modalService.show(workDailyhours)
+    }
+    else if (this.table_name == "agile_system") {
+      this.modalRef = this.modalService.show(agileSystem)
+    }
+    else if (this.table_name == "agile_system_user") {
+      this.modalRef = this.modalService.show(agileSystemUser)
+    }
+    else if (this.table_name == "agile_sprint") {
+      this.modalRef = this.modalService.show(agileSprint)
+    }
+    else if (this.table_name == "agile_story") {
+      this.modalRef = this.modalService.show(agileStory)
+    }
+    else if (this.table_name == "agile_story_agile_system_user") {
+      this.modalRef = this.modalService.show(agileStoryAgileSystemUser)
+    }
   }
+
   storeCurrentTable(tableName: string) {
     this.currentTable = tableName;
-    // console.log("Made it here!!!" + tableName);
   }
+
   setupTable() {
     if (this.currentTable == 'Work User') {
       this.table_name = "work_user"
@@ -143,6 +171,7 @@ export class DataComponent implements OnInit {
         { dataField: "work_team_name", caption: "Team" }
       ];
      } 
+
      else if (this.currentTable == "Agile System User") {
       this.columnChoices = [
         { dataField: "agile_system_user_id", caption: "Agile System ID" },
@@ -163,6 +192,7 @@ export class DataComponent implements OnInit {
         { dataField: "sprint_end_date", caption: "Sprint End Date" }
       ];
     }
+
     else if (this.currentTable == "Agile Story") {
       this.columnChoices = [
         { dataField: "agile_story_id", caption: "Story ID" },
