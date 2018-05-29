@@ -5,7 +5,7 @@ import { DxButtonModule } from 'devextreme-angular';
 import { DxDataGridModule } from 'devextreme-angular';
 import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { DataService } from '../services/data.service';
-import { DxTextBoxModule } from 'devextreme-angular';
+import { DxTextBoxModule, DxNumberBoxModule } from 'devextreme-angular';
 
 @Component({
   selector: 'app-data',
