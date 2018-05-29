@@ -22,7 +22,7 @@
         </button>
       </div>
       <div class="col-sm-1">
-        <button id="addRow" mat-button class='dataBtn' (click)="openModal(template)">
+        <button id="addRow" mat-button class='dataBtn' (click)="openModal(agileSystemUser)">
           <i class="fas fa-plus-circle"></i>
         </button>
       </div>
@@ -62,26 +62,33 @@
       </button>
     </div>
     <div class="modal-body">
-    Agile System ID:<input type="text" name="Work User ID">
+    Agile System ID:<input type="text" name="Agile System ID">
     <br />
-    Agile System Name:<input type="text" name="First Name">
+    Agile System Name:<input type="text" name="Agile System Name">
     <br />
-    Agile System Type: <input type="text" name="Last Name">
+    Agile System Type: <input type="text" name="Agile System Type">
     <br />
-    Work Team Name: <input type="text" name="email">
+    Work Team Name: <input type="text" name="Work Team Name">
     </div>
   </ng-template>
   
-  <ng-template #Agile System User>
+  <ng-template #agileSystemUser>
     <div class = "modal-header">
-      <h4 class="modal-title pull-left"> Work Team</h4>
+      <h4 class="modal-title pull-left"> Agile System User</h4>
     </div>
     <div class = "modal-body">
       Agile System User ID:<input type="text" name="Agile System User ID">
+      <br />
       Agile System User Name:<input type="text" name="Agile System User Name">
+      <br />
       Agile System Name:<input type="text" name="Agile System Name">
-      Work Team Member ID:<input type="text" name="Work Team Member ID">
+      <br />
+      Work Team Member ID:  <dx-select-box
+      [items]="['left', 'top']"
+      [(value)]="labelLocation"></dx-select-box>
+      <br />
       First Name:<input type="text" name="First Name">
+      <br />
       Last Name:<input type="text" name="Last Name">
     </div>
   </ng-template>
@@ -94,47 +101,54 @@
       </button>
     </div>
     <div class="modal-body">
-    Agile Sprint ID:<input type="text" name="Work User ID">
+    Agile Sprint ID:<input type="text" name="Agile Sprint ID">
     <br />
-  Agile Spint Name:<mat-form-field class = "selectKey">
-      <mat-select placeholder = "Select a Foreign Key">
-        <mat-option *ngFor = "let key of keys" [value] = "key">
-           {{key.viewValue}} 
-          </mat-option>
-      </mat-select>
-    </mat-form-field>
+  Agile Spint Name:<input type="text" name="Agile Sprint Name">
     <br />
-   Work User ID :<dx-select-box
-   [items]="['left', 'top']"
-   [(value)]="labelLocation"></dx-select-box>
+   Agile System Name :<input type="text" name="Agile System Name">
     <br />
-    Work Team Name: <input type="text" name="email">
+    Sprint Description: <input type="text" name="Sprint Description">
     <br />
-    First Name:<input type="text" name="First Name">
+    Sprint Start Date:<input type="date" name="Sprint Start Date">
     <br />
-    Last Name: <input type="text" name="Last Name">
+    Sprint End Date: <input type="date" name="Sprint End Date">
     <br />
     </div>
   </ng-template>
   
   <ng-template #template>
       <div class = "modal-header">
-        <h4 class="modal-title pull-left"> Work Daily Hours</h4>
+        <h4 class="modal-title pull-left"> Agile Story</h4>
       </div>
       <div class = "modal-body">
-        Work Daily Hours ID:<dx-number-box></dx-number-box>
+        Agile Story ID:<dx-number-box></dx-number-box>
         <br />
-        Work Team Member ID:      <dx-select-box
-        [items]="['left', 'top']"
-        [(value)]="labelLocation"></dx-select-box>
+        Agile Sprint Name:<input type="text" name="Agile Sprint Name">
           <br />
-        Work Date :<dx-number-box></dx-number-box>
+        Story Type :<input type="text" name="Story Type">
         <br />
-        Hours:<dx-number-box></dx-number-box>
+        Story Status:<input type="text" name="Story Status">
         <br />
-        Name:<dx-number-box></dx-number-box>
+        Story Points:<dx-number-box></dx-number-box>
         <br />
       </div>
     </ng-template>
+    <ng-template #agileStoryagileSystemUser>
+        <div class = "modal-header">
+          <h4 class="modal-title pull-left"> Agile Story Agile System User</h4>
+        </div>
+        <div class = "modal-body">
+          Agile Story Agile System User ID:<dx-number-box></dx-number-box>
+          <br />
+          Agile Story ID:      <dx-select-box
+          [items]="['left', 'top']"
+          [(value)]="labelLocation"></dx-select-box>
+            <br />
+          Agile System User Name :<input type="text" name="Agile System User Name">
+          <br />
+          Agile System User Story Points:<dx-number-box></dx-number-box>
+          <br />
+        </div>
+      </ng-template>
   
   
