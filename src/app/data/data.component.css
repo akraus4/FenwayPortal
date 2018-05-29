@@ -22,13 +22,6 @@
     font-weight: bold;
     padding-top: 25px;
 }
-input {
-    text-align: relative;
-    font-family: 'Roboto';
-    font-weight: bold;
-    padding-top: 1px;
-    margin: 30 px;
-}
 
 .dataBtn{
     border-radius: 3px;
@@ -100,3 +93,15 @@ margin-top: 10px;
     background-color: #1a3b68;
     color: white;
 }
+input {
+   margin: 10px;
+   position: relative;
+
+}
+/deep/ dx-select-box {
+width: 60%
+}
+/deep/ dx-text-box {
+    width: 50%
+    }
+    
