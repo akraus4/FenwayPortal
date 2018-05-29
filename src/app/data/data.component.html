@@ -53,7 +53,94 @@
     </div>
   </div>
   
-  
+  <ng-template #workUser >
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Work User</h4></div>
+      <div class="modal-body">
+      Work User ID:<dx-text-box></dx-text-box>
+      <br />
+      First Name:<dx-text-box id = "fName"></dx-text-box>
+      <br />
+      Last Name:<dx-text-box></dx-text-box>
+      <br />
+      Email:<dx-text-box id = "email"></dx-text-box>
+      </div>
+      <div class = "buttons">
+          <button type="submit">Submit</button>
+          <button>Cancel</button>
+        </div>
+        <br />
+    
+    </ng-template>
+    
+    <ng-template #workTeam>
+      <div class = "modal-header">
+        <h4 class="modal-title pull-left"> Work Team</h4></div>
+      <div class = "modal-body">
+        Work Team ID:<dx-text-box></dx-text-box>
+        Work Team Name:<dx-text-box></dx-text-box>
+        Project ID:<dx-text-box></dx-text-box>
+        Project Name:<dx-text-box></dx-text-box>
+      </div>
+      <div class = "buttons">
+          <button type="submit">Submit</button>
+          <button>Cancel</button>
+        </div>
+    </ng-template>
+    
+    <ng-template #template>
+      <div class="modal-header">
+        <h4 class="modal-title pull-left">Work Team Member</h4></div>
+      <div class="modal-body">
+      Work Team Member ID:<dx-text-box></dx-text-box>
+      <br />
+      Work Team ID:<dx-select-box
+      [items]="['left', 'top']"
+      [(value)]="labelLocation"></dx-select-box>
+      <br />
+     Work User ID :<dx-select-box
+     [items]="['left', 'top']"
+     [(value)]="labelLocation"></dx-select-box>
+      <br />
+      Work Team Name:<dx-text-box></dx-text-box>
+      <br />
+      First Name:<dx-text-box></dx-text-box>
+      <br />
+      Last Name:<dx-text-box></dx-text-box>
+      <br />
+      </div>
+      <div class = "buttons">
+          <button type="submit">Submit</button>
+          <button>Cancel</button>
+          <br />
+        </div>
+        <br />
+    </ng-template>
+    
+    <ng-template #workDailyHours>
+        <div class = "modal-header">
+          <h4 class="modal-title pull-left"> Work Daily Hours</h4>
+        </div>
+        <div class = "modal-body">
+          Work Daily Hours ID:<dx-text-box></dx-text-box>
+          <br />
+          Work Team Member ID:<dx-select-box
+          [items]="['left', 'top']"
+          [(value)]="labelLocation"></dx-select-box>
+            <br />
+          Work Date:<dx-text-box></dx-text-box>
+          <br />
+          Hours:<dx-text-box></dx-text-box>
+          <br />
+          Name:<dx-text-box></dx-text-box>
+          <br />
+        </div>
+        <div class = "buttons">
+          <button type="submit">Submit</button>
+          <button>Cancel</button>
+        </div>
+      </ng-template>
+    
   <ng-template #agileSystem >
     <div class="modal-header">
       <h4 class="modal-title pull-left">Insert New Row</h4>
@@ -116,7 +203,7 @@
     </div>
   </ng-template>
   
-  <ng-template #template>
+  <ng-template #agileStory>
       <div class = "modal-header">
         <h4 class="modal-title pull-left"> Agile Story</h4>
       </div>
