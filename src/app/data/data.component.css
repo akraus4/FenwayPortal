@@ -94,14 +94,26 @@ margin-top: 10px;
     color: white;
 }
 input {
-   margin: 10px;
-   position: relative;
-
-}
-/deep/ dx-select-box {
-width: 60%
-}
-/deep/ dx-text-box {
-    width: 50%
-    }
+    margin: 30px;
+    position: relative;
+ }
+ /deep/ dx-text-box {
+     width: 50%;
+     height: 35px;
+ }
+ /deep/ dx-select-box {
+     width: 50%;
+ }
+ .submit {
+     margin-left: 20px;
+     margin-right: 20px;
+     padding: 50;
+     float: right;
+ }
+ .cancel  {
+     margin-left: 20px;
+     margin-right: 20px;
+     padding: 50;
+     float: right;
+ }
     

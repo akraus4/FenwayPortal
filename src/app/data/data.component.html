@@ -22,7 +22,7 @@
         </button>
       </div>
       <div class="col-sm-1">
-        <button id="addRow" mat-button class='dataBtn' (click)="openModal(agileSystemUser)">
+        <button id="addRow" mat-button class='dataBtn' (click)="openModal(workUser)">
           <i class="fas fa-plus-circle"></i>
         </button>
       </div>
@@ -88,7 +88,7 @@
         </div>
     </ng-template>
     
-    <ng-template #template>
+    <ng-template #workTeamMember>
       <div class="modal-header">
         <h4 class="modal-title pull-left">Work Team Member</h4></div>
       <div class="modal-body">
@@ -141,100 +141,107 @@
         </div>
       </ng-template>
     
-  <ng-template #agileSystem >
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">Insert New Row</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-    Agile System ID:<input type="text" name="Agile System ID">
-    <br />
-    Agile System Name:<input type="text" name="Agile System Name">
-    <br />
-    Agile System Type: <input type="text" name="Agile System Type">
-    <br />
-    Work Team Name: <input type="text" name="Work Team Name">
-    </div>
-  </ng-template>
-  
-  <ng-template #agileSystemUser>
-    <div class = "modal-header">
-      <h4 class="modal-title pull-left"> Agile System User</h4>
-    </div>
-    <div class = "modal-body">
-      Agile System User ID:<input type="text" name="Agile System User ID">
-      <br />
-      Agile System User Name:<input type="text" name="Agile System User Name">
-      <br />
-      Agile System Name:<input type="text" name="Agile System Name">
-      <br />
-      Work Team Member ID:  <dx-select-box
-      [items]="['left', 'top']"
-      [(value)]="labelLocation"></dx-select-box>
-      <br />
-      First Name:<input type="text" name="First Name">
-      <br />
-      Last Name:<input type="text" name="Last Name">
-    </div>
-  </ng-template>
-  
-  <ng-template #agileSprint>
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">Agile Sprint</h4>
-      <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-    Agile Sprint ID:<input type="text" name="Agile Sprint ID">
-    <br />
-  Agile Spint Name:<input type="text" name="Agile Sprint Name">
-    <br />
-   Agile System Name :<input type="text" name="Agile System Name">
-    <br />
-    Sprint Description: <input type="text" name="Sprint Description">
-    <br />
-    Sprint Start Date:<input type="date" name="Sprint Start Date">
-    <br />
-    Sprint End Date: <input type="date" name="Sprint End Date">
-    <br />
-    </div>
-  </ng-template>
-  
-  <ng-template #agileStory>
-      <div class = "modal-header">
-        <h4 class="modal-title pull-left"> Agile Story</h4>
-      </div>
-      <div class = "modal-body">
-        Agile Story ID:<dx-number-box></dx-number-box>
+      <ng-template #agileSystem >
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">Agile System</h4></div>
+        <div class="modal-body">
+        Agile System ID:<dx-text-box></dx-text-box>
         <br />
-        Agile Sprint Name:<input type="text" name="Agile Sprint Name">
+        Agile Sytem Name:<dx-text-box></dx-text-box>
+        <br />
+        Agile System Type:<dx-text-box></dx-text-box>
+        <br />
+        Work Team Name:<dx-text-box></dx-text-box>
+        </div>
+        <div class = "buttons">
+            <button type="submit">Submit</button>
+            <button>Cancel</button>
+          </div>
           <br />
-        Story Type :<input type="text" name="Story Type">
-        <br />
-        Story Status:<input type="text" name="Story Status">
-        <br />
-        Story Points:<dx-number-box></dx-number-box>
-        <br />
-      </div>
-    </ng-template>
-    <ng-template #agileStoryagileSystemUser>
+      
+      </ng-template> -->
+  
+      <ng-template #agileSystemUser>
         <div class = "modal-header">
-          <h4 class="modal-title pull-left"> Agile Story Agile System User</h4>
+          <h4 class="modal-title pull-left"> Agile System User</h4>
         </div>
         <div class = "modal-body">
-          Agile Story Agile System User ID:<dx-number-box></dx-number-box>
+          Agile System User ID:<dx-text-box></dx-text-box>
           <br />
-          Agile Story ID:      <dx-select-box
+          Agile Sytem User Name:<dx-text-box></dx-text-box>
+          <br />
+          Agile Sytem Name:<dx-text-box></dx-text-box>
+          <br />
+          Work Team Member ID<dx-select-box
           [items]="['left', 'top']"
           [(value)]="labelLocation"></dx-select-box>
             <br />
-          Agile System User Name :<input type="text" name="Agile System User Name">
+          First Name:<dx-text-box></dx-text-box>
           <br />
-          Agile System User Story Points:<dx-number-box></dx-number-box>
-          <br />
+          Last Name:<dx-text-box></dx-text-box>
+          <br/>
         </div>
+        <div class = "buttons">
+          <button type="submit">Submit</button>
+          <button>Cancel</button>
+        </div>
+
+      </ng-template> 
+  
+       <ng-template #agileSprint >
+        <div class="modal-header">
+          <h4 class="modal-title pull-left">Agile Sprint</h4></div>
+        <div class="modal-body">
+       Agile Sprint ID:<dx-text-box></dx-text-box>
+        <br />
+        Agile Sprint Name:<dx-text-box></dx-text-box>
+        <br />
+        Agile System Name:<dx-text-box></dx-text-box>
+        <br />
+        Sprint Description:<dx-text-box></dx-text-box>
+        <br/>
+        Sprint Start Date:<dx-text-box></dx-text-box>
+        <br/>
+        Sprint End Date:<dx-text-box></dx-text-box>
+        </div>
+        <br/>
+        <div class = "buttons">
+            <button type="submit">Submit</button>
+            <button>Cancel</button>
+          </div>
+          <br />
+      
       </ng-template>
   
+      <ng-template #agileStory>
+        <div class = "modal-header">
+          <h4 class="modal-title pull-left"> Agile Story</h4></div>
+        <div class = "modal-body">
+          Agile Story ID:<dx-text-box></dx-text-box>
+          Agile Sprint Name:<dx-text-box></dx-text-box>
+          Story Type:<dx-text-box></dx-text-box>
+          Story Status:<dx-text-box></dx-text-box>
+          Story Points:<dx-text-box></dx-text-box>
+        </div>
+        <div class = "buttons">
+            <button type="submit">Submit</button>
+            <button>Cancel</button>
+          </div>
+      </ng-template>
+
+      <ng-template #agileStoryAgileSystemUser>
+        <div class = "modal-header">
+          <h4 class="modal-title pull-left"> Agile Story Agile System User</h4></div>
+        <div class = "modal-body">
+          Agile Story Agile System User ID:<dx-text-box></dx-text-box>
+          Agile Story ID<dx-select-box
+          [items]="['left', 'top']"
+          [(value)]="labelLocation"></dx-select-box>
+          Agile system User Name:<dx-text-box></dx-text-box>
+          Agile System User Story Points:<dx-text-box></dx-text-box>
+        </div>
+        <div class = "buttons">
+            <button type="submit">Submit</button>
+            <button>Cancel</button>
+          </div>
+      </ng-template>
