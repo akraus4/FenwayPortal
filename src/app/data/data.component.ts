@@ -24,10 +24,7 @@ export class DataComponent implements OnInit {
   TableChoices;
   key: string;
 
-keys = [
-{value: 0, viewValue: "This Foreign Key"},
-{value: 1, viewValue: "That Foreign Key"}
-]
+
   //Dropdonw choices for 'Select Table"
   tables = [
     { value: 0, viewValue: "Work User" },
@@ -59,6 +56,9 @@ keys = [
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+  closeModal(template: TemplateRef<any>) {
+      this.modalService.hide(1);
   }
   storeCurrentTable(tableName: string) {
     this.currentTable = tableName;

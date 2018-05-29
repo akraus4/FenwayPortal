@@ -54,7 +54,7 @@
 </div>
 
 
-<ng-template #workUser >
+<ng-template #template >
   <div class="modal-header">
     <h4 class="modal-title pull-left">Work User</h4></div>
   <div class="modal-body">
@@ -65,8 +65,8 @@
   <br />
   </div>
   <div class = "buttons">
-      <button class= "submit">Submit</button>
-      <button class = "cancel">Cancel</button>
+      <button class= "submit"  >Submit</button>
+      <button class = "cancel" (click) = "closeModal()">Cancel</button>
       <br />
     </div>
     <br />
@@ -120,7 +120,7 @@
     <br />
 </ng-template>
 
-<ng-template #template>
+<ng-template #workDailyHours>
     <div class = "modal-header">
       <h4 class="modal-title"> Work Daily Hours</h4>
     </div>
