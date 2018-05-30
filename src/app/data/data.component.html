@@ -23,7 +23,7 @@
           </button>
       </div>
       <div class="col-sm-1">
-          <button id="addRow" mat-button class='dataBtn' (click)="openModal(workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser)">
+          <button id="addRow" mat-button class='dataBtn' (click)= "openModal(workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser)">
               <i class="fas fa-plus-circle"></i>
             </button>
         </div>
@@ -43,17 +43,18 @@
   </div>
 </div>
 
+<!-- make ALL IDs read only -->
 <ng-template #workUser>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Work User</h4></div>
   <div class="modal-body">
-  Work User ID:<dx-text-box value = "hello"></dx-text-box>
+  Work User ID:<dx-text-box id="wUserId" [(value)] = "workUserId"></dx-text-box>
   <br />
-  First Name:<dx-text-box id = "fName"></dx-text-box>
+  First Name:<dx-text-box id = "fName"  [(value)] = "firstName"></dx-text-box>
   <br />
-  Last Name:<dx-text-box></dx-text-box>
+  Last Name:<dx-text-box id = "lName"  [(value)] = "lastName"></dx-text-box>
   <br />
-  Email:<dx-text-box id = "email"></dx-text-box>
+  Email:<dx-text-box id = "email"  [(value)] = "email"></dx-text-box>
   </div>
   <div class = "buttons">
       <button type="submit">Submit</button>
@@ -67,10 +68,10 @@
   <div class = "modal-header">
     <h4 class="modal-title pull-left"> Work Team</h4></div>
   <div class = "modal-body">
-    Work Team ID:<dx-text-box></dx-text-box>
-    Work Team Name:<dx-text-box></dx-text-box>
-    Project ID:<dx-text-box></dx-text-box>
-    Project Name:<dx-text-box></dx-text-box>
+    Work Team ID:<dx-text-box id="wTeamId" [(value)] = "workTeamID"></dx-text-box>
+    Work Team Name:<dx-text-box id="wTeamName" [(value)] = "workTeamName"></dx-text-box>
+    Project ID:<dx-text-box id="projectId" [(value)] = "projectID"></dx-text-box>
+    Project Name:<dx-text-box id="projectName" [(value)] = "projectName"></dx-text-box>
   </div>
   <div class = "buttons">
       <button type="submit">Submit</button>
@@ -78,11 +79,11 @@
     </div>
 </ng-template>
 
-<ng-template #template>
+<ng-template #workTeamMember>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Work Team Member</h4></div>
   <div class="modal-body">
-  Work Team Member ID:<dx-text-box></dx-text-box>
+  Work Team Member ID:<dx-text-box id="wTeamMemberId" [(value)] = "workTeamMemberId"></dx-text-box>
   <br />
   Work Team ID:<dx-select-box
   [items]="['left', 'top']"
@@ -92,11 +93,11 @@
  [items]="['left', 'top']"
  [(value)]="labelLocation"></dx-select-box>
   <br />
-  Work Team Name:<dx-text-box></dx-text-box>
+  Work Team Name:<dx-text-box id="wTeamName" [(value)] = "workTeamName"></dx-text-box>
   <br />
-  First Name:<dx-text-box></dx-text-box>
+  First Name:<dx-text-box id = "fName"  [(value)] = "firstName"></dx-text-box>
   <br />
-  Last Name:<dx-text-box></dx-text-box>
+  Last Name:<dx-text-box id = "lName"  [(value)] = "lastName"></dx-text-box>
   <br />
   </div>
   <div class = "buttons">
@@ -107,22 +108,22 @@
     <br />
 </ng-template>
 
-<ng-template #workDailyHours>
+<ng-template #workDailyhours>
     <div class = "modal-header">
       <h4 class="modal-title pull-left"> Work Daily Hours</h4>
     </div>
     <div class = "modal-body">
-      Work Daily Hours ID:<dx-text-box></dx-text-box>
+      Work Daily Hours ID:<dx-text-box id = "wDailyHoursId"  [(value)] = "workDailyHoursId"></dx-text-box>
       <br />
       Work Team Member ID:<dx-select-box
       [items]="['left', 'top']"
       [(value)]="labelLocation"></dx-select-box>
         <br />
-      Work Date:<dx-text-box></dx-text-box>
+      Work Date:<dx-text-box id="wDate" [(value)] = "workDate"></dx-text-box>
       <br />
-      Hours:<dx-text-box></dx-text-box>
+      Hours:<dx-text-box id="hours" [(value)] = "hours"></dx-text-box>
       <br />
-      Name:<dx-text-box></dx-text-box>
+      Name:<dx-text-box id="name" [(value)] = "name"></dx-text-box>
       <br />
     </div>
     <div class = "buttons">

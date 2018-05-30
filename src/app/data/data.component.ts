@@ -1,13 +1,14 @@
-import { Component, OnInit, Inject, TemplateRef } from '@angular/core';
+import { Component, OnInit, Inject, TemplateRef, ViewChild, AfterViewInit  } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { DxButtonModule } from 'devextreme-angular';
-import { DxDataGridModule } from 'devextreme-angular';
+import { DxDataGridModule, DxDataGridComponent } from 'devextreme-angular';
 import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { DataService } from '../services/data.service';
 import { DxTextBoxModule } from 'devextreme-angular';
 import { MetricsService } from '../services/metrics.service'
-
+declare var jquery:any;
+declare var $ :any;
 
 @Component({
   selector: 'app-data',
@@ -16,6 +17,7 @@ import { MetricsService } from '../services/metrics.service'
 })
 
 export class DataComponent implements OnInit {
+  @ViewChild(DxDataGridComponent) dataGrid:DxDataGridComponent
   modalRef: BsModalRef;
   title: string = "Data Management";
   columnChoices: Array<any> = [];
@@ -27,7 +29,20 @@ export class DataComponent implements OnInit {
   TableChoices;
   key: string;
   metricsService: any;
-
+  val: any;
+  workUserId: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  workTeamID: string;
+  workTeamName: string;
+  projectID: string;
+  projectName: string;
+  workTeamMemberId: string;
+  workDailyHoursId: string;
+  workDate: string;
+  hours: string;
+  name: string;
 
   constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
     this.dataService = dataService;
@@ -61,23 +76,69 @@ export class DataComponent implements OnInit {
     { dataField: "agile_system_user_name", caption: "User" },
   ];
 
+  // clickHandler = function() {
+  //   let data = this.dataGrid.instance.getSelectedRowsData();
+  //   console.log(JSON.stringify(data));
+    
+    
+  // };
+
   ngOnInit() {
   }
  
+  ngAfterViewInit() {
+    //document.getElementById('wUserId').value = selectedData[0].work_user_id
+  }
 
-
+// clickHandler(){
+//   let selectedData = this.dataGrid.instance.getSelectedRowsData();
+//   var workUserId = JSON.stringify(selectedData[0].work_user_id)
+//   console.log(workUserId)
+// }
 
   openModal(workUser: TemplateRef<any>, workTeam: TemplateRef<any>, workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>,agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>) {
+    let selectedData = this.dataGrid.instance.getSelectedRowsData();
+    console.log(JSON.stringify(selectedData));
     if (this.table_name == "work_user") {
+     this.workUserId = selectedData[0].work_user_id
+     this.firstName = selectedData[0].firstname
+     this.lastName = selectedData[0].lastname
+     this.email = selectedData[0].email
+      // console.log(workUserId)
+       //$("#wUserId").attr("value", workUserId);
+
+      //(<HTMLInputElement>document.getElementById('wUserId')).value = selectedData[0].work_user_id  
+      
     this.modalRef = this.modalService.show(workUser)
+  
+    // var potato = (<HTMLInputElement>document.getElementById("wUserId")).value;
+    // console.log("potato: " + potato)
     } 
     else if (this.table_name == "work_team") {
+      this.workTeamID = selectedData[0].work_team_id
+      this.workTeamName = selectedData[0].work_team_name
+      this.projectID = selectedData[0].project_id
+      this.projectName = selectedData[0].project_name
+
+
       this.modalRef = this.modalService.show(workTeam)
     }
     else if (this.table_name == "work_team_member") {
+      this.workTeamMemberId = selectedData[0].work_team_member_id
+      this.workTeamName = selectedData[0].work_team_name
+      this.firstName = selectedData[0].firstname
+      this.lastName = selectedData[0].lastname
+
+
       this.modalRef = this.modalService.show(workTeamMember)
     }
     else if (this.table_name == "work_dailyhours") {
+      this.workDailyHoursId = selectedData[0].work_dailyhours_id
+      this.workDate = selectedData[0].work_date
+      this.hours = selectedData[0].hours
+      this.name = selectedData[0].name
+
+
       this.modalRef = this.modalService.show(workDailyhours)
     }
     else if (this.table_name == "agile_system") {
