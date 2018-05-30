@@ -300,7 +300,7 @@ def findTableData(table_name):
 
     return json.dumps(jsonList)
 
-
+@app.route
 
 # @app.route("/getColumnData/<tableName>")
 # def getColumnData():
