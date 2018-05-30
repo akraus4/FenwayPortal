@@ -4,11 +4,9 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { DxButtonModule } from 'devextreme-angular';
 import { DxDataGridModule, DxDataGridComponent } from 'devextreme-angular';
 import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
-import { DataService } from '../services/data.service';
-import { DxTextBoxModule } from 'devextreme-angular';
+import { DataService } from '../services/data.service'
 import { MetricsService } from '../services/metrics.service'
-declare var jquery:any;
-declare var $ :any;
+import { DxTextBoxModule, DxNumberBoxModule } from 'devextreme-angular';
 
 @Component({
   selector: 'app-data',

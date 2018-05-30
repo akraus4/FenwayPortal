@@ -57,8 +57,9 @@
   Email:<dx-text-box id = "email"  [(value)] = "email"></dx-text-box>
   </div>
   <div class = "buttons">
-      <button type="submit">Submit</button>
-      <button>Cancel</button>
+      <button class= "submit"  >Submit</button>
+      <button class = "cancel" (click) = "closeModal()">Cancel</button>
+      <br />
     </div>
     <br />
 
@@ -74,10 +75,11 @@
     Project Name:<dx-text-box id="projectName" [(value)] = "projectName"></dx-text-box>
   </div>
   <div class = "buttons">
-      <button type="submit">Submit</button>
-      <button>Cancel</button>
+      <button class= "submit">Submit</button>
+      <button class = "cancel">Cancel</button>
+      <br />
     </div>
-</ng-template>
+    <br />
 
 <ng-template #workTeamMember>
   <div class="modal-header">
@@ -85,7 +87,7 @@
   <div class="modal-body">
   Work Team Member ID:<dx-text-box id="wTeamMemberId" [(value)] = "workTeamMemberId"></dx-text-box>
   <br />
-  Work Team ID:<dx-select-box
+ Work Team ID:<dx-select-box
   [items]="['left', 'top']"
   [(value)]="labelLocation"></dx-select-box>
   <br />
@@ -101,8 +103,8 @@
   <br />
   </div>
   <div class = "buttons">
-      <button type="submit">Submit</button>
-      <button>Cancel</button>
+      <button class= "submit">Submit</button>
+      <button class = "cancel">Cancel</button>
       <br />
     </div>
     <br />
@@ -110,7 +112,7 @@
 
 <ng-template #workDailyhours>
     <div class = "modal-header">
-      <h4 class="modal-title pull-left"> Work Daily Hours</h4>
+      <h4 class="modal-title"> Work Daily Hours</h4>
     </div>
     <div class = "modal-body">
       Work Daily Hours ID:<dx-text-box id = "wDailyHoursId"  [(value)] = "workDailyHoursId"></dx-text-box>
@@ -127,9 +129,12 @@
       <br />
     </div>
     <div class = "buttons">
-      <button type="submit">Submit</button>
-      <button>Cancel</button>
-    </div>
+        <button class= "submit">Submit</button>
+        <button class = "cancel">Cancel</button>
+        <br />
+      </div>
+      <br />
+      
   </ng-template>
 
   <app-loading-panel></app-loading-panel>

@@ -95,4 +95,27 @@ margin-top: 10px;
 }
 input {
    margin: 30px;
+   position: relative;
+}
+/deep/ dx-text-box {
+    width: 50%;
+    height: 35px;
+}
+/deep/ dx-select-box {
+    width: 50%;
+}
+.submit {
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 50;
+    float: right;
+    color: #1a3b68;
+}
+.cancel  {
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 50;
+    float: right;
+    font-family: 'Roboto';
+    color: #1a3b68;
 }
