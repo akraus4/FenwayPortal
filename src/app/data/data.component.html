@@ -1,247 +1,149 @@
 <!-- <h1 id="title"> {{title}} </h1> -->
 <div class="row">
-    <div class="col-sm-12">
-      <h1 id="title"> {{title}} </h1>
-      <app-sign-in></app-sign-in>
+  <div class="col-sm-12">
+    <h1 id="title"> {{title}} </h1>
+    <app-sign-in></app-sign-in>
+  </div>
+</div>
+<br />
+
+<div id="gridWidgetContainer" class="effect7">
+  <div class="selectTeam" class="row" id="searchWidgetContainer">
+    <div class="col-sm-3">
+      <mat-form-field class="selectTables">
+        <mat-select placeholder="Select a Table" (change)="storeCurrentTable($event.value.viewValue)">
+          <mat-option *ngFor="let table of tables" [value]="table">{{table.viewValue}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-1">
+      <button id="search" mat-button class='dataBtn' (click)="setupTable()">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+    <div class="col-sm-1">
+      <button id="addRow" mat-button class='dataBtn' (click)="openModal(template)">
+        <i class="fas fa-plus-circle"></i>
+      </button>
+    </div>
+
+
+    <!-- <div id="table">
+      
+      
+      
+    </div> -->
+  </div>
+  <div class="row" id="gridGraphMetricsPageDiv">
+    <div class="col-12">
+      <dx-data-grid id="gridContainer" [dataSource]="TableChoices" [showRowLines]="true" [showBorders]="true" [columns]="columnChoices"
+        [allowColumnReordering]="true" (onEditingStart)="logEvent('EditingStart')" (onInitNewRow)="logEvent('InitNewRow')"
+        (onRowInserting)="logEvent('RowInserting')" (onRowInserted)="logEvent('RowInserted')" (onRowUpdating)="logEvent('RowUpdating')"
+        (onRowUpdated)="logEvent('RowUpdated')" (onRowRemoving)="logEvent('RowRemoving')" (onRowRemoved)="logEvent('RowRemoved')">
+        <dxo-editing mode="form" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true"></dxo-editing>>
+        <dxo-export [enabled]="true" fileName="Employees" [allowExportSelectedData]="true"></dxo-export>
+        <dxo-selection mode="multiple"></dxo-selection>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+
+        <dxo-sorting mode="none"></dxo-sorting>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxi-column *ngFor="let col of columnChoices" [dataField]="col.dataField" [caption]="col.caption"></dxi-column>
+      </dx-data-grid>
     </div>
   </div>
+</div>
+
+
+<ng-template #template >
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Work User</h4></div>
+  <div class="modal-body">
+  Work User ID:<dx-text-box></dx-text-box>
+  First Name:<dx-text-box id = "fName"></dx-text-box>
+  Last Name:<dx-text-box></dx-text-box>
+  Email:<dx-text-box id = "email"></dx-text-box>
   <br />
-  
-  <div id="gridWidgetContainer" class="effect7">
-    <div class="selectTeam" class="row" id="searchWidgetContainer">
-      <div class="col-sm-3">
-        <mat-form-field class="selectTables">
-          <mat-select placeholder="Select a Table" (change)="storeCurrentTable($event.value.viewValue)">
-            <mat-option *ngFor="let table of tables" [value]="table">{{table.viewValue}}</mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-      <div class="col-sm-1">
-        <button id="search" mat-button class='dataBtn' (click)="setupTable()">
-          <i class="fas fa-search"></i>
-        </button>
-      </div>
-      <div class="col-sm-1">
-        <button id="addRow" mat-button class='dataBtn' (click)="openModal(workUser)">
-          <i class="fas fa-plus-circle"></i>
-        </button>
-      </div>
-  
-  
-      <!-- <div id="table">
-        
-        
-        
-      </div> -->
-    </div>
-    <div class="row" id="gridGraphMetricsPageDiv">
-      <div class="col-12">
-        <dx-data-grid id="gridContainer" [dataSource]="TableChoices" [showRowLines]="true" [showBorders]="true" [columns]="columnChoices"
-          [allowColumnReordering]="true" (onEditingStart)="logEvent('EditingStart')" (onInitNewRow)="logEvent('InitNewRow')"
-          (onRowInserting)="logEvent('RowInserting')" (onRowInserted)="logEvent('RowInserted')" (onRowUpdating)="logEvent('RowUpdating')"
-          (onRowUpdated)="logEvent('RowUpdated')" (onRowRemoving)="logEvent('RowRemoving')" (onRowRemoved)="logEvent('RowRemoved')">
-          <dxo-editing mode="form" [allowUpdating]="true" [allowDeleting]="true" [allowAdding]="true"></dxo-editing>>
-          <dxo-export [enabled]="true" fileName="Employees" [allowExportSelectedData]="true"></dxo-export>
-          <dxo-selection mode="multiple"></dxo-selection>
-          <dxo-header-filter [visible]="true"></dxo-header-filter>
-  
-          <dxo-sorting mode="none"></dxo-sorting>
-          <dxo-paging [pageSize]="10"></dxo-paging>
-          <dxi-column *ngFor="let col of columnChoices" [dataField]="col.dataField" [caption]="col.caption"></dxi-column>
-        </dx-data-grid>
-      </div>
-    </div>
   </div>
-  
-  <ng-template #workUser >
-      <div class="modal-header">
-        <h4 class="modal-title pull-left">Work User</h4></div>
-      <div class="modal-body">
-      Work User ID:<dx-text-box></dx-text-box>
+  <div class = "buttons">
+      <button class= "submit"  >Submit</button>
+      <button class = "cancel" (click) = "closeModal()">Cancel</button>
       <br />
-      First Name:<dx-text-box id = "fName"></dx-text-box>
+    </div>
+    <br />
+
+</ng-template>
+
+<ng-template #workTeam>
+  <div class = "modal-header">
+    <h4 class="modal-title pull-left"> Work Team</h4></div>
+  <div class = "modal-body">
+    Work Team ID:<dx-text-box></dx-text-box>
+    Work Team Name:<dx-text-box></dx-text-box>
+    Project ID:<dx-text-box></dx-text-box>
+    Project Name:<dx-text-box></dx-text-box>
+  </div>
+  <div class = "buttons">
+      <button class= "submit">Submit</button>
+      <button class = "cancel">Cancel</button>
       <br />
-      Last Name:<dx-text-box></dx-text-box>
+    </div>
+    <br />
+
+</ng-template>
+
+<ng-template #workTeamMember>
+  <div class="modal-header">
+    <h4 class="modal-title pull-right">Work Team Member</h4></div>
+  <div class="modal-body">
+  Work Team Member ID:<dx-text-box></dx-text-box>
+  <br />
+ Work Team ID:<dx-select-box
+  [items]="['left', 'top']"
+  [(value)]="labelLocation"></dx-select-box>
+  <br />
+ Work User ID :<dx-select-box
+ [items]="['left', 'top']"
+ [(value)]="labelLocation"></dx-select-box>
+  <br />
+  Work Team Name:<dx-text-box></dx-text-box>
+  <br />
+  First Name:<dx-text-box></dx-text-box>
+  <br />
+  Last Name:<dx-text-box></dx-text-box>
+  <br />
+  </div>
+  <div class = "buttons">
+      <button class= "submit">Submit</button>
+      <button class = "cancel">Cancel</button>
       <br />
-      Email:<dx-text-box id = "email"></dx-text-box>
-      </div>
-      <div class = "buttons">
-          <button type="submit">Submit</button>
-          <button>Cancel</button>
-        </div>
-        <br />
-    
-    </ng-template>
-    
-    <ng-template #workTeam>
-      <div class = "modal-header">
-        <h4 class="modal-title pull-left"> Work Team</h4></div>
-      <div class = "modal-body">
-        Work Team ID:<dx-text-box></dx-text-box>
-        Work Team Name:<dx-text-box></dx-text-box>
-        Project ID:<dx-text-box></dx-text-box>
-        Project Name:<dx-text-box></dx-text-box>
-      </div>
-      <div class = "buttons">
-          <button type="submit">Submit</button>
-          <button>Cancel</button>
-        </div>
-    </ng-template>
-    
-    <ng-template #workTeamMember>
-      <div class="modal-header">
-        <h4 class="modal-title pull-left">Work Team Member</h4></div>
-      <div class="modal-body">
-      Work Team Member ID:<dx-text-box></dx-text-box>
+    </div>
+    <br />
+</ng-template>
+
+<ng-template #workDailyHours>
+    <div class = "modal-header">
+      <h4 class="modal-title"> Work Daily Hours</h4>
+    </div>
+    <div class = "modal-body">
+      Work Daily Hours ID:<dx-text-box></dx-text-box>
       <br />
-      Work Team ID:<dx-select-box
+      Work Team Member ID:<dx-select-box
       [items]="['left', 'top']"
       [(value)]="labelLocation"></dx-select-box>
+        <br />
+      Work Date:<dx-text-box></dx-text-box>
       <br />
-     Work User ID :<dx-select-box
-     [items]="['left', 'top']"
-     [(value)]="labelLocation"></dx-select-box>
+      Hours:<dx-number-box></dx-number-box>
       <br />
-      Work Team Name:<dx-text-box></dx-text-box>
+      Name:<dx-text-box></dx-text-box>
       <br />
-      First Name:<dx-text-box></dx-text-box>
-      <br />
-      Last Name:<dx-text-box></dx-text-box>
-      <br />
+    </div>
+    <div class = "buttons">
+        <button class= "submit">Submit</button>
+        <button class = "cancel">Cancel</button>
+        <br />
       </div>
-      <div class = "buttons">
-          <button type="submit">Submit</button>
-          <button>Cancel</button>
-          <br />
-        </div>
-        <br />
-    </ng-template>
-    
-    <ng-template #workDailyHours>
-        <div class = "modal-header">
-          <h4 class="modal-title pull-left"> Work Daily Hours</h4>
-        </div>
-        <div class = "modal-body">
-          Work Daily Hours ID:<dx-text-box></dx-text-box>
-          <br />
-          Work Team Member ID:<dx-select-box
-          [items]="['left', 'top']"
-          [(value)]="labelLocation"></dx-select-box>
-            <br />
-          Work Date:<dx-text-box></dx-text-box>
-          <br />
-          Hours:<dx-text-box></dx-text-box>
-          <br />
-          Name:<dx-text-box></dx-text-box>
-          <br />
-        </div>
-        <div class = "buttons">
-          <button type="submit">Submit</button>
-          <button>Cancel</button>
-        </div>
-      </ng-template>
-    
-      <ng-template #agileSystem >
-        <div class="modal-header">
-          <h4 class="modal-title pull-left">Agile System</h4></div>
-        <div class="modal-body">
-        Agile System ID:<dx-text-box></dx-text-box>
-        <br />
-        Agile Sytem Name:<dx-text-box></dx-text-box>
-        <br />
-        Agile System Type:<dx-text-box></dx-text-box>
-        <br />
-        Work Team Name:<dx-text-box></dx-text-box>
-        </div>
-        <div class = "buttons">
-            <button type="submit">Submit</button>
-            <button>Cancel</button>
-          </div>
-          <br />
+      <br />
       
-      </ng-template> -->
-  
-      <ng-template #agileSystemUser>
-        <div class = "modal-header">
-          <h4 class="modal-title pull-left"> Agile System User</h4>
-        </div>
-        <div class = "modal-body">
-          Agile System User ID:<dx-text-box></dx-text-box>
-          <br />
-          Agile Sytem User Name:<dx-text-box></dx-text-box>
-          <br />
-          Agile Sytem Name:<dx-text-box></dx-text-box>
-          <br />
-          Work Team Member ID<dx-select-box
-          [items]="['left', 'top']"
-          [(value)]="labelLocation"></dx-select-box>
-            <br />
-          First Name:<dx-text-box></dx-text-box>
-          <br />
-          Last Name:<dx-text-box></dx-text-box>
-          <br/>
-        </div>
-        <div class = "buttons">
-          <button type="submit">Submit</button>
-          <button>Cancel</button>
-        </div>
+  </ng-template>
 
-      </ng-template> 
-  
-       <ng-template #agileSprint >
-        <div class="modal-header">
-          <h4 class="modal-title pull-left">Agile Sprint</h4></div>
-        <div class="modal-body">
-       Agile Sprint ID:<dx-text-box></dx-text-box>
-        <br />
-        Agile Sprint Name:<dx-text-box></dx-text-box>
-        <br />
-        Agile System Name:<dx-text-box></dx-text-box>
-        <br />
-        Sprint Description:<dx-text-box></dx-text-box>
-        <br/>
-        Sprint Start Date:<dx-text-box></dx-text-box>
-        <br/>
-        Sprint End Date:<dx-text-box></dx-text-box>
-        </div>
-        <br/>
-        <div class = "buttons">
-            <button type="submit">Submit</button>
-            <button>Cancel</button>
-          </div>
-          <br />
-      
-      </ng-template>
-  
-      <ng-template #agileStory>
-        <div class = "modal-header">
-          <h4 class="modal-title pull-left"> Agile Story</h4></div>
-        <div class = "modal-body">
-          Agile Story ID:<dx-text-box></dx-text-box>
-          Agile Sprint Name:<dx-text-box></dx-text-box>
-          Story Type:<dx-text-box></dx-text-box>
-          Story Status:<dx-text-box></dx-text-box>
-          Story Points:<dx-text-box></dx-text-box>
-        </div>
-        <div class = "buttons">
-            <button type="submit">Submit</button>
-            <button>Cancel</button>
-          </div>
-      </ng-template>
-
-      <ng-template #agileStoryAgileSystemUser>
-        <div class = "modal-header">
-          <h4 class="modal-title pull-left"> Agile Story Agile System User</h4></div>
-        <div class = "modal-body">
-          Agile Story Agile System User ID:<dx-text-box></dx-text-box>
-          Agile Story ID<dx-select-box
-          [items]="['left', 'top']"
-          [(value)]="labelLocation"></dx-select-box>
-          Agile system User Name:<dx-text-box></dx-text-box>
-          Agile System User Story Points:<dx-text-box></dx-text-box>
-        </div>
-        <div class = "buttons">
-            <button type="submit">Submit</button>
-            <button>Cancel</button>
-          </div>
-      </ng-template>

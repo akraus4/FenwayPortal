@@ -6,7 +6,7 @@ import { DxDataGridModule } from 'devextreme-angular';
 import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { DataService } from '../services/data.service'
 import { MetricsService } from '../services/metrics.service'
-
+import { DxTextBoxModule, DxNumberBoxModule } from 'devextreme-angular';
 
 @Component({
   selector: 'app-data',
@@ -24,6 +24,7 @@ export class DataComponent implements OnInit {
   table_name: any;
   TableChoices;
   metricsService: any;
+  key: string;
 
   constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
     this.dataService = dataService;
@@ -53,11 +54,11 @@ export class DataComponent implements OnInit {
 
   ngOnInit() {
   }
- 
-
-
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
+  }
+  closeModal(template: TemplateRef<any>) {
+      this.modalService.hide(1);
   }
   storeCurrentTable(tableName: string) {
     this.currentTable = tableName;
@@ -137,7 +138,8 @@ export class DataComponent implements OnInit {
         { dataField: "work_dailyhours_id", caption: "Work Daily Hours ID" },
         { dataField: "work_team_member_id", caption: "Work Team Member ID" },
         { dataField: "work_date", caption: "Work Date" },
-        { dataField: "hours", caption: "Hours" }
+        { dataField: "hours", caption: "Hours" },
+        { dataField: "name", caption: "Name"}
       ];
     }
 
