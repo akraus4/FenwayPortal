@@ -55,7 +55,7 @@
 </div>
 
 
-<ng-template #template >
+<ng-template #workUser >
   <div class="modal-header">
     <h4 class="modal-title pull-left">Work User</h4></div>
   <div class="modal-body">
@@ -92,18 +92,21 @@
 
 </ng-template>
 
-<ng-template #workTeamMember>
+<ng-template #template>
   <div class="modal-header">
     <h4 class="modal-title pull-right">Work Team Member</h4></div>
   <div class="modal-body">
   Work Team Member ID:<dx-text-box></dx-text-box>
   <br />
  Work Team ID:<dx-select-box
-  [items]="['left', 'top']"
+ [dataSource]="data"
+  [searchEnabled]="true"
   [(value)]="labelLocation"></dx-select-box>
   <br />
  Work User ID :<dx-select-box
  [items]="['left', 'top']"
+ valueExpr="ID"
+ [searchEnabled]="true"
  [(value)]="labelLocation"></dx-select-box>
   <br />
   Work Team Name:<dx-text-box></dx-text-box>
@@ -130,6 +133,8 @@
       <br />
       Work Team Member ID:<dx-select-box
       [items]="['left', 'top']"
+      valueExpr="ID"
+      [searchEnabled]="true"
       [(value)]="labelLocation"></dx-select-box>
         <br />
       Work Date:<dx-text-box></dx-text-box>

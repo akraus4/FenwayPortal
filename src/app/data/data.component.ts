@@ -6,7 +6,8 @@ import { DxDataGridModule } from 'devextreme-angular';
 import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { DataService } from '../services/data.service';
 import { DxTextBoxModule, DxNumberBoxModule } from 'devextreme-angular';
-
+import data_grid from 'devextreme/ui/data_grid';
+import { DataSource } from '@angular/cdk/table';
 @Component({
   selector: 'app-data',
   templateUrl: './data.component.html',
@@ -17,13 +18,15 @@ export class DataComponent implements OnInit {
   modalRef: BsModalRef;
   title: string = "Data Management";
   columnChoices: Array<any> = [];
+  dropDownChoices: Array<any> = [];
   currentTable;
   table: string;
   dataService: any;
   table_name: any;
   TableChoices;
   key: string;
-
+  dropValues;
+ drop_table: any;
 
   //Dropdonw choices for 'Select Table"
   tables = [
@@ -37,6 +40,7 @@ export class DataComponent implements OnInit {
     { value: 7, viewValue: "Agile Story" },
     { value: 8, viewValue: "Agile Story Agile System User" }
   ];
+  
   //Default column list.
   columns = [
     { dataField: "story_type", caption: "Story Type" },
@@ -50,20 +54,59 @@ export class DataComponent implements OnInit {
   }
   constructor(private modalService: BsModalService, @Inject(DataService) dataService) {
     this.dataService = dataService;
-    this.columnChoices = this.columns
+    this.columnChoices = this.columns;
+    this.dropDownChoices = this.columns;
   }
 
-
+// Opens the modal.
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
+  // Closes the modal.
   closeModal(template: TemplateRef<any>) {
       this.modalService.hide(1);
   }
+  
+  getDropDownData(table_name) {
+    this.dataService.getDropDownData(this.table_name)
+    .map(res => { return res.json(); })
+    .subscribe((results) => { this.dropDownChoices = results; });
+  }
+  // Get the name of tables that have dropdowns. 
+  setupDrownDowns() {
+    if (this.currentTable == "Work Team ") {
+      this.drop_table = "work_team"
+    }
+    else if (this.currentTable == 'Work Team Member') {
+      this.drop_table = "work_team_member"
+    }
+    else if (this.currentTable == 'Work Daily Hours') {
+      this.drop_table = "work_dailyhours"
+    }
+    else if (this.currentTable == 'Agile System') {
+      this.drop_table = "agile_system"
+    }
+    else if (this.currentTable == 'Agile System User') {
+      this.drop_table = "agile_system_user"
+    }
+    else if (this.currentTable == 'Agile Sprint') {
+      this.drop_table = "agile_sprint"
+    }
+    else if (this.currentTable == 'Agile Story') {
+      this.drop_table = "agile_story"
+    }
+    else if (this.currentTable == 'Agile Story Agile System User') {
+      this.drop_table = "agile_story_agile_system_user"
+    }
+    this.getDropDownData(this.drop_table)
+  }
+
+// Store the current selected table.
   storeCurrentTable(tableName: string) {
     this.currentTable = tableName;
     // console.log("Made it here!!!" + tableName);
   }
+  // Gets the table names.
   setupTable() {
     if (this.currentTable == 'Work User') {
       this.table_name = "work_user"
@@ -100,7 +143,7 @@ export class DataComponent implements OnInit {
       .map(res => { return res.json(); })
       .subscribe((results) => { this.TableChoices = results; this.getColumns(); });
   }
-
+  // Get the coloums for each table.
   getColumns() {
     if (this.currentTable == "Work User") {
       this.columnChoices = [
@@ -189,7 +232,6 @@ export class DataComponent implements OnInit {
         { dataField: "agile_system_user_story_points", caption: "User Story Points" }
       ];
     }
-
   };
 };
 
