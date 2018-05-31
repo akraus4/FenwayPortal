@@ -146,7 +146,6 @@ export class DataComponent implements OnInit {
       this.workDailyHoursId = selectedData[0].work_dailyhours_id
       this.workDate = selectedData[0].work_date
       this.hours = selectedData[0].hours
-      this.name = selectedData[0].name
       this.modalRef = this.modalService.show(workDailyhours)
     }
 
