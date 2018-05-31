@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, TemplateRef, ViewChild, AfterViewInit  } from '@angular/core';
+import { Component, OnInit, Inject, TemplateRef, ViewChild, AfterViewInit } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { DxButtonModule } from 'devextreme-angular';
@@ -15,7 +15,7 @@ import { DxTextBoxModule, DxNumberBoxModule } from 'devextreme-angular';
 })
 
 export class DataComponent implements OnInit {
-  @ViewChild(DxDataGridComponent) dataGrid:DxDataGridComponent
+  @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent
   modalRef: BsModalRef;
   title: string = "Data Management";
   columnChoices: Array<any> = [];
@@ -41,6 +41,25 @@ export class DataComponent implements OnInit {
   workDate: string;
   hours: string;
   name: string;
+  agileSystemType: string;
+  agileSystemName: string;
+  agileSystemId: string;
+  agileSystemUserId: string;
+  agileSystemUserName: string;
+  workTeamMemberID: string;
+  workUserID: string;
+  agileSprintId: string;
+  agileSprintName: string;
+  sprintDescription: string;
+  sprintStartDate: string;
+  sprintEndDate: string;
+  agileStoryid: string;
+  storyType: string;
+  storyStatus: string;
+  storyPoints: string;
+  agileStoryAgileSystemUserId: string;
+  agileStoryId: string;
+  agileSystemUserStoryPoints: string;
 
   constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
     this.dataService = dataService;
@@ -49,9 +68,9 @@ export class DataComponent implements OnInit {
   }
 
   keys = [
-    {value: 0, viewValue: "This Foreign Key"},
-    {value: 1, viewValue: "That Foreign Key"}
-    ]
+    { value: 0, viewValue: "This Foreign Key" },
+    { value: 1, viewValue: "That Foreign Key" }
+  ]
 
   //Dropdown choices for 'Select Table"
   tables = [
@@ -77,33 +96,35 @@ export class DataComponent implements OnInit {
   // clickHandler = function() {
   //   let data = this.dataGrid.instance.getSelectedRowsData();
   //   console.log(JSON.stringify(data));
-    
-    
+
+
   // };
 
   ngOnInit() {
   }
- 
+
   ngAfterViewInit() {
     //document.getElementById('wUserId').value = selectedData[0].work_user_id
   }
 
-// clickHandler(){
-//   let selectedData = this.dataGrid.instance.getSelectedRowsData();
-//   var workUserId = JSON.stringify(selectedData[0].work_user_id)
-//   console.log(workUserId)
-// }
+  // clickHandler(){
+  //   let selectedData = this.dataGrid.instance.getSelectedRowsData();
+  //   var workUserId = JSON.stringify(selectedData[0].work_user_id)
+  //   console.log(workUserId)
+  // }
 
-  openModal(workUser: TemplateRef<any>, workTeam: TemplateRef<any>, workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>,agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>) {
+  // workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>,agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>
+
+  openModal(workUser: TemplateRef<any>, workTeam: TemplateRef<any>, workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>, agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>) {
     let selectedData = this.dataGrid.instance.getSelectedRowsData();
     console.log(JSON.stringify(selectedData));
     if (this.table_name == "work_user") {
-     this.workUserId = selectedData[0].work_user_id
-     this.firstName = selectedData[0].firstname
-     this.lastName = selectedData[0].lastname
-     this.email = selectedData[0].email
-    this.modalRef = this.modalService.show(workUser)
-    } 
+      this.workUserId = selectedData[0].work_user_id
+      this.firstName = selectedData[0].firstname
+      this.lastName = selectedData[0].lastname
+      this.email = selectedData[0].email
+      this.modalRef = this.modalService.show(workUser)
+    }
 
     else if (this.table_name == "work_team") {
       this.workTeamID = selectedData[0].work_team_id
@@ -115,9 +136,9 @@ export class DataComponent implements OnInit {
 
     else if (this.table_name == "work_team_member") {
       this.workTeamMemberId = selectedData[0].work_team_member_id
-      this.workTeamName = selectedData[0].work_team_name
-      this.firstName = selectedData[0].firstname
-      this.lastName = selectedData[0].lastname
+      // this.workTeamName = selectedData[0].work_team_name
+      // this.firstName = selectedData[0].firstname
+      // this.lastName = selectedData[0].lastname
       this.modalRef = this.modalService.show(workTeamMember)
     }
 
@@ -130,21 +151,45 @@ export class DataComponent implements OnInit {
     }
 
     else if (this.table_name == "agile_system") {
+      this.agileSystemId = selectedData[0].agile_system_id
+      this.agileSystemName = selectedData[0].agile_system_name
+      this.agileSystemType = selectedData[0].agile_system_type
+      this.workTeamID = selectedData[0].work_team_id
       this.modalRef = this.modalService.show(agileSystem)
     }
 
     else if (this.table_name == "agile_system_user") {
+      this.agileSystemUserId = selectedData[0].agile_system_user_id
+      this.agileSystemUserName = selectedData[0].agile_system_user_name
+      this.agileSystemId = selectedData[0].agile_system_id
+      this.workTeamMemberID = selectedData[0].work_team_member_id
+      this.workUserID = selectedData[0].work_user_id
       this.modalRef = this.modalService.show(agileSystemUser)
     }
     else if (this.table_name == "agile_sprint") {
+      this.agileSprintId = selectedData[0].agile_sprint_id
+      this.agileSprintName = selectedData[0].agile_sprint_name
+      this.agileSystemId = selectedData[0].agile_system_id
+      this.sprintDescription = selectedData[0].sprint_description
+      this.sprintStartDate = selectedData[0].sprint_start_date
+      this.sprintEndDate = selectedData[0].sprint_end_date
       this.modalRef = this.modalService.show(agileSprint)
     }
 
     else if (this.table_name == "agile_story") {
+      this.agileStoryid = selectedData[0].agile_story_id
+      this.agileSprintId = selectedData[0].agile_sprint_id
+      this.storyType = selectedData[0].story_type
+      this.storyStatus = selectedData[0].story_status
+      this.storyPoints = selectedData[0].story_points
       this.modalRef = this.modalService.show(agileStory)
     }
 
     else if (this.table_name == "agile_story_agile_system_user") {
+      this.agileStoryAgileSystemUserId = selectedData[0].agile_story_agile_system_user_id
+      this.agileStoryId = selectedData[0].agile_story_id
+      this.agileSystemUserName = selectedData[0].agile_system_user_id
+      this.agileSystemUserStoryPoints = selectedData[0].agile_system_user_story_points
       this.modalRef = this.modalService.show(agileStoryAgileSystemUser)
     }
   }
@@ -188,7 +233,7 @@ export class DataComponent implements OnInit {
   getTableData(table_name) {
     this.dataService.findTableData(this.table_name)
       .map(res => { return res.json(); })
-      .subscribe((results) => { this.TableChoices = results; this.getColumns(); this.metricsService.hideLoadingPanel();});
+      .subscribe((results) => { this.TableChoices = results; this.getColumns(); this.metricsService.hideLoadingPanel(); });
   }
 
   getColumns() {
@@ -199,7 +244,7 @@ export class DataComponent implements OnInit {
         { dataField: "lastname", caption: "Last Name" },
         { dataField: "email", caption: "Email" },
       ];
-      
+
     }
 
     else if (this.currentTable == "Work Team") {
@@ -216,9 +261,9 @@ export class DataComponent implements OnInit {
         { dataField: "work_team_member_id", caption: "Team Member ID" },
         { dataField: "work_team_id", caption: "Work Team ID" },
         { dataField: "work_user_id", caption: "Work User ID" },
-        { dataField: "work_team_name", caption: "Work Team Name"},
-        { dataField: "firstname", caption: "First Name"},
-        { dataField: "lastname", caption: "Last Name"},
+        { dataField: "work_team_name", caption: "Work Team Name" },
+        { dataField: "firstname", caption: "First Name" },
+        { dataField: "lastname", caption: "Last Name" },
       ];
     }
 
@@ -228,7 +273,7 @@ export class DataComponent implements OnInit {
         { dataField: "work_team_member_id", caption: "Work Team Member ID" },
         { dataField: "work_date", caption: "Work Date" },
         { dataField: "hours", caption: "Hours" },
-        { dataField: "name", caption: "Name"}
+        { dataField: "name", caption: "Name" }
       ];
     }
 
@@ -239,9 +284,9 @@ export class DataComponent implements OnInit {
         { dataField: "agile_system_type", caption: "System Type" },
         { dataField: "work_team_name", caption: "Team" }
       ];
-     } 
+    }
 
-     else if (this.currentTable == "Agile System User") {
+    else if (this.currentTable == "Agile System User") {
       this.columnChoices = [
         { dataField: "agile_system_user_id", caption: "Agile System ID" },
         { dataField: "agile_system_user_name", caption: "User System Name" },
