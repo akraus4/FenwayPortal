@@ -102,55 +102,48 @@ export class DataComponent implements OnInit {
      this.firstName = selectedData[0].firstname
      this.lastName = selectedData[0].lastname
      this.email = selectedData[0].email
-      // console.log(workUserId)
-       //$("#wUserId").attr("value", workUserId);
-
-      //(<HTMLInputElement>document.getElementById('wUserId')).value = selectedData[0].work_user_id  
-      
     this.modalRef = this.modalService.show(workUser)
-  
-    // var potato = (<HTMLInputElement>document.getElementById("wUserId")).value;
-    // console.log("potato: " + potato)
     } 
+
     else if (this.table_name == "work_team") {
       this.workTeamID = selectedData[0].work_team_id
       this.workTeamName = selectedData[0].work_team_name
       this.projectID = selectedData[0].project_id
       this.projectName = selectedData[0].project_name
-
-
       this.modalRef = this.modalService.show(workTeam)
     }
+
     else if (this.table_name == "work_team_member") {
       this.workTeamMemberId = selectedData[0].work_team_member_id
       this.workTeamName = selectedData[0].work_team_name
       this.firstName = selectedData[0].firstname
       this.lastName = selectedData[0].lastname
-
-
       this.modalRef = this.modalService.show(workTeamMember)
     }
+
     else if (this.table_name == "work_dailyhours") {
       this.workDailyHoursId = selectedData[0].work_dailyhours_id
       this.workDate = selectedData[0].work_date
       this.hours = selectedData[0].hours
       this.name = selectedData[0].name
-
-
       this.modalRef = this.modalService.show(workDailyhours)
     }
+
     else if (this.table_name == "agile_system") {
       this.modalRef = this.modalService.show(agileSystem)
     }
+
     else if (this.table_name == "agile_system_user") {
       this.modalRef = this.modalService.show(agileSystemUser)
     }
     else if (this.table_name == "agile_sprint") {
       this.modalRef = this.modalService.show(agileSprint)
     }
+
     else if (this.table_name == "agile_story") {
       this.modalRef = this.modalService.show(agileStory)
     }
+
     else if (this.table_name == "agile_story_agile_system_user") {
       this.modalRef = this.modalService.show(agileStoryAgileSystemUser)
     }

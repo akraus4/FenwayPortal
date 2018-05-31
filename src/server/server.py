@@ -298,7 +298,7 @@ def findTableData(table_name):
 
     return json.dumps(jsonList)
 
-
+# @app.route
 
 # @app.route("/getColumnData/<tableName>")
 # def getColumnData():
@@ -332,5 +332,4 @@ def findTableData(table_name):
 #     return json.dumps(allTeams)       
 
 if __name__ == "__main__":
-    
-     app.run()
+    app.run()
