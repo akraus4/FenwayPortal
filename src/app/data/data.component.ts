@@ -93,102 +93,80 @@ export class DataComponent implements OnInit {
     { dataField: "agile_system_user_name", caption: "User" },
   ];
 
-  // clickHandler = function() {
-  //   let data = this.dataGrid.instance.getSelectedRowsData();
-  //   console.log(JSON.stringify(data));
-
-
-  // };
 
   ngOnInit() {
   }
 
-  ngAfterViewInit() {
-    //document.getElementById('wUserId').value = selectedData[0].work_user_id
-  }
-
-  // clickHandler(){
-  //   let selectedData = this.dataGrid.instance.getSelectedRowsData();
-  //   var workUserId = JSON.stringify(selectedData[0].work_user_id)
-  //   console.log(workUserId)
-  // }
-
-  // workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>,agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>
-
   openModal(workUser: TemplateRef<any>, workTeam: TemplateRef<any>, workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>, agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>) {
     let selectedData = this.dataGrid.instance.getSelectedRowsData();
-    console.log(JSON.stringify(selectedData));
     if (this.table_name == "work_user") {
-      this.workUserId = selectedData[0].work_user_id
-      this.firstName = selectedData[0].firstname
-      this.lastName = selectedData[0].lastname
-      this.email = selectedData[0].email
+      this.workUserId = selectedData[0] ? selectedData[0].work_user_id : null
+      this.firstName = selectedData[0] ? selectedData[0].firstname : null
+      this.lastName = selectedData[0] ? selectedData[0].lastname : null
+      this.email = selectedData[0] ? selectedData[0].email : null
       this.modalRef = this.modalService.show(workUser)
     }
 
     else if (this.table_name == "work_team") {
-      this.workTeamID = selectedData[0].work_team_id
-      this.workTeamName = selectedData[0].work_team_name
-      this.projectID = selectedData[0].project_id
-      this.projectName = selectedData[0].project_name
-      this.modalRef = this.modalService.show(workTeam)
+      this.workTeamID = selectedData[0] ? selectedData[0].work_team_id : null
+      this.workTeamName = selectedData[0] ? selectedData[0].work_team_name : null
+      this.projectID = selectedData[0] ? selectedData[0].project_id : null
+      this.projectName = selectedData[0] ? selectedData[0].project_name : null
+      this.modalRef = this.modalService.show(workTeam) 
     }
 
     else if (this.table_name == "work_team_member") {
-      this.workTeamMemberId = selectedData[0].work_team_member_id
-      // this.workTeamName = selectedData[0].work_team_name
-      // this.firstName = selectedData[0].firstname
-      // this.lastName = selectedData[0].lastname
+      this.workTeamMemberId = selectedData[0] ? selectedData[0].work_team_member_id : null
       this.modalRef = this.modalService.show(workTeamMember)
     }
 
     else if (this.table_name == "work_dailyhours") {
-      this.workDailyHoursId = selectedData[0].work_dailyhours_id
-      this.workDate = selectedData[0].work_date
-      this.hours = selectedData[0].hours
+      this.workDailyHoursId = selectedData[0] ? selectedData[0].work_dailyhours_id : null
+      this.workDate = selectedData[0] ? selectedData[0].work_date : null
+      this.hours = selectedData[0] ? selectedData[0].hours : null
       this.modalRef = this.modalService.show(workDailyhours)
     }
 
     else if (this.table_name == "agile_system") {
-      this.agileSystemId = selectedData[0].agile_system_id
-      this.agileSystemName = selectedData[0].agile_system_name
-      this.agileSystemType = selectedData[0].agile_system_type
-      this.workTeamID = selectedData[0].work_team_id
+      this.agileSystemId = selectedData[0] ? selectedData[0].agile_system_id : null
+      this.agileSystemName = selectedData[0] ? selectedData[0].agile_system_name : null
+      this.agileSystemType = selectedData[0] ? selectedData[0].agile_system_type : null
+      this.workTeamID = selectedData[0] ? selectedData[0].work_team_id : null
       this.modalRef = this.modalService.show(agileSystem)
     }
 
     else if (this.table_name == "agile_system_user") {
-      this.agileSystemUserId = selectedData[0].agile_system_user_id
-      this.agileSystemUserName = selectedData[0].agile_system_user_name
-      this.agileSystemId = selectedData[0].agile_system_id
-      this.workTeamMemberID = selectedData[0].work_team_member_id
-      this.workUserID = selectedData[0].work_user_id
+      this.agileSystemUserId = selectedData[0] ? selectedData[0].agile_system_user_id : null
+      this.agileSystemUserName = selectedData[0] ? selectedData[0].agile_system_user_name : null
+      this.agileSystemId = selectedData[0] ? selectedData[0].agile_system_id : null
+      this.workTeamMemberID = selectedData[0] ? selectedData[0].work_team_member_id : null
+      this.workUserID = selectedData[0] ? selectedData[0].work_user_id : null
       this.modalRef = this.modalService.show(agileSystemUser)
     }
     else if (this.table_name == "agile_sprint") {
-      this.agileSprintId = selectedData[0].agile_sprint_id
-      this.agileSprintName = selectedData[0].agile_sprint_name
-      this.agileSystemId = selectedData[0].agile_system_id
-      this.sprintDescription = selectedData[0].sprint_description
-      this.sprintStartDate = selectedData[0].sprint_start_date
-      this.sprintEndDate = selectedData[0].sprint_end_date
+      this.agileSprintId = selectedData[0] ? selectedData[0].agile_sprint_id : null
+      this.agileSprintName = selectedData[0] ? selectedData[0].agile_sprint_name : null
+      this.agileSystemId = selectedData[0] ? selectedData[0].agile_system_id : null
+      this.sprintDescription = selectedData[0] ? selectedData[0].sprint_description : null
+      this.sprintStartDate = selectedData[0] ? selectedData[0].sprint_start_date : null
+      this.sprintEndDate = selectedData[0] ? selectedData[0].sprint_end_date : null
       this.modalRef = this.modalService.show(agileSprint)
     }
 
     else if (this.table_name == "agile_story") {
-      this.agileStoryid = selectedData[0].agile_story_id
-      this.agileSprintId = selectedData[0].agile_sprint_id
-      this.storyType = selectedData[0].story_type
-      this.storyStatus = selectedData[0].story_status
-      this.storyPoints = selectedData[0].story_points
+      this.agileStoryid = selectedData[0] ? selectedData[0].agile_story_id : null
+      this.agileSprintId = selectedData[0] ? selectedData[0].agile_sprint_id : null
+      this.storyType = selectedData[0] ? selectedData[0].story_type : null
+      this.storyStatus = selectedData[0] ? selectedData[0].story_status : null
+      this.storyPoints = selectedData[0] ? selectedData[0].story_points : null
       this.modalRef = this.modalService.show(agileStory)
     }
 
     else if (this.table_name == "agile_story_agile_system_user") {
-      this.agileStoryAgileSystemUserId = selectedData[0].agile_story_agile_system_user_id
-      this.agileStoryId = selectedData[0].agile_story_id
-      this.agileSystemUserName = selectedData[0].agile_system_user_id
-      this.agileSystemUserStoryPoints = selectedData[0].agile_system_user_story_points
+      this.agileStoryAgileSystemUserId = selectedData[0] ? selectedData[0].agile_story_agile_system_user_id : null
+      this.agileStoryId = selectedData[0] ? selectedData[0].agile_story_id : null
+      this.agileSystemUserName = selectedData[0] ? selectedData[0].agile_system_user_id : null
+      this.agileSystemUserStoryPoints = selectedData[0] ? selectedData[0].agile_system_user_story_points : null
       this.modalRef = this.modalService.show(agileStoryAgileSystemUser)
     }
   }
