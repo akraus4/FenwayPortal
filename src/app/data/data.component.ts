@@ -6,7 +6,7 @@ import { DxDataGridModule, DxDataGridComponent } from 'devextreme-angular';
 import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { DataService } from '../services/data.service'
 import { MetricsService } from '../services/metrics.service'
-import { DxTextBoxModule, DxNumberBoxModule } from 'devextreme-angular';
+import { DxTextBoxModule, DxNumberBoxModule, DxSelectBoxModule } from 'devextreme-angular';
 
 @Component({
   selector: 'app-data',
@@ -20,6 +20,7 @@ export class DataComponent implements OnInit {
   title: string = "Data Management";
   columnChoices: Array<any> = [];
   currentTable;
+  selectedopt = "0";
   table: string;
   dataService: any;
   table_name: any;
@@ -63,11 +64,12 @@ export class DataComponent implements OnInit {
   agileSystemUserStoryPoints: string;
   viewValue: any;
 
-
   constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
     this.dataService = dataService;
-    this.columnChoices = this.columns;
+    // this.columnChoices = this.columns;
     this.metricsService = metricsService;
+  
+    
   }
 
   keys = [
@@ -87,18 +89,22 @@ export class DataComponent implements OnInit {
     { value: 7, viewValue: "Agile Story" },
     { value: 8, viewValue: "Agile Story Agile System User" }
   ];
+  
+
   //Default column list.
-  columns = [
-    { dataField: "story_type", caption: "Story Type" },
-    { dataField: "agile_system_user_story_points", caption: "User's Story Pts" },
-    { dataField: "agile_sprint_id", caption: "Sprint ID" },
-    { dataField: "story_type", caption: "Story Type" },
-    { dataField: "agile_system_user_name", caption: "User" },
-  ];
+  // columns = [
+  //   { dataField: "story_type", caption: "Story Type" },
+  //   { dataField: "agile_system_user_story_points", caption: "User's Story Pts" },
+  //   { dataField: "agile_sprint_id", caption: "Sprint ID" },
+  //   { dataField: "story_type", caption: "Story Type" },
+  //   { dataField: "agile_system_user_name", caption: "User" },
+  // ];
 
 
   ngOnInit() {
     this.workUserOnInit();
+    
+    // $("#id").dxSelectBox("instance").option("value", 0);
   }
 
   workUserOnInit(){
@@ -181,8 +187,9 @@ export class DataComponent implements OnInit {
     }
   }
 
-  storeCurrentTable(tableName: string) {
-    this.currentTable = tableName;
+  selectTable(e) {
+     var i = e.value;
+     this.currentTable = this.tables[i].viewValue
     this.setupTable();
   }
 

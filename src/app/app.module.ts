@@ -71,7 +71,6 @@ import {
     BrowserAnimationsModule,
     ReactiveFormsModule,
     DxCheckBoxModule,
-    DxSelectBoxModule,
     DxNumberBoxModule,
     DxFormModule,
     DxTextBoxModule,
