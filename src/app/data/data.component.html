@@ -2,6 +2,7 @@
 <div class="row">
   <div class="col-sm-12">
     <h1 id="title"> {{title}} </h1>
+    <h2> {{e}}</h2>
     <app-sign-in></app-sign-in>
   </div>
 </div>
@@ -54,7 +55,7 @@
     Email:<dx-text-box id="email" [(value)]="email"></dx-text-box>
   </div>
   <div class="buttons">
-    <button class="submit">Submit</button>
+    <button class="submit" (click)="getD()">Submit</button>
     <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
@@ -140,7 +141,7 @@
     Work Team:<dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
   </div>
   <div class="buttons">
-    <button class="submit">Submit</button>
+    <button class="submit" >Submit</button>
     <button class="cancel">Cancel</button>
     <br />
   </div>
@@ -191,7 +192,7 @@
   </div>
   <br/>
   <div class="buttons">
-    <button class="submit">Submit</button>
+    <button class="submit"  (click) = " getDropDown()">Submit</button>
     <button class="cancel">Cancel</button>
     <br />
   </div>
@@ -244,3 +245,10 @@
 </ng-template>
 
 <app-loading-panel></app-loading-panel>
+
+<div>
+<p>
+
+</p>
+
+</div>

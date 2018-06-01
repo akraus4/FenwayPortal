@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, TemplateRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Inject, TemplateRef, ViewChild, AfterViewInit, getDebugNode } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { DxButtonModule } from 'devextreme-angular';
@@ -9,6 +9,7 @@ import { MetricsService } from '../services/metrics.service'
 import { DxTextBoxModule, DxNumberBoxModule } from 'devextreme-angular';
 import data_grid from 'devextreme/ui/data_grid';
 import { DataSource } from '@angular/cdk/table';
+import { DxiDataGridColumn } from 'devextreme-angular/ui/nested/base/data-grid-column-dxi';
 @Component({
   selector: 'app-data',
   templateUrl: './data.component.html',
@@ -64,7 +65,8 @@ export class DataComponent implements OnInit {
   agileStoryId: string;
   agileSystemUserStoryPoints: string;
   viewValue: any;
-
+  drop_name;
+  dropDownData;
 
   constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
     this.dataService = dataService;
@@ -76,7 +78,9 @@ export class DataComponent implements OnInit {
     { value: 0, viewValue: "This Foreign Key" },
     { value: 1, viewValue: "That Foreign Key" }
   ]
-
+getD(e) {
+  
+}
   //Dropdown choices for 'Select Table"
   tables = [
     { value: 0, viewValue: "Work User" },
@@ -228,7 +232,12 @@ export class DataComponent implements OnInit {
       .subscribe((results) => { this.TableChoices = results; this.getColumns(); this.metricsService.hideLoadingPanel(); });
   }
 
-
+  getDropDown(table_name) {
+    console.log(this.table_name)
+    this.dataService.findDropDownData(this.table_name)
+      .map(res => { return res.json(); })
+      .subscribe((results) => { this.dropDownData = results; console.log(JSON.stringify(results)) });
+  }
 
   getColumns() {
     if (this.currentTable == "Work User") {

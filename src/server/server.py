@@ -299,12 +299,12 @@ def findTableData(table_name):
     return json.dumps(jsonList)
 
 @app.route("/findDropDownData/<table_name>")
-def findDropDownData(drop_name):
+def findDropDownData(table_name):
     
-    print("Paramater: " + drop_name)
+    print("Paramater: " + table_name)
 
 
-    if drop_name == "work_team":
+    if table_name == "work_team":
         jsonList = []
         addObject = {}
         i=0
@@ -316,7 +316,7 @@ def findDropDownData(drop_name):
             addObject = {}
             i=i+1
 
-    elif drop_name == "work_team_member":
+    elif table_name == "work_team_member":
         jsonList = []
         addObject = {}
         i=0
@@ -328,7 +328,7 @@ def findDropDownData(drop_name):
             jsonList.insert(i, addObject)
             addObject = {}
             i=i+1
-    elif drop_name == "work_dailyhours":
+    elif table_name == "work_dailyhours":
         jsonList = []
         addObject = {}
         i=0
@@ -339,7 +339,7 @@ def findDropDownData(drop_name):
             jsonList.insert(i, addObject)
             addObject = {}
             i=i+1
-    elif drop_name == "agile_system":
+    elif table_name == "agile_system":
         jsonList = []
         addObject = {}
         i=0
@@ -349,7 +349,8 @@ def findDropDownData(drop_name):
         jsonList = []
         addObject = {}
         i=0
-    elif drop_name == "agile_system_user":
+        
+    elif table_name == "agile_system_user":
         jsonList = []
         addObject = {}
         i=0
@@ -358,20 +359,21 @@ def findDropDownData(drop_name):
             addObject['agile_system_id'] = row[0]
             addObject['work_team_member_id'] = row[1]
             addObject['work_user_id'] = row[2]
-            jsonList = []
+            jsonList.insert(i, addObject)
             addObject = {}
-            i=0
-    elif drop_name == "agile_sprint":
+            i= i +1
+    elif table_name == "agile_sprint":
         jsonList = []
         addObject = {}
         i=0
-        cur.execute('SELECT agile_system_id FROM agile_sprint')
+        cur.execute('SELECT agile_system_id FROM agile_system')
         for row in cur.fetchall():
             addObject['agile_system_id'] = row[0]
-            jsonList = []
+            jsonList.insert(i, addObject)
             addObject = {}
-            i=0
-    elif drop_name == "agile_story":
+            i= i +1
+
+    elif table_name == "agile_story":
         jsonList = []
         addObject = {}
         i=0
@@ -381,7 +383,7 @@ def findDropDownData(drop_name):
             jsonList = []
             addObject = {}
             i=0
-    elif drop_name == "agile_story_agile_system_user":
+    elif table_name == "agile_story_agile_system_user":
         jsonList = []
         addObject = {}
         i=0

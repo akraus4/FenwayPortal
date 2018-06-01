@@ -21,7 +21,7 @@ export class DataService {
 
 	}
 	findDropDownData(table_name) {
-		let result = this.http.get(this.url + '/findDropDownData/' + table_name);
+		let result = this.http.get(this.url + '/findDropDownData/'+ table_name);
 		console.log(JSON.stringify(result));
 		return result
 	}
