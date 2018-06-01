@@ -10,18 +10,14 @@
 <div id="gridWidgetContainer" class="effect7">
   <div class="selectTeam" class="row" id="searchWidgetContainer">
     <div class="col-sm-3">
-      <mat-form-field class="selectTables">
-        <mat-select placeholder="Select a Table" (change)="storeCurrentTable($event.value.viewValue)">
+      <mat-form-field class="selectTables" id="tableSelector">
+        <mat-select placeholder = "Work User" (change)="storeCurrentTable($event.value.viewValue)" >
           <mat-option *ngFor="let table of tables" [value]="table">{{table.viewValue}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
 
-    <div class="col-sm-1">
-      <button id="search" mat-button class='dataBtn' (click)="setupTable()">
-        <i class="fas fa-search"></i>
-      </button>
-    </div>
+
     <div class="col-sm-1">
       <button id="addRow" mat-button class='dataBtn' (click)="openModal(workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser)">
         <i class="fas fa-plus-circle"></i>

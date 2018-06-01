@@ -23,6 +23,7 @@ export class DataComponent implements OnInit {
   table: string;
   dataService: any;
   table_name: any;
+  tableSelector: any;
   templateName: any;
   TableChoices;
   key: string;
@@ -60,6 +61,8 @@ export class DataComponent implements OnInit {
   agileStoryAgileSystemUserId: string;
   agileStoryId: string;
   agileSystemUserStoryPoints: string;
+  viewValue: any;
+
 
   constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
     this.dataService = dataService;
@@ -95,6 +98,13 @@ export class DataComponent implements OnInit {
 
 
   ngOnInit() {
+    this.workUserOnInit();
+  }
+
+  workUserOnInit(){
+    this.currentTable = 'Work User'
+    this.setupTable()
+    this.metricsService.hideLoadingPanel();
   }
 
   openModal(workUser: TemplateRef<any>, workTeam: TemplateRef<any>, workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>, agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>) {
@@ -173,10 +183,13 @@ export class DataComponent implements OnInit {
 
   storeCurrentTable(tableName: string) {
     this.currentTable = tableName;
+    this.setupTable();
   }
 
   setupTable() {
+    
     this.metricsService.showLoadingPanel()
+    
     if (this.currentTable == 'Work User') {
       this.table_name = "work_user"
     }
@@ -212,6 +225,8 @@ export class DataComponent implements OnInit {
       .map(res => { return res.json(); })
       .subscribe((results) => { this.TableChoices = results; this.getColumns(); this.metricsService.hideLoadingPanel(); });
   }
+
+
 
   getColumns() {
     if (this.currentTable == "Work User") {
