@@ -8,21 +8,20 @@ CORS(app)
     
 
 db = MySQLdb.connect(
-                     host="52.55.14.143",  # your host
-                     user="fg_user_dev2",  # username
-                     passwd="6UhjVvAgM_Jm",  # password
-                     db="fg_metrics_dev2",# name of the database
-                     charset = "utf8"
-                     ) 
+                    host="52.55.14.143",  # your host
+                    user="fg_user_dev2",  # username
+                    passwd="6UhjVvAgM_Jm",  # password
+                    db="fg_metrics_dev2", # name of the database 
                     # host= "52.55.14.143",
                     # user= "fg_user",
                     # passwd= "uXQ1pgjZlne7",
                     # db= "fg_metrics",
-                    # charset = "utf8")  
+                    charset = "utf8" # Encoding format
+                    )  
 
 # Create a Cursor object to execute queries.
 cur = db.cursor()
-
+    
 #Create list of JSON objects for Select Team drop down in View Metrics Page
 @app.route("/findAllTeams")
 def findAllTeams():
@@ -92,7 +91,7 @@ def findAllStoriesWithUsersBySprint(sprint_id):
         addObject['story_points'] = row[6]
         addObject['agile_story_agile_system_user_id'] = row[7]
         addObject['agile_story_id_1'] = row[8]
-        addObject['agiel_system_user_id'] = row[9]
+        addObject['agile_system_user_id'] = row[9]
         addObject['agile_system_user_story_points'] = row[10]
         addObject['agile_system_user_id_1'] = row[11]
         addObject['agile_system_user_name'] = row[12]
@@ -116,7 +115,6 @@ def findAllStoriesWithUsersBySprint(sprint_id):
 def findTableData(table_name):
     
     print("Paramater: " + table_name)
-
 
     if table_name == "work_user":
         jsonList = []
@@ -440,5 +438,4 @@ def findDropDownData(drop_name):
 #     return json.dumps(allTeams)       
 
 if __name__ == "__main__":
-    
-     app.run()
+    app.run()

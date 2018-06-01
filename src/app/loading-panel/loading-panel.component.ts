@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { DxLoadPanelModule } from 'devextreme-angular';
 import { MetricsService } from '../services/metrics.service';
 
@@ -8,20 +8,20 @@ import { MetricsService } from '../services/metrics.service';
   styleUrls: ['./loading-panel.component.css']
 })
 export class LoadingPanelComponent implements OnInit {
-  // metricsService: any;
+   metricsService: any;
 
   loadingVisible: boolean;
   
 
-  constructor(private   metricsService:  MetricsService) {
-    // this.metricsService = metricsService;
+  constructor( @Inject(MetricsService) metricsService) {
+    this.metricsService = metricsService;
    
   }
 
   ngOnInit() {
-  //   this.metricsService.loadingVisible.subscribe(
-  //     (loadIndicator) => this.loadingVisible = loadIndicator
-  // );
+    this.metricsService.loadingVisible.subscribe(
+      (loadIndicator) => this.loadingVisible = loadIndicator
+  );
   }
 
 
