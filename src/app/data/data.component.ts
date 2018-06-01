@@ -6,7 +6,9 @@ import { DxDataGridModule, DxDataGridComponent } from 'devextreme-angular';
 import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { DataService } from '../services/data.service'
 import { MetricsService } from '../services/metrics.service'
-import { DxTextBoxModule, DxNumberBoxModule } from 'devextreme-angular';
+import { DxTextBoxModule, DxNumberBoxModule, DxSelectBoxModule  } from 'devextreme-angular';
+import DataSource from 'devextreme/data/data_source';
+
 
 @Component({
   selector: 'app-data',
