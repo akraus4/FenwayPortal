@@ -67,6 +67,14 @@ export class DataComponent implements OnInit {
   viewValue: any;
   drop_name;
   dropDownData;
+  workTeamDropData;
+  workUserDropData;
+  agileSystemDropData;
+  workTeamMemberDropData;
+  agileSprintDropData;
+  agileStoryDropData;
+  agileSystemUserDropData;
+
 
   constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
     this.dataService = dataService;
@@ -91,7 +99,7 @@ export class DataComponent implements OnInit {
     { value: 7, viewValue: "Agile Story" },
     { value: 8, viewValue: "Agile Story Agile System User" }
   ];
-  
+
   //Default column list.
   columns = [
     { dataField: "story_type", caption: "Story Type" },
@@ -106,7 +114,7 @@ export class DataComponent implements OnInit {
     this.workUserOnInit();
   }
 
-  workUserOnInit(){
+  workUserOnInit() {
     this.currentTable = 'Work User'
     this.setupTable()
     this.metricsService.hideLoadingPanel();
@@ -127,7 +135,7 @@ export class DataComponent implements OnInit {
       this.workTeamName = selectedData[0] ? selectedData[0].work_team_name : null
       this.projectID = selectedData[0] ? selectedData[0].project_id : null
       this.projectName = selectedData[0] ? selectedData[0].project_name : null
-      this.modalRef = this.modalService.show(workTeam) 
+      this.modalRef = this.modalService.show(workTeam)
     }
 
     else if (this.table_name == "work_team_member") {
@@ -193,9 +201,9 @@ export class DataComponent implements OnInit {
     this.setupTable();
   }
   setupTable() {
-    
+
     this.metricsService.showLoadingPanel()
-    
+
     if (this.currentTable == 'Work User') {
       this.table_name = "work_user"
     }
