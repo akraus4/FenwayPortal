@@ -298,7 +298,115 @@ def findTableData(table_name):
 
     return json.dumps(jsonList)
 
-# @app.route
+@app.route("/findDropDownData/<table_name>")
+def findDropDownData(table_name):
+    
+    print("Paramater: " + table_name)
+
+
+    if table_name == "work_team":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('SELECT work_team_id, work_team_name from work_team')
+        for row in cur.fetchall():
+            addObject['work_team_id'] = row[0]
+            addObject['work_team_name'] = row[1]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i=i+1
+
+    elif table_name == "work_team_member":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('SELECT work_team_member_id, work_team_id, work_user_id FROM work_team_member;')
+        for row in cur.fetchall():
+            addObject['c'] = row[0]
+            addObject['work_team_id'] = row[1]
+            addObject['work_user_id'] = row[2]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i=i+1
+    elif table_name == "work_dailyhours":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('SELECT work_dailyhours_id, work_team_member_id from work_daiyhours')
+        for row in cur.fetchall():
+            addObject['work_dailyhours_id'] = row[0]
+            addObject['work_team_member_id'] = row[1]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i=i+1
+    elif table_name == "agile_system":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('SELECT work_team_id FROM agile_system;')
+        for row in cur.fetchall():
+            addObject['work_team_member_id'] = row[0]
+        jsonList = []
+        addObject = {}
+        i=0
+        
+    elif table_name == "agile_system_user":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('SELECT agile_system_id, work_team_member, work_user_id FROM agile_system_user')
+        for row in cur.fetchall():
+            addObject['agile_system_id'] = row[0]
+            addObject['work_team_member_id'] = row[1]
+            addObject['work_user_id'] = row[2]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i= i +1
+    elif table_name == "agile_sprint":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('SELECT agile_system_id FROM agile_system')
+        for row in cur.fetchall():
+            addObject['agile_system_id'] = row[0]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i= i +1
+
+    elif table_name == "agile_story":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('SELECT agile_sprint_id FROM agile_story;')
+        for row in cur.fetchall():
+            addObject['agile_sprint_id'] = row[0]
+            jsonList = []
+            addObject = {}
+            i=0
+    elif table_name == "agile_story_agile_system_user":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('SELECT agile_story_id, agile_system_user_id FROM agile_story_agile_system_user')
+        for row in cur.fetchall():
+            addObject['agile_story_id'] = row[0]
+            addObject['agile_system_user_id'] = row[1]
+            jsonList = []
+            addObject = {}
+            i=0
+    return json.dumps(jsonList)
+
+
+
+
+
+
+
+
+
+
+
+
 
 # @app.route("/getColumnData/<tableName>")
 # def getColumnData():
