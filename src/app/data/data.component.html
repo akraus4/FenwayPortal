@@ -79,7 +79,7 @@
   </div>
   <div class="buttons">
     <button class="submit">Submit</button>
-    <button class="cancel">Cancel</button>
+    <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
   <br />
@@ -99,7 +99,7 @@
   </div>
   <div class="buttons">
     <button class="submit">Submit</button>
-    <button class="cancel">Cancel</button>
+    <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
   <br />
@@ -120,7 +120,7 @@
   </div>
   <div class="buttons">
     <button class="submit">Submit</button>
-    <button class="cancel">Cancel</button>
+    <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
   <br />
@@ -137,12 +137,12 @@
     Agile Sytem Name:<dx-text-box id="aSystemName" [(value)]="agileSystemName"></dx-text-box>
     <br /> 
     Agile System Type:<dx-text-box id="aSystemType" [(value)]="agileSystemType"></dx-text-box>
-    <br /> 
-    Work Team:<dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
+    <br /> workUser
+    Work Team:<dx-select-box  [dataSource]="dropDownData"  displayExpr="" [(value)]="labelLocation"></dx-select-box>
   </div>
   <div class="buttons">
     <button class="submit" >Submit</button>
-    <button class="cancel">Cancel</button>
+    <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
   <br />
@@ -166,7 +166,7 @@
   </div>
   <div class="buttons">
     <button class="submit">Submit</button>
-    <button class="cancel">Cancel</button>
+    <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
   <br />
@@ -193,7 +193,7 @@
   <br/>
   <div class="buttons">
     <button class="submit"  (click) = " getDropDown()">Submit</button>
-    <button class="cancel">Cancel</button>
+    <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
   <br />
@@ -217,7 +217,7 @@
   </div>
   <div class="buttons">
     <button class="submit">Submit</button>
-    <button class="cancel">Cancel</button>
+    <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
   <br />
@@ -238,7 +238,7 @@
   </div>
   <div class="buttons">
     <button class="submit">Submit</button>
-    <button class="cancel">Cancel</button>
+    <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
   <br />

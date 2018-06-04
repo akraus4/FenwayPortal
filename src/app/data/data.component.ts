@@ -185,7 +185,9 @@ export class DataComponent implements OnInit {
       this.modalRef = this.modalService.show(agileStoryAgileSystemUser)
     }
   }
-
+  closeModal() {
+    this.modalService.hide(1)
+  }
   storeCurrentTable(tableName: string) {
     this.currentTable = tableName;
     this.setupTable();

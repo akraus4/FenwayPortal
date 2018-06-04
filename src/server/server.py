@@ -315,7 +315,6 @@ def findDropDownData(table_name):
             jsonList.insert(i, addObject)
             addObject = {}
             i=i+1
-
     elif table_name == "work_team_member":
         jsonList = []
         addObject = {}
@@ -346,10 +345,9 @@ def findDropDownData(table_name):
         cur.execute('SELECT work_team_id FROM agile_system;')
         for row in cur.fetchall():
             addObject['work_team_member_id'] = row[0]
-        jsonList = []
-        addObject = {}
-        i=0
-        
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i=i+1
     elif table_name == "agile_system_user":
         jsonList = []
         addObject = {}
@@ -391,9 +389,9 @@ def findDropDownData(table_name):
         for row in cur.fetchall():
             addObject['agile_story_id'] = row[0]
             addObject['agile_system_user_id'] = row[1]
-            jsonList = []
+            jsonList.insert(i, addObject)
             addObject = {}
-            i=0
+            i=i+1
     return json.dumps(jsonList)
 
 
