@@ -78,9 +78,7 @@ export class DataComponent implements OnInit {
     { value: 0, viewValue: "This Foreign Key" },
     { value: 1, viewValue: "That Foreign Key" }
   ]
-getD(e) {
-  
-}
+
   //Dropdown choices for 'Select Table"
   tables = [
     { value: 0, viewValue: "Work User" },
