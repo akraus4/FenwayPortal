@@ -63,7 +63,7 @@ export class DataComponent implements OnInit {
   agileStoryId: string;
   agileSystemUserStoryPoints: string;
   viewValue: any;
-  saveMessage: any;
+  statementExecuted: any;
 
   constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
     this.dataService = dataService;
@@ -346,7 +346,7 @@ export class DataComponent implements OnInit {
     }
     this.dataService.editTableData(asu_id, asu_name, as_id, wtm_id, wu_id)
       .map(res => { return res.json(); })
-      .subscribe((results) => { this.saveMessage = results;});
+      .subscribe((results) => { this.statementExecuted = results;});
   }
 };
 

@@ -16,7 +16,8 @@ db = MySQLdb.connect(
     # user= "fg_user",
     # passwd= "uXQ1pgjZlne7",
     # db= "fg_metrics",
-    charset="utf8"  # Encoding format
+    charset="utf8",  # Encoding format
+    autocommit = True
 )
 
 # Create a Cursor object to execute queries.
@@ -308,12 +309,10 @@ def findTableData(table_name):
 @app.route("/editTableData/<asu_id>/<asu_name>/<as_id>/<wtm_id>/<wu_id>")
 def editTableData(asu_id,asu_name,as_id,wtm_id,wu_id):
     cur.execute("INSERT INTO agile_system_user(agile_system_user_id,agile_system_user_name,agile_system_id,work_team_member_id,work_user_id)"
-                + "Values('" + asu_id + "','" + asu_name + "','" + as_id + "','" + wtm_id + "','" + wu_id + "')")
-                # + "ON DUPLICATE KEY UPDATE agile_system_user_name='" + asu_name + "', agile_system_id='" + as_id + "', work_team_member_id='" + wtm_id + "',work_user_id='" + wu_id + "'")
-
-    return 
-
-# db.commit()
+                + "Values('" + asu_id + "','" + asu_name + "','" + as_id + "','" + wtm_id + "','" + wu_id + "')"
+                + "ON DUPLICATE KEY UPDATE agile_system_user_name='" + asu_name + "', agile_system_id='" + as_id + "', work_team_member_id='" + wtm_id + "',work_user_id='" + wu_id + "'")
+    statementExecuted = "True"
+    return statementExecuted
 
 # @app.route
 
