@@ -233,7 +233,9 @@ export class DataComponent implements OnInit {
       .subscribe((results) => { this.TableChoices = results; this.getColumns(); this.metricsService.hideLoadingPanel(); });
   }
 
-
+  closeModal() {
+    this.modalService.hide(1)
+    }
 
   getColumns() {
     if (this.currentTable == "Work User") {
