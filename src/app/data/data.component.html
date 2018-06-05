@@ -169,17 +169,17 @@
     Agile System User ID:
     <dx-text-box id="aSystemUserId" [(value)]="agileSystemUserId"></dx-text-box>
     <br /> Agile Sytem User Name:
-    <dx-text-box id="asystemUserName" [(value)]="agileSystemUserName"></dx-text-box>
+    <dx-text-box id="aSystemUserName" [(value)]="agileSystemUserName"></dx-text-box>
     <br /> Agile System:
-    <dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
+    <dx-select-box id="aSystemId" [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
     <br /> Work Team Member:
-    <dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
+    <dx-select-box id="wTeamMemberId" [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
     <br /> Work User:
-    <dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
+    <dx-select-box id="wUserId" [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
     <br/>
   </div>
   <div class="buttons">
-    <button class="submit">Submit</button>
+    <button class="submit" (click)="getEditTableData()">Submit</button>
     <button class="cancel">Cancel</button>
     <br />
   </div>

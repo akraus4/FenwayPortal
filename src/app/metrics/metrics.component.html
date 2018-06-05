@@ -50,7 +50,21 @@
           <mat-option *ngFor="let TeamChoice of TeamChoices" [value]="TeamChoice">{{TeamChoice.agile_system_name}}</mat-option>
         </mat-select>
       </mat-form-field>
+     
+      <!-- <dx-select-box 
+      class="selectBox"
+      id="tableSelector"
+      [dataSource]="TeamChoices"
+      displayExpr="agile_system_name"
+      valueExpr="agile_system_id"
+      (onValueChanged)="getAllSprintsByTeam($event)">
+      </dx-select-box> -->
+
     </div>
+
+
+
+    
 
     <!-- <div class="col-3">
     <mat-form-field class="selectSprint">
@@ -62,7 +76,7 @@
     </mat-form-field>
   </div> -->
 
-    <div class="col-4">
+    <div class="col-5">
       <mat-form-field class="selectSprint">
         <mat-select placeholder='Select Sprints' [formControl]="Sprint" (change)="storeSprintId($event.value)" multiple>
           <mat-option *ngFor="let SprintChoice of SprintChoices" [value]="SprintChoice">
@@ -70,11 +84,61 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-    </div>
+
+      <!-- <dx-drop-down-box 
+      class="selectBox"
+      id="tableSelector"
+      [(value)]="gridBoxValue"
+      displayExpr="agile_sprint_name"
+      placeholder="Select sprints..."
+      valueExpr="agile_sprint_id"
+      [dataSource]="SprintChoices"
+      >
+      <div *dxTemplate="let contentData of 'content'">
+        <dx-data-grid
+        [dataSource]="SprintChoices"
+        [selection]="{ mode: 'multiple' }"
+        [hoverStateEnabled]="true"
+        [paging]="{ enabled: true, pageSize: 10 }"
+        [filterRow]="{ visible: false }"
+        [scrolling]="{ mode: 'infinite' }"
+        [height]="auto"
+        [(selectedRowKeys)]="gridBoxValue"
+> -->
+
+<!-- <dx-drop-down-box
+[(value)]="gridBoxValue"
+valueExpr="agile_sprint_id"
+displayExpr="agile_sprint_name"
+placeholder="Select a value..."
+[showClearButton]="true"
+[dataSource]="SprintChoices"
+>
+
+<div *dxTemplate="let data of 'content'">
+<dx-data-grid
+        [dataSource]="SprintChoices"
+        [columns]="['CompanyName', 'City', 'Phone']"
+        [selection]="{ mode: 'multiple' }"
+        [hoverStateEnabled]="true"
+        [paging]="{ enabled: true, pageSize: 10 }"
+        [filterRow]="{ visible: true }"
+        [scrolling]="{ mode: 'infinite' }"
+        [height]="265"
+        [(selectedRowKeys)]="gridBoxValue"
+>
+
+<dxi-column dataField="agile_sprint_name" caption="Sprint"></dxi-column>
+      <dxi-column dataField="sprint_start_date" caption="Start Date"></dxi-column>
+      <dxi-column dataField="sprint_end_date" caption="End Date"></dxi-column>
+</dx-data-grid>
+      </div>
+      </dx-drop-down-box>
+    </div> -->
 
 
 
-    <div class="col-4">
+    <div class="col-3">
       <!-- This is the button to search the metrics   -->
       <button mat-button id="formCompleteButton" (click)='getAllStoriesWithUsersBySprint()' class='metricBtn' disabled><i class="fas fa-search"></i>
 

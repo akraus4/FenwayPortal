@@ -63,6 +63,7 @@ export class DataComponent implements OnInit {
   agileStoryId: string;
   agileSystemUserStoryPoints: string;
   viewValue: any;
+  saveMessage: any;
 
   constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
     this.dataService = dataService;
@@ -328,6 +329,25 @@ export class DataComponent implements OnInit {
     }
 
   };
+
+  getEditTableData(workUser: TemplateRef<any>, workTeam: TemplateRef<any>, workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>, agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>) {
+
+    if(this.table_name == "agile_system_user") {
+      var asu_id = this.agileSystemUserId;
+      console.log("asu_id: " + asu_id)
+      var asu_name = this.agileSystemUserName;
+      console.log("asu_name: " + asu_name)
+      var as_id = this.agileSystemId;
+      console.log("as_id: " + as_id)
+      var wtm_id = this.workTeamMemberID;
+      console.log("wtm_id: " + wtm_id)
+      var wu_id = this.workUserID;
+      console.log("wu_id: " + wu_id)
+    }
+    this.dataService.editTableData(asu_id, asu_name, as_id, wtm_id, wu_id)
+      .map(res => { return res.json(); })
+      .subscribe((results) => { this.saveMessage = results;});
+  }
 };
 
 
