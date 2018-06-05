@@ -8,11 +8,11 @@ CORS(app)
     
 
 db = MySQLdb.connect(
-                    host="52.55.14.143",  # your host
+                    #host="52.55.14.143",  # your host
                     user="fg_user_dev2",  # username
                     passwd="6UhjVvAgM_Jm",  # password
                     db="fg_metrics_dev2", # name of the database 
-                    # host= "52.55.14.143",
+                     host= "52.55.14.143",
                     # user= "fg_user",
                     # passwd= "uXQ1pgjZlne7",
                     # db= "fg_metrics",
@@ -363,10 +363,10 @@ def findDropDownData(table_name):
         jsonList = []
         addObject = {}
         i=0
-        cur.execute('SELECT agile_sprint_id , agile_sprint_name FROM agile_sprint;')
+        cur.execute('SELECT agile_system_id , agile_system_name FROM agile_system;')
         for row in cur.fetchall():
-            addObject['agile_sprint_id'] = row[0]
-            addObject['agile_sprint_name'] = row[1]
+            addObject['agile_system_id'] = row[0]
+            addObject['agile_system_name'] = row[1]
             jsonList.insert(i, addObject)
             addObject = {}
             i= i +1

@@ -65,16 +65,13 @@ export class DataComponent implements OnInit {
   agileStoryId: string;
   agileSystemUserStoryPoints: string;
   viewValue: any;
+  // Data sources for each dropdown in the data templates
   drop_name;
   dropDownData;
-  workTeamDropData;
-  workUserDropData;
-  agileSystemDropData;
-  workTeamMemberDropData;
-  agileSprintDropData;
-  agileStoryDropData;
-  agileSystemUserDropData;
-
+  dropDownData1
+  dropDownData2;
+  dropDownData3;
+  dropdownDataInt = 0;
 
   constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
     this.dataService = dataService;
@@ -121,7 +118,8 @@ export class DataComponent implements OnInit {
   }
 
   openModal(workUser: TemplateRef<any>, workTeam: TemplateRef<any>, workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>, agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>) {
-    let selectedData = this.dataGrid.instance.getSelectedRowsData();
+    let selectedData = this.dataGrid.instance.getSelectedRowsData(); 
+    this.dropdownDataInt = 0;
     if (this.table_name == "work_user") {
       this.workUserId = selectedData[0] ? selectedData[0].work_user_id : null
       this.firstName = selectedData[0] ? selectedData[0].firstname : null
@@ -141,6 +139,7 @@ export class DataComponent implements OnInit {
     else if (this.table_name == "work_team_member") {
       this.workTeamMemberId = selectedData[0] ? selectedData[0].work_team_member_id : null
       this.modalRef = this.modalService.show(workTeamMember)
+
     }
 
     else if (this.table_name == "work_dailyhours") {
@@ -194,7 +193,8 @@ export class DataComponent implements OnInit {
     }
   }
   closeModal() {
-    this.modalService.hide(1)
+    this.modalService.hide(1);
+    
   }
   storeCurrentTable(tableName: string) {
     this.currentTable = tableName;
@@ -244,7 +244,24 @@ export class DataComponent implements OnInit {
     console.log(this.table_name)
     this.dataService.findDropDownData(this.table_name)
       .map(res => { return res.json(); })
-      .subscribe((results) => { this.dropDownData = results; console.log(JSON.stringify(results)) });
+      .subscribe((results) => { 
+        if (this.dropdownDataInt == 0) {
+          this.dropDownData = results;
+          console.log("1")
+        }
+        else  if (this.dropdownDataInt == 1) {
+          this.dropDownData1 = results;
+          console.log("2")
+        }
+        else  if (this.dropdownDataInt == 2) {
+          this.dropDownData2 = results;
+          console.log("3")
+        }
+        this.dropdownDataInt++;
+        // this.dropDownData = results;
+        //  this.dropDownData1 = results; 
+        //  this.dropDownData2 = results; 
+         console.log(JSON.stringify(results)) });
   }
 
   getColumns() {
