@@ -234,7 +234,9 @@ export class DataComponent implements OnInit {
       .subscribe((results) => { this.TableChoices = results; this.getColumns(); this.metricsService.hideLoadingPanel(); });
   }
 
-
+  closeModal() {
+    this.modalService.hide(1)
+    }
 
   getColumns() {
     if (this.currentTable == "Work User") {
@@ -331,22 +333,42 @@ export class DataComponent implements OnInit {
   };
 
   getEditTableData(workUser: TemplateRef<any>, workTeam: TemplateRef<any>, workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>, agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>) {
-
     if(this.table_name == "agile_system_user") {
       var asu_id = this.agileSystemUserId;
-      console.log("asu_id: " + asu_id)
       var asu_name = this.agileSystemUserName;
-      console.log("asu_name: " + asu_name)
       var as_id = this.agileSystemId;
-      console.log("as_id: " + as_id)
       var wtm_id = this.workTeamMemberID;
-      console.log("wtm_id: " + wtm_id)
       var wu_id = this.workUserID;
-      console.log("wu_id: " + wu_id)
-    }
-    this.dataService.editTableData(asu_id, asu_name, as_id, wtm_id, wu_id)
+      this.dataService.editTableDataASU(asu_id, asu_name, as_id, wtm_id, wu_id)
       .map(res => { return res.json(); })
       .subscribe((results) => { this.statementExecuted = results;});
+      this.closeModal()
+    }
+    else if(this.table_name == "agile_sprint"){
+      var aSprintId = this.agileSprintId;
+      var aSprintName = this.agileSprintName;
+      var aSystemId = this.agileSystemId;
+      var sprintDescription = this.sprintDescription;
+      var sprintStartDate = this.sprintStartDate;
+      var sprintEndDate = this.sprintEndDate;
+      this.dataService.editTableDataASprint(aSprintId,aSprintName,aSystemId,sprintDescription,sprintStartDate,sprintEndDate)
+      .map(res => { return res.json(); })
+      .subscribe((results) => { this.statementExecuted = results;});
+      this.closeModal()
+    }
+    else if(this.table_name == "agile_story"){
+      var aStoryId = this.agileStoryid;
+      var aStoryName = this.agileSprintName;
+      var aSprintId = this.agileSystemId;
+      var storyDescription = this.sprintDescription;
+      var storyType = this.storyType;
+      var storyStatus = this.storyStatus;
+      var storyPoints = this.storyPoints;
+      this.dataService.editTableDataASprint(aSprintId,aSprintName,aSystemId,sprintDescription,sprintStartDate,sprintEndDate)
+      .map(res => { return res.json(); })
+      .subscribe((results) => { this.statementExecuted = results;});
+      this.closeModal()
+    }
   }
 };
 
