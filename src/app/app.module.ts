@@ -29,7 +29,7 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { DataService } from './services/data.service';
 import { MatInputModule } from '@angular/material';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { DxButtonModule, DxLoadPanelModule, DxDataGridModule, DxPieChartModule } from 'devextreme-angular';
+import { DxButtonModule, DxLoadPanelModule, DxDataGridModule, DxPieChartModule, DxDropDownBoxModule, DxListModule   } from 'devextreme-angular';
 import notify from 'devextreme/ui/notify';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { LoadingPanelComponent } from './loading-panel/loading-panel.component';
@@ -106,7 +106,9 @@ import {
     BrowserModule,
     HttpModule,
     FormsModule,
-    DxLoadPanelModule
+    DxLoadPanelModule,
+    DxDropDownBoxModule ,
+    DxListModule  
   ],
 
   providers: [MetricsService, DataService],

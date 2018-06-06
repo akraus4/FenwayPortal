@@ -63,6 +63,7 @@ export class DataComponent implements OnInit {
   agileStoryId: string;
   agileSystemUserStoryPoints: string;
   viewValue: any;
+  statementExecuted: any;
 
   constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
     this.dataService = dataService;
@@ -330,6 +331,45 @@ export class DataComponent implements OnInit {
     }
 
   };
+
+  getEditTableData(workUser: TemplateRef<any>, workTeam: TemplateRef<any>, workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>, agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>) {
+    if(this.table_name == "agile_system_user") {
+      var asu_id = this.agileSystemUserId;
+      var asu_name = this.agileSystemUserName;
+      var as_id = this.agileSystemId;
+      var wtm_id = this.workTeamMemberID;
+      var wu_id = this.workUserID;
+      this.dataService.editTableDataASU(asu_id, asu_name, as_id, wtm_id, wu_id)
+      .map(res => { return res.json(); })
+      .subscribe((results) => { this.statementExecuted = results;});
+      this.closeModal()
+    }
+    else if(this.table_name == "agile_sprint"){
+      var aSprintId = this.agileSprintId;
+      var aSprintName = this.agileSprintName;
+      var aSystemId = this.agileSystemId;
+      var sprintDescription = this.sprintDescription;
+      var sprintStartDate = this.sprintStartDate;
+      var sprintEndDate = this.sprintEndDate;
+      this.dataService.editTableDataASprint(aSprintId,aSprintName,aSystemId,sprintDescription,sprintStartDate,sprintEndDate)
+      .map(res => { return res.json(); })
+      .subscribe((results) => { this.statementExecuted = results;});
+      this.closeModal()
+    }
+    else if(this.table_name == "agile_story"){
+      var aStoryId = this.agileStoryid;
+      var aStoryName = this.agileSprintName;
+      var aSprintId = this.agileSystemId;
+      var storyDescription = this.sprintDescription;
+      var storyType = this.storyType;
+      var storyStatus = this.storyStatus;
+      var storyPoints = this.storyPoints;
+      this.dataService.editTableDataASprint(aSprintId,aSprintName,aSystemId,sprintDescription,sprintStartDate,sprintEndDate)
+      .map(res => { return res.json(); })
+      .subscribe((results) => { this.statementExecuted = results;});
+      this.closeModal()
+    }
+  }
 };
 
 

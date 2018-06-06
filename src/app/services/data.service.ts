@@ -12,13 +12,29 @@ export class DataService {
 	constructor(@Inject(Http) http) {
 		this.http = http;
 	}
-	
-    //Not pulling data because our work team ID's do not match with work team tables.
-    findTableData(table_name) {
+
+	//Not pulling data because our work team ID's do not match with work team tables.
+	findTableData(table_name) {
 		let result = this.http.get(this.url + '/findTableData/' + table_name);
 		console.log(JSON.stringify(result));
 		return result
 
+	}
+
+	editTableDataASU(asu_id, asu_name, as_id, wtm_id, wu_id) {
+		let result = this.http.get(this.url + '/editTableDataASU/' + asu_id + '/' + asu_name + '/' + as_id + '/' + wtm_id + '/' + wu_id) ;
+		console.log(JSON.stringify(result));
+		return result
+	}
+	editTableDataASprint(aSprintId,aSprintName,aSystemId,sprintDescription,sprintStartDate,sprintEndDate) {
+		let result = this.http.get(this.url + '/editTableDataASprint/' + aSprintId + '/' + aSprintName + '/' + aSystemId + '/' + sprintDescription + '/' + sprintStartDate + '/' + sprintEndDate) ;
+		console.log(JSON.stringify(result));
+		return result
+	}
+	editTableDataAStory(aStoryId,aStoryName,aSprintId,storyDescription,storyType,storyStatus,storyPoints) {
+		let result = this.http.get(this.url + '/editTableDataAStory/' + aStoryId + '/' + aStoryName + '/' + aSprintId + '/' + storyDescription + '/' + storyType + '/' + storyStatus + '/' + storyPoints) ;
+		console.log(JSON.stringify(result));
+		return result
 	}
 }
 
