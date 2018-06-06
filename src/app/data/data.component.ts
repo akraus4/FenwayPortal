@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, TemplateRef, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Inject, TemplateRef, ViewChild, AfterViewInit, getDebugNode } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { DxButtonModule } from 'devextreme-angular';
@@ -7,7 +7,9 @@ import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { DataService } from '../services/data.service'
 import { MetricsService } from '../services/metrics.service'
 import { DxTextBoxModule, DxNumberBoxModule, DxSelectBoxModule } from 'devextreme-angular';
-
+import data_grid from 'devextreme/ui/data_grid';
+import { DataSource } from '@angular/cdk/table';
+import { DxiDataGridColumn } from 'devextreme-angular/ui/nested/base/data-grid-column-dxi';
 @Component({
   selector: 'app-data',
   templateUrl: './data.component.html',
@@ -19,6 +21,7 @@ export class DataComponent implements OnInit {
   modalRef: BsModalRef;
   title: string = "Data Management";
   columnChoices: Array<any> = [];
+  dropDownChoices: Array<any> = [];
   currentTable;
   selectedopt = "0";
   table: string;
@@ -64,6 +67,13 @@ export class DataComponent implements OnInit {
   agileSystemUserStoryPoints: string;
   viewValue: any;
   statementExecuted: any;
+  // Data sources for each dropdown in the data templates
+  drop_name;
+  dropDownData;
+  dropDownData1
+  dropDownData2;
+  dropDownData3;
+  dropdownDataInt = 0;
 
   constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
     this.dataService = dataService;
@@ -90,7 +100,6 @@ export class DataComponent implements OnInit {
     { value: 7, viewValue: "Agile Story" },
     { value: 8, viewValue: "Agile Story Agile System User" }
   ];
-  
 
   //Default column list.
   // columns = [
@@ -108,14 +117,16 @@ export class DataComponent implements OnInit {
     // $("#id").dxSelectBox("instance").option("value", 0);
   }
 
-  workUserOnInit(){
+  workUserOnInit() {
     this.currentTable = 'Work User'
     this.setupTable()
     this.metricsService.hideLoadingPanel();
   }
 
   openModal(workUser: TemplateRef<any>, workTeam: TemplateRef<any>, workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>, agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>) {
-    let selectedData = this.dataGrid.instance.getSelectedRowsData();
+    let selectedData = this.dataGrid.instance.getSelectedRowsData(); 
+    console.log(selectedData)
+    this.dropdownDataInt = 0;
     if (this.table_name == "work_user") {
       this.workUserId = selectedData[0] ? selectedData[0].work_user_id : null
       this.firstName = selectedData[0] ? selectedData[0].firstname : null
@@ -129,12 +140,13 @@ export class DataComponent implements OnInit {
       this.workTeamName = selectedData[0] ? selectedData[0].work_team_name : null
       this.projectID = selectedData[0] ? selectedData[0].project_id : null
       this.projectName = selectedData[0] ? selectedData[0].project_name : null
-      this.modalRef = this.modalService.show(workTeam) 
+      this.modalRef = this.modalService.show(workTeam)
     }
 
     else if (this.table_name == "work_team_member") {
       this.workTeamMemberId = selectedData[0] ? selectedData[0].work_team_member_id : null
       this.modalRef = this.modalService.show(workTeamMember)
+
     }
 
     else if (this.table_name == "work_dailyhours") {
@@ -155,7 +167,7 @@ export class DataComponent implements OnInit {
     else if (this.table_name == "agile_system_user") {
       this.agileSystemUserId = selectedData[0] ? selectedData[0].agile_system_user_id : null
       this.agileSystemUserName = selectedData[0] ? selectedData[0].agile_system_user_name : null
-      this.agileSystemId = selectedData[0] ? selectedData[0].agile_system_id : null
+      this.agileSystemName = selectedData[0] ? selectedData[0].agile_system_id : null
       this.workTeamMemberID = selectedData[0] ? selectedData[0].work_team_member_id : null
       this.workUserID = selectedData[0] ? selectedData[0].work_user_id : null
       this.modalRef = this.modalService.show(agileSystemUser)
@@ -187,17 +199,23 @@ export class DataComponent implements OnInit {
       this.modalRef = this.modalService.show(agileStoryAgileSystemUser)
     }
   }
-
-  selectTable(e) {
-     var i = e.value;
-     this.currentTable = this.tables[i].viewValue
+  closeModal() {
+    this.modalService.hide(1);
+    
+  }
+  storeCurrentTable(tableName: string) {
+    this.currentTable = tableName;
     this.setupTable();
   }
-
+    selectTable(e) {
+      var i = e.value;
+      this.currentTable = this.tables[i].viewValue
+    this.setupTable();
+  }
   setupTable() {
-    
+
     this.metricsService.showLoadingPanel()
-    
+
     if (this.currentTable == 'Work User') {
       this.table_name = "work_user"
     }
@@ -234,9 +252,29 @@ export class DataComponent implements OnInit {
       .subscribe((results) => { this.TableChoices = results; this.getColumns(); this.metricsService.hideLoadingPanel(); });
   }
 
-  closeModal() {
-    this.modalService.hide(1)
-    }
+  getDropDown(table_name) {
+    console.log(this.table_name)
+    this.dataService.findDropDownData(this.table_name)
+      .map(res => { return res.json(); })
+      .subscribe((results) => { 
+        if (this.dropdownDataInt == 0) {
+          this.dropDownData = results;
+          console.log("1")
+        }
+        else  if (this.dropdownDataInt == 1) {
+          this.dropDownData1 = results;
+          console.log("2")
+        }
+        else  if (this.dropdownDataInt == 2) {
+          this.dropDownData2 = results;
+          console.log("3")
+        }
+        this.dropdownDataInt++;
+        // this.dropDownData = results;
+        //  this.dropDownData1 = results; 
+        //  this.dropDownData2 = results; 
+         console.log(JSON.stringify(results)) });
+  }
 
   getColumns() {
     if (this.currentTable == "Work User") {
@@ -329,7 +367,6 @@ export class DataComponent implements OnInit {
         { dataField: "agile_system_user_story_points", caption: "User Story Points" }
       ];
     }
-
   };
   
   getEditTableData(workUser: TemplateRef<any>, workTeam: TemplateRef<any>, workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>, agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>) {
@@ -356,10 +393,10 @@ export class DataComponent implements OnInit {
     else if(this.table_name == "agile_system_user") {
       var asu_id = this.agileSystemUserId;
       var asu_name = this.agileSystemUserName;
-      var as_id = this.agileSystemId;
+      var aSystem_id = this.agileSystemId
       var wtm_id = this.workTeamMemberID;
       var wu_id = this.workUserID;
-      this.dataService.editTableDataASU(asu_id, asu_name, as_id, wtm_id, wu_id)
+      this.dataService.editTableDataASystemUser(asu_id, asu_name, aSystem_id, wtm_id, wu_id)
       .map(res => { return res.json(); })
       .subscribe((results) => { this.statementExecuted = results;});
       this.closeModal()

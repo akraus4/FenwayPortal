@@ -2,6 +2,7 @@
 <div class="row">
   <div class="col-sm-12">
     <h1 id="title"> {{title}} </h1>
+    <h2> {{e}}</h2>
     <app-sign-in></app-sign-in>
   </div>
 </div>
@@ -28,7 +29,7 @@
 
 
     <div class="col-sm-1">
-      <button id="addRow" mat-button class='dataBtn' (click)="openModal(workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser)">
+      <button id="addRow" mat-button class='dataBtn' (click)="openModal(workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser);getDropDown()">
         <i class="fas fa-plus-circle"></i>
       </button>
     </div>
@@ -89,7 +90,7 @@
   </div>
   <div class="buttons">
     <button class="submit">Submit</button>
-    <button class="cancel">Cancel</button>
+    <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
   <br />
@@ -100,17 +101,16 @@
     <h4 class="modal-title pull-left">Work Team Member</h4>
   </div>
   <div class="modal-body">
-    Work Team Member ID:
-    <dx-text-box id="wTeamMemberId" [(value)]="workTeamMemberId"></dx-text-box>
-    <br /> Work Team:
-    <dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
-    <br /> Work User:
-    <dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
+    Work Team Member ID:<dx-text-box id="wTeamMemberId" [(value)]="workTeamMemberId"></dx-text-box>
+    <br />
+    Work Team:<dx-select-box  [dataSource] = "dropDownData" displayExpr="work_team_name" valueExpr= "work_team_id"></dx-select-box>
+    <br />
+    Work User:<dx-select-box [dataSource] = "dropDownData1" displayExpr="firstName" valueExpr= "work_user_id"></dx-select-box>
     <br />
   </div>
   <div class="buttons">
     <button class="submit">Submit</button>
-    <button class="cancel">Cancel</button>
+    <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
   <br />
@@ -121,17 +121,16 @@
     <h4 class="modal-title"> Work Daily Hours</h4>
   </div>
   <div class="modal-body">
-    Work Daily Hours ID:
-    <dx-text-box id="wDailyHoursId" [(value)]="workDailyHoursId"></dx-text-box>
-    <br /> Work Team:
-    <dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
-    <br /> Work Date:
-    <dx-text-box id="workDate" [(value)]="workDate"></dx-text-box>
-    <br /> Hours:
-    <dx-text-box id="hours" [(value)]="hours"></dx-text-box>
+    Work Daily Hours ID:<dx-text-box id="wDailyHoursId" [(value)]="workDailyHoursId"></dx-text-box>
+    <br />
+    Work Team:<dx-select-box  [dataSource] = "dropDownData" displayExpr="work_team_name" valueExpr= "work_team_id"></dx-select-box>
+    <br /> 
+    Work Date: <dx-text-box id="workDate" [(value)]="workDate"></dx-text-box>
+    <br /> 
+    Hours: <dx-text-box id="hours" [(value)]="hours"></dx-text-box>
   </div>
   <div class="buttons">
-    <button class="submit" (click)="getEditTableData()">Submit</button>
+    <button class="submit">Submit</button>
     <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
@@ -143,15 +142,14 @@
     <h4 class="modal-title pull-left">Agile System</h4>
   </div>
   <div class="modal-body">
-
-    Agile System ID:
-    <dx-text-box id="aSystemId" [(value)]="agileSystemId"></dx-text-box>
-    <br /> Agile Sytem Name:
-    <dx-text-box id="aSystemName" [(value)]="agileSystemName"></dx-text-box>
-    <br /> Agile System Type:
-    <dx-text-box id="aSystemType" [(value)]="agileSystemType"></dx-text-box>
-    <br /> Work Team:
-    <dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
+    
+    Agile System ID:<dx-text-box id="aSystemId" [(value)]="agileSystemId"></dx-text-box>
+    <br /> 
+    Agile Sytem Name:<dx-text-box id="aSystemName" [(value)]="agileSystemName"></dx-text-box>
+    <br /> 
+    Agile System Type:<dx-text-box id="aSystemType" [(value)]="agileSystemType"></dx-text-box>
+    <br /> 
+    Work Team:<dx-select-box  [dataSource] = "dropDownData" displayExpr="work_team_name" valueExpr= "work_team_id"></dx-select-box>
   </div>
   <div class="buttons">
     <button class="submit" (click)="getEditTableData()">Submit</button>
@@ -166,21 +164,20 @@
     <h4 class="modal-title pull-left">Agile System User</h4>
   </div>
   <div class="modal-body">
-    Agile System User ID:
-    <dx-text-box id="aSystemUserId" [(value)]="agileSystemUserId"></dx-text-box>
-    <br /> Agile Sytem User Name:
-    <dx-text-box id="aSystemUserName" [(value)]="agileSystemUserName"></dx-text-box>
-    <br /> Agile System:
-    <dx-select-box id="aSystemId" [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
-    <br /> Work Team Member:
-    <dx-select-box id="wTeamMemberId" [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
-    <br /> Work User:
-    <dx-select-box id="wUserId" [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
+    Agile System User ID:<dx-text-box id="aSystemUserId" [(value)]="agileSystemUserId"></dx-text-box>
+    <br /> 
+    Agile Sytem User Name:<dx-text-box id="asystemUserName" [(value)]="agileSystemUserName"></dx-text-box>
+    <br />
+    Agile System:<dx-select-box  [dataSource] = "dropDownData" displayExpr="agile_system_name" valueExpr= "agile_system_id" [value]="agileSystemName"></dx-select-box>
+    <br />
+    Work Team Member:<dx-select-box  [dataSource] = "dropDownData1" displayExpr="work_team_member_id" valueExpr= "work_team_member_id"></dx-select-box>
+    <br /> 
+    Work User:<dx-select-box  [dataSource] = "dropDownData" displayExpr="firstname" valueExpr= "work_user_id"></dx-select-box>
     <br/>
   </div>
   <div class="buttons">
     <button class="submit" (click)="getEditTableData()">Submit</button>
-    <button class="cancel">Cancel</button>
+    <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
   <br />
@@ -193,16 +190,16 @@
   <div class="modal-body">
     Agile Sprint ID:
     <dx-text-box id="aSprintId" [(value)]="agileSprintId"></dx-text-box>
-    <br /> Agile Sprint Name:
-    <dx-text-box id="aSprintName" [(value)]="agileSprintName"></dx-text-box>
-    <br /> Agile System:
-    <dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
-    <br /> Sprint Description:
-    <dx-text-box id="sprintDescription" [(value)]="sprintDescription"></dx-text-box>
-    <br/> Sprint Start Date:
-    <dx-text-box id="sprintStartDate" [(value)]="sprintStartDate"></dx-text-box>
-    <br/> Sprint End Date:
-    <dx-text-box id="sprintEndDate" [(value)]="sprintEndDate"></dx-text-box>
+    <br /> 
+    Agile Sprint Name:<dx-text-box id="aSprintName" [(value)]="agileSprintName"></dx-text-box>
+    <br />
+    Agile System:<dx-select-box [dataSource] = "dropDownData" displayExpr="agile_system_name" valueExpr= "agile_system_id"></dx-select-box>
+    <br /> 
+    Sprint Description:<dx-text-box id="sprintDescription" [(value)]="sprintDescription"></dx-text-box>
+    <br/> 
+    Sprint Start Date:<dx-text-box id="sprintStartDate" [(value)]="sprintStartDate"></dx-text-box>
+    <br/> 
+    Sprint End Date:<dx-text-box id="sprintEndDate" [(value)]="sprintEndDate"></dx-text-box>
   </div>
   <br/>
   <div class="buttons">
@@ -218,21 +215,20 @@
     <h4 class="modal-title pull-left"> Agile Story</h4>
   </div>
   <div class="modal-body">
-
-    Agile Story ID:
-    <dx-text-box id="agileStoryid" [(value)]="agileStoryid"></dx-text-box>
-    <br /> Agile Sprint:
-    <dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
-    <br /> Story Type:
-    <dx-text-box id="storyType" [(value)]="storyType"></dx-text-box>
-    <br /> Story Status:
-    <dx-text-box id="storyStatus" [(value)]="storyStatus"></dx-text-box>
-    <br /> Story Points:
-    <dx-text-box id="storyPoints" [(value)]="storyPoints"></dx-text-box>
+    
+    Agile Story ID:<dx-text-box id="agileStoryid" [(value)]="agileStoryid"></dx-text-box>
+    <br />
+    Agile Sprint:<dx-select-box  [dataSource] = "dropDownData" displayExpr="agile_sprint_name" valueExpr= "agile_sprint_id"></dx-select-box>
+    <br />
+    Story Type:<dx-text-box id="storyType" [(value)]="storyType"></dx-text-box>
+    <br />
+    Story Status:<dx-text-box id="storyStatus" [(value)]="storyStatus"></dx-text-box>
+    <br />
+    Story Points:<dx-text-box id="storyPoints" [(value)]="storyPoints"></dx-text-box>
   </div>
   <div class="buttons">
-    <button class="submit">Submit</button>
-    <button class="cancel">Cancel</button>
+    <button class="submit"(click)="getEditTableData()">Submit</button>
+    <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
   <br />
@@ -243,21 +239,27 @@
     <h4 class="modal-title pull-left"> Agile Story Agile System User</h4>
   </div>
   <div class="modal-body">
-    Agile Story Agile System User ID:
-    <dx-text-box id="agileStoryAgileSystemUserId" [(value)]="agileStoryAgileSystemUserId"></dx-text-box>
-    <br /> Agile Story
-    <dx-select-box id="agileStoryId" [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
-    <br /> Agile system User:
-    <dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
-    <br /> Agile System User Story Points:
-    <dx-text-box id="agileSystemUserStoryPoints" [(value)]="agileSystemUserStoryPoints"></dx-text-box>
+    Agile Story Agile System User ID:<dx-text-box id="agileStoryAgileSystemUserId" [(value)]="agileStoryAgileSystemUserId"></dx-text-box>
+    <br />
+    Agile Story<dx-select-box id="agileStoryId" [dataSource] = "dropDownData" displayExpr="agile_story_name" valueExpr= "agile_story_id"></dx-select-box>
+    <br />
+    Agile system User:<dx-select-box  [dataSource] = "dropDownData" displayExpr="agile_system_user_name" valueExpr= "agile_system_user_id"></dx-select-box>
+    <br />
+    Agile System User Story Points:<dx-text-box id="agileSystemUserStoryPoints" [(value)]="agileSystemUserStoryPoints"></dx-text-box>
   </div>
   <div class="buttons">
-    <button class="submit">Submit</button>
-    <button class="cancel">Cancel</button>
+    <button class="submit" (click)="getEditTableData()">Submit</button>
+    <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
   <br />
 </ng-template>
 
 <app-loading-panel></app-loading-panel>
+
+<div>
+<p>
+
+</p>
+
+</div>

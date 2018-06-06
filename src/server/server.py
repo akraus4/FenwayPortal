@@ -322,11 +322,11 @@ def editTableDataASystem(aSystem_id,aSystem_name,aSystem_type,wTeam_id):
     return statementExecuted
 
 
-@app.route("/editTableDataASU/<asu_id>/<asu_name>/<as_id>/<wtm_id>/<wu_id>")
-def editTableDataASU(asu_id,asu_name,as_id,wtm_id,wu_id):
+@app.route("/editTableDataASystemUser/<asu_id>/<asu_name>/<aSystem_id>/<wtm_id>/<wu_id>")
+def editTableDataASU(asu_id,asu_name,aSystem_id,wtm_id,wu_id):
     cur.execute("INSERT INTO agile_system_user(agile_system_user_id,agile_system_user_name,agile_system_id,work_team_member_id,work_user_id)"
-                + "Values('" + asu_id + "','" + asu_name + "','" + as_id + "','" + wtm_id + "','" + wu_id + "')"
-                + "ON DUPLICATE KEY UPDATE agile_system_user_name='" + asu_name + "', agile_system_id='" + as_id + "', work_team_member_id='" + wtm_id + "',work_user_id='" + wu_id + "'")
+                + "Values('" + asu_id + "','" + asu_name + "','" + aSystem_id + "','" + wtm_id + "','" + wu_id + "')"
+                + "ON DUPLICATE KEY UPDATE agile_system_user_name='" + asu_name + "', agile_system_id='" + aSystem_id + "', work_team_member_id='" + wtm_id + "',work_user_id='" + wu_id + "'")
     statementExecuted = "True"
     return statementExecuted
 
@@ -347,6 +347,114 @@ def editTableDataAS(aSprintId,aSprintName,aSystemId,sprintDescription,sprintStar
 #     return statementExecuted
 
 # @app.route
+@app.route("/findDropDownData/<table_name>")
+def findDropDownData(table_name):
+    
+    print("Paramater: " + table_name)
+
+
+    if table_name == "work_team":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('SELECT work_team_id, work_team_name from work_team;')
+        for row in cur.fetchall():
+            addObject['work_team_id'] = row[0]
+            addObject['work_team_name'] = row[1]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i=i+1
+    elif table_name == "work_team_member":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('SELECT work_team_id, work_team_name FROM work_team;')
+        for row in cur.fetchall():
+            addObject['work_team_id'] = row[0]
+            addObject['work_team_name'] = row[1]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i=i+1
+    elif table_name == "work_dailyhours":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('SELECT work_team_id, work_team_name from work_team;')
+        for row in cur.fetchall():
+            addObject['work_team_id'] = row[0]
+            addObject['work_team_name'] = row[1]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i=i+1
+    elif table_name == "agile_system":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('SELECT work_team_id, work_team_name from work_team;')
+        for row in cur.fetchall():
+            addObject['work_team_id'] = row[0]
+            addObject['work_team_name'] = row[1]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i=i+1
+    elif table_name == "agile_system_user":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('SELECT agile_system_id, agile_system_name FROM agile_system;')
+        for row in cur.fetchall():
+            addObject['agile_system_id'] = row[0]
+            addObject['agile_system_name'] = row[1]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i= i +1
+    elif table_name == "agile_sprint":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('SELECT agile_system_id , agile_system_name FROM agile_system;')
+        for row in cur.fetchall():
+            addObject['agile_system_id'] = row[0]
+            addObject['agile_system_name'] = row[1]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i= i +1
+
+    elif table_name == "agile_story":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('SELECT agile_sprint_id, agile_sprint_name FROM agile_sprint;')
+        for row in cur.fetchall():
+            addObject['agile_sprint_id'] = row[0]
+            addObject['agile_sprint_name'] = row[1]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i= i + 1
+    elif table_name == "agile_story_agile_system_user":
+        jsonList = []
+        addObject = {}
+        i=0
+        cur.execute('SELECT agile_story_id, agile_story_name FROM agile_story;')
+        for row in cur.fetchall():
+            addObject['agile_story_id'] = row[0]
+            addObject['agile_story_name'] = row[1]
+            jsonList.insert(i, addObject)
+            addObject = {}
+            i=i+1
+    return json.dumps(jsonList)
+
+
+
+
+
+
+
+
+
+
+
+
 
 # @app.route("/getColumnData/<tableName>")
 # def getColumnData():

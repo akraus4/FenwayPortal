@@ -33,8 +33,8 @@ export class DataService {
 		return result
 	}
 
-	editTableDataASU(asu_id, asu_name, as_id, wtm_id, wu_id) {
-		let result = this.http.get(this.url + '/editTableDataASU/' + asu_id + '/' + asu_name + '/' + as_id + '/' + wtm_id + '/' + wu_id) ;
+	editTableDataASystemUser(asu_id, asu_name, aSystem_id, wtm_id, wu_id) {
+		let result = this.http.get(this.url + '/editTableDataASystemUser/' + asu_id + '/' + asu_name + '/' + aSystem_id + '/' + wtm_id + '/' + wu_id) ;
 		console.log(JSON.stringify(result));
 		return result
 	}
@@ -47,6 +47,11 @@ export class DataService {
 
 	editTableDataAStory(aStoryId,aStoryName,aSprintId,storyDescription,storyType,storyStatus,storyPoints) {
 		let result = this.http.get(this.url + '/editTableDataAStory/' + aStoryId + '/' + aStoryName + '/' + aSprintId + '/' + storyDescription + '/' + storyType + '/' + storyStatus + '/' + storyPoints) ;
+		console.log(JSON.stringify(result));
+		return result
+	}
+	findDropDownData(table_name) {
+		let result = this.http.get(this.url + '/findDropDownData/'+ table_name);
 		console.log(JSON.stringify(result));
 		return result
 	}
