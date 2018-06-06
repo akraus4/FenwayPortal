@@ -20,7 +20,7 @@
 
 
     <div class="col-sm-1">
-      <button id="addRow" mat-button class='dataBtn' (click)="openModal(workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser)">
+      <button id="addRow" mat-button class='dataBtn' (click)="openModal(workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser);getDropDown()">
         <i class="fas fa-plus-circle"></i>
       </button>
     </div>
@@ -55,7 +55,7 @@
     Email:<dx-text-box id="email" [(value)]="email"></dx-text-box>
   </div>
   <div class="buttons">
-    <button class="submit" (click)="getD()">Submit</button>
+    <button class="submit">Submit</button>
     <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
@@ -92,9 +92,9 @@
   <div class="modal-body">
     Work Team Member ID:<dx-text-box id="wTeamMemberId" [(value)]="workTeamMemberId"></dx-text-box>
     <br />
-    Work Team:<dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
+    Work Team:<dx-select-box  [dataSource] = "dropDownData" displayExpr="work_team_name" valueExpr= "work_team_id"></dx-select-box>
     <br />
-    Work User:<dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
+    Work User:<dx-select-box [dataSource] = "dropDownData1" displayExpr="firstName" valueExpr= "work_user_id"></dx-select-box>
     <br />
   </div>
   <div class="buttons">
@@ -112,7 +112,7 @@
   <div class="modal-body">
     Work Daily Hours ID:<dx-text-box id="wDailyHoursId" [(value)]="workDailyHoursId"></dx-text-box>
     <br />
-    Work Team:<dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
+    Work Team:<dx-select-box  [dataSource] = "dropDownData" displayExpr="work_team_name" valueExpr= "work_team_id"></dx-select-box>
     <br /> 
     Work Date: <dx-text-box id="workDate" [(value)]="workDate"></dx-text-box>
     <br /> 
@@ -137,8 +137,8 @@
     Agile Sytem Name:<dx-text-box id="aSystemName" [(value)]="agileSystemName"></dx-text-box>
     <br /> 
     Agile System Type:<dx-text-box id="aSystemType" [(value)]="agileSystemType"></dx-text-box>
-    <br /> workUser
-    Work Team:<dx-select-box  [dataSource]="dropDownData"  displayExpr="" [(value)]="labelLocation"></dx-select-box>
+    <br /> 
+    Work Team:<dx-select-box  [dataSource] = "dropDownData" displayExpr="work_team_name" valueExpr= "work_team_id"></dx-select-box>
   </div>
   <div class="buttons">
     <button class="submit" >Submit</button>
@@ -157,11 +157,11 @@
     <br /> 
     Agile Sytem User Name:<dx-text-box id="asystemUserName" [(value)]="agileSystemUserName"></dx-text-box>
     <br />
-    Agile System:<dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
+    Agile System:<dx-select-box  [dataSource] = "dropDownData" displayExpr="agile_system_name" valueExpr= "agile_system_id"></dx-select-box>
     <br />
-    Work Team Member:<dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
+    Work Team Member:<dx-select-box  [dataSource] = "dropDownData1" displayExpr="work_team_member_id" valueExpr= "work_team_member_id"></dx-select-box>
     <br /> 
-    Work User:<dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
+    Work User:<dx-select-box  [dataSource] = "dropDownData" displayExpr="firstname" valueExpr= "work_user_id"></dx-select-box>
     <br/>
   </div>
   <div class="buttons">
@@ -182,7 +182,7 @@
     <br /> 
     Agile Sprint Name:<dx-text-box id="aSprintName" [(value)]="agileSprintName"></dx-text-box>
     <br />
-    Agile System:<dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
+    Agile System:<dx-select-box [dataSource] = "dropDownData" displayExpr="agile_system_name" valueExpr= "agile_system_id"></dx-select-box>
     <br /> 
     Sprint Description:<dx-text-box id="sprintDescription" [(value)]="sprintDescription"></dx-text-box>
     <br/> 
@@ -192,7 +192,7 @@
   </div>
   <br/>
   <div class="buttons">
-    <button class="submit"  (click) = " getDropDown()">Submit</button>
+    <button class="submit" >Submit</button>
     <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
@@ -207,7 +207,7 @@
     
     Agile Story ID:<dx-text-box id="agileStoryid" [(value)]="agileStoryid"></dx-text-box>
     <br />
-    Agile Sprint:<dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
+    Agile Sprint:<dx-select-box  [dataSource] = "dropDownData" displayExpr="agile_sprint_name" valueExpr= "agile_sprint_id"></dx-select-box>
     <br />
     Story Type:<dx-text-box id="storyType" [(value)]="storyType"></dx-text-box>
     <br />
@@ -230,9 +230,9 @@
   <div class="modal-body">
     Agile Story Agile System User ID:<dx-text-box id="agileStoryAgileSystemUserId" [(value)]="agileStoryAgileSystemUserId"></dx-text-box>
     <br />
-    Agile Story<dx-select-box id="agileStoryId" [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
+    Agile Story<dx-select-box id="agileStoryId"  [dataSource] = "dropDownData" displayExpr="agile_story_name" valueExpr= "agile_story_id"></dx-select-box>
     <br />
-    Agile system User:<dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
+    Agile system User:<dx-select-box  [dataSource] = "dropDownData" displayExpr="agile_system_user_name" valueExpr= "agile_system_user_id"></dx-select-box>
     <br />
     Agile System User Story Points:<dx-text-box id="agileSystemUserStoryPoints" [(value)]="agileSystemUserStoryPoints"></dx-text-box>
   </div>
