@@ -330,10 +330,10 @@ def findDropDownData(table_name):
         jsonList = []
         addObject = {}
         i=0
-        cur.execute('SELECT work_dailyhours_id, work_team_member_id from work_dailyhours;')
+        cur.execute('SELECT work_team_id, work_team_name from work_team;')
         for row in cur.fetchall():
-            addObject['work_dailyhours_id'] = row[0]
-            addObject['work_team_member_id'] = row[1]
+            addObject['work_team_id'] = row[0]
+            addObject['work_team_name'] = row[1]
             jsonList.insert(i, addObject)
             addObject = {}
             i=i+1
@@ -341,10 +341,10 @@ def findDropDownData(table_name):
         jsonList = []
         addObject = {}
         i=0
-        cur.execute('SELECT agile_system_id, agile_system_name FROM agile_system;')
+        cur.execute('SELECT work_team_id, work_team_name from work_team;')
         for row in cur.fetchall():
-            addObject['agile_system_id'] = row[0]
-            addObject['agile_system_name'] = row[0]
+            addObject['work_team_id'] = row[0]
+            addObject['work_team_name'] = row[1]
             jsonList.insert(i, addObject)
             addObject = {}
             i=i+1
@@ -375,13 +375,13 @@ def findDropDownData(table_name):
         jsonList = []
         addObject = {}
         i=0
-        cur.execute('SELECT agile_story_id, agile_story_name FROM agile_story;')
+        cur.execute('SELECT agile_sprint_id, agile_sprint_name FROM agile_sprint;')
         for row in cur.fetchall():
-            addObject['agile_story_id'] = row[0]
-            addObject['agile_story_name'] = row[1]
-            jsonList = []
+            addObject['agile_sprint_id'] = row[0]
+            addObject['agile_sprint_name'] = row[1]
+            jsonList.insert(i, addObject)
             addObject = {}
-            i=0
+            i= i + 1
     elif table_name == "agile_story_agile_system_user":
         jsonList = []
         addObject = {}
