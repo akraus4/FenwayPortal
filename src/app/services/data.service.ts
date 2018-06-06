@@ -21,16 +21,30 @@ export class DataService {
 
 	}
 
+	editTableDataWDailyhours(wDailyhours_id,wTeam_member_id,work_date,hours) {
+		let result = this.http.get(this.url + '/editTableDataWDailyhours/' + wDailyhours_id + '/' + wTeam_member_id + '/' + work_date + '/' + hours) ;
+		console.log(JSON.stringify(result));
+		return result
+	}
+
+	editTableDataASystem(aSystem_id,aSystem_name,aSystem_type,wTeam_id) {
+		let result = this.http.get(this.url + '/editTableDataASystem/' + aSystem_id + '/' + aSystem_name + '/' + aSystem_type + '/' + wTeam_id) ;
+		console.log(JSON.stringify(result));
+		return result
+	}
+
 	editTableDataASU(asu_id, asu_name, as_id, wtm_id, wu_id) {
 		let result = this.http.get(this.url + '/editTableDataASU/' + asu_id + '/' + asu_name + '/' + as_id + '/' + wtm_id + '/' + wu_id) ;
 		console.log(JSON.stringify(result));
 		return result
 	}
+
 	editTableDataASprint(aSprintId,aSprintName,aSystemId,sprintDescription,sprintStartDate,sprintEndDate) {
 		let result = this.http.get(this.url + '/editTableDataASprint/' + aSprintId + '/' + aSprintName + '/' + aSystemId + '/' + sprintDescription + '/' + sprintStartDate + '/' + sprintEndDate) ;
 		console.log(JSON.stringify(result));
 		return result
 	}
+
 	editTableDataAStory(aStoryId,aStoryName,aSprintId,storyDescription,storyType,storyStatus,storyPoints) {
 		let result = this.http.get(this.url + '/editTableDataAStory/' + aStoryId + '/' + aStoryName + '/' + aSprintId + '/' + storyDescription + '/' + storyType + '/' + storyStatus + '/' + storyPoints) ;
 		console.log(JSON.stringify(result));

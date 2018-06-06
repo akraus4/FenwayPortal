@@ -131,8 +131,8 @@
     <dx-text-box id="hours" [(value)]="hours"></dx-text-box>
   </div>
   <div class="buttons">
-    <button class="submit">Submit</button>
-    <button class="cancel">Cancel</button>
+    <button class="submit" (click)="getEditTableData()">Submit</button>
+    <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
   <br />
@@ -154,8 +154,8 @@
     <dx-select-box [items]="['left', 'top']" [(value)]="labelLocation"></dx-select-box>
   </div>
   <div class="buttons">
-    <button class="submit">Submit</button>
-    <button class="cancel">Cancel</button>
+    <button class="submit" (click)="getEditTableData()">Submit</button>
+    <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
   <br />
@@ -206,8 +206,8 @@
   </div>
   <br/>
   <div class="buttons">
-    <button class="submit">Submit</button>
-    <button class="cancel">Cancel</button>
+    <button class="submit" (click)="getEditTableData()">Submit</button>
+    <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
   <br />

@@ -331,9 +331,29 @@ export class DataComponent implements OnInit {
     }
 
   };
-
+  
   getEditTableData(workUser: TemplateRef<any>, workTeam: TemplateRef<any>, workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>, agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>) {
-    if(this.table_name == "agile_system_user") {
+    if(this.table_name == "work_dailyhours") {
+      var wDailyhours_id = this.workDailyHoursId;
+      var wTeam_member_id = this.workTeamMemberID;
+      var work_date = this.workDate;
+      var hours = this.hours;
+      this.dataService.editTableDataWDailyhours(wDailyhours_id,wTeam_member_id,work_date,hours)
+      .map(res => { return res.json(); })
+      .subscribe((results) => { this.statementExecuted = results;});
+      this.closeModal()
+    }
+    else if(this.table_name == "agile_system") {
+      var aSystem_id = this.agileSystemId;
+      var aSystem_name = this.agileSystemName;
+      var aSystem_type = this.agileSystemType;
+      var wTeam_id = this.workTeamID;
+      this.dataService.editTableDataASystem(aSystem_id, aSystem_name, aSystem_type, wTeam_id)
+      .map(res => { return res.json(); })
+      .subscribe((results) => { this.statementExecuted = results;});
+      this.closeModal()
+    }
+    else if(this.table_name == "agile_system_user") {
       var asu_id = this.agileSystemUserId;
       var asu_name = this.agileSystemUserName;
       var as_id = this.agileSystemId;
