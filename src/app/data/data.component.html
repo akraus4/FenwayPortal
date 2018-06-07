@@ -13,7 +13,7 @@
     <div class="col-sm-4">
       <!-- <mat-form-field class="selectTables" id="tableSelector" >
         <mat-select [(ngModel)]="selectedopt" (change)="storeCurrentTable($event.value.viewValue)" >
-          <mat-option *ngFor="let table of tables" [value] = 'tables'>{{table.viewValue}}</mat-option>
+          <mat-option *ngFor="let table of tables" [value] = 'tables[0].value'>{{table.viewValue}}</mat-option>
         </mat-select>
       </mat-form-field> -->
       <dx-select-box 
@@ -168,7 +168,7 @@
     <br /> 
     Agile Sytem User Name:<dx-text-box id="asystemUserName" [(value)]="agileSystemUserName"></dx-text-box>
     <br />
-    Agile System:<dx-select-box  [dataSource] = "dropDownData" displayExpr="agile_system_name" valueExpr= "agile_system_id" [value]="agileSystemName"></dx-select-box>
+    Agile System:<dx-select-box  [dataSource] = "dropDownData" displayExpr="agile_system_name" valueExpr= "agile_system_id"></dx-select-box>
     <br />
     Work Team Member:<dx-select-box  [dataSource] = "dropDownData1" displayExpr="work_team_member_id" valueExpr= "work_team_member_id"></dx-select-box>
     <br /> 

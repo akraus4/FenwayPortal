@@ -23,7 +23,7 @@ export class DataComponent implements OnInit {
   columnChoices: Array<any> = [];
   dropDownChoices: Array<any> = [];
   currentTable;
-  selectedopt = "0";
+  selectedopt;
   table: string;
   dataService: any;
   table_name: any;
@@ -113,7 +113,7 @@ export class DataComponent implements OnInit {
 
   ngOnInit() {
     this.workUserOnInit();
-    
+    // this.selectedopt = this.tables[0].value;
     // $("#id").dxSelectBox("instance").option("value", 0);
   }
 
@@ -396,6 +396,7 @@ export class DataComponent implements OnInit {
       var aSystem_id = this.agileSystemId
       var wtm_id = this.workTeamMemberID;
       var wu_id = this.workUserID;
+      console.log(this.agileSystemId + " :Component.ts")
       this.dataService.editTableDataASystemUser(asu_id, asu_name, aSystem_id, wtm_id, wu_id)
       .map(res => { return res.json(); })
       .subscribe((results) => { this.statementExecuted = results;});

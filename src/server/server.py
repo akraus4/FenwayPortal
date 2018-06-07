@@ -332,6 +332,7 @@ def editTableDataASU(asu_id,asu_name,aSystem_id,wtm_id,wu_id):
 
 @app.route("/editTableDataASprint/<aSprintId>/<aSprintName>/<aSystemId>/<sprintDescription>/<sprintStartDate>/<sprintEndDate>")
 def editTableDataAS(aSprintId,aSprintName,aSystemId,sprintDescription,sprintStartDate,sprintEndDate):
+    print(aSystemId + " :python")
     cur.execute("INSERT INTO agile_sprint(agile_sprint_id,agile_sprint_name,agile_system_id,sprint_description,sprint_start_date,sprint_end_date)"
                 + "Values('" + aSprintId + "','" + aSprintName + "','" + aSystemId + "','" + sprintDescription + "','" + sprintStartDate + "','" + sprintEndDate + "')"
                 + "ON DUPLICATE KEY UPDATE agile_sprint_id='" + aSprintId + "', agile_sprint_name='" + aSprintName + "', agile_system_id='" + aSystemId + "',sprint_description='" + sprintDescription + "',sprint_start_date='" + sprintStartDate + "',sprint_end_date='" + sprintEndDate + "'")
