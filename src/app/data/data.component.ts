@@ -69,6 +69,7 @@ export class DataComponent implements OnInit {
   statementExecuted: any;
   // Data sources for each dropdown in the data templates
   drop_name;
+  originalDataSource;
   dropDownData;
   dropDownData1
   dropDownData2;
@@ -132,8 +133,7 @@ export class DataComponent implements OnInit {
   }
 
   openModal(workUser: TemplateRef<any>, workTeam: TemplateRef<any>, workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>, agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>) {
-    let selectedData = this.dataGrid.instance.getSelectedRowsData(); 
-    console.log(selectedData)
+    let selectedData = this.dataGrid.instance.getSelectedRowsData();
     this.dropdownDataInt = 0;
     if (this.table_name == "work_user") {
       this.workUserId = selectedData[0] ? selectedData[0].work_user_id : null
@@ -209,7 +209,7 @@ export class DataComponent implements OnInit {
   }
   closeModal() {
     this.modalService.hide(1);
-    
+
   }
   storeCurrentTable(tableName: string) {
     this.currentTable = tableName;
@@ -264,24 +264,56 @@ export class DataComponent implements OnInit {
     console.log(this.table_name)
     this.dataService.findDropDownData(this.table_name)
       .map(res => { return res.json(); })
-      .subscribe((results) => { 
-        if (this.dropdownDataInt == 0) {
-          this.dropDownData = results;
-          console.log("1")
+      .subscribe((results) => {
+        var newResults = JSON.stringify(results).split('],[');
+      this.originalDataSource = results;  
+        // if (this.dropdownDataInt == 0) {
+        //   this.dropDownData = results;
+        //   console.log("1")
+        // }
+        // else  if (this.dropdownDataInt == 1) {
+        //   this.dropDownData1 = results;
+        //   console.log("2")
+        // }
+        // else  if (this.dropdownDataInt == 2) {
+        //   this.dropDownData2 = results;
+        //   console.log("3")
+        // }
+        // this.dropdownDataInt++;
+        var ddResult1 = newResults[0].concat(']');
+        ddResult1 = ddResult1.substr(1);
+        ddResult1 = JSON.parse(ddResult1);
+        console.log(ddResult1);
+        if (newResults[2] == null) {
+          var ddResult2 = '[' + newResults[1];
+          ddResult2 = ddResult2.slice(0, -1);
+          ddResult2 = JSON.parse(ddResult2);
+          console.log(ddResult2);
+        } else {
+          console.log('made');
+          var ddResult2 = '[' + newResults[1];
+          ddResult2 = newResults[1].concat(']');
+          ddResult2 = JSON.parse(ddResult2);
+          console.log(ddResult2);
         }
-        else  if (this.dropdownDataInt == 1) {
-          this.dropDownData1 = results;
-          console.log("2")
-        }
-        else  if (this.dropdownDataInt == 2) {
-          this.dropDownData2 = results;
-          console.log("3")
-        }
-        this.dropdownDataInt++;
-        // this.dropDownData = results;
-        //  this.dropDownData1 = results; 
-        //  this.dropDownData2 = results; 
-         console.log(JSON.stringify(results)) });
+        // var dResult3 = '[' + newResults[2];
+        // dResult3 = dResult3.slice(0, -1 );
+        // dResult3 = JSON.parse(dResult3);
+        // console.log(dResult3);
+
+
+        var ddResult1 = newResults[0].concat(']');
+        ddResult1 = ddResult1.substr(1);
+        ddResult1 = JSON.parse(ddResult1);
+        console.log(ddResult1);
+        // console.log(newResults[1]);
+        // console.log(newResults[2]);
+        this.dropDownData = ddResult1;
+        this.dropDownData1 = ddResult2;
+        this.dropDownData2 = newResults[2];
+        this.dropDownData3 = newResults[3];
+        console.log(JSON.stringify(results));
+      });
   }
 
   getColumns() {
