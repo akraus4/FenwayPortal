@@ -65,7 +65,7 @@
     <dx-text-box id="email" [(value)]="email"></dx-text-box>
   </div>
   <div class="buttons">
-    <button class="submit">Submit</button>
+    <button class="submit" (click)="getEditTableData()">Submit</button>
     <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
@@ -83,13 +83,13 @@
     <br /> Work Team Name:
     <dx-text-box id="wTeamName" [(value)]="workTeamName"></dx-text-box>
     <br /> Project ID:
-    <dx-text-box id="projectId" [(value)]="projectID"></dx-text-box>
+    <dx-text-box id="projectId" [(value)]="projectNameworkTeam"></dx-text-box>
     <br /> Project Name:
     <dx-text-box id="projectName" [(value)]="projectName"></dx-text-box>
     <br />
   </div>
   <div class="buttons">
-    <button class="submit">Submit</button>
+    <button class="submit" (click)="getEditTableData()">Submit</button>
     <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
@@ -109,7 +109,7 @@
     <br />
   </div>
   <div class="buttons">
-    <button class="submit">Submit</button>
+    <button class="submit" (click)="getEditTableData()">Submit</button>
     <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
@@ -130,7 +130,7 @@
     Hours: <dx-text-box id="hours" [(value)]="hours"></dx-text-box>
   </div>
   <div class="buttons">
-    <button class="submit">Submit</button>
+    <button class="submit" (click)="getEditTableData()">Submit</button>
     <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
@@ -227,7 +227,7 @@
     Story Points:<dx-text-box id="storyPoints" [(value)]="storyPoints"></dx-text-box>
   </div>
   <div class="buttons">
-    <button class="submit"(click)="getEditTableData()">Submit</button>
+    <button class="submit" (click)="getEditTableData()">Submit</button>
     <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>

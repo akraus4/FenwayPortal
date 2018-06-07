@@ -39,7 +39,7 @@ export class DataComponent implements OnInit {
   email: string;
   workTeamID: string;
   workTeamName: string;
-  projectID: string;
+  projectNameworkTeam: string;
   projectName: string;
   workTeamMemberId: string;
   workDailyHoursId: string;
@@ -74,6 +74,14 @@ export class DataComponent implements OnInit {
   dropDownData2;
   dropDownData3;
   dropdownDataInt = 0;
+  wTeamId: string;
+  wTeamName:string;
+  pNameworkTeam:string;
+  pName:string;
+  wUserId:string;
+  fName:string;
+  lName:string;
+  email1:string;
 
   constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
     this.dataService = dataService;
@@ -138,7 +146,7 @@ export class DataComponent implements OnInit {
     else if (this.table_name == "work_team") {
       this.workTeamID = selectedData[0] ? selectedData[0].work_team_id : null
       this.workTeamName = selectedData[0] ? selectedData[0].work_team_name : null
-      this.projectID = selectedData[0] ? selectedData[0].project_id : null
+      this.projectNameworkTeam = selectedData[0] ? selectedData[0].project_id : null
       this.projectName = selectedData[0] ? selectedData[0].project_name : null
       this.modalRef = this.modalService.show(workTeam)
     }
@@ -370,26 +378,56 @@ export class DataComponent implements OnInit {
   };
   
   getEditTableData(workUser: TemplateRef<any>, workTeam: TemplateRef<any>, workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>, agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>) {
-    if(this.table_name == "work_dailyhours") {
-      var wDailyhours_id = this.workDailyHoursId;
-      var wTeam_member_id = this.workTeamMemberID;
-      var work_date = this.workDate;
-      var hours = this.hours;
-      this.dataService.editTableDataWDailyhours(wDailyhours_id,wTeam_member_id,work_date,hours)
+
+    if(this.table_name == "work_user"){
+      var wUserId = this.workUserId;
+      var fName = this.firstName;
+      var lName = this.lastName;
+      var email = this.email;
+      this.dataService.editTableDataWUser(wUserId,fName,lName,email)
+      .map(res => { return res.json(); })
+      .subscribe((results) => { this.statementExecuted = results; });
+      this.closeModal()
+   }
+    else if(this.table_name == "work_team"){
+      var wTeamId = this.workTeamID;
+      var wTeamName = this.workTeamName;
+      var pNameworkTeam = this.projectNameworkTeam;
+      var pName = this.projectName;
+      this.dataService.editTableDataWTeam(wTeamId,wTeamName,pNameworkTeam,pName)
       .map(res => { return res.json(); })
       .subscribe((results) => { this.statementExecuted = results;});
       this.closeModal()
-    }
-    else if(this.table_name == "agile_system") {
-      var aSystem_id = this.agileSystemId;
-      var aSystem_name = this.agileSystemName;
-      var aSystem_type = this.agileSystemType;
-      var wTeam_id = this.workTeamID;
-      this.dataService.editTableDataASystem(aSystem_id, aSystem_name, aSystem_type, wTeam_id)
+   }
+   else if(this.table_name == "work_team_member"){
+      var wTeamMemberId = this.workTeamMemberId;
+      var wTeamId = this.workTeamID;
+      var wUserId = this.workUserId;
+      this.dataService.editTableDataWTeamMember(wTeamMemberId,wTeamId,wUserId)
       .map(res => { return res.json(); })
       .subscribe((results) => { this.statementExecuted = results;});
       this.closeModal()
-    }
+   }
+   else if(this.table_name == "work_dailyhours") {
+    var wDailyhours_id = this.workDailyHoursId;
+    var wTeam_member_id = this.workTeamMemberID;
+    var work_date = this.workDate;
+    var hours = this.hours;
+    this.dataService.editTableDataWDailyhours(wDailyhours_id,wTeam_member_id,work_date,hours)
+    .map(res => { return res.json(); })
+    .subscribe((results) => { this.statementExecuted = results;});
+    this.closeModal()
+  }
+  else if(this.table_name == "agile_system") {
+    var aSystem_id = this.agileSystemId;
+    var aSystem_name = this.agileSystemName;
+    var aSystem_type = this.agileSystemType;
+    var wTeam_id = this.workTeamID;
+    this.dataService.editTableDataASystem(aSystem_id, aSystem_name, aSystem_type, wTeam_id)
+    .map(res => { return res.json(); })
+    .subscribe((results) => { this.statementExecuted = results;});
+    this.closeModal()
+  }
     else if(this.table_name == "agile_system_user") {
       var asu_id = this.agileSystemUserId;
       var asu_name = this.agileSystemUserName;
@@ -406,28 +444,34 @@ export class DataComponent implements OnInit {
       var aSprintId = this.agileSprintId;
       var aSprintName = this.agileSprintName;
       var aSystemId = this.agileSystemId;
-      var sprintDescription = this.sprintDescription;
-      var sprintStartDate = this.sprintStartDate;
-      var sprintEndDate = this.sprintEndDate;
-      this.dataService.editTableDataASprint(aSprintId,aSprintName,aSystemId,sprintDescription,sprintStartDate,sprintEndDate)
+      var sDescription = this.sprintDescription;
+      var sStartDate = this.sprintStartDate;
+      var sEndDate = this.sprintEndDate;
+      this.dataService.editTableDataASprint(aSprintId,aSprintName,aSystemId,sDescription,sStartDate,sEndDate)
       .map(res => { return res.json(); })
       .subscribe((results) => { this.statementExecuted = results;});
       this.closeModal()
     }
     else if(this.table_name == "agile_story"){
       var aStoryId = this.agileStoryid;
-      var aStoryName = this.agileSprintName;
-      var aSprintId = this.agileSystemId;
-      var storyDescription = this.sprintDescription;
-      var storyType = this.storyType;
-      var storyStatus = this.storyStatus;
-      var storyPoints = this.storyPoints;
-      this.dataService.editTableDataASprint(aSprintId,aSprintName,aSystemId,sprintDescription,sprintStartDate,sprintEndDate)
+      var aSprintId = this.agileSprintId;
+      var sType = this.storyType;
+      var sStatus = this.storyStatus;
+      var sPoints = this.storyPoints;
+      this.dataService.editTableDataAStory(aStoryId,aSprintId,sType,sStatus,sPoints)
+      .map(res => { return res.json(); })
+      .subscribe((results) => { this.statementExecuted = results;});
+      this.closeModal()
+    }
+    else if(this.table_name == "agile_story_agile_system_user"){
+      var aStoryAgileSystemUserId = this.agileStoryAgileSystemUserId;
+      var aStoryId = this.agileStoryId;
+      var aSystemUserId = this.agileSystemUserId;
+      var aSystemUserStoryPoints = this.agileSystemUserStoryPoints;
+      this.dataService.editTableDataASAgileSystemUser(aStoryAgileSystemUserId,aStoryId,aSystemUserId,aSystemUserStoryPoints)
       .map(res => { return res.json(); })
       .subscribe((results) => { this.statementExecuted = results;});
       this.closeModal()
     }
   }
-};
-
-
+}
