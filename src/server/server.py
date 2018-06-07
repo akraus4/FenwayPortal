@@ -384,15 +384,31 @@ def findDropDownData(table_name):
             i= i + 1
     elif table_name == "agile_story_agile_system_user":
         jsonList = []
-        addObject = {}
-        i=0
-        cur.execute('SELECT agile_story_id, agile_story_name FROM agile_story;')
+        addObjectStory = {}
+        addObjectSystem = {}
+        iStory=0
+        iSystem=0
+        jsonListStory = []
+        jsonListSystem = []
+        sqlStory = 'SELECT agile_story_id, agile_story_name FROM agile_story;'
+        sqlSystem = 'SELECT agile_system_user_id, agile_system_user_name FROM agile_system_user;'
+        cur.execute(sqlStory)
         for row in cur.fetchall():
-            addObject['agile_story_id'] = row[0]
-            addObject['agile_story_name'] = row[1]
-            jsonList.insert(i, addObject)
-            addObject = {}
-            i=i+1
+            addObjectStory['agile_story_id'] = row[0]
+            addObjectStory['agile_story_name'] = row[1]
+            jsonListStory.insert(iStory, addObjectStory)
+            addObjectStory = {}
+            iStory=iStory+1
+        jsonList.insert(0, jsonListStory)
+        cur.execute(sqlSystem)
+        for row in cur.fetchall():
+            addObjectSystem['agile_system_user_id'] = row[0]
+            addObjectSystem['agile_system_user_name'] = row[1]
+            jsonListSystem.insert(iSystem, addObjectSystem)
+            addObjectSystem = {}
+            iSystem=iSystem+1
+        jsonList.insert(1, jsonListSystem)
+        print(jsonList)
     return json.dumps(jsonList)
 
 
