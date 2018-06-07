@@ -8,8 +8,9 @@ import { DataService } from '../services/data.service'
 import { MetricsService } from '../services/metrics.service'
 import { DxTextBoxModule, DxNumberBoxModule, DxSelectBoxModule } from 'devextreme-angular';
 import data_grid from 'devextreme/ui/data_grid';
-import { DataSource } from '@angular/cdk/table';
 import { DxiDataGridColumn } from 'devextreme-angular/ui/nested/base/data-grid-column-dxi';
+import DataSource from 'devextreme/data/data_source';
+
 @Component({
   selector: 'app-data',
   templateUrl: './data.component.html',
