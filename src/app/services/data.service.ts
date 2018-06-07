@@ -22,7 +22,11 @@ export class DataService {
 	}
 	findDropDownData(table_name) {
 		let result = this.http.get(this.url + '/findDropDownData/'+ table_name);
-		console.log(JSON.stringify(result));
+		console.log('Result = ' + JSON.stringify(result));
+		console.log('Result 2 = ' + result);
+		var results = JSON.stringify(result).split(', ');
+		console.log('Result Story = ' + JSON.stringify(results[0]));
+
 		return result
 	}
 }
