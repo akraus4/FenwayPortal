@@ -1,9 +1,11 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { DxDataGridComponent } from 'devextreme-angular';
 
 @Injectable()
 
 export class DataService {
+	
 	developmentURL = 'http://localhost:5000'
 	productionURL = ''
 	url = this.developmentURL
