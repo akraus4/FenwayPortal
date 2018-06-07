@@ -424,7 +424,6 @@ def findDropDownData(table_name):
             addObjectUser = {}
             iUser= iUser+1
         jsonList.insert(1, jsonListUser)
-        print(jsonList)
     elif table_name == "work_dailyhours":
         jsonList = []
         addObject = {}
@@ -507,7 +506,6 @@ def findDropDownData(table_name):
             addObjectSystem = {}
             iSystem=iSystem+1
         jsonList.insert(1, jsonListSystem)
-        print(jsonList)
     return json.dumps(jsonList)
 
 

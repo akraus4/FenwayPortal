@@ -47,6 +47,7 @@ export class DataComponent implements OnInit {
   workDate: string;
   hours: string;
   name: string;
+  agileStoryName: string;
   agileSystemType: string;
   agileSystemName: string;
   agileSystemId: string;
@@ -61,8 +62,10 @@ export class DataComponent implements OnInit {
   sprintEndDate: string;
   agileStoryid: string;
   storyType: string;
+  workUserName: string;
   storyStatus: string;
   storyPoints: string;
+  workTeamMemberName: string;
   agileStoryAgileSystemUserId: string;
   agileStoryId: string;
   agileSystemUserStoryPoints: string;
@@ -154,12 +157,15 @@ export class DataComponent implements OnInit {
 
     else if (this.table_name == "work_team_member") {
       this.workTeamMemberId = selectedData[0] ? selectedData[0].work_team_member_id : null
+      this.workTeamName = selectedData[0] ? selectedData[0].work_team_id : null
+      this.workUserName = selectedData[0] ? selectedData[0].work_user_id : null
       this.modalRef = this.modalService.show(workTeamMember)
 
     }
 
     else if (this.table_name == "work_dailyhours") {
       this.workDailyHoursId = selectedData[0] ? selectedData[0].work_dailyhours_id : null
+      this.workTeamMemberName = selectedData[0] ? selectedData[0].work_team_member_id : null
       this.workDate = selectedData[0] ? selectedData[0].work_date : null
       this.hours = selectedData[0] ? selectedData[0].hours : null
       this.modalRef = this.modalService.show(workDailyhours)
@@ -184,7 +190,7 @@ export class DataComponent implements OnInit {
     else if (this.table_name == "agile_sprint") {
       this.agileSprintId = selectedData[0] ? selectedData[0].agile_sprint_id : null
       this.agileSprintName = selectedData[0] ? selectedData[0].agile_sprint_name : null
-      this.agileSystemId = selectedData[0] ? selectedData[0].agile_system_id : null
+      this.agileSystemName = selectedData[0] ? selectedData[0].agile_system_id : null
       this.sprintDescription = selectedData[0] ? selectedData[0].sprint_description : null
       this.sprintStartDate = selectedData[0] ? selectedData[0].sprint_start_date : null
       this.sprintEndDate = selectedData[0] ? selectedData[0].sprint_end_date : null
@@ -193,7 +199,7 @@ export class DataComponent implements OnInit {
 
     else if (this.table_name == "agile_story") {
       this.agileStoryid = selectedData[0] ? selectedData[0].agile_story_id : null
-      this.agileSprintId = selectedData[0] ? selectedData[0].agile_sprint_id : null
+      this.agileSprintName = selectedData[0] ? selectedData[0].agile_sprint_id : null
       this.storyType = selectedData[0] ? selectedData[0].story_type : null
       this.storyStatus = selectedData[0] ? selectedData[0].story_status : null
       this.storyPoints = selectedData[0] ? selectedData[0].story_points : null
@@ -202,7 +208,7 @@ export class DataComponent implements OnInit {
 
     else if (this.table_name == "agile_story_agile_system_user") {
       this.agileStoryAgileSystemUserId = selectedData[0] ? selectedData[0].agile_story_agile_system_user_id : null
-      this.agileStoryId = selectedData[0] ? selectedData[0].agile_story_id : null
+      this.agileStoryName = selectedData[0] ? selectedData[0].agile_story_id : null
       this.agileSystemUserName = selectedData[0] ? selectedData[0].agile_system_user_id : null
       this.agileSystemUserStoryPoints = selectedData[0] ? selectedData[0].agile_system_user_story_points : null
       this.modalRef = this.modalService.show(agileStoryAgileSystemUser)
@@ -262,7 +268,6 @@ export class DataComponent implements OnInit {
   }
 
   getDropDown(table_name) {
-    console.log(this.table_name)
     this.dataService.findDropDownData(this.table_name)
       .map(res => { return res.json(); })
       .subscribe((results) => {
@@ -284,31 +289,24 @@ export class DataComponent implements OnInit {
         var ddResult1 = newResults[0].concat(']');
         ddResult1 = ddResult1.substr(1);
         ddResult1 = JSON.parse(ddResult1);
-        console.log(ddResult1);
         if (newResults[2] == null) {
           var ddResult2 = '[' + newResults[1];
           ddResult2 = ddResult2.slice(0, -1);
           ddResult2 = JSON.parse(ddResult2);
-          console.log(ddResult2);
         } else {
-          console.log('made');
           var ddResult2 = '[' + newResults[1];
           ddResult2 = newResults[1].concat(']');
-          ddResult2 = JSON.parse(ddResult2);
-          console.log(ddResult2);
         }
     
 
         var ddResult1 = newResults[0].concat(']');
         ddResult1 = ddResult1.substr(1);
         ddResult1 = JSON.parse(ddResult1);
-        console.log(ddResult1);
         // console.log(newResults[1]);
         // console.log(newResults[2]);
         this.dropDownData = ddResult1;
         this.dropDownData1 = ddResult2;
         this.dropDownData2 = newResults[2];
-        console.log(JSON.stringify(results));
       });
   }
 
@@ -429,8 +427,8 @@ export class DataComponent implements OnInit {
    }
    else if(this.table_name == "work_team_member"){
       var wTeamMemberId = this.workTeamMemberId;
-      var wTeamId = this.workTeamID;
-      var wUserId = this.workUserId;
+      var wTeamId = this.workTeamName;
+      var wUserId = this.workUserName;
       this.dataService.editTableDataWTeamMember(wTeamMemberId,wTeamId,wUserId)
       .map(res => { return res.json(); })
       .subscribe((results) => { this.statementExecuted = results;});
@@ -462,7 +460,6 @@ export class DataComponent implements OnInit {
       var aSystem_id = this.agileSystemId
       var wtm_id = this.workTeamMemberID;
       var wu_id = this.workUserID;
-      console.log(this.agileSystemId + " :Component.ts")
       this.dataService.editTableDataASystemUser(asu_id, asu_name, aSystem_id, wtm_id, wu_id)
       .map(res => { return res.json(); })
       .subscribe((results) => { this.statementExecuted = results;});
@@ -471,7 +468,7 @@ export class DataComponent implements OnInit {
     else if(this.table_name == "agile_sprint"){
       var aSprintId = this.agileSprintId;
       var aSprintName = this.agileSprintName;
-      var aSystemId = this.agileSystemId;
+      var aSystemId = this.agileSystemName;
       var sDescription = this.sprintDescription;
       var sStartDate = this.sprintStartDate;
       var sEndDate = this.sprintEndDate;
@@ -482,7 +479,7 @@ export class DataComponent implements OnInit {
     }
     else if(this.table_name == "agile_story"){
       var aStoryId = this.agileStoryid;
-      var aSprintId = this.agileSprintId;
+      var aSprintId = this.agileSprintName;
       var sType = this.storyType;
       var sStatus = this.storyStatus;
       var sPoints = this.storyPoints;
@@ -493,8 +490,8 @@ export class DataComponent implements OnInit {
     }
     else if(this.table_name == "agile_story_agile_system_user"){
       var aStoryAgileSystemUserId = this.agileStoryAgileSystemUserId;
-      var aStoryId = this.agileStoryId;
-      var aSystemUserId = this.agileSystemUserId;
+      var aStoryId = this.agileStoryName;
+      var aSystemUserId = this.agileSystemUserName;
       var aSystemUserStoryPoints = this.agileSystemUserStoryPoints;
       this.dataService.editTableDataASAgileSystemUser(aStoryAgileSystemUserId,aStoryId,aSystemUserId,aSystemUserStoryPoints)
       .map(res => { return res.json(); })
