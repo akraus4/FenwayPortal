@@ -218,7 +218,7 @@
     
     Agile Story ID:<dx-text-box id="agileStoryid" [(value)]="agileStoryid"></dx-text-box>
     <br />
-    Agile Sprint:<dx-select-box  [dataSource] = "originalDataSource" displayExpr="agile_sprint_name" valueExpr= "agile_sprint_id"></dx-select-box>
+    Agile Sprint:<dx-select-box  [dataSource] = "originalDataSource" displayExpr="agile_sprint_name" valueExpr= "agile_sprint_id" [value]="agileSystemName"></dx-select-box>
     <br />
     Story Type:<dx-text-box id="storyType" [(value)]="storyType"></dx-text-box>
     <br />
