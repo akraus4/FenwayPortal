@@ -67,6 +67,7 @@ export class DataComponent implements OnInit {
   viewValue: any;
   // Data sources for each dropdown in the data templates
   drop_name;
+  originalDataSource;
   dropDownData;
   dropDownData1
   dropDownData2;
@@ -246,7 +247,7 @@ export class DataComponent implements OnInit {
       .map(res => { return res.json(); })
       .subscribe((results) => {
         var newResults = JSON.stringify(results).split('],[');
-
+      this.originalDataSource = results;  
         // if (this.dropdownDataInt == 0) {
         //   this.dropDownData = results;
         //   console.log("1")
@@ -276,10 +277,10 @@ export class DataComponent implements OnInit {
           ddResult2 = JSON.parse(ddResult2);
           console.log(ddResult2);
         }
-        var dResult3 = '[' + newResults[2];
-        dResult3 = dResult3.slice(0, -1 );
-        dResult3 = JSON.parse(dResult3);
-        console.log(dResult3);
+        // var dResult3 = '[' + newResults[2];
+        // dResult3 = dResult3.slice(0, -1 );
+        // dResult3 = JSON.parse(dResult3);
+        // console.log(dResult3);
 
 
         var ddResult1 = newResults[0].concat(']');
