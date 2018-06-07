@@ -6,7 +6,7 @@ import { DxDataGridModule, DxDataGridComponent } from 'devextreme-angular';
 import { NgIf, NgSwitch, NgSwitchCase } from '@angular/common';
 import { DataService } from '../services/data.service'
 import { MetricsService } from '../services/metrics.service'
-import { DxTextBoxModule, DxNumberBoxModule, DxSelectBoxModule  } from 'devextreme-angular';
+import { DxTextBoxModule, DxNumberBoxModule, DxSelectBoxModule } from 'devextreme-angular';
 import DataSource from 'devextreme/data/data_source';
 import data_grid from 'devextreme/ui/data_grid';
 import { DxiDataGridColumn } from 'devextreme-angular/ui/nested/base/data-grid-column-dxi';
@@ -247,7 +247,7 @@ export class DataComponent implements OnInit {
       .map(res => { return res.json(); })
       .subscribe((results) => {
         var newResults = JSON.stringify(results).split('],[');
-      this.originalDataSource = results;  
+        this.originalDataSource = results;
         // if (this.dropdownDataInt == 0) {
         //   this.dropDownData = results;
         //   console.log("1")
@@ -261,6 +261,7 @@ export class DataComponent implements OnInit {
         //   console.log("3")
         // }
         // this.dropdownDataInt++;
+        console.log('**************** ' + newResults);
         var ddResult1 = newResults[0].concat(']');
         ddResult1 = ddResult1.substr(1);
         ddResult1 = JSON.parse(ddResult1);
@@ -273,26 +274,31 @@ export class DataComponent implements OnInit {
         } else {
           console.log('made');
           var ddResult2 = '[' + newResults[1];
-          ddResult2 = newResults[1].concat(']');
+          console.log('1 ########### ' + ddResult2);
+          ddResult2 = ddResult2 + ']';
+          console.log('2 ########### ' + ddResult2);  
           ddResult2 = JSON.parse(ddResult2);
-          console.log(ddResult2);
+          // var ddResult3 = '[' + newResults[2];
+          // ddResult3 = ddResult3.slice(0, -1);
+          // ddResult3 = JSON.parse(ddResult3);
+          // console.log('3 ########### ' + ddResult3)
+          // var dResult3 = '[' + newResults[3];
+          // dResult3 = dResult3.slice(0, -1 );
+          // dResult3 = JSON.parse(dResult3);
+          // console.log(dResult3);
         }
-        // var dResult3 = '[' + newResults[2];
-        // dResult3 = dResult3.slice(0, -1 );
-        // dResult3 = JSON.parse(dResult3);
-        // console.log(dResult3);
 
 
-        var ddResult1 = newResults[0].concat(']');
-        ddResult1 = ddResult1.substr(1);
-        ddResult1 = JSON.parse(ddResult1);
-        console.log(ddResult1);
+        // var ddResult1 = newResults[0].concat(']');
+        // ddResult1 = ddResult1.substr(1);
+        // ddResult1 = JSON.parse(ddResult1);
+        // console.log(ddResult1);
         // console.log(newResults[1]);
-        // console.log(newResults[2]);
+        // console.log(newResults[2]);  
         this.dropDownData = ddResult1;
         this.dropDownData1 = ddResult2;
-        this.dropDownData2 = newResults[2];
-        this.dropDownData3 = newResults[3];
+        // this.dropDownData2 = ddResult3;
+        // this.dropDownData3 = newResults[3];
         console.log(JSON.stringify(results));
       });
   }
