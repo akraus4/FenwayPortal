@@ -247,7 +247,7 @@ export class DataComponent implements OnInit {
       .map(res => { return res.json(); })
       .subscribe((results) => {
         var newResults = JSON.stringify(results).split('],[');
-      this.originalDataSource = results;  
+        this.originalDataSource = results;
         // if (this.dropdownDataInt == 0) {
         //   this.dropDownData = results;
         //   console.log("1")
@@ -277,11 +277,7 @@ export class DataComponent implements OnInit {
           ddResult2 = JSON.parse(ddResult2);
           console.log(ddResult2);
         }
-        // var dResult3 = '[' + newResults[2];
-        // dResult3 = dResult3.slice(0, -1 );
-        // dResult3 = JSON.parse(dResult3);
-        // console.log(dResult3);
-
+    
 
         var ddResult1 = newResults[0].concat(']');
         ddResult1 = ddResult1.substr(1);
@@ -292,7 +288,6 @@ export class DataComponent implements OnInit {
         this.dropDownData = ddResult1;
         this.dropDownData1 = ddResult2;
         this.dropDownData2 = newResults[2];
-        this.dropDownData3 = newResults[3];
         console.log(JSON.stringify(results));
       });
   }

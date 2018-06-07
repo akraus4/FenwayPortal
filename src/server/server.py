@@ -177,7 +177,6 @@ def findTableData(table_name):
             addObject = {}
             i=i+1
 
-
     elif table_name == "agile_system":
         jsonList = []
         addObject = {}
@@ -317,15 +316,31 @@ def findDropDownData(table_name):
             i=i+1
     elif table_name == "work_team_member":
         jsonList = []
-        addObject = {}
-        i=0
-        cur.execute('SELECT work_team_id, work_team_name FROM work_team;')
+        addObjectTeam = {}
+        addObjectUser = {}
+        iTeam=0
+        iUser=0
+        jsonListTeam = []
+        jsonListUser = []
+        sqlTeam = 'SELECT work_team_id, work_team_name FROM work_team;'
+        sqlUser = 'SELECT work_user_id, firstname, lastname FROM work_user;'
+        cur.execute(sqlTeam)
         for row in cur.fetchall():
-            addObject['work_team_id'] = row[0]
-            addObject['work_team_name'] = row[1]
-            jsonList.insert(i, addObject)
-            addObject = {}
-            i=i+1
+            addObjectTeam['work_team_id'] = row[0]
+            addObjectTeam['work_team_name'] = row[1]
+            jsonListTeam.insert(iTeam, addObjectTeam)
+            addObjectTeam = {}
+            iTeam=iTeam+1
+        jsonList.insert(0, jsonListTeam)
+        cur.execute(sqlUser)
+        for row in cur.fetchall():
+            addObjectUser['work_user_id'] = row[0]
+            addObjectUser['name'] = row[1] + ' ' + row[2]
+            jsonListUser.insert(iUser, addObjectUser)
+            addObjectUser = {}
+            iUser= iUser+1
+        jsonList.insert(1, jsonListUser)
+        print(jsonList)
     elif table_name == "work_dailyhours":
         jsonList = []
         addObject = {}
