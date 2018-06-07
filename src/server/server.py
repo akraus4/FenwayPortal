@@ -305,6 +305,30 @@ def findTableData(table_name):
 
     return json.dumps(jsonList)
 
+@app.route("/editTableDataWUser/<wUserId>/<fName>/<lName>/<email>")
+def editTableDataWUser(wUserId,fName,lName,email):
+    cur.execute("INSERT INTO work_user(work_user_id,firstname,lastname,email)"
+                + "Values('" + wUserId + "','" + fName + "','" + lName + "','" + email + "')"
+                + "ON DUPLICATE KEY UPDATE work_user_id='" + wUserId + "', firstname='" + fName + "', lastname='" + lName + "', email='" + email + "'")
+    statementExecuted = "True"
+    return statementExecuted
+
+
+@app.route("/editTableDataWTeam/<wTeamId>/<wTeamName>/<pNameworkTeam>/<pName>")
+def editTableDataWTeam(wTeamId,wTeamName,pNameworkTeam,pName):
+    cur.execute("INSERT INTO work_team(work_team_id,work_team_name,project_namework_team,project_name)"
+                + "Values('" + wTeamId + "','" + wTeamName + "','" + pNameworkTeam + "','" + pName + "')"
+                + "ON DUPLICATE KEY UPDATE work_team_name='" + wTeamName + "', project_namework_team='" + pNameworkTeam + "', project_name='" + pName + "'")
+    statementExecuted = "True"
+    return statementExecuted
+
+@app.route("/editTableDataWTeamMember/<wTeamMemberId>/<wTeamId>/<wUserId>")
+def editTableDataWTeamMember(wTeamMemberId,wTeamId,wUserId):
+    cur.execute("INSERT INTO work_team_member(work_team_member_id,work_team_id,work_user_id)"
+                + "Values('" + wTeamMemberId + "','" + wTeamId + "','" + wUserId + "')"
+                + "ON DUPLICATE KEY UPDATE work_team_member_id='" + wTeamMemberId + "', work_team_id='" + wTeamId + "', work_user_id='" + wUserId + "'")
+    statementExecuted = "True"
+    return statementExecuted
 
 @app.route("/editTableDataASU/<asu_id>/<asu_name>/<as_id>/<wtm_id>/<wu_id>")
 def editTableDataASU(asu_id,asu_name,as_id,wtm_id,wu_id):
@@ -314,21 +338,31 @@ def editTableDataASU(asu_id,asu_name,as_id,wtm_id,wu_id):
     statementExecuted = "True"
     return statementExecuted
 
-@app.route("/editTableDataASprint/<aSprintId>/<aSprintName>/<aSystemId>/<sprintDescription>/<sprintStartDate>/<sprintEndDate>")
-def editTableDataAS(aSprintId,aSprintName,aSystemId,sprintDescription,sprintStartDate,sprintEndDate):
+@app.route("/editTableDataASprint/<aSprintId>/<aSprintName>/<aSystemId>/<sDescription>/<sStartDate>/<sEndDate>")
+def editTableDataASprint(aSprintId,aSprintName,aSystemId,sDescription,sStartDate,sEndDate):
     cur.execute("INSERT INTO agile_sprint(agile_sprint_id,agile_sprint_name,agile_system_id,sprint_description,sprint_start_date,sprint_end_date)"
-                + "Values('" + aSprintId + "','" + aSprintName + "','" + aSystemId + "','" + sprintDescription + "','" + sprintStartDate + "','" + sprintEndDate + "')"
-                + "ON DUPLICATE KEY UPDATE agile_sprint_id='" + aSprintId + "', agile_sprint_name='" + aSprintName + "', agile_system_id='" + aSystemId + "',sprint_description='" + sprintDescription + "',sprint_start_date='" + sprintStartDate + "',sprint_end_date='" + sprintEndDate + "'")
+                + "Values('" + aSprintId + "','" + aSprintName + "','" + aSystemId + "','" + sDescription + "','" + sStartDate + "','" + sEndDate + "')"
+                + "ON DUPLICATE KEY UPDATE agile_sprint_id='" + aSprintId + "', agile_sprint_name='" + aSprintName + "', agile_system_id='" + aSystemId + "',sprint_description='" + sDescription + "',sprint_start_date='" + sStartDate + "',sprint_end_date='" + sEndDate + "'")
     statementExecuted = "True"
     return statementExecuted
 
-@app.route("/editTableDataAStory/<aStoryId>/<aStoryName>/<aSprintId>/<storyDescription>/<storyType>/<storyStaus>/<storyPoints>")
-def editTableDataAS(aStoryId,aStoryName,aSprintId,storyDescription,storyType,storyStatus,storyPoints):
-    cur.execute("INSERT INTO agile_sprint(agile_story_id,agile_story_name,agile_sprint_id,story_description,story_type,story_status,story_points)"
-                + "Values('" + aStoryId + "','" + aStoryName + "','" + aSprintId + "','" + storyDescription + "','" + storyType + "','" + storyStatus + "','" + storyPoints + "')"
-                + "ON DUPLICATE KEY UPDATE agile_story_id='" + aStoryId + "', agile_story_name='" + aStoryName + "', agile_sprint_id='" + aSprintId + "',story_description='" + storyDescription + "',story_type='" + storyType + "',story_status='" + storyStatus + "',story_points='" + storyPoints + "'")
+@app.route("/editTableDataAStory/<aStoryId>/<aSprintId>/<sType>/<sStatus>/<sPoints>")
+def editTableDataAStory(aStoryId,aSprintId,sType,sStatus,sPoints):
+    cur.execute("INSERT INTO agile_story(agile_story_id,agile_sprint_id,story_type,story_status,story_points)"
+                + "Values('" + aStoryId + "','" + aSprintId + "','" + sType + "','" + sStatus + "','" + sPoints + "')"
+                + "ON DUPLICATE KEY UPDATE agile_sprint_id='" + aSprintId + "',story_type='" + sType + "',story_status='" + sStatus + "',story_points='" + sPoints + "'")
+                # + "ON DUPLICATE KEY UPDATE agile_story_id='" + aStoryId + "', agile_sprint_id='" + aSprintId + "',story_type='" + sType + "',story_status='" + sStatus + "',story_points='" + sPoints + "'")
     statementExecuted = "True"
     return statementExecuted
+
+@app.route("/editTableDataASAgileSystemUser/<aStoryAgileSystemUserId>/<aStoryId>/<aSystemUserId>/<aSystemUserStoryPoints>")
+def editTableDataASAgileSystemUser(aStoryAgileSystemUserId,aStoryId,aSystemUserId,aSystemUserStoryPoints):
+    cur.execute("INSERT INTO agile_story_agile_system_user(agile_story_agile_system_user_id,agile_story_id,agile_system_user_id,agile_system_user_story_points)"
+                + "Values('" + aStoryAgileSystemUserId + "','" + aStoryId + "','" + aSystemUserId + "','" + aSystemUserStoryPoints + "')"
+                + "ON DUPLICATE KEY UPDATE agile_story_agile_system_user_id='" + aStoryAgileSystemUserId + "', agile_story_id='" + aStoryId + "',agile_system_user_id='" + aSystemUserId + "',agile_system_user_story_points='" + aSystemUserStoryPoints + "'")
+    statementExecuted = "True"
+    return statementExecuted
+
 
 # @app.route
 

@@ -21,18 +21,38 @@ export class DataService {
 
 	}
 
+	editTableDataWUser(wUserId,fName,lName,email) {
+		let result = this.http.get(this.url + '/editTableDataWUser/' + wUserId + '/' + fName + '/' + lName + '/' + email) ;
+		console.log(JSON.stringify(result));
+		return result
+	}
+	editTableDataWTeam(wTeamId,wTeamName,pNameworkTeam,pName) {
+		let result = this.http.get(this.url + '/editTableDataWTeam/' + wTeamId + '/' + wTeamName + '/' + pNameworkTeam + '/' + pName) ;
+		console.log(JSON.stringify(result));
+		return result
+	}
+	editTableDataWTeamMember(wTeamMemberId,wTeamId,wUserId) {
+		let result = this.http.get(this.url + '/editTableDataWTeamMember/' + wTeamMemberId + '/' + wTeamId + '/' + wUserId) ;
+		console.log(JSON.stringify(result));
+		return result
+	}
 	editTableDataASU(asu_id, asu_name, as_id, wtm_id, wu_id) {
 		let result = this.http.get(this.url + '/editTableDataASU/' + asu_id + '/' + asu_name + '/' + as_id + '/' + wtm_id + '/' + wu_id) ;
 		console.log(JSON.stringify(result));
 		return result
 	}
-	editTableDataASprint(aSprintId,aSprintName,aSystemId,sprintDescription,sprintStartDate,sprintEndDate) {
-		let result = this.http.get(this.url + '/editTableDataASprint/' + aSprintId + '/' + aSprintName + '/' + aSystemId + '/' + sprintDescription + '/' + sprintStartDate + '/' + sprintEndDate) ;
+	editTableDataASprint(aSprintId,aSprintName,aSystemId,sDescription,sStartDate,sEndDate) {
+		let result = this.http.get(this.url + '/editTableDataASprint/' + aSprintId + '/' + aSprintName + '/' + aSystemId + '/' + sDescription + '/' + sStartDate + '/' + sEndDate) ;
 		console.log(JSON.stringify(result));
 		return result
 	}
-	editTableDataAStory(aStoryId,aStoryName,aSprintId,storyDescription,storyType,storyStatus,storyPoints) {
-		let result = this.http.get(this.url + '/editTableDataAStory/' + aStoryId + '/' + aStoryName + '/' + aSprintId + '/' + storyDescription + '/' + storyType + '/' + storyStatus + '/' + storyPoints) ;
+	editTableDataAStory(aStoryId,aSprintId,sType,sStatus,sPoints) {
+		let result = this.http.get(this.url + '/editTableDataAStory/' + aStoryId + '/' + aSprintId + '/' + sType + '/' + sStatus + '/' + sPoints) ;
+		console.log(JSON.stringify(result));
+		return result
+	}
+	editTableDataASAgileSystemUser(aStoryAgileSystemUserId,aStoryId,aSystemUserId,aSystemUserStoryPoints) {
+		let result = this.http.get(this.url + '/editTableDataASAgileSystemUser/' + aStoryAgileSystemUserId + '/' + aStoryId + '/' + aSystemUserId + '/' + aSystemUserStoryPoints) ;
 		console.log(JSON.stringify(result));
 		return result
 	}
