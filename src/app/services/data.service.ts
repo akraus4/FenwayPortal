@@ -22,24 +22,6 @@ export class DataService {
 		return result
 
 	}
-
-	editTableDataWDailyhours(wDailyhours_id,wTeam_member_id,work_date,hours) {
-		let result = this.http.get(this.url + '/editTableDataWDailyhours/' + wDailyhours_id + '/' + wTeam_member_id + '/' + work_date + '/' + hours) ;
-		console.log(JSON.stringify(result));
-		return result
-	}
-
-	editTableDataASystem(aSystem_id,aSystem_name,aSystem_type,wTeam_id) {
-		let result = this.http.get(this.url + '/editTableDataASystem/' + aSystem_id + '/' + aSystem_name + '/' + aSystem_type + '/' + wTeam_id) ;
-		console.log(JSON.stringify(result));
-		return result
-	}
-
-	editTableDataASystemUser(asu_id, asu_name, aSystem_id, wtm_id, wu_id) {
-		let result = this.http.get(this.url + '/editTableDataASystemUser/' + asu_id + '/' + asu_name + '/' + aSystem_id + '/' + wtm_id + '/' + wu_id) ;
-		console.log(JSON.stringify(result));
-		return result
-	}
 	editTableDataWUser(wUserId,fName,lName,email) {
 		let result = this.http.get(this.url + '/editTableDataWUser/' + wUserId + '/' + fName + '/' + lName + '/' + email) ;
 		console.log(JSON.stringify(result));
@@ -55,8 +37,18 @@ export class DataService {
 		console.log(JSON.stringify(result));
 		return result
 	}
-	editTableDataASU(asu_id, asu_name, as_id, wtm_id, wu_id) {
-		let result = this.http.get(this.url + '/editTableDataASU/' + asu_id + '/' + asu_name + '/' + as_id + '/' + wtm_id + '/' + wu_id) ;
+	editTableDataWDailyhours(wDailyhours_id,wTeam_member_id,work_date,hours) {
+		let result = this.http.get(this.url + '/editTableDataWDailyhours/' + wDailyhours_id + '/' + wTeam_member_id + '/' + work_date + '/' + hours) ;
+		console.log(JSON.stringify(result));
+		return result
+	}
+	editTableDataASystem(aSystem_id,aSystem_name,aSystem_type,wTeam_id) {
+		let result = this.http.get(this.url + '/editTableDataASystem/' + aSystem_id + '/' + aSystem_name + '/' + aSystem_type + '/' + wTeam_id) ;
+		console.log(JSON.stringify(result));
+		return result
+	}
+	editTableDataASystemUser(asu_id, asu_name, aSystem_id, wtm_id, wu_id) {
+		let result = this.http.get(this.url + '/editTableDataASystemUser/' + asu_id + '/' + asu_name + '/' + aSystem_id + '/' + wtm_id + '/' + wu_id) ;
 		console.log(JSON.stringify(result));
 		return result
 	}

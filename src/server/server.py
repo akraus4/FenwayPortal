@@ -305,22 +305,6 @@ def findTableData(table_name):
 
     return json.dumps(jsonList)
 
-@app.route("/editTableDataWDailyhours/<wDailyhours_id>/<wTeam_member_id>/<work_date>/<hours>")
-def editTableDataWDailyHours(wDailyhours_id,wTeam_member_id,work_date,hours):
-    cur.execute("INSERT INTO work_dailyhours(work_dailyhours_id,work_team_member_id,work_date,hours)"
-                + "Values('" + wDailyhours_id + "','" + wTeam_member_id + "','" + work_date + "','" + hours + "')"
-                + "ON DUPLICATE KEY UPDATE work_team_member_id='" + wTeam_member_id + "', work_date='" + work_date + "', hours='" + hours + "'")
-    statementExecuted = "True"
-    return statementExecuted
-
-@app.route("/editTableDataASystem/<aSystem_id>/<aSystem_name>/<aSystem_type>/<wTeam_id>")
-def editTableDataASystem(aSystem_id,aSystem_name,aSystem_type,wTeam_id):
-    cur.execute("INSERT INTO agile_system(agile_system_id,agile_system_name,agile_system_type,work_team_id)"
-                + "Values('" + aSystem_id + "','" + aSystem_name + "','" + aSystem_type + "','" + wTeam_id + "')"
-                + "ON DUPLICATE KEY UPDATE agile_system_name='" + aSystem_name + "', agile_system_type='" + aSystem_type + "', work_team_id='" + wTeam_id + "'")
-    statementExecuted = "True"
-    return statementExecuted
-
 @app.route("/editTableDataWUser/<wUserId>/<fName>/<lName>/<email>")
 def editTableDataWUser(wUserId,fName,lName,email):
     cur.execute("INSERT INTO work_user(work_user_id,firstname,lastname,email)"
@@ -328,7 +312,6 @@ def editTableDataWUser(wUserId,fName,lName,email):
                 + "ON DUPLICATE KEY UPDATE work_user_id='" + wUserId + "', firstname='" + fName + "', lastname='" + lName + "', email='" + email + "'")
     statementExecuted = "True"
     return statementExecuted
-
 
 @app.route("/editTableDataWTeam/<wTeamId>/<wTeamName>/<pNameworkTeam>/<pName>")
 def editTableDataWTeam(wTeamId,wTeamName,pNameworkTeam,pName):
@@ -343,6 +326,22 @@ def editTableDataWTeamMember(wTeamMemberId,wTeamId,wUserId):
     cur.execute("INSERT INTO work_team_member(work_team_member_id,work_team_id,work_user_id)"
                 + "Values('" + wTeamMemberId + "','" + wTeamId + "','" + wUserId + "')"
                 + "ON DUPLICATE KEY UPDATE work_team_member_id='" + wTeamMemberId + "', work_team_id='" + wTeamId + "', work_user_id='" + wUserId + "'")
+    statementExecuted = "True"
+    return statementExecuted
+
+@app.route("/editTableDataWDailyhours/<wDailyhours_id>/<wTeam_member_id>/<work_date>/<hours>")
+def editTableDataWDailyHours(wDailyhours_id,wTeam_member_id,work_date,hours):
+    cur.execute("INSERT INTO work_dailyhours(work_dailyhours_id,work_team_member_id,work_date,hours)"
+                + "Values('" + wDailyhours_id + "','" + wTeam_member_id + "','" + work_date + "','" + hours + "')"
+                + "ON DUPLICATE KEY UPDATE work_team_member_id='" + wTeam_member_id + "', work_date='" + work_date + "', hours='" + hours + "'")
+    statementExecuted = "True"
+    return statementExecuted
+
+@app.route("/editTableDataASystem/<aSystem_id>/<aSystem_name>/<aSystem_type>/<wTeam_id>")
+def editTableDataASystem(aSystem_id,aSystem_name,aSystem_type,wTeam_id):
+    cur.execute("INSERT INTO agile_system(agile_system_id,agile_system_name,agile_system_type,work_team_id)"
+                + "Values('" + aSystem_id + "','" + aSystem_name + "','" + aSystem_type + "','" + wTeam_id + "')"
+                + "ON DUPLICATE KEY UPDATE agile_system_name='" + aSystem_name + "', agile_system_type='" + aSystem_type + "', work_team_id='" + wTeam_id + "'")
     statementExecuted = "True"
     return statementExecuted
 
@@ -367,7 +366,6 @@ def editTableDataAStory(aStoryId,aSprintId,sType,sStatus,sPoints):
     cur.execute("INSERT INTO agile_story(agile_story_id,agile_sprint_id,story_type,story_status,story_points)"
                 + "Values('" + aStoryId + "','" + aSprintId + "','" + sType + "','" + sStatus + "','" + sPoints + "')"
                 + "ON DUPLICATE KEY UPDATE agile_sprint_id='" + aSprintId + "',story_type='" + sType + "',story_status='" + sStatus + "',story_points='" + sPoints + "'")
-                # + "ON DUPLICATE KEY UPDATE agile_story_id='" + aStoryId + "', agile_sprint_id='" + aSprintId + "',story_type='" + sType + "',story_status='" + sStatus + "',story_points='" + sPoints + "'")
     statementExecuted = "True"
     return statementExecuted
 
