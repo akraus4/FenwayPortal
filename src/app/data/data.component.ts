@@ -106,7 +106,7 @@ export class DataComponent implements OnInit {
     { value: 0, viewValue: "Work User" },
     { value: 1, viewValue: "Work Team" },
     { value: 2, viewValue: "Work Team Member" },
-    { value: 3, viewValue: "Work Daily Hours" },
+    // { value: 3, viewValue: "Work Daily Hours" },
     { value: 4, viewValue: "Agile System" },
     { value: 5, viewValue: "Agile System User" },
     { value: 6, viewValue: "Agile Sprint" },
