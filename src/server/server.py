@@ -21,7 +21,7 @@ db = MySQLdb.connect(
 )
 
 # Create a Cursor object to execute queries.
-cur = db.cursor()
+cur = db.cur
 
 # Create list of JSON objects for Select Team drop down in View Metrics Page
 
