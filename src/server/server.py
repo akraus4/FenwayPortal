@@ -183,7 +183,7 @@ def findTableData(table_name):
             addObject['name'] = row[4] + ' ' + row[5]
             jsonList.insert(i, addObject)
             addObject = {}
-            i = i+1
+            i=i+1
 
     elif table_name == "agile_system":
         jsonList = []
@@ -398,15 +398,30 @@ def findDropDownData(table_name):
             i=i+1
     elif table_name == "work_team_member":
         jsonList = []
-        addObject = {}
-        i=0
-        cur.execute('SELECT work_team_id, work_team_name FROM work_team;')
+        addObjectTeam = {}
+        addObjectUser = {}
+        iTeam=0
+        iUser=0
+        jsonListTeam = []
+        jsonListUser = []
+        sqlTeam = 'SELECT work_team_id, work_team_name FROM work_team;'
+        sqlUser = 'SELECT work_user_id, firstname, lastname FROM work_user;'
+        cur.execute(sqlTeam)
         for row in cur.fetchall():
-            addObject['work_team_id'] = row[0]
-            addObject['work_team_name'] = row[1]
-            jsonList.insert(i, addObject)
-            addObject = {}
-            i=i+1
+            addObjectTeam['work_team_id'] = row[0]
+            addObjectTeam['work_team_name'] = row[1]
+            jsonListTeam.insert(iTeam, addObjectTeam)
+            addObjectTeam = {}
+            iTeam=iTeam+1
+        jsonList.insert(0, jsonListTeam)
+        cur.execute(sqlUser)
+        for row in cur.fetchall():
+            addObjectUser['work_user_id'] = row[0]
+            addObjectUser['name'] = row[1] + ' ' + row[2]
+            jsonListUser.insert(iUser, addObjectUser)
+            addObjectUser = {}
+            iUser= iUser+1
+        jsonList.insert(1, jsonListUser)
     elif table_name == "work_dailyhours":
         jsonList = []
         addObject = {}
@@ -465,15 +480,30 @@ def findDropDownData(table_name):
             i= i + 1
     elif table_name == "agile_story_agile_system_user":
         jsonList = []
-        addObject = {}
-        i=0
-        cur.execute('SELECT agile_story_id, agile_story_name FROM agile_story;')
+        addObjectStory = {}
+        addObjectSystem = {}
+        iStory=0
+        iSystem=0
+        jsonListStory = []
+        jsonListSystem = []
+        sqlStory = 'SELECT agile_story_id, agile_story_name FROM agile_story;'
+        sqlSystem = 'SELECT agile_system_user_id, agile_system_user_name FROM agile_system_user;'
+        cur.execute(sqlStory)
         for row in cur.fetchall():
-            addObject['agile_story_id'] = row[0]
-            addObject['agile_story_name'] = row[1]
-            jsonList.insert(i, addObject)
-            addObject = {}
-            i=i+1
+            addObjectStory['agile_story_id'] = row[0]
+            addObjectStory['agile_story_name'] = row[1]
+            jsonListStory.insert(iStory, addObjectStory)
+            addObjectStory = {}
+            iStory=iStory+1
+        jsonList.insert(0, jsonListStory)
+        cur.execute(sqlSystem)
+        for row in cur.fetchall():
+            addObjectSystem['agile_system_user_id'] = row[0]
+            addObjectSystem['agile_system_user_name'] = row[1]
+            jsonListSystem.insert(iSystem, addObjectSystem)
+            addObjectSystem = {}
+            iSystem=iSystem+1
+        jsonList.insert(1, jsonListSystem)
     return json.dumps(jsonList)
 
 

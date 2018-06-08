@@ -103,9 +103,9 @@
   <div class="modal-body">
     Work Team Member ID:<dx-text-box id="wTeamMemberId" [(value)]="workTeamMemberId"></dx-text-box>
     <br />
-    Work Team:<dx-select-box  [dataSource] = "dropDownData" displayExpr="work_team_name" valueExpr= "work_team_id"></dx-select-box>
+    Work Team:<dx-select-box  [dataSource] = "dropDownData" displayExpr="work_team_name" valueExpr= "work_team_id" [(ngModel)]="workTeamName"></dx-select-box>
     <br />
-    Work User:<dx-select-box [dataSource] = "dropDownData1" displayExpr="firstName" valueExpr= "work_user_id"></dx-select-box>
+    Work User:<dx-select-box [dataSource] = "dropDownData1" displayExpr="name" valueExpr= "work_user_id"[(ngModel)]="workUserName"></dx-select-box>
     <br />
   </div>
   <div class="buttons">
@@ -123,7 +123,7 @@
   <div class="modal-body">
     Work Daily Hours ID:<dx-text-box id="wDailyHoursId" [(value)]="workDailyHoursId"></dx-text-box>
     <br />
-    Work Team:<dx-select-box  [dataSource] = "dropDownData" displayExpr="work_team_name" valueExpr= "work_team_id"></dx-select-box>
+    Work Team Member:<dx-select-box  [dataSource] = "originalDataSource" displayExpr="work_team_name" valueExpr= "work_team_id" [(ngModel)]="workTeamMemberName"></dx-select-box>
     <br /> 
     Work Date: <dx-text-box id="workDate" [(value)]="workDate"></dx-text-box>
     <br /> 
@@ -149,7 +149,7 @@
     <br /> 
     Agile System Type:<dx-text-box id="aSystemType" [(value)]="agileSystemType"></dx-text-box>
     <br /> 
-    Work Team:<dx-select-box  [dataSource] = "dropDownData" displayExpr="work_team_name" valueExpr= "work_team_id"></dx-select-box>
+    Work Team:<dx-select-box  [dataSource] = "originalDataSource" displayExpr="work_team_name" valueExpr= "work_team_id" [(ngModel)]="workTeamID"></dx-select-box>
   </div>
   <div class="buttons">
     <button class="submit" (click)="getEditTableData()">Submit</button>
@@ -172,7 +172,7 @@
     <br />
     Work Team Member:<dx-select-box  [dataSource] = "dropDownData1" displayExpr="work_team_member_id" valueExpr= "work_team_member_id"></dx-select-box>
     <br /> 
-    Work User:<dx-select-box  [dataSource] = "dropDownData" displayExpr="firstname" valueExpr= "work_user_id"></dx-select-box>
+    Work User:<dx-select-box  [dataSource] = "dropDownData2" displayExpr="firstname" valueExpr= "work_user_id"></dx-select-box>
     <br/>
   </div>
   <div class="buttons">
@@ -193,7 +193,7 @@
     <br /> 
     Agile Sprint Name:<dx-text-box id="aSprintName" [(value)]="agileSprintName"></dx-text-box>
     <br />
-    Agile System:<dx-select-box [dataSource] = "dropDownData" displayExpr="agile_system_name" valueExpr= "agile_system_id"></dx-select-box>
+    Agile System:<dx-select-box [dataSource] = "originalDataSource" displayExpr="agile_system_name" valueExpr= "agile_system_id" [(ngModel)]="agileSystemName"></dx-select-box>
     <br /> 
     Sprint Description:<dx-text-box id="sprintDescription" [(value)]="sprintDescription"></dx-text-box>
     <br/> 
@@ -218,7 +218,7 @@
     
     Agile Story ID:<dx-text-box id="agileStoryid" [(value)]="agileStoryid"></dx-text-box>
     <br />
-    Agile Sprint:<dx-select-box  [dataSource] = "dropDownData" displayExpr="agile_sprint_name" valueExpr= "agile_sprint_id"></dx-select-box>
+    Agile Sprint:<dx-select-box  [dataSource] = "originalDataSource" displayExpr="agile_sprint_name" valueExpr= "agile_sprint_id" [(ngModel)]="agileSprintName"></dx-select-box>
     <br />
     Story Type:<dx-text-box id="storyType" [(value)]="storyType"></dx-text-box>
     <br />
@@ -241,9 +241,9 @@
   <div class="modal-body">
     Agile Story Agile System User ID:<dx-text-box id="agileStoryAgileSystemUserId" [(value)]="agileStoryAgileSystemUserId"></dx-text-box>
     <br />
-    Agile Story<dx-select-box id="agileStoryId" [dataSource] = "dropDownData" displayExpr="agile_story_name" valueExpr= "agile_story_id"></dx-select-box>
+    Agile Story<dx-select-box id="agileStoryId" [dataSource] = "dropDownData" displayExpr="agile_story_name" valueExpr= "agile_story_id" [(ngModel)]="agileStoryName"></dx-select-box>
     <br />
-    Agile system User:<dx-select-box  [dataSource] = "dropDownData" displayExpr="agile_system_user_name" valueExpr= "agile_system_user_id"></dx-select-box>
+    Agile system User:<dx-select-box  [dataSource] = "dropDownData1" displayExpr="agile_system_user_name" valueExpr= "agile_system_user_id" [(ngModel)]="agileSystemUserName"></dx-select-box>
     <br />
     Agile System User Story Points:<dx-text-box id="agileSystemUserStoryPoints" [(value)]="agileSystemUserStoryPoints"></dx-text-box>
   </div>

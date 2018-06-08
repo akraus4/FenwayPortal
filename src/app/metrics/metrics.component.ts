@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { MetricsService } from '../services/metrics.service';
 import { MatTableDataSource } from '@angular/material';
 import { DxButtonModule } from 'devextreme-angular';
-import { DxDataGridModule, DxSelectBoxModule, DxDropDownBoxModule , DxListModule  } from 'devextreme-angular';
+import { DxDataGridModule } from 'devextreme-angular';
 
 
 // if(!/localhost/.test(document.location.host)) {
@@ -33,7 +33,6 @@ export class MetricsComponent implements OnInit {
   usersPoints;
   storiesBySprint = [];
   storyData;
-  _gridBoxValue: number[];
 
   currentTeamMemberId: string;
   // dataSource = this.StoryChoices;
@@ -60,21 +59,13 @@ export class MetricsComponent implements OnInit {
       .subscribe((results) =>{this.TeamChoices = results});
   }
 
-  getAllSprintsByTeam(e) {
-    // console.log(e.value);
-    this.metricsService.getAllSprintsBySystem(e.value)
+  getAllSprintsByTeam(system_id) {
+    // console.log(system_id);
+    this.metricsService.getAllSprintsBySystem(system_id)
       .map(res => { return res.json(); })
       .subscribe((results) => this.SprintChoices = results);
     // this.getAllUsersByTeam(system_id);
   }
-
-  get gridBoxValue(): number[] {
-    return this._gridBoxValue;
-}
-
-set gridBoxValue(value: number[]) {
-    this._gridBoxValue = value || [];
-}
 
   // getAllUsersByTeam(system_id) {
   //   // console.log(system_id);
@@ -83,23 +74,10 @@ set gridBoxValue(value: number[]) {
   //     .subscribe((results) => this.TeamMemberChoices = results);
   // }
 
-  // storeSprintId(e) {
-  //   // if more than one sprint id need to add "OR" between to enable SQL statement to understand multipule inputs
-  //   var i = 0;
-  //   this.currentSprintId = [];
-  //   console.log(e);
-  //   // for (i = 0; i < sprint_ids.length; i++) {
-         
-  //   //   this.currentSprintId.push(sprint_ids[i].agile_sprint_id);
-  //   // }
-  //   (<HTMLInputElement>document.getElementById("formCompleteButton")).disabled = false;
-  // }
-
   storeSprintId(sprint_ids) {
     // if more than one sprint id need to add "OR" between to enable SQL statement to understand multipule inputs
     var i = 0;
     this.currentSprintId = [];
-    // console.log(e);
     for (i = 0; i < sprint_ids.length; i++) {
          
       this.currentSprintId.push(sprint_ids[i].agile_sprint_id);
