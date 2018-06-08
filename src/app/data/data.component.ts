@@ -209,7 +209,6 @@ export class DataComponent implements OnInit {
   }
   closeModal() {
     this.modalService.hide(1);
-    
   }
   storeCurrentTable(tableName: string) {
     this.currentTable = tableName;
@@ -387,7 +386,11 @@ export class DataComponent implements OnInit {
       this.dataService.editTableDataWUser(wUserId,fName,lName,email)
       .map(res => { return res.json(); })
       .subscribe((results) => { this.statementExecuted = results; });
+      this.setupTable()
       this.closeModal()
+      // this.dataService.setupTable();
+      // this.dataService.instance.refresh()
+      // this.dataGrid.instance.refresh()
    }
     else if(this.table_name == "work_team"){
       var wTeamId = this.workTeamID;
