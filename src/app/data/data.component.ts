@@ -71,7 +71,6 @@ export class DataComponent implements OnInit {
   dropDownData;
   dropDownData1
   dropDownData2;
-  dropDownData3;
   dropdownDataInt = 0;
 
   constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
@@ -196,7 +195,6 @@ export class DataComponent implements OnInit {
   }
   closeModal() {
     this.modalService.hide(1);
-
   }
   storeCurrentTable(tableName: string) {
     this.currentTable = tableName;
@@ -273,7 +271,6 @@ export class DataComponent implements OnInit {
           ddResult2 = ddResult2.slice(0, -1);
           ddResult2 = JSON.parse(ddResult2);
           console.log(ddResult2);
-          
         };
 
         // else {
@@ -298,8 +295,6 @@ export class DataComponent implements OnInit {
         this.dropDownData1 = ddResult2;
         // this.dropDownData2 = ddResult3;
         console.log(JSON.stringify(results));
-       
-       
       });
   };
 
@@ -311,7 +306,6 @@ export class DataComponent implements OnInit {
         { dataField: "lastname", caption: "Last Name" },
         { dataField: "email", caption: "Email" },
       ];
-
     }
 
     else if (this.currentTable == "Work Team") {

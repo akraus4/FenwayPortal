@@ -367,13 +367,13 @@ def findDropDownData(table_name):
         jsonList = []
         addObjectSystem = {}
         addObjectMember = {}
-        addObjectUser = {}
+        # addObjectUser = {}
         iSystem=0
         iMember=0
-        iUser=0
+        # iUser=0
         jsonListSystem = []
         jsonListMember = []
-        jsonListUser = []
+        # jsonListUser = []
         sqlSystem = 'SELECT agile_system_id, agile_system_name from agile_system;'
         sqlMember = 'SELECT work_team_member_id FROM work_team_member;'
         sqlUser = 'SELECT work_user_id, firstname, lastname from work_user;'
@@ -392,15 +392,15 @@ def findDropDownData(table_name):
             addObjectMember = {}
             iMember=iMember+1
         jsonList.insert(1, jsonListMember)
-        cur.execute(sqlUser)
-        for row in cur.fetchall():
-            addObjectUser['work_user_id'] = row[0]
-            addObjectUser['name'] = row[1] + ' ' + row[2]
-            jsonListUser.insert(iUser, addObjectUser)
-            addObjectUser = {}
-            iUser=iUser+1
-        jsonList.insert(1, jsonListUser)
-        print(jsonList)
+        # cur.execute(sqlUser)
+        # for row in cur.fetchall():
+        #     addObjectUser['work_user_id'] = row[0]
+        #     addObjectUser['name'] = row[1] + ' ' + row[2]
+        #     jsonListUser.insert(iUser, addObjectUser)
+        #     addObjectUser = {}
+        #     iUser=iUser+1
+        # jsonList.insert(1, jsonListUser)
+        # print(jsonList)
     elif table_name == "agile_sprint":
         jsonList = []
         addObject = {}
