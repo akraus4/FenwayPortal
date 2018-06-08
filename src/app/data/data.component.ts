@@ -386,7 +386,6 @@ export class DataComponent implements OnInit {
       this.dataService.editTableDataWUser(wUserId,fName,lName,email)
       .map(res => { return res.json(); })
       .subscribe((results) => { this.statementExecuted = results; });
-      this.setupTable()
       this.closeModal()
       // this.dataService.setupTable();
       // this.dataService.instance.refresh()
