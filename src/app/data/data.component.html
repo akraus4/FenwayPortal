@@ -25,11 +25,11 @@
   </div>
   <div class="row" id="gridGraphMetricsPageDiv">
     <div class="col-12">
-      <dx-data-grid id="gridContainer" [dataSource]="TableChoices" [showRowLines]="true" [showBorders]="true" [columns]="columnChoices">
+      <dx-data-grid id="gridContainer" [dataSource]="TableChoices" [showRowLines]="true" [showBorders]="true" [columns]="columnChoices" (onRowClick)="onRowClick($event)">
         <dxo-export [enabled]="true" fileName="Employees" [allowExportSelectedData]="true"></dxo-export>
-        <dxo-selection mode="single"></dxo-selection>
+        <!-- <dxo-selection mode="single"></dxo-selection> -->
         <dxo-header-filter [visible]="true"></dxo-header-filter>
-        <dxo-sorting mode="none"></dxo-sorting>
+        <dxo-sorting mode="multiple"></dxo-sorting>
         <dxo-paging [pageSize]="10"></dxo-paging>
         <dxi-column *ngFor="let col of columnChoices" [dataField]="col.dataField" [caption]="col.caption"></dxi-column>
       </dx-data-grid>

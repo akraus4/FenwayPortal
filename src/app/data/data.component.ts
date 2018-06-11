@@ -117,6 +117,21 @@ export class DataComponent implements OnInit {
     this.metricsService.hideLoadingPanel();
   }
 
+  onRowClick (e) {
+    var component = e.component,
+        prevClickTime = component.lastClickTime;
+    component.lastClickTime = new Date();
+    if (prevClickTime && (component.lastClickTime - prevClickTime < 300)) {
+        //Double click code
+        this.openModal(workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser)
+        this.getDropDown()
+    }
+    else {
+        //Single click code
+        console.log('single click');
+    }
+}
+  
   //Determines which template to call and how the fields should be populated when opened
   openModal(workUser: TemplateRef<any>, workTeam: TemplateRef<any>, workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>, agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>) {
     let selectedData = this.dataGrid.instance.getSelectedRowsData();
