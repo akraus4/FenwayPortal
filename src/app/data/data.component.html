@@ -11,12 +11,12 @@
 <div id="gridWidgetContainer" class="effect7">
   <div class="selectTeam" class="row" id="searchWidgetContainer">
     <div class="col-sm-4">
-      <!-- <mat-form-field class="selectTables" id="tableSelector" >
-        <mat-select [(ngModel)]="selectedopt" (change)="storeCurrentTable($event.value.viewValue)" >
-          <mat-option *ngFor="let table of tables" [value] = 'tables[0].value'>{{table.viewValue}}</mat-option>
+      <mat-form-field class="selectTables" id="tableSelector" >
+        <mat-select [(ngModel)]="tablesModel" (change)="storeCurrentTable($event.value)" >
+          <mat-option *ngFor="let table of tables" [value] = 'table.value'>{{table.viewValue}}</mat-option>
         </mat-select>
-      </mat-form-field> -->
-      <dx-select-box 
+      </mat-form-field>
+      <!-- <dx-select-box 
       class="selectBox"
       id="tableSelector"
       [dataSource]="tables"
@@ -24,7 +24,7 @@
       valueExpr="value"
       [value]="tables[0].value"
       (onValueChanged)="selectTable($event)">
-      </dx-select-box>
+      </dx-select-box> -->
     </div>
 
 
@@ -65,7 +65,7 @@
     <dx-text-box id="email" [(value)]="email"></dx-text-box>
   </div>
   <div class="buttons">
-    <button class="submit" (click)="getEditTableData()">Submit</button>
+    <button class="submit" (click)="getEditTableData();setupTable()">Submit</button>
     <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>
@@ -103,9 +103,9 @@
   <div class="modal-body">
     Work Team Member ID:<dx-text-box id="wTeamMemberId" [(value)]="workTeamMemberId"></dx-text-box>
     <br />
-    Work Team:<dx-select-box  [dataSource] = "dropDownData" displayExpr="work_team_name" valueExpr= "work_team_id" [(ngModel)]="workTeamName"></dx-select-box>
+    Work Team:<dx-select-box  [dataSource] = "dropDownData" displayExpr="work_team_name" valueExpr= "work_team_id" [(ngModel)]="workTeamID"></dx-select-box>
     <br />
-    Work User:<dx-select-box [dataSource] = "dropDownData1" displayExpr="name" valueExpr= "work_user_id"[(ngModel)]="workUserName"></dx-select-box>
+    Work User:<dx-select-box [dataSource] = "dropDownData1" displayExpr="name" valueExpr= "work_user_id"[(ngModel)]="workUserID"></dx-select-box>
     <br />
   </div>
   <div class="buttons">
@@ -241,7 +241,7 @@
   <div class="modal-body">
     Agile Story Agile System User ID:<dx-text-box id="agileStoryAgileSystemUserId" [(value)]="agileStoryAgileSystemUserId"></dx-text-box>
     <br />
-    Agile Story<dx-select-box id="agileStoryId" [dataSource] = "dropDownData" displayExpr="agile_story_name" valueExpr= "agile_story_id" [(ngModel)]="agileStoryName"></dx-select-box>
+    Agile Story<dx-select-box id="agileStoryId" [dataSource] = "dropDownData" displayExpr="agile_story_name" valueExpr= "agile_story_id" [(ngModel)]="agileStoryid"></dx-select-box>
     <br />
     Agile system User:<dx-select-box  [dataSource] = "dropDownData1" displayExpr="agile_system_user_name" valueExpr= "agile_system_user_id" [(ngModel)]="agileSystemUserName"></dx-select-box>
     <br />
