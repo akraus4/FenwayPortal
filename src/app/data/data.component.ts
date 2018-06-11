@@ -117,7 +117,7 @@ export class DataComponent implements OnInit {
     this.metricsService.hideLoadingPanel();
   }
 
-  onRowClick (e) {
+  onRowClick (e,workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser) {
     var component = e.component,
         prevClickTime = component.lastClickTime;
     component.lastClickTime = new Date();

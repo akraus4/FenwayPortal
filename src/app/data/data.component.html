@@ -25,7 +25,7 @@
   </div>
   <div class="row" id="gridGraphMetricsPageDiv">
     <div class="col-12">
-      <dx-data-grid id="gridContainer" [dataSource]="TableChoices" [showRowLines]="true" [showBorders]="true" [columns]="columnChoices" (onRowClick)="onRowClick($event)">
+      <dx-data-grid id="gridContainer" [dataSource]="TableChoices" [showRowLines]="true" [showBorders]="true" [columns]="columnChoices" (onRowClick)="onRowClick($event,workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser)">
         <dxo-export [enabled]="true" fileName="Employees" [allowExportSelectedData]="true"></dxo-export>
         <!-- <dxo-selection mode="single"></dxo-selection> -->
         <dxo-header-filter [visible]="true"></dxo-header-filter>
