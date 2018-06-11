@@ -1,16 +1,13 @@
-<!-- <h1 id="title"> {{title}} </h1> -->
+
 <div class="row">
   <div class="col-sm-12">
-    <h1 id="title"> {{title}} </h1>
-    <h2> {{e}}</h2>
-    <app-sign-in></app-sign-in>
+    <header number=5></header>
   </div>
 </div>
-<br />
 
 <div id="gridWidgetContainer" class="effect7">
   <div class="selectTeam" class="row" id="searchWidgetContainer">
-    <div class="col-sm-4">
+    <div id="tableSelectDiv" class="col-sm-4 searchField">
       <!-- <mat-form-field class="selectTables" id="tableSelector" >
         <mat-select [(ngModel)]="selectedopt" (change)="storeCurrentTable($event.value.viewValue)" >
           <mat-option *ngFor="let table of tables" [value] = 'tables[0].value'>{{table.viewValue}}</mat-option>
@@ -28,7 +25,7 @@
     </div>
 
 
-    <div class="col-sm-1">
+    <div class="col-sm-1 searchField">
       <button id="addRow" mat-button class='dataBtn' (click)="openModal(workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser);getDropDown()">
         <i class="fas fa-plus-circle"></i>
       </button>

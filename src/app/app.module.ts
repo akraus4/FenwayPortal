@@ -18,6 +18,7 @@ import { ViewScoreComponent } from './view-score/view-score.component';
 import { ScorecardComponent } from './scorecard/scorecard.component';
 import { DataComponent } from './data/data.component';
 import { DemoComponent } from './demo/demo.component';
+import { FooterComponent } from './footer/footer.component';
 import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
@@ -59,7 +60,7 @@ import {
     LoadingPanelComponent,
     SignInComponent,
     TeamComponent,
-
+    FooterComponent,
 
 
   ],

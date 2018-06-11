@@ -1,8 +1,21 @@
+#headerRow{
+    width: 150%;
+    margin-left: -25%;
+    -webkit-box-shadow:0px 0px 7px #6d6c6d;
+ -moz-box-shadow:0px 0px 7px #6d6c6d;
+ box-shadow:0px 0px 7px #6d6c6d;
+}
+
 #header{
-    text-align: center;
-    font-size: 50px;
+    text-align: left;
+    font-size: 31px;
     color: #1a3b68;
-    font-family: 'Roboto';
+    padding-left: 10%;
+    background: white;
+    font-family: Monda,'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: bold;
-    
+}
+
+#signin{
+    background: white;
 }
