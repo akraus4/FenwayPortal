@@ -17,7 +17,7 @@
 
 
     <div class="col-sm-1 searchField">
-      <button id="addRow" mat-button class='dataBtn' (click)="openModal(workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser);getDropDown()">
+      <button id="addRow" mat-button class='dataBtn' (click)="clearSelectedRows();openModal(workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser);getDropDown()">
         <i class="fas fa-plus-circle"></i>
       </button>
     </div>
@@ -25,9 +25,9 @@
   </div>
   <div class="row" id="gridGraphMetricsPageDiv">
     <div class="col-12">
-      <dx-data-grid id="gridContainer" [dataSource]="TableChoices" [showRowLines]="true" [showBorders]="true" [columns]="columnChoices" (onRowClick)="onRowClick($event,workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser)">
+      <dx-data-grid id="gridContainer" [dataSource]="TableChoices" [hoverStateEnabled]="true" [showRowLines]="true" [showBorders]="true" [columns]="columnChoices" (onRowClick)="onRowClick($event,workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser)">
         <dxo-export [enabled]="true" fileName="Employees" [allowExportSelectedData]="true"></dxo-export>
-        <!-- <dxo-selection mode="single"></dxo-selection> -->
+        <dxo-selection mode="single"></dxo-selection>
         <dxo-header-filter [visible]="true"></dxo-header-filter>
         <dxo-sorting mode="multiple"></dxo-sorting>
         <dxo-paging [pageSize]="10"></dxo-paging>
@@ -53,7 +53,7 @@
     <dx-text-box id="email" [(value)]="email"></dx-text-box>
   </div>
   <div class="buttons">
-    <button class="submit" (click)="getEditTableData();setupTable()">Submit</button>
+    <button class="submit" (click)="getEditTableData()">Submit</button>
     <button class="cancel" (click)="closeModal()">Cancel</button>
     <br />
   </div>

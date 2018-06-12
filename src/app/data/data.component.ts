@@ -31,6 +31,7 @@ export class DataComponent implements OnInit {
   val: any;
   viewValue: any;
   statementExecuted: any;
+  selectionChangedRaised = false;
   //variables for work_user
   workUserId: string;
   firstName: string;
@@ -121,10 +122,11 @@ export class DataComponent implements OnInit {
     var component = e.component,
         prevClickTime = component.lastClickTime;
     component.lastClickTime = new Date();
+    
     if (prevClickTime && (component.lastClickTime - prevClickTime < 300)) {
         //Double click code
         this.openModal(workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser)
-        this.getDropDown()
+          this.getDropDown()
     }
     else {
         //Single click code
@@ -132,6 +134,10 @@ export class DataComponent implements OnInit {
     }
 }
   
+clearSelectedRows(){
+  this.dataGrid.instance.deselectAll()
+}
+
   //Determines which template to call and how the fields should be populated when opened
   openModal(workUser: TemplateRef<any>, workTeam: TemplateRef<any>, workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>, agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>) {
     let selectedData = this.dataGrid.instance.getSelectedRowsData();
@@ -231,6 +237,7 @@ export class DataComponent implements OnInit {
   }
 
   getDropDown() {
+    if(this.tablesModel != "work_user" && this.tablesModel != "work_team"){
     this.dataService.findDropDownData(this.tablesModel)
       .map(res => { return res.json(); })
       .subscribe((results) => {
@@ -268,6 +275,7 @@ export class DataComponent implements OnInit {
         this.dropDownData1 = ddResult2;
         this.dropDownData2 = newResults[2];
       });
+    }
   }
 
   //sets the columns in the main grid
