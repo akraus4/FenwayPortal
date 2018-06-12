@@ -1,22 +1,48 @@
-#wrapper {
-    padding-left: 0;
-    -webkit-transition: all 0.8s ease;
-    -moz-transition: all 0.8s ease;
-    -o-transition: all 0.8s ease;
-    transition: all 0.8s ease;
-}
-
 #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
     left: 0;
     /*height: 100%;*/
     top: 89.5px;
-    bottom: 0;
+    bottom: 40px;
     overflow-y: auto;
-    background-color: #858585;
-    transition: all 0.8s ease;
+    background-color: #969696;
+    -webkit-transition: all 0.9s ease;
+    -moz-transition: all 0.9s ease;
+    -o-transition: all 0.9s ease;
+    transition: all 0.9s ease;
 }
+
+
+#sidebar-wrapper {
+    /*height:83.9vh;*/
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    padding-right: 15px;
+    overflow-x:hidden;
+    overflow-y:scroll
+}
+
+#wrapper {
+    padding-left: 0;
+    -webkit-transition: all 0.9s ease;
+    -moz-transition: all 0.9s ease;
+    -o-transition: all 0.9s ease;
+    transition: all 0.9s ease;
+}
+
+
+
+#wrapper {
+    padding-left: 220px;
+}
+
+    #wrapper.toggled {
+        padding-left: 0;
+        /* -webkit-transition-duration: 0.3s;
+        -moz-transition-duration: 0.3s;
+        -o-transition-duration: 0.3s;
+        transition-duration: 0.3s; */
+    }
 
 /* .gradient {
     background-image:
@@ -68,7 +94,7 @@ img{
 /*Initial positioning of the sidebar*/
 
 #homePageTab {
-    margin-top: 80px; 
+    border-top: #666666 solid 1px;
 }
 
 
@@ -126,10 +152,7 @@ span{
     margin-top: 20px;
 }
 
-.toggled #medicaidProvider {
-    padding: 0;
-    margin-left: 10px;
-}
+
 
 .toggled .sidebar-brand {
     margin-top: -20px;
@@ -154,7 +177,7 @@ i {
     /*Styling for the menu links*/
     .sidebar-nav li a {
         padding-left: 10px;
-        font-family: "Roboto";
+        font-family: Monda,'Helvetica Neue', Helvetica, Arial, sans-serif;
         display: block;
         text-decoration: none;
         color: #f3f3f4;
@@ -168,18 +191,25 @@ i {
             text-decoration: none;
             color: #ffffff;
             background: rgb(207, 16, 45);
+            -webkit-box-shadow: 0px 0px 2px #303030;
+    -moz-box-shadow: 0px 0px 2px #303030;
+    box-shadow: 0px 0px 2px #303030;
         }
 
 /*Styling for selected menu item*/
 .primaryListItem.link-active {
     width: 108%;
     background: #1a3b68 !important;
+    border-left: 4px solid rgb(207, 16, 45);
     text-decoration: none;
+    -webkit-box-shadow: 0px 0px 2px #303030;
+    -moz-box-shadow: 0px 0px 2px #303030;
+    box-shadow: 0px 0px 2px #303030;
 }
 
 /*Position of hamburger button*/
 .sidebar-nav > .sidebar-brand {
-    height: 110px;
+    height: 186px;
     padding-left: 7px;
 }
 
@@ -190,31 +220,15 @@ i {
         padding-right: 21.2px;
     }
 
-#wrapper {
-    padding-left: 220px;
-}
 
-    #wrapper.toggled {
-        padding-left: 0;
-        transition: 0.5s;
-    }
 
-#sidebar-wrapper {
-    /*height:83.9vh;*/
-    -ms-overflow-style: -ms-autohiding-scrollbar;
-    padding-right: 15px;
-    overflow-x:hidden;
-    overflow-y:scroll
-}
+  
+
 
 #wrapper.toggled .sidebar-brand {
     width: 240px;
     padding-right: 15px;
     height: 65px;
-}
-
-#wrapper.toggled #userInfoDiv {
-    visibility: hidden;
 }
 
 #wrapper.toggled #homePageTab {
@@ -281,6 +295,11 @@ span.crosshair {
 li.primaryListItem {
     min-width: 240px;
     width: 100%;
+    border-bottom: #666666 solid 1px;
+    background-color: #707070;
+    /* -webkit-box-shadow: 0px 0px 7px #6d6c6d;
+    -moz-box-shadow: 0px 0px 7px #6d6c6d;
+    box-shadow: 0px 0px 2px #6d6c6d; */
 }
 
 
