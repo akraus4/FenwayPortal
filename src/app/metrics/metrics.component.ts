@@ -80,7 +80,6 @@ export class MetricsComponent implements OnInit {
     var i = 0;
     this.currentSprintId = [];
     for (i = 0; i < sprint_ids.length; i++) {
-
       this.currentSprintId.push(sprint_ids[i].agile_sprint_id);
     }
     (<HTMLInputElement>document.getElementById("formCompleteButton")).disabled = false;
@@ -92,18 +91,30 @@ export class MetricsComponent implements OnInit {
 
   getSprintIdString(){
     var i = 0;
-    var stringSprintId = this.currentSprintId.toString();
-    this.newSprintIds = stringSprintId.split(',');
-    for (i = 0; i < this.newSprintIds.length; i++) {
+    // var stringSprintId = this.currentSprintId.toString();
+    // this.newSprintIds = stringSprintId.split(',');
+    // for (i = 0; i < this.newSprintIds.length; i++) {
+    //   if (i == 0) {
+    //     this.sprintIds = this.newSprintIds[i];
+    //     console.log('sprint' + i + ' = ' + this.newSprintIds[i]);
+    //   } else if (i == this.newSprintIds.length) {
+    //     this.sprintIds = this.sprintIds + "', '" + this.newSprintIds[i];
+    //     console.log('sprint' + i + ' = ' + this.newSprintIds[i]);
+    //   } else {
+    //     this.sprintIds = this.sprintIds + "', '" + this.newSprintIds[i];
+    //     console.log('sprint' + i + ' = ' + this.newSprintIds[i]);
+    //   }
+    // }
+    for (i = 0; i < this.currentSprintId.length; i++) {
       if (i == 0) {
-        this.sprintIds = this.newSprintIds[i];
-        console.log('sprint' + i + ' = ' + this.newSprintIds[i]);
-      } else if (i == this.newSprintIds.length) {
-        this.sprintIds = this.sprintIds + "', '" + this.newSprintIds[i];
-        console.log('sprint' + i + ' = ' + this.newSprintIds[i]);
+        this.sprintIds = this.currentSprintId[i];
+        // console.log('sprint' + i + ' = ' + this.currentSprintId[i]);
+      } else if (i == this.currentSprintId.length) {
+        this.sprintIds = this.sprintIds + "', '" + this.currentSprintId[i];
+        // console.log('sprint' + i + ' = ' + this.currentSprintId[i]);
       } else {
-        this.sprintIds = this.sprintIds + "', '" + this.newSprintIds[i];
-        console.log('sprint' + i + ' = ' + this.newSprintIds[i]);
+        this.sprintIds = this.sprintIds + "', '" + this.currentSprintId[i];
+        // console.log('sprint' + i + ' = ' + this.currentSprintId[i]);
       }
     }
   }

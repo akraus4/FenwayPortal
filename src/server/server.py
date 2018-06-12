@@ -65,7 +65,6 @@ def findAllSprintsBySystem(system_id):
 
 @app.route("/findAllStoriesWithUsersBySprint/<sprint_id>")
 def findAllStoriesWithUsersBySprint(sprint_id):
-    print(sprint_id)
     jsonList = []
     addObject = {}
     i = 0
