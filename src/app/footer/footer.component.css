@@ -1,0 +1,57 @@
+#footerContent {
+    position: fixed;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    height: 40px;
+    background-color: #1a3b68;
+}
+
+#copyright{
+    color: white;
+    font-family: Monda,'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin-top: 10px;
+    margin-left: 20px;
+    font-size: 13px;
+}
+
+.contact_label {
+    color: white; 
+    font-family: Monda,'Helvetica Neue', Helvetica, Arial, sans-serif;
+    position: absolute;
+    right: 14%;
+    top: 9px;
+    font-size: 14px;
+    padding-right: 15px;
+  }
+  
+  .logos {
+   position: absolute;
+   right: 4%;
+   bottom: 5px;
+  }
+  
+  .facebook_logo {
+    position: relative;
+    
+  }
+  
+  .twitter_logo {
+    position: relative;
+  }
+  
+  .linkedin_logo {
+    position: relative;
+  }
+  
+  .fg_logo {
+    position: relative;
+  }
+
+  @media (max-width: 768px){
+    .contact_label {display: none;}
+  }
+  
+  @media (max-width: 385px){
+    .copyright {width: 50%;}
+  }

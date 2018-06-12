@@ -1,26 +1,45 @@
 <div class="container">
-        <div id="wrapper" >
-            <div class="scrollable-content sidebar" id="sidebar-wrapper">
-                <ul class="sidebar-nav">
-                    <li class="sidebar-brand">
-                        <div id="navHeaderRow" class="row">
-                            <div id="userInfoDiv" class="col-xs-10">
-                                <img [src]="logoPath">
-                            </div>
-
-                            <div id="toggleIconDiv" class="col-xs-2">
-                                <a (click)="toggleMenu()" id="menu-toggle">
-                                    <i id="navToggleIcon" class="fa fa-bars" aria-hidden="true"></i>
-                                </a>
-                            </div>
+    <div id="wrapper" >
+        <div class="scrollable-content sidebar" id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <div id="navHeaderRow" class="row">
+                        <div id="userInfoDiv" class="col-xs-10">
+                            <img id='logo' [src]="logoPath">
+                            <!-- <img id='logoToggled' [src]="logoPathToggled"> -->
                         </div>
-                    </li>
 
-                <!-- ----------------------Home---------------------- -->
-                <li [routerLinkActive]="['link-active']"  class="primaryListItem">
-                        <a id="homePageTab" [routerLink]="['/home']">
+                        <div id="toggleIconDiv" class="col-xs-2">
+                            <a (click)="toggleMenu()" id="menu-toggle">
+                                <i id="navToggleIcon" class="fa fa-bars" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+
+            <!-- ----------------------Home---------------------- -->
+            <li [routerLinkActive]="['link-active']"  class="primaryListItem">
+                    <a id="homePageTab" [routerLink]="['/home']">
+                        <p id="iconWrapper">
+                            <i class="fa fa-home"></i><span class="navLabels">Home</span>
+                        </p>
+                    </a>
+                </li>
+
+<!-- ----------------------Data---------------------- -->
+<li [routerLinkActive]="['link-active']" class="primaryListItem">
+    <a id="dataTab" [routerLink]="['/data']" >
+        <p id="iconWrapper">
+           <i class="fa fa-database"></i> <span class="navLabels" >Data Management</span>
+        </p>
+    </a>
+</li>
+
+                <!-- ----------------------Metrics---------------------- -->
+                <li [routerLinkActive]="['link-active']" class="primaryListItem">
+                        <a id="metricsTab" [routerLink]="['/metrics']" >
                             <p id="iconWrapper">
-                                <i class="fa fa-home"></i><span class="navLabels">Home</span>
+                                <i class="fas fa-table"></i> <span class="navLabels">Metrics Management</span>
                             </p>
                         </a>
                     </li>
@@ -44,7 +63,7 @@
                         </li>
                          <!-- ----------------------Metrics---------------------- -->
                     <li class="primaryListItem">
-                            <a id="metricsDashboardTab" href='https://datastudio.google.com/reporting/1wH5M3-P3vz4DRvJ-6DJJ0VhVhud6yCvP/page/vEhR'  target="_blank">
+                            <a id="metricsDashboardTab" href='https://datastudio.google.com/reporting/1BJXLE_mfW5JMUMpSFVQMd90Mqnd6Uttl/page/RC6Q'  target="_blank">
                                 <p id="iconWrapper">
                                     <i class="fa fa-chart-bar"></i> <span class="navLabels">Metrics Dashboard</span>
                                 </p>
@@ -66,79 +85,108 @@
                     <li [routerLinkActive]="['link-active']"  class="primaryListItem">
                         <a id="viewScorecardTab" [routerLink]="['/view-score']">
                             <p id="iconWrapper">
-                                <i class="fa fa-address-card"></i><span class="navLabels">Scorecard Management</span>
+                                <i class="fa fa-chart-bar"></i> <span class="navLabels">Metrics Dashboard</span>
                             </p>
                         </a>
                     </li>
 
-                           <!-- ---------------------- Scorecard Dashboard ---------------------- -->
+                    
+
+                            <!-- ----------------------Demo---------------------- -->
+                   <li [routerLinkActive]="['link-active']" class="primaryListItem">
+                        <a id="demoTab" [routerLink]="['/demo']" >
+                            <p id="iconWrapper">
+                               <i class="fa fa-calendar"></i> <span class="navLabels">Demo Schedule</span>
+                            </p>
+                        </a>
+                    </li>
+
+                          <!-- ---------------------- View Score Board ---------------------- -->
+                <li [routerLinkActive]="['link-active']"  class="primaryListItem">
+                    <a id="viewScorecardTab" [routerLink]="['/view-score']">
+                        <p id="iconWrapper">
+                            <i class="fa fa-address-card"></i><span class="navLabels">Scorecard Management</span>
+                        </p>
+                    </a>
+                </li>
+
+                       <!-- ---------------------- Scorecard Dashboard ---------------------- -->
+                       <li [routerLinkActive]="['link-active']"  class="primaryListItem">
+                        <a id="viewScorecardTab" [routerLink]="['/view-score']">
+                            <p id="iconWrapper">
+                                <i class="fa fa-address-card"></i><span class="navLabels">Scorecard Dashboard</span>
+                            </p>
+                        </a>
+                    </li>
+            
+                <!-- ----------------------Lineup---------------------- -->
+                <!-- <li [routerLinkActive]="['link-active']"  class="primaryListItem">
+                      <a id="lineupTab" [routerLink]="['/lineup']"> 
+                        <p id="iconWrapper">
+                           <i class="fa fa-tasks"></i> <span class="navLabels">Set Lineup</span>
+                        </p>
+                    </a>
+                </li> -->
+
+               
+
+                <!-- ---------------------- Score Board ---------------------- -->
+                <li [routerLinkActive]="['link-active']"  class="primaryListItem">
+                    <a id="scorecardTab" [routerLink]="['/scorecard']">
+                        <p id="iconWrapper">
+                            <i class="fa fa-edit"></i><span class="navLabels">New Scorecard</span>
+                        </p>
+                    </a>
+                </li>
+
+                           <!-- ---------------------- Team Schedule ---------------------- -->
                            <li [routerLinkActive]="['link-active']"  class="primaryListItem">
-                            <a id="viewScorecardTab" [routerLink]="['/view-score']">
+                                <a id="viewScorecardTab" [routerLink]="['/team']">
+                                    <p id="iconWrapper">
+                                        <i class="fas fa-clock"></i><span class="navLabels">Team's Schedules</span>
+                                    </p>
+                                </a>
+                            </li>
+
+                             <!-- ---------------------- Associate Stages ---------------------- -->
+                           <li [routerLinkActive]="['link-active']"  class="primaryListItem">
+                            <a id="viewScorecardTab" [routerLink]="['/evaluations']">
                                 <p id="iconWrapper">
-                                    <i class="fa fa-address-card"></i><span class="navLabels">Scorecard Dashboard</span>
+                                    <i class="fas fa-star"></i><span class="navLabels">Associate Evaluations</span>
                                 </p>
                             </a>
                         </li>
-                
-                    <!-- ----------------------Lineup---------------------- -->
-                    <!-- <li [routerLinkActive]="['link-active']"  class="primaryListItem">
-                          <a id="lineupTab" [routerLink]="['/lineup']"> 
-                            <p id="iconWrapper">
-                               <i class="fa fa-tasks"></i> <span class="navLabels">Set Lineup</span>
-                            </p>
-                        </a>
-                    </li> -->
 
-                   
-
-                    <!-- ---------------------- Score Board ---------------------- -->
-                    <li [routerLinkActive]="['link-active']"  class="primaryListItem">
-                        <a id="scorecardTab" [routerLink]="['/scorecard']">
-                            <p id="iconWrapper">
-                                <i class="fa fa-edit"></i><span class="navLabels">New Scorecard</span>
-                            </p>
-                        </a>
-                    </li>
-
-                               <!-- ---------------------- Team Schedule ---------------------- -->
-                               <li [routerLinkActive]="['link-active']"  class="primaryListItem">
-                                    <a id="viewScorecardTab" [routerLink]="['/team']">
-                                        <p id="iconWrapper">
-                                            <i class="fas fa-clock"></i><span class="navLabels">Team's Schedules</span>
-                                        </p>
-                                    </a>
-                                </li>
-
-                                 <!-- ---------------------- Associate Stages ---------------------- -->
-                               <li [routerLinkActive]="['link-active']"  class="primaryListItem">
-                                <a id="viewScorecardTab" [routerLink]="['/team']">
+                         <!-- ---------------------- Associate Stages Management ---------------------- -->
+                         <li [routerLinkActive]="['link-active']"  class="primaryListItem">
+                                <a id="viewScorecardTab" [routerLink]="['/evaluation-management']">
                                     <p id="iconWrapper">
-                                        <i class="fas fa-star"></i><span class="navLabels">Associate Evaluations</span>
+                                        <i class="fal fa-table"></i><span class="navLabels">Evaluation Management</span>
                                     </p>
                                 </a>
                             </li>
 
-                              <!-- ---------------------- One on One ---------------------- -->
-                              <li [routerLinkActive]="['link-active']"  class="primaryListItem">
-                                <a id="viewScorecardTab" [routerLink]="['/team']">
-                                    <p id="iconWrapper">
-                                        <i class="fas fa-clipboard-list"></i><span class="navLabels">One on One</span>
-                                    </p>
-                                </a>
-                            </li>
+                          <!-- ---------------------- One on One ---------------------- -->
+                          <!-- <li [routerLinkActive]="['link-active']"  class="primaryListItem">
+                            <a id="viewScorecardTab" [routerLink]="['/team']">
+                                <p id="iconWrapper">
+                                    <i class="fas fa-clipboard-list"></i><span class="navLabels">One on One</span>
+                                </p>
+                            </a>
+                        </li> -->
 
-                      
-            <!-- ---------------------- Example ---------------------- -->
-            <!-- <li [routerLinkActive]="['link-active']" class="primaryListItem">
-                <a id="medicaidProvider" [routerLink]="['/']">
-                    <p id="iconWrapper">
-                        <img id="firstCareIcon" class="glyphicon glyphicon-pencil" title="Score Board"/>
-                        <span class="navLabels" id="ytbcText">Score Board</span>
-                    </p>
-                </a>
-            </li> -->
+                  
+        <!-- ---------------------- Example ---------------------- -->
+        <!-- <li [routerLinkActive]="['link-active']" class="primaryListItem">
+            <a id="medicaidProvider" [routerLink]="['/']">
+                <p id="iconWrapper">
+                    <img id="firstCareIcon" class="glyphicon glyphicon-pencil" title="Score Board"/>
+                    <span class="navLabels" id="ytbcText">Score Board</span>
+                </p>
+            </a>
+        </li> -->
 
-                </ul>
-            </div>
+            </ul>
         </div>
     </div>
+</div>

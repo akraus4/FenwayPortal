@@ -23,11 +23,20 @@
 }
 
 #formCompleteButton{
-    font-weight: bold;
-    min-width: 13%;
-    margin-top: 6%;
-
-}
+    border-radius: 4px;
+    -webkit-box-shadow: 0 1px 3px transparent;
+    box-shadow: 0 1px 3px transparent;
+    border-width: 1px;
+    border-style: solid;
+    background-color: #fff;
+    border-color: #ddd;
+    color: #333;
+    margin-top: 12px;
+    height: 43px;
+    width: 42px;
+    font-size: 18px;
+    /* margin-top: 6%; */
+    }
 #metricsPageRadio{
     margin-top: 1%;
     margin-left: 41%;
@@ -97,10 +106,14 @@
          -o-transform:skew(8deg) rotate(3deg);
             transform:skew(8deg) rotate(3deg);
 }
- #searchWidgetContainer{
-z-index: 1;
-margin-top: 10px;
-} 
+#searchWidgetContainer{
+    /* z-index: 1; */
+    margin-bottom: -53px;
+    } 
+    
+    .searchField{
+        z-index: 4;
+    }
 #gridWidgetContainer{
     background-color: white;
     padding-top: 25px;

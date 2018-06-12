@@ -10,19 +10,21 @@ import * as $ from "jquery";
 export class NavBarComponent implements OnInit {
 
   logoPath: string;
+  logoPathToggled: string;
 
   constructor(private router: Router) {
     this.logoPath = './assets/FGLogoVer.png';
+    this.logoPathToggled = './assets/FGLogoCircle.png';
   }
 
   ngOnInit() { }
   toggleMenu() {
-    $("#navDiv").toggleClass("toggled");
+    // $("#navDiv").toggleClass("toggled");
     $("#wrapper").toggleClass("toggled");
     $("#contentDiv").toggleClass("col-sm-12 col-sm-13");
     $("#toggleIconDiv").toggleClass("toggled");
-
-    $("#navDiv").toggleClass("col-sm-2 col-sm-1");
+    // $("#navDiv").toggleClass("col-sm-2 col-sm-1");
+    
     // $("#toggleIconDiv").toggleClass("toggled");
   }
 
