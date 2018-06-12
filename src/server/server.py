@@ -6,7 +6,6 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
-
 db = MySQLdb.connect(
     host="52.55.14.143",  # your host
     user="fg_user_dev2",  # username
@@ -25,17 +24,13 @@ cur = db.cursor()
 
 # Create list of JSON objects for Select Team drop down in View Metrics Page
 
-
 @app.route("/findAllTeams")
 def findAllTeams():
     jsonList = []
     addObject = {}
     i = 0
-
     cur.execute("SELECT * FROM agile_system ORDER BY agile_system_name ASC")
-
     for row in cur.fetchall():
-
         addObject['agile_system_id'] = row[0]
         addObject['agile_system_name'] = row[1]
         addObject['agile_system_type'] = row[2]
@@ -43,11 +38,9 @@ def findAllTeams():
         jsonList.insert(i, addObject)
         addObject = {}
         i = i+1
-
     return json.dumps(jsonList)
 
 # Create list of JSON objects for Select sprint drop down in View Metrics Page
-
 
 @app.route("/findAllSprintsBySystem/<system_id>")
 def findAllSprintsBySystem(system_id):
@@ -56,7 +49,6 @@ def findAllSprintsBySystem(system_id):
     i = 0
     cur.execute("SELECT * FROM agile_sprint WHERE agile_system_id = '" +
                 system_id + "' ORDER BY agile_sprint_name ASC")
-
     for row in cur.fetchall():
         addObject['agile_sprint_id'] = row[0]
         addObject['agile_sprint_name'] = row[1]
@@ -67,14 +59,13 @@ def findAllSprintsBySystem(system_id):
         jsonList.insert(i, addObject)
         addObject = {}
         i = i+1
-
     return json.dumps(jsonList)
 
 # Create list of JSON objects for table in View Metrics Page
 
-
 @app.route("/findAllStoriesWithUsersBySprint/<sprint_id>")
 def findAllStoriesWithUsersBySprint(sprint_id):
+    print(sprint_id)
     jsonList = []
     addObject = {}
     i = 0
