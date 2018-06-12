@@ -5,9 +5,13 @@ var sprintName;
 var sprintStartDate;
 var sprintEndDate;
 var fs = require('fs');
-// var database = require('./database')
 
-getTrello.getList("5a7dd1e8a8fca8c51103c593").then((listResult) => {
+var config = require('../config/config');
+
+//********Add the team you wish to pull stories for.
+var team = config.teams.noJsTeam;
+
+getTrello.getList(team.key, team.token, team.board, team.acceptedColumn).then((listResult) => {
         // var newList = [];
         for (var list in listResult) {
                 systemID = listResult.idBoard;
@@ -17,23 +21,13 @@ getTrello.getList("5a7dd1e8a8fca8c51103c593").then((listResult) => {
                 sprintName = "Sprint " + sprint[2];
                 sprintStartDate = sprint[3];
                 sprintEndDate = sprint[4];
-                // let listInfo = {
-                //         'sprint_id': sprintID,
-                //         'system_id': systemID,
-                //         'sprint_name': "Sprint " + sprint[2],
-                //         'sprint_start_date': sprint[3],
-                //         'sprint_end_date': sprint[4]
-                // }
-                // newList = listInfo;
-                // console.log(newList)
+
         }
-        getTrello.getAcceptedCards().then((result) => {
+        getTrello.getAcceptedCards(team.key, team.token).then((result) => {
                 var newStories = [];
 
-                // var storyMember = [];
-                //console.log(result)
                 for (var card in result) {
-                       // var user;
+
                         var name = JSON.stringify(result[card].name);
                         var pointsExp = /\(([^)]+)\)/;
                         var point = pointsExp.exec(name);
@@ -41,25 +35,18 @@ getTrello.getList("5a7dd1e8a8fca8c51103c593").then((listResult) => {
                                 'user': result[card].idMembers[0],
                                 'user_points' : point !== null ? point[1] : "no points",
                         }
-                        //user.push(member)
 
                         let story = {
                                 'story_id': result[card].id,
                                 'story_points':  point !== null ? point[1] : "no points",
                                 'assigned _ to': member
-                                // [
-                                //         'user' : result[card].idMembers,
-                                //         'user_points' : point[1]
-                                // ]
+
                         }
                         newStories.push(story)
                         console.log(story)
-
-                        // storyMember.push(member)
                 }
 
                 let stories = {
-                        // "system_id": systemID,
                         "sprint_id": sprintID,
                         "sprint_name": sprintName,
                         "sprint_start_date": sprintStartDate,
@@ -67,14 +54,15 @@ getTrello.getList("5a7dd1e8a8fca8c51103c593").then((listResult) => {
                         "stories: ": newStories
                 };
                 
-                 //must create a Metrics folder on your C drive to work
-                var path = "C:\\Metrics\\LACD_" + sprintName + ".json";
+                
+                //must create a Metrics folder on your C drive to work
+                var path = "C:\\Metrics\\" + team.name + "_" + sprintName + ".json";
                 fs.writeFile(path, JSON.stringify(stories, null, 4), (err) => {
                         if (err) {
                                 console.error(err);
                                 return;
                         };
-                        console.log("File has been loggged to LACD_" + sprintName + ".json");
+                        console.log("File has been loggged to NoJs_" + sprintName + ".json");
                 });
         })
 })
