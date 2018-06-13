@@ -73,7 +73,7 @@ export class DataComponent implements OnInit {
   //variables for agile_story_agile_system_user
   agileStoryAgileSystemUserId: string;
   agileSystemUserStoryPoints: string;
-
+ 
   // Data sources for each dropdown in the data templates
   drop_name;
   originalDataSource;
