@@ -79,7 +79,6 @@ export class DataComponent implements OnInit {
   dropDownData;
   dropDownData1
   dropDownData2;
-  dropDownData3;
   dropdownDataInt = 0;
 
   constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
@@ -120,6 +119,7 @@ export class DataComponent implements OnInit {
 
   //Determines which template to call and how the fields should be populated when opened
   openModal(workUser: TemplateRef<any>, workTeam: TemplateRef<any>, workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>, agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>) {
+    this.metricsService.showLoadingPanel();
     let selectedData = this.dataGrid.instance.getSelectedRowsData();
     this.dropdownDataInt = 0;
     if (this.tablesModel == "work_user") {
@@ -162,7 +162,7 @@ export class DataComponent implements OnInit {
       this.agileSystemUserName = selectedData[0] ? selectedData[0].agile_system_user_name : null
       this.agileSystemName = selectedData[0] ? selectedData[0].agile_system_id : null
       this.workTeamMemberID = selectedData[0] ? selectedData[0].work_team_member_id : null
-      this.workUserID = selectedData[0] ? selectedData[0].work_user_id : null
+      // this.workUserID = selectedData[0] ? selectedData[0].work_user_id : null
       this.modalRef = this.modalService.show(agileSystemUser)
     }
     else if (this.tablesModel == "agile_sprint") {
@@ -223,6 +223,7 @@ export class DataComponent implements OnInit {
       .subscribe((results) => {
         var newResults = JSON.stringify(results).split('],[');
         this.originalDataSource = results;
+        this.metricsService.hideLoadingPanel();
         // if (this.dropdownDataInt == 0) {
         //   this.dropDownData = results;
         //   console.log("1")
@@ -239,23 +240,39 @@ export class DataComponent implements OnInit {
         var ddResult1 = newResults[0].concat(']');
         ddResult1 = ddResult1.substr(1);
         ddResult1 = JSON.parse(ddResult1);
-        if (newResults[2] == null) {
+        console.log(ddResult1);
+        
+        if (newResults[1] != null) {
           var ddResult2 = '[' + newResults[1];
           ddResult2 = ddResult2.slice(0, -1);
           ddResult2 = JSON.parse(ddResult2);
-        } 
-        else {
-          var ddResult2 = '[' + newResults[1];
-          ddResult2 = newResults[1].concat(']');
-        }
-        var ddResult1 = newResults[0].concat(']');
-        ddResult1 = ddResult1.substr(1);
-        ddResult1 = JSON.parse(ddResult1);
+          console.log(ddResult2);
+        };
+
+        // else {
+        //   console.log('made');
+        //   var ddResult2 = '[' + newResults[1];
+        //   ddResult2 = ddResult2.concat(']');
+        //   ddResult2 = JSON.parse(ddResult2);
+        //   console.log(ddResult1 + ddResult2);
+        // }
+        // var ddResult3 = '[' + newResults[1];
+        // ddResult3 = ddResult3.slice(0, -1);
+        // ddResult3 = JSON.parse(ddResult3);
+        // console.log(ddResult3);
+
+        // var ddResult1 = newResults[0].concat(']');
+        // ddResult1 = ddResult1.substr(1);
+        // ddResult1 = JSON.parse(ddResult1);
+        // console.log(ddResult1);
+        // console.log(newResults[1]);
+        // console.log(newResults[2]);
         this.dropDownData = ddResult1;
         this.dropDownData1 = ddResult2;
-        this.dropDownData2 = newResults[2];
+        // this.dropDownData2 = ddResult3;
+        console.log(JSON.stringify(results));
       });
-  }
+  };
 
   //sets the columns in the main grid
   getColumns() {
@@ -308,7 +325,7 @@ export class DataComponent implements OnInit {
         { dataField: "agile_system_user_id", caption: "Agile System ID" },
         { dataField: "agile_system_user_name", caption: "User System Name" },
         { dataField: "agile_system_name", caption: "System Name" },
-        { dataField: "work_team_member_id", caption: "Work Team Member ID" },
+        // { dataField: "work_team_member_id", caption: "Work Team Member ID" },
         { dataField: "firstname", caption: "First Name" },
         { dataField: "lastname", caption: "Last Name" },
       ];

@@ -449,15 +449,43 @@ def findDropDownData(table_name):
             i=i+1
     elif table_name == "agile_system_user":
         jsonList = []
-        addObject = {}
-        i=0
-        cur.execute('SELECT agile_system_id, agile_system_name FROM agile_system;')
+        addObjectSystem = {}
+        # addObjectMember = {}
+        addObjectUser = {}
+        iSystem=0
+        # iMember=0
+        iUser=0
+        jsonListSystem = []
+        # jsonListMember = []
+        jsonListUser = []
+        sqlSystem = 'SELECT agile_system_id, agile_system_name from agile_system;'
+        # sqlMember = 'SELECT work_team_member_id FROM work_team_member;'
+        sqlUser = 'SELECT work_user_id, firstname, lastname from work_user;'
+        cur.execute(sqlSystem)
         for row in cur.fetchall():
-            addObject['agile_system_id'] = row[0]
-            addObject['agile_system_name'] = row[1]
-            jsonList.insert(i, addObject)
-            addObject = {}
-            i= i +1
+            addObjectSystem['agile_system_id'] = row[0]
+            addObjectSystem['agile_system_name'] = row[1]
+            jsonListSystem.insert(iSystem, addObjectSystem)
+            addObjectSystem = {}
+            iSystem=iSystem+1
+        jsonList.insert(0, jsonListSystem)
+        print(jsonList)
+        # cur.execute(sqlMember)
+        # for row in cur.fetchall():
+        #     addObjectMember['work_team_member_id'] = row[0]
+        #     jsonListMember.insert(iMember, addObjectMember)
+        #     addObjectMember = {}
+        #     iMember=iMember+1
+        # jsonList.insert(1, jsonListMember)
+        cur.execute(sqlUser)
+        for row in cur.fetchall():
+            addObjectUser['work_user_id'] = row[0]
+            addObjectUser['name'] = row[1] + ' ' + row[2]
+            jsonListUser.insert(iUser, addObjectUser)
+            addObjectUser = {}
+            iUser=iUser+1
+        jsonList.insert(1, jsonListUser)
+        print(jsonList)
     elif table_name == "agile_sprint":
         jsonList = []
         addObject = {}
