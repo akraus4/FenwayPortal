@@ -357,9 +357,9 @@ export class DataComponent implements OnInit {
         .map(res => { return res.json(); })
         .subscribe((results) => { this.statementExecuted = results; });
       this.closeModal()
-      this.dataService.findTableData(this.tablesModel)
-        .map(res => { return res.json(); })
-        .subscribe((results) => { this.TableChoices = results; this.getColumns(); this.metricsService.hideLoadingPanel(); });
+      // this.dataService.findTableData(this.tablesModel)
+      //   .map(res => { return res.json(); })
+      //   .subscribe((results) => { this.TableChoices = results; this.getColumns(); this.metricsService.hideLoadingPanel(); });
     }
     else if (this.tablesModel == "work_team_member") {
       this.dataService.editTableDataWTeamMember(this.workTeamMemberId, this.workTeamID, this.workUserID, this.committedHours)

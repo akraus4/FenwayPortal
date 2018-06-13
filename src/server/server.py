@@ -339,7 +339,7 @@ def editTableDataWTeam(wTeamId,wTeamName,pNameworkTeam,pName):
     statementExecuted = "True"
     return statementExecuted
 
-@app.route("/editTableDataWTeamMember/<wTeamMemberId>/<wTeamId>/<wUserId>")
+@app.route("/editTableDataWTeamMember/<wTeamMemberId>/<wTeamId>/<wUserId>/<cHours>")
 def editTableDataWTeamMember(wTeamMemberId,wTeamId,wUserId,cHours):
     cur.execute("INSERT INTO work_team_member(work_team_member_id,work_team_id,work_user_id,committed_hours)"
                 + "Values('" + wTeamMemberId + "','" + wTeamId + "','" + wUserId + "','" + cHours + "')"
