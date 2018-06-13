@@ -44,6 +44,7 @@ export class DataComponent implements OnInit {
   projectName: string;
   //variables for work_team_member
   workTeamMemberId: string;
+  expectedHours: string;
   //variables for work_dailyhours
   workDailyHoursId: string;
   workDate: string;
@@ -161,6 +162,7 @@ clearSelectedRows(){
       this.workTeamMemberId = selectedData[0] ? selectedData[0].work_team_member_id : null
       this.workTeamID = selectedData[0] ? selectedData[0].work_team_id : null
       this.workUserID = selectedData[0] ? selectedData[0].work_user_id : null
+      this.expectedHours = selectedData[0] ? selectedData[0].expected_hours : null
       this.modalRef = this.modalService.show(workTeamMember)
     }
     else if (this.tablesModel == "work_dailyhours") {
@@ -322,6 +324,7 @@ clearSelectedRows(){
         { dataField: "work_team_name", caption: "Work Team Name" },
         { dataField: "firstname", caption: "First Name" },
         { dataField: "lastname", caption: "Last Name" },
+        { dataField: "expected_hours", caption: "Expected Hours" },
       ];
     }
     else if (this.tablesModel == "work_dailyhours") {
@@ -395,12 +398,12 @@ clearSelectedRows(){
         .map(res => { return res.json(); })
         .subscribe((results) => { this.statementExecuted = results; });
       this.closeModal()
-      this.dataService.findTableData(this.tablesModel)
-        .map(res => { return res.json(); })
-        .subscribe((results) => { this.TableChoices = results; this.getColumns(); this.metricsService.hideLoadingPanel(); });
+      // this.dataService.findTableData(this.tablesModel)
+      //   .map(res => { return res.json(); })
+      //   .subscribe((results) => { this.TableChoices = results; this.getColumns(); this.metricsService.hideLoadingPanel(); });
     }
     else if (this.tablesModel == "work_team_member") {
-      this.dataService.editTableDataWTeamMember(this.workTeamMemberId, this.workTeamID, this.workUserID)
+      this.dataService.editTableDataWTeamMember(this.workTeamMemberId, this.workTeamID, this.workUserID, this.expectedHours)
         .map(res => { return res.json(); })
         .subscribe((results) => { this.statementExecuted = results; });
       this.closeModal()

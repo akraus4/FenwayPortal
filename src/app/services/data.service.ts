@@ -32,8 +32,8 @@ export class DataService {
 		console.log(JSON.stringify(result));
 		return result
 	}
-	editTableDataWTeamMember(wTeamMemberId,wTeamId,wUserId) {
-		let result = this.http.get(this.url + '/editTableDataWTeamMember/' + wTeamMemberId + '/' + wTeamId + '/' + wUserId) ;
+	editTableDataWTeamMember(wTeamMemberId,wTeamId,wUserId,eHours) {
+		let result = this.http.get(this.url + '/editTableDataWTeamMember/' + wTeamMemberId + '/' + wTeamId + '/' + wUserId + '/' + eHours) ;
 		console.log(JSON.stringify(result));
 		return result
 	}

@@ -149,14 +149,15 @@ def findTableData(table_name):
         jsonList = []
         addObject = {}
         i = 0
-        cur.execute('SELECT work_team_member.work_team_member_id, work_team.work_team_id, work_user.work_user_id, work_team.work_team_name, work_user.firstname, work_user.lastname FROM work_team LEFT OUTER JOIN work_team_member ON work_team.work_team_id = work_team_member.work_team_id LEFT OUTER JOIN work_user ON work_user.work_user_id = work_team_member.work_user_id')
+        cur.execute('SELECT work_team_member.work_team_member_id, work_team.work_team_id, work_user.work_user_id,work_team_member.expected_hours, work_team.work_team_name, work_user.firstname, work_user.lastname FROM work_team LEFT OUTER JOIN work_team_member ON work_team.work_team_id = work_team_member.work_team_id LEFT OUTER JOIN work_user ON work_user.work_user_id = work_team_member.work_user_id')
         for row in cur.fetchall():
             addObject['work_team_member_id'] = row[0]
             addObject['work_team_id'] = row[1]
             addObject['work_user_id'] = row[2]
-            addObject['work_team_name'] = row[3]
-            addObject['firstname'] = row[4]
-            addObject['lastname'] = row[5]
+            addObject['expected_hours'] = row[3]
+            addObject['work_team_name'] = row[4]
+            addObject['firstname'] = row[5]
+            addObject['lastname'] = row[6]
             jsonList.insert(i, addObject)
             addObject = {}
             i = i+1
@@ -312,11 +313,11 @@ def editTableDataWTeam(wTeamId,wTeamName,pNameworkTeam,pName):
     statementExecuted = "True"
     return statementExecuted
 
-@app.route("/editTableDataWTeamMember/<wTeamMemberId>/<wTeamId>/<wUserId>")
-def editTableDataWTeamMember(wTeamMemberId,wTeamId,wUserId):
-    cur.execute("INSERT INTO work_team_member(work_team_member_id,work_team_id,work_user_id)"
-                + "Values('" + wTeamMemberId + "','" + wTeamId + "','" + wUserId + "')"
-                + "ON DUPLICATE KEY UPDATE work_team_member_id='" + wTeamMemberId + "', work_team_id='" + wTeamId + "', work_user_id='" + wUserId + "'")
+@app.route("/editTableDataWTeamMember/<wTeamMemberId>/<wTeamId>/<wUserId>/<eHours>")
+def editTableDataWTeamMember(wTeamMemberId,wTeamId,wUserId,eHours):
+    cur.execute("INSERT INTO work_team_member(work_team_member_id,work_team_id,work_user_id,expected_hours)"
+                + "Values('" + wTeamMemberId + "','" + wTeamId + "','" + wUserId + "','" + eHours + "')"
+                + "ON DUPLICATE KEY UPDATE work_team_member_id='" + wTeamMemberId + "', work_team_id='" + wTeamId + "', work_user_id='" + wUserId + "', expected_hours='" + eHours + "'")
     statementExecuted = "True"
     return statementExecuted
 
