@@ -33,7 +33,6 @@ export class MetricsComponent implements OnInit {
   usersPoints;
   storiesBySprint = [];
   storyData;
-  newSprintIds;
   sprintIds;
 
   currentTeamMemberId: string;
@@ -82,14 +81,19 @@ export class MetricsComponent implements OnInit {
     for (i = 0; i < sprint_ids.length; i++) {
       this.currentSprintId.push(sprint_ids[i].agile_sprint_id);
     }
-    (<HTMLInputElement>document.getElementById("formCompleteButton")).disabled = false;
+    if(this.currentSprintId==""){
+      (<HTMLInputElement>document.getElementById("formCompleteButton")).disabled = true;
+    }
+    else{
+      (<HTMLInputElement>document.getElementById("formCompleteButton")).disabled = false;
+    }
   }
 
   storeTeamMemberId(team_member_id) {
     this.currentTeamMemberId = team_member_id
   }
 
-  getSprintIdString(){
+  getSprintIdString() {
     var i = 0;
     for (i = 0; i < this.currentSprintId.length; i++) {
       if (i == 0) {
