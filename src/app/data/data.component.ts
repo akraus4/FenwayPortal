@@ -131,7 +131,7 @@ export class DataComponent implements OnInit {
     }
     else {
         //Single click code
-        console.log('single click');
+        // console.log('single click');
     }
 }
   
