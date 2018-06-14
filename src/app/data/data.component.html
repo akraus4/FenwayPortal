@@ -157,11 +157,11 @@
     <br /> 
     Agile Sytem User Name:<dx-text-box id="asystemUserName" [(value)]="agileSystemUserName"></dx-text-box>
     <br />
-    Agile System:<dx-select-box  [dataSource] = "dropDownData" displayExpr="agile_system_name" valueExpr= "agile_system_id"></dx-select-box>
+    Agile System:<dx-select-box  [dataSource] = "dropDownData" displayExpr="agile_system_name" valueExpr= "agile_system_id" [(ngModel)]="agileSystemName"></dx-select-box>
     <br />
     <!-- Work Team Member:<dx-select-box  [dataSource] = "dropDownData1" displayExpr="work_team_member_id" valueExpr= "work_team_name"></dx-select-box>
     <br />  -->
-    Work User:<dx-select-box [dataSource] = "dropDownData1" displayExpr="name" valueExpr= "work_user_id"></dx-select-box>
+    Work User:<dx-select-box [dataSource] = "dropDownData1" displayExpr="name" valueExpr= "work_user_id" [(ngModel)]="workUserID"></dx-select-box>
     <br/>
   </div>
   <div class="buttons">

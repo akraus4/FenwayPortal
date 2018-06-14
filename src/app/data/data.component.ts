@@ -183,8 +183,8 @@ export class DataComponent implements OnInit {
       this.agileSystemUserId = selectedData[0] ? selectedData[0].agile_system_user_id : null
       this.agileSystemUserName = selectedData[0] ? selectedData[0].agile_system_user_name : null
       this.agileSystemName = selectedData[0] ? selectedData[0].agile_system_id : null
-      this.workTeamMemberID = selectedData[0] ? selectedData[0].work_team_member_id : null
-      // this.workUserID = selectedData[0] ? selectedData[0].work_user_id : null
+      // this.workTeamMemberID = selectedData[0] ? selectedData[0].work_team_member_id : null
+      this.workUserID = selectedData[0] ? selectedData[0].work_user_id : null
       this.modalRef = this.modalService.show(agileSystemUser)
     }
     else if (this.tablesModel == "agile_sprint") {
@@ -421,7 +421,7 @@ export class DataComponent implements OnInit {
       this.closeModal()
     }
     else if (this.tablesModel == "agile_system_user") {
-      this.dataService.editTableDataASystemUser(this.agileSystemUserId, this.agileSystemUserName, this.agileSystemId, this.workTeamMemberID, this.workUserID)
+      this.dataService.editTableDataASystemUser(this.agileSystemUserId, this.agileSystemUserName, this.agileSystemName, this.workTeamMemberID, this.workUserID)
         .map(res => { return res.json(); })
         .subscribe((results) => { this.statementExecuted = results; });
       this.closeModal()
