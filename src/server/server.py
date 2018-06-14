@@ -385,7 +385,7 @@ def editTableDataASAgileSystemUser(aStoryAgileSystemUserId,aStoryId,aSystemUserI
 @app.route("/findDropDownData/<table_name>")
 def findDropDownData(table_name):
     
-    print("Paramater: " + table_name)
+    # print("Paramater: " + table_name)
 
 
     if table_name == "work_team":
@@ -469,7 +469,7 @@ def findDropDownData(table_name):
             addObjectSystem = {}
             iSystem=iSystem+1
         jsonList.insert(0, jsonListSystem)
-        print(jsonList)
+        # print(jsonList)
         # cur.execute(sqlMember)
         # for row in cur.fetchall():
         #     addObjectMember['work_team_member_id'] = row[0]
@@ -485,7 +485,7 @@ def findDropDownData(table_name):
             addObjectUser = {}
             iUser=iUser+1
         jsonList.insert(1, jsonListUser)
-        print(jsonList)
+        # print(jsonList)
     elif table_name == "agile_sprint":
         jsonList = []
         addObject = {}
