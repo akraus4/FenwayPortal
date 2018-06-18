@@ -3,6 +3,13 @@ import MySQLdb
 from flask import Flask, json, jsonify, request
 from flask_cors import CORS
 
+import random
+
+import string
+
+import uuid
+print uuid.uuid4()
+
 app = Flask(__name__)
 CORS(app)
 
@@ -22,6 +29,12 @@ db = MySQLdb.connect(
 
 # Create a Cursor object to execute queries.
 cur = db.cursor()
+
+# @app.route("/getRandomID")
+# def getRandomID():
+#     print uuid.uuid4()
+
+
 
 # Create list of JSON objects for Select Team drop down in View Metrics Page
 
@@ -535,6 +548,8 @@ def findDropDownData(table_name):
             iSystem=iSystem+1
         jsonList.insert(1, jsonListSystem)
     return json.dumps(jsonList)
+
+
 
 
 

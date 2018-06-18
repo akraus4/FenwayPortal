@@ -4,6 +4,9 @@
     <header number=5></header>
   </div>
 </div>
+<div>
+  <button type="button" (click) = "aRandomID()">Click to get Random ID</button>
+</div>
 
 <div id="gridWidgetContainer" class="effect7">
   <div class="selectTeam" class="row" id="searchWidgetContainer">
@@ -14,8 +17,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-
-
+   
     <div class="col-sm-1 searchField">
       <button id="addRow" mat-button class='dataBtn' (click)="openModal(workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser);getDropDown()">
         <i class="fas fa-plus-circle"></i>
@@ -246,8 +248,5 @@
 <app-loading-panel></app-loading-panel>
 
 <div>
-<p>
-
-</p>
 
 </div>

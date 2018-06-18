@@ -79,6 +79,7 @@ export class DataComponent implements OnInit {
   dropDownData1
   dropDownData2;
   dropdownDataInt = 0;
+  randomID;
 
   constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
     this.dataService = dataService;
@@ -208,13 +209,23 @@ export class DataComponent implements OnInit {
     this.metricsService.showLoadingPanel()
     this.getTableData()
   }
+
   //pulls data from python to populate grid
   getTableData() {
     this.dataService.findTableData(this.tablesModel)
       .map(res => { return res.json(); })
       .subscribe((results) => { this.TableChoices = results; this.getColumns(); this.metricsService.hideLoadingPanel(); });
   }
-
+  getRandomID() {
+    this.dataService.getRandomID()
+      .map(res => { return res.json(); })
+      .subscribe((results) => { this.randomID = results; });
+    console.log(this.randomID)
+  }
+  aRandomID() {
+    let randomID = Math.random().toString(36).slice(2);
+    console.log(randomID);
+  }
   getDropDown() {
     this.dataService.findDropDownData(this.tablesModel)
       .map(res => { return res.json(); })
@@ -239,7 +250,7 @@ export class DataComponent implements OnInit {
         ddResult1 = ddResult1.substr(1);
         ddResult1 = JSON.parse(ddResult1);
         console.log(ddResult1);
-        
+
         if (newResults[1] != null) {
           var ddResult2 = '[' + newResults[1];
           ddResult2 = ddResult2.slice(0, -1);

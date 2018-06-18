@@ -22,6 +22,11 @@ export class DataService {
 		return result
 
 	}
+	getRandomID() {
+		let result = this.http.get(this.url + '/getRandomID');
+		console.log("Made it" + JSON.stringify(result));
+		return result
+	}
 
 	editTableDataWDailyhours(wDailyhours_id,wTeam_member_id,work_date,hours) {
 		let result = this.http.get(this.url + '/editTableDataWDailyhours/' + wDailyhours_id + '/' + wTeam_member_id + '/' + work_date + '/' + hours) ;
