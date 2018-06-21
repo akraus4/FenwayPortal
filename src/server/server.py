@@ -8,24 +8,28 @@ CORS(app)
 
 
 db = MySQLdb.connect(
+
+# Development Database
     host="52.55.14.143",  # your host
     user="fg_user_dev2",  # username
     passwd="6UhjVvAgM_Jm",  # password
     db="fg_metrics_dev2",  # name of the database
+
+# Production Database
     # host= "52.55.14.143",
     # user= "fg_user",
     # passwd= "uXQ1pgjZlne7",
     # db= "fg_metrics",
+
+# Connect Properties
     charset="utf8",  # Encoding format
-    autocommit = True
+    autocommit = True # automatically commits changes to database
 )
 
 # Create a Cursor object to execute queries.
 cur = db.cursor()
 
-# Create list of JSON objects for Select Team drop down in View Metrics Page
-
-
+# Create list of JSON objects for Select Team drop down in Metrics Management page
 @app.route("/findAllTeams")
 def findAllTeams():
     jsonList = []
@@ -35,7 +39,6 @@ def findAllTeams():
     cur.execute("SELECT * FROM agile_system ORDER BY agile_system_name ASC")
 
     for row in cur.fetchall():
-
         addObject['agile_system_id'] = row[0]
         addObject['agile_system_name'] = row[1]
         addObject['agile_system_type'] = row[2]
@@ -46,9 +49,7 @@ def findAllTeams():
 
     return json.dumps(jsonList)
 
-# Create list of JSON objects for Select sprint drop down in View Metrics Page
-
-
+# Create list of JSON objects for Select sprint drop down in Metrics Management Page
 @app.route("/findAllSprintsBySystem/<system_id>")
 def findAllSprintsBySystem(system_id):
     jsonList = []
@@ -138,9 +139,7 @@ def findAllStoriesWithUsersBySprint(sprint_id):
 
     return json.dumps(jsonList)
 
-# Create list of JSON objects for table in Data Management Page
-
-
+# Create list of JSON objects for tables in Data Management Page
 @app.route("/findTableData/<table_name>")
 def findTableData(table_name):
 
@@ -326,6 +325,53 @@ def findTableData(table_name):
 
     return json.dumps(jsonList)
 
+# Gets data for work_dailyhours table in Data Management Page
+# @app.route("/findWorkDailyhoursData/<table_name>/<workTeams>")
+# def findWorkDailyhoursData(table_name,workTeams):
+
+#     print("Paramater: " + table_name)
+#     print("team: " + workTeams) 
+
+#     if table_name == "work_dailyhours":
+#         jsonList = []
+#         addObject = {}
+#         i = 0
+#         print("gooey gooeyr goo")
+#         cur.execute("select work_dailyhours.work_dailyhours_id, work_team_member.work_team_member_id, work_dailyhours.work_date, work_dailyhours.hours, work_user.firstname, work_user.lastname from work_dailyhours left outer join work_team_member on work_team_member.work_team_member_id = work_dailyhours.work_team_member_id left outer join work_user on work_user.work_user_id = work_team_member.work_user_id where work_team_member.work_team_id in ('" + workTeams +"')")
+#         print(cur.fetchall())
+#         for row in cur.fetchall():
+#             addObject['work_dailyhours_id'] = row[0]
+#             addObject['work_team_member_id'] = row[1]
+#             addObject['work_date'] = row[2]
+#             addObject['hours'] = row[3]
+#             # addObject['name'] = row[4] + ' ' + row[5] #error on this line
+#             jsonList.insert(i, addObject)
+#             addObject = {}
+#             i=i+1
+#         print(json.dumps(jsonList))
+#     return json.dumps(jsonList)
+
+# Finds work teams to populate work_dailyhours drop down in Data Management Page
+@app.route("/findWorkTeams")
+def findWorkTeams():
+    jsonList = []
+    addObject = {}
+    i = 0
+
+    cur.execute("SELECT * FROM work_team ORDER BY work_team_name ASC")
+
+    for row in cur.fetchall():
+        addObject['work_team_id'] = row[0]
+        addObject['work_team_name'] = row[1]
+        addObject['project_namework_team'] = row[2]
+        addObject['project_name'] = row[3]
+        jsonList.insert(i, addObject)
+        addObject = {}
+        i = i+1
+
+    return json.dumps(jsonList)
+
+# Insert/update statement to handle the modal add or edit for work_dailyhours table in data management
 @app.route("/editTableDataWDailyhours/<wDailyhours_id>/<wTeam_member_id>/<work_date>/<hours>")
 def editTableDataWDailyHours(wDailyhours_id,wTeam_member_id,work_date,hours):
     cur.execute("INSERT INTO work_dailyhours(work_dailyhours_id,work_team_member_id,work_date,hours)"
@@ -334,6 +380,7 @@ def editTableDataWDailyHours(wDailyhours_id,wTeam_member_id,work_date,hours):
     statementExecuted = "True"
     return statementExecuted
 
+# Insert/update statement to handle the modal add or edit for agile_system table in data management
 @app.route("/editTableDataASystem/<aSystem_id>/<aSystem_name>/<aSystem_type>/<wTeam_id>")
 def editTableDataASystem(aSystem_id,aSystem_name,aSystem_type,wTeam_id):
     cur.execute("INSERT INTO agile_system(agile_system_id,agile_system_name,agile_system_type,work_team_id)"
@@ -342,6 +389,7 @@ def editTableDataASystem(aSystem_id,aSystem_name,aSystem_type,wTeam_id):
     statementExecuted = "True"
     return statementExecuted
 
+# Insert/update statement to handle the modal add or edit for work_user table in data management
 @app.route("/editTableDataWUser/<wUserId>/<fName>/<lName>/<email>")
 def editTableDataWUser(wUserId,fName,lName,email):
     cur.execute("INSERT INTO work_user(work_user_id,firstname,lastname,email)"
@@ -350,7 +398,7 @@ def editTableDataWUser(wUserId,fName,lName,email):
     statementExecuted = "True"
     return statementExecuted
 
-
+# Insert/update statement to handle the modal add or edit for work_team table in data management
 @app.route("/editTableDataWTeam/<wTeamId>/<wTeamName>/<pNameworkTeam>/<pName>")
 def editTableDataWTeam(wTeamId,wTeamName,pNameworkTeam,pName):
     cur.execute("INSERT INTO work_team(work_team_id,work_team_name,project_namework_team,project_name)"
@@ -359,6 +407,7 @@ def editTableDataWTeam(wTeamId,wTeamName,pNameworkTeam,pName):
     statementExecuted = "True"
     return statementExecuted
 
+# Insert/update statement to handle the modal add or edit for work_team_member table in data management
 @app.route("/editTableDataWTeamMember/<wTeamMemberId>/<wTeamId>/<wUserId>/<eHours>")
 def editTableDataWTeamMember(wTeamMemberId,wTeamId,wUserId,eHours):
     cur.execute("INSERT INTO work_team_member(work_team_member_id,work_team_id,work_user_id,expected_hours)"
@@ -367,6 +416,7 @@ def editTableDataWTeamMember(wTeamMemberId,wTeamId,wUserId,eHours):
     statementExecuted = "True"
     return statementExecuted
 
+# Insert/update statement to handle the modal add or edit for agile_system_user table in data management
 @app.route("/editTableDataASystemUser/<asu_id>/<asu_name>/<aSystem_id>/<wtm_id>/<wu_id>")
 def editTableDataASU(asu_id,asu_name,aSystem_id,wtm_id,wu_id):
     cur.execute("INSERT INTO agile_system_user(agile_system_user_id,agile_system_user_name,agile_system_id,work_team_member_id,work_user_id)"
@@ -375,6 +425,7 @@ def editTableDataASU(asu_id,asu_name,aSystem_id,wtm_id,wu_id):
     statementExecuted = "True"
     return statementExecuted
 
+# Insert/update statement to handle the modal add or edit for agile_sprint table in data management
 @app.route("/editTableDataASprint/<aSprintId>/<aSprintName>/<aSystemId>/<sDescription>/<sStartDate>/<sEndDate>")
 def editTableDataASprint(aSprintId,aSprintName,aSystemId,sDescription,sStartDate,sEndDate):
     cur.execute("INSERT INTO agile_sprint(agile_sprint_id,agile_sprint_name,agile_system_id,sprint_description,sprint_start_date,sprint_end_date)"
@@ -383,6 +434,7 @@ def editTableDataASprint(aSprintId,aSprintName,aSystemId,sDescription,sStartDate
     statementExecuted = "True"
     return statementExecuted
 
+# Insert/update statement to handle the modal add or edit for agile_story table in data management
 @app.route("/editTableDataAStory/<aStoryId>/<aSprintId>/<sType>/<sStatus>/<sPoints>")
 def editTableDataAStory(aStoryId,aSprintId,sType,sStatus,sPoints):
     cur.execute("INSERT INTO agile_story(agile_story_id,agile_sprint_id,story_type,story_status,story_points)"
@@ -392,6 +444,7 @@ def editTableDataAStory(aStoryId,aSprintId,sType,sStatus,sPoints):
     statementExecuted = "True"
     return statementExecuted
 
+# Insert/update statement to handle the modal add or edit for agile_story_agile_system_user table in data management
 @app.route("/editTableDataASAgileSystemUser/<aStoryAgileSystemUserId>/<aStoryId>/<aSystemUserId>/<aSystemUserStoryPoints>")
 def editTableDataASAgileSystemUser(aStoryAgileSystemUserId,aStoryId,aSystemUserId,aSystemUserStoryPoints):
     cur.execute("INSERT INTO agile_story_agile_system_user(agile_story_agile_system_user_id,agile_story_id,agile_system_user_id,agile_system_user_story_points)"
@@ -401,12 +454,11 @@ def editTableDataASAgileSystemUser(aStoryAgileSystemUserId,aStoryId,aSystemUserI
     return statementExecuted
 
 
-# @app.route
+# finds data to populate drop downs in edit/add modals for data management
 @app.route("/findDropDownData/<table_name>")
 def findDropDownData(table_name):
     
     # print("Paramater: " + table_name)
-
 
     if table_name == "work_team":
         jsonList = []
@@ -558,50 +610,6 @@ def findDropDownData(table_name):
             iSystem=iSystem+1
         jsonList.insert(1, jsonListSystem)
     return json.dumps(jsonList)
-
-
-
-
-
-
-
-
-
-
-
-
-
-# @app.route("/getColumnData/<tableName>")
-# def getColumnData():
-#     column = []
-#     cur.execute("SELECT * FROM agile_sprint")
-#     for row in cur.fetchall():
-#         column['agile_sprint_id'] = row[0]
-#         column['agile_sprint_name']= row[1]
-# 	    column['agile_system_id']= row[2]
-# 	    column['sprint_description']= row[3]
-# 	    column['sprint_start_date']= row[4]
-# 	    column['sprint_end_date']= row[5]
-#     return json.dumps(column)
-
-# @app.route("/getColumnData")
-# def getColumnData():
-#     allTeams = []
-#     individualTeam = {}
-#     i = 0
-#     cur.execute("SELECT * FROM agile_sprint")
-#     for row in cur.fetchall():
-#         individualTeam['agile_sprint_id'] = row[0]
-#         individualTeam['agile_sprint_name'] = row[1]
-#         individualTeam['agile_system_id'] = row[2]
-#         individualTeam['sprint_description'] = row[3]
-#         individualTeam['sprint_start_date'] = row[4]
-#         individualTeam['sprint_end_date'] = row[5]
-#         allTeams.insert(i, individualTeam)
-#         individualTeam = {}
-#         i = i+1
-#     return json.dumps(allTeams)
-
 
 if __name__ == "__main__":
     app.run()
