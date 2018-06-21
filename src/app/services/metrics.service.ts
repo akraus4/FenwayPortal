@@ -9,6 +9,7 @@ export class MetricsService {
 	productionURL = ''
 	url = this.developmentURL
 	http: any;
+	loadingVisible = new BehaviorSubject<boolean>(false);
 
 	constructor(@Inject(Http) http) {
 		this.http = http;	
@@ -75,7 +76,7 @@ export class MetricsService {
 	// }
 
 
-	loadingVisible = new BehaviorSubject<boolean>(false);
+	
   
 
 	showLoadingPanel(): void {

@@ -70,6 +70,26 @@ def findAllSprintsBySystem(system_id):
 
     return json.dumps(jsonList)
 
+@app.route("/findTeamMemberByTeam/<work_team_id>")
+def findTeamMemberByTeam(work_team_id):
+    jsonList = []
+    addObject = {}
+    i = 0
+    cur.execute("SELECT work_team_member_id, firstname, lastname FROM work_team_member A INNER JOIN work_user B ON B.work_user_id = A.work_user_id WHERE A.work_team_id = '" +
+                work_team_id + "' ORDER BY firstname ASC")
+
+    for row in cur.fetchall():
+        addObject['work_team_member_id'] = row[0]
+        addObject['name'] = row[1] + " " + row[2]
+        # addObject['work_user_id'] = row[2]
+        # addObject['expected_hours'] = row[3]
+        jsonList.insert(i, addObject)
+        addObject = {}
+        i = i+1
+
+    return json.dumps(jsonList)
+
+
 # Create list of JSON objects for table in View Metrics Page
 
 
@@ -451,16 +471,16 @@ def findDropDownData(table_name):
         jsonList = []
         addObjectSystem = {}
         # addObjectMember = {}
-        addObjectUser = {}
+        # addObjectUser = {}
         iSystem=0
         # iMember=0
-        iUser=0
+        # iUser=0
         jsonListSystem = []
         # jsonListMember = []
-        jsonListUser = []
-        sqlSystem = 'SELECT agile_system_id, agile_system_name from agile_system;'
-        # sqlMember = 'SELECT work_team_member_id FROM work_team_member;'
-        sqlUser = 'SELECT work_user_id, firstname, lastname from work_user;'
+        # jsonListUser = []
+        sqlSystem = 'SELECT agile_system_id, agile_system_name FROM agile_system;'
+        # sqlMember = 'SELECT work_team_member_id, firstname, lastname FROM work_team_member A INNER JOIN work_user B ON A.work_user_id = B.work_user_id;'
+        # sqlUser = 'SELECT work_user_id, firstname, lastname FROM work_user;'
         cur.execute(sqlSystem)
         for row in cur.fetchall():
             addObjectSystem['agile_system_id'] = row[0]
@@ -469,22 +489,24 @@ def findDropDownData(table_name):
             addObjectSystem = {}
             iSystem=iSystem+1
         jsonList.insert(0, jsonListSystem)
-        # print(jsonList)
+        print(jsonList)
         # cur.execute(sqlMember)
         # for row in cur.fetchall():
         #     addObjectMember['work_team_member_id'] = row[0]
+        #     addObjectMember['name'] = row[1] + ' ' + row[2]
         #     jsonListMember.insert(iMember, addObjectMember)
         #     addObjectMember = {}
         #     iMember=iMember+1
         # jsonList.insert(1, jsonListMember)
-        cur.execute(sqlUser)
-        for row in cur.fetchall():
-            addObjectUser['work_user_id'] = row[0]
-            addObjectUser['name'] = row[1] + ' ' + row[2]
-            jsonListUser.insert(iUser, addObjectUser)
-            addObjectUser = {}
-            iUser=iUser+1
-        jsonList.insert(1, jsonListUser)
+        # print(jsonList)
+        # cur.execute(sqlUser)
+        # for row in cur.fetchall():
+        #     addObjectUser['work_user_id'] = row[0]
+        #     addObjectUser['name'] = row[1] + ' ' + row[2]
+        #     jsonListUser.insert(iUser, addObjectUser)
+        #     addObjectUser = {}
+        #     iUser=iUser+1
+        # jsonList.insert(1, jsonListUser)
         # print(jsonList)
     elif table_name == "agile_sprint":
         jsonList = []
