@@ -98,8 +98,7 @@ export class MetricsComponent implements OnInit {
     for (i = 0; i < this.currentSprintId.length; i++) {
       if (i == 0) {
         this.sprintIds = this.currentSprintId[i];
-      } 
-      else {
+      } else {
         this.sprintIds = this.sprintIds + "', '" + this.currentSprintId[i];
       }
     }
