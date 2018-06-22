@@ -36,12 +36,6 @@ export class MetricsService {
 		return result
 	}
 
-	// getAllUsersBySystem(system_id) {
-	// 	let result = this.http.get(this.url +'/findAllUsersBySystem/' + system_id);
-	// 	// console.log(JSON.stringify(result));
-	// 	return result
-	// }
-
 	getAllStoriesWithUsersBySprint(sprint_id) {
 		// var stories = [];
 		// var num: number = 0;

@@ -7,7 +7,6 @@ import { Subject } from 'rxjs/Subject';
 @Injectable()
 
 export class DataService {
-
 	developmentURL = 'http://localhost:5000'
 	productionURL = ''
 	url = this.developmentURL
@@ -28,7 +27,6 @@ export class DataService {
 		let result = this.http.get(this.url + '/findTableData/' + table_name);
 		console.log(JSON.stringify(result));
 		return result
-
 	}
 	getTeamMemberByTeam(work_team_id) {
 		let result = this.http.get(this.url + '/findTeamMemberByTeam/' + work_team_id);
@@ -86,7 +84,6 @@ export class DataService {
 		// console.log('Result 2 = ' + result);
 		var results = JSON.stringify(result).split(', ');
 		// console.log('Result Story = ' + JSON.stringify(results[0]));
-
 		return result
 	}
 }
@@ -95,6 +92,5 @@ export class DataService {
 // 		let result = this.http.get(this.url + '/findSystemUserWithSystemWithTeamMemberWithWorkUser');
 // 		console.log(JSON.stringify(result));
 // 		return result
-
 // 	}
 // }

@@ -73,7 +73,6 @@ export class DataComponent implements OnInit {
   //variables for agile_story_agile_system_user
   agileStoryAgileSystemUserId: string;
   agileSystemUserStoryPoints: string;
-
   // Data sources for each dropdown in the data templates
   drop_name;
   originalDataSource;
@@ -81,7 +80,7 @@ export class DataComponent implements OnInit {
   dropDownData1;
   dropDownData2;
   dropdownDataInt = 0;
-
+  // Data sources and ngModel for agile system user
   workTeamDS;
   workTeamModel;
   workTeamMemberDS;
@@ -249,6 +248,7 @@ export class DataComponent implements OnInit {
     this.metricsService.showLoadingPanel()
     this.getTableData()
   }
+
   //pulls data from python to populate grid
   getTableData() {
     this.dataService.findTableData(this.tablesModel)
@@ -285,16 +285,12 @@ export class DataComponent implements OnInit {
           ddResult1 = JSON.parse(ddResult1);
           // console.log(ddResult1);
           console.log('***************');
-
           if (newResults[1] != null) {
             var ddResult2 = '[' + newResults[1];
             ddResult2 = ddResult2.slice(0, -1);
             ddResult2 = JSON.parse(ddResult2);
             // console.log(ddResult2);
           };
-
-         
-
           // else {
           //   console.log('made');
           //   var ddResult2 = '[' + newResults[1];
@@ -306,7 +302,6 @@ export class DataComponent implements OnInit {
           // ddResult3 = ddResult3.slice(0, -1);
           // ddResult3 = JSON.parse(ddResult3);
           // console.log(ddResult3);
-
           // var ddResult1 = newResults[0].concat(']');
           // ddResult1 = ddResult1.substr(1);
           // ddResult1 = JSON.parse(ddResult1);

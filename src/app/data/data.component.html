@@ -15,7 +15,6 @@
       </mat-form-field>
     </div>
 
-
     <div class="col-sm-1 searchField">
       <button id="addRow" mat-button class='dataBtn' (click)="clearSelectedRows();openModal(workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser);getDropDown()">
         <i class="fas fa-plus-circle"></i>
@@ -37,7 +36,6 @@
   </div>
 </div>
 
-
 <ng-template #workUser>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Work User</h4>
@@ -58,7 +56,6 @@
     <br />
   </div>
   <br />
-
 </ng-template>
 
 <ng-template #workTeam>
@@ -83,7 +80,7 @@
   </div>
   <br />
 </ng-template>
- 
+
 <ng-template #workTeamMember>
   <div class="modal-header">
     <h4 class="modal-title pull-left">Work Team Member</h4>
@@ -131,7 +128,6 @@
     <h4 class="modal-title pull-left">Agile System</h4>
   </div>
   <div class="modal-body">
-    
     Agile System ID:<dx-text-box id="aSystemId" [(value)]="agileSystemId"></dx-text-box>
     <br /> 
     Agile Sytem Name:<dx-text-box id="aSystemName" [(value)]="agileSystemName"></dx-text-box>
@@ -157,8 +153,8 @@
     <br /> 
     Agile Sytem User Name:<dx-text-box id="asystemUserName" [(value)]="agileSystemUserName"></dx-text-box>
     <br />
-    <!-- Agile System:<dx-select-box  [dataSource] = "originalDataSource" displayExpr="agile_system_name" valueExpr= "agile_system_id" [(ngModel)]="agileSystemName"></dx-select-box>
-    <br /> -->
+    Agile System:<dx-select-box  [dataSource] = "originalDataSource" displayExpr="agile_system_name" valueExpr= "agile_system_id" [(ngModel)]="agileSystemName"></dx-select-box>
+    <br />
     Work Team:<dx-select-box [dataSource] = "workTeamDS" displayExpr="work_team_name" valueExpr= "work_team_id" (onValueChanged)="getTeamMemberByTeam($event.value)" [(ngModel)]="workTeamModel"></dx-select-box>
     <br /> 
     Work Team Member:<dx-select-box  [dataSource] = "workTeamMemberDS" displayExpr="name" valueExpr= "work_team_member_id" [(ngModel)]="workTeamMemberID"></dx-select-box>
