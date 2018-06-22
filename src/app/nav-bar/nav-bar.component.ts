@@ -24,7 +24,7 @@ export class NavBarComponent implements OnInit {
     $("#contentDiv").toggleClass("col-sm-12 col-sm-13");
     $("#toggleIconDiv").toggleClass("toggled");
     // $("#navDiv").toggleClass("col-sm-2 col-sm-1");
-    
+    // $('#nav-icon1').toggleClass('open');
     // $("#toggleIconDiv").toggleClass("toggled");
   }
 

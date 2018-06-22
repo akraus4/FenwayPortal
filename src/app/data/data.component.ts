@@ -31,6 +31,7 @@ export class DataComponent implements OnInit {
   val: any;
   viewValue: any;
   statementExecuted: any;
+  selectionChangedRaised = false;
   //variables for work_user
   workUserId: string;
   firstName: string;
@@ -72,14 +73,13 @@ export class DataComponent implements OnInit {
   //variables for agile_story_agile_system_user
   agileStoryAgileSystemUserId: string;
   agileSystemUserStoryPoints: string;
- 
+
   // Data sources for each dropdown in the data templates
   drop_name;
   originalDataSource;
   dropDownData;
   dropDownData1;
   dropDownData2;
-  dropDownData3;
   dropdownDataInt = 0;
 
   keys = [
@@ -121,8 +121,30 @@ export class DataComponent implements OnInit {
     this.metricsService.hideLoadingPanel();
   }
 
+  onRowClick(e, workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser) {
+    var component = e.component,
+      prevClickTime = component.lastClickTime;
+    component.lastClickTime = new Date();
+
+    if (prevClickTime && (component.lastClickTime - prevClickTime < 300)) {
+      //Double click code
+      this.openModal(workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser)
+      this.getDropDown()
+
+    }
+    else {
+      //Single click code
+      // console.log('single click');
+    }
+  }
+
+  clearSelectedRows() {
+    this.dataGrid.instance.deselectAll()
+  }
+
   //Determines which template to call and how the fields should be populated when opened
   openModal(workUser: TemplateRef<any>, workTeam: TemplateRef<any>, workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>, agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>) {
+    this.metricsService.showLoadingPanel();
     let selectedData = this.dataGrid.instance.getSelectedRowsData();
     this.dropdownDataInt = 0;
     if (this.tablesModel == "work_user") {
@@ -164,7 +186,7 @@ export class DataComponent implements OnInit {
       this.agileSystemUserId = selectedData[0] ? selectedData[0].agile_system_user_id : null
       this.agileSystemUserName = selectedData[0] ? selectedData[0].agile_system_user_name : null
       this.agileSystemName = selectedData[0] ? selectedData[0].agile_system_id : null
-      this.workTeamMemberID = selectedData[0] ? selectedData[0].work_team_member_id : null
+      // this.workTeamMemberID = selectedData[0] ? selectedData[0].work_team_member_id : null
       this.workUserID = selectedData[0] ? selectedData[0].work_user_id : null
       this.modalRef = this.modalService.show(agileSystemUser)
     }
@@ -221,43 +243,62 @@ export class DataComponent implements OnInit {
   }
 
   getDropDown() {
-    this.dataService.findDropDownData(this.tablesModel)
-      .map(res => { return res.json(); })
-      .subscribe((results) => {
-        var newResults = JSON.stringify(results).split('],[');
-        this.originalDataSource = results;
-        // if (this.dropdownDataInt == 0) {
-        //   this.dropDownData = results;
-        //   console.log("1")
-        // }
-        // else  if (this.dropdownDataInt == 1) {
-        //   this.dropDownData1 = results;
-        //   console.log("2")
-        // }
-        // else  if (this.dropdownDataInt == 2) {
-        //   this.dropDownData2 = results;
-        //   console.log("3")
-        // }
-        // this.dropdownDataInt++;
-        var ddResult1 = newResults[0].concat(']');
-        ddResult1 = ddResult1.substr(1);
-        ddResult1 = JSON.parse(ddResult1);
-        if (newResults[2] == null) {
-          var ddResult2 = '[' + newResults[1];
-          ddResult2 = ddResult2.slice(0, -1);
-          ddResult2 = JSON.parse(ddResult2);
-        } 
-        else {
-          var ddResult2 = '[' + newResults[1];
-          ddResult2 = newResults[1].concat(']');
-        }
-        var ddResult1 = newResults[0].concat(']');
-        ddResult1 = ddResult1.substr(1);
-        ddResult1 = JSON.parse(ddResult1);
-        this.dropDownData = ddResult1;
-        this.dropDownData1 = ddResult2;
-        this.dropDownData2 = newResults[2];
-      });
+    if (this.tablesModel != "work_user" && this.tablesModel != "work_team") {
+      this.dataService.findDropDownData(this.tablesModel)
+        .map(res => { return res.json(); })
+        .subscribe((results) => {
+          var newResults = JSON.stringify(results).split('],[');
+          this.originalDataSource = results;
+          // if (this.dropdownDataInt == 0) {
+          //   this.dropDownData = results;
+          //   console.log("1")
+          // }
+          // else  if (this.dropdownDataInt == 1) {
+          //   this.dropDownData1 = results;
+          //   console.log("2")
+          // }
+          // else  if (this.dropdownDataInt == 2) {
+          //   this.dropDownData2 = results;
+          //   console.log("3")
+          // }
+          // this.dropdownDataInt++;
+          var ddResult1 = newResults[0].concat(']');
+          ddResult1 = ddResult1.substr(1);
+          ddResult1 = JSON.parse(ddResult1);
+          // console.log(ddResult1);
+
+          if (newResults[1] != null) {
+            var ddResult2 = '[' + newResults[1];
+            ddResult2 = ddResult2.slice(0, -1);
+            ddResult2 = JSON.parse(ddResult2);
+            // console.log(ddResult2);
+          };
+
+          // else {
+          //   console.log('made');
+          //   var ddResult2 = '[' + newResults[1];
+          //   ddResult2 = ddResult2.concat(']');
+          //   ddResult2 = JSON.parse(ddResult2);
+          //   console.log(ddResult1 + ddResult2);
+          // }
+          // var ddResult3 = '[' + newResults[1];
+          // ddResult3 = ddResult3.slice(0, -1);
+          // ddResult3 = JSON.parse(ddResult3);
+          // console.log(ddResult3);
+
+          // var ddResult1 = newResults[0].concat(']');
+          // ddResult1 = ddResult1.substr(1);
+          // ddResult1 = JSON.parse(ddResult1);
+          // console.log(ddResult1);
+          // console.log(newResults[1]);
+          // console.log(newResults[2]);
+          this.dropDownData = ddResult1;
+          this.dropDownData1 = ddResult2;
+          // this.dropDownData2 = ddResult3;
+          // console.log(JSON.stringify(results));
+        });
+    }
+    this.metricsService.hideLoadingPanel();
   }
 
   //sets the columns in the main grid
@@ -311,7 +352,7 @@ export class DataComponent implements OnInit {
         { dataField: "agile_system_user_id", caption: "Agile System ID" },
         { dataField: "agile_system_user_name", caption: "User System Name" },
         { dataField: "agile_system_name", caption: "System Name" },
-        { dataField: "work_team_member_id", caption: "Work Team Member ID" },
+        // { dataField: "work_team_member_id", caption: "Work Team Member ID" },
         { dataField: "firstname", caption: "First Name" },
         { dataField: "lastname", caption: "Last Name" },
       ];
@@ -383,7 +424,7 @@ export class DataComponent implements OnInit {
       this.closeModal()
     }
     else if (this.tablesModel == "agile_system_user") {
-      this.dataService.editTableDataASystemUser(this.agileSystemUserId, this.agileSystemUserName, this.agileSystemId, this.workTeamMemberID, this.workUserID)
+      this.dataService.editTableDataASystemUser(this.agileSystemUserId, this.agileSystemUserName, this.agileSystemName, this.workTeamMemberID, this.workUserID)
         .map(res => { return res.json(); })
         .subscribe((results) => { this.statementExecuted = results; });
       this.closeModal()
