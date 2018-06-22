@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MetricsService } from '../services/metrics.service';
-// import { MatTableDataSource } from '@angular/material';
 import { DxButtonModule } from 'devextreme-angular';
 import { DxDataGridModule } from 'devextreme-angular';
 
@@ -126,7 +125,6 @@ export class MetricsComponent implements OnInit {
         totalPoints = this.StoryChoices[i].agile_system_user_story_points;
       }
     }
-    // console.log("Users Points: " + JSON.stringify(this.usersPoints));
   }
 
   getStoryCount() {
@@ -139,7 +137,6 @@ export class MetricsComponent implements OnInit {
     var lastSprint = "";
     var numberOfStories = this.StoryChoices.length - 1;
     for (i = 0; i < this.StoryChoices.length; i++) {
-      // console.log('i = ' + i + ' number of stories = ' + numberOfStories)
       if (lastSprint == this.StoryChoices[i].agile_sprint_id || lastSprint == "") {
         if (lastStory != this.StoryChoices[i].agile_story_id) {
           this.storiesBySprintCount++;
@@ -162,6 +159,5 @@ export class MetricsComponent implements OnInit {
       }
       lastSprint = this.StoryChoices[i].agile_sprint_id;
     }
-    // console.log("StoriesBySprint: " + JSON.stringify(this.storiesBySprint))
   }
 }
