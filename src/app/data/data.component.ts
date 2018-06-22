@@ -82,12 +82,6 @@ export class DataComponent implements OnInit {
   dropDownData3;
   dropdownDataInt = 0;
 
-  constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
-    this.dataService = dataService;
-    // this.columnChoices = this.columns;
-    this.metricsService = metricsService;
-  }
-
   keys = [
     { value: 0, viewValue: "This Foreign Key" },
     { value: 1, viewValue: "That Foreign Key" }
@@ -105,6 +99,15 @@ export class DataComponent implements OnInit {
     { value: 'agile_story', viewValue: "Agile Story" },
     { value: 'agile_story_agile_system_user', viewValue: "Agile Story Agile System User" }
   ];
+
+ 
+  constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
+    this.dataService = dataService;
+    // this.columnChoices = this.columns;
+    this.metricsService = metricsService;
+  }
+
+
 
   ngOnInit() {
     this.workUserOnInit();

@@ -2,6 +2,8 @@
 import MySQLdb
 from flask import Flask, json, jsonify, request
 from flask_cors import CORS
+from google.oauth2 import id_token
+from google.auth.transport import requests
 
 app = Flask(__name__)
 CORS(app)
@@ -514,6 +516,32 @@ def findDropDownData(table_name):
 
 
 
+# (Receive token by HTTPS POST)
+# ...
+try:
+    # print(token)
+    print(id_token)
+    CLIENT_ID = '788526420286-nfoaufj427k7s71ujkktdvo71irgi5rm.apps.googleusercontent.com'
+    # Specify the CLIENT_ID of the app that accesses the backend:
+    idinfo = id_token.verify_oauth2_token(id_token, requests.Request(), CLIENT_ID)
+
+    # Or, if multiple clients access the backend server:
+    # idinfo = id_token.verify_oauth2_token(token, requests.Request())
+    # if idinfo['aud'] not in [CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]:
+    #     raise ValueError('Could not verify audience.')
+
+    if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+        raise ValueError('Wrong issuer.')
+
+    # If auth request is from a G Suite domain:
+    # if idinfo['hd'] != GSUITE_DOMAIN_NAME:
+    #     raise ValueError('Wrong hosted domain.')
+
+    # ID token is valid. Get the user's Google Account ID from the decoded token.
+    userid = idinfo['sub']
+except ValueError:
+    # Invalid token
+    pass 
 
 
 
