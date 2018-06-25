@@ -5,7 +5,6 @@ import { MatTableDataSource } from '@angular/material';
 import { DxButtonModule } from 'devextreme-angular';
 import { DxDataGridModule } from 'devextreme-angular';
 import { Routes, RouterModule, Router } from '@angular/router';
-import { SignInComponent } from '../sign-in/sign-in.component'
 
 // if(!/localhost/.test(document.location.host)) {
 //   enableProdMode();
@@ -24,7 +23,7 @@ export class MetricsComponent implements OnInit {
   title = 'POST Request'
   TeamChoices = [];
   metricsService: any;
-  SignInComponent: any;
+  signInComponent: any;
   SprintChoices = [];
   StoryChoices;
   TeamMemberChoices = [];
@@ -35,21 +34,19 @@ export class MetricsComponent implements OnInit {
   usersPoints;
   storiesBySprint = [];
   storyData;
-  googleUser;
   sprintIds;
 
   currentTeamMemberId: string;
   // dataSource = this.StoryChoices;
   // dataSource: WeekData[];
-  constructor(@Inject(MetricsService) metricsService) {
+  constructor(@Inject(MetricsService) metricsService ) {
     this.metricsService = metricsService;
-
   }
+
 
   ngOnInit() {
     document.getElementById('gridGraphMetricsPageDiv').style.display = 'block';
     this.getAllTeams();
-    this.SignInComponent.function.onSignIn(this.googleUser);
   };
 
   // displayedColumns = ['agile_story_id', 'agile_story_name', 'agile_sprint_id', 'story_type', 'story_points', 'agile_system_user_id'];
