@@ -5,8 +5,8 @@
   </div>
 </div>
 
-<div id="gridWidgetContainer" class="effect7">
-  <div class="selectTeam row" id="searchWidgetContainer">
+<div class="effect7 gridWidgetContainer">
+  <div class="row selectTeam" id="searchWidgetContainer">
     <div id="tableSelectDiv" class="col-sm-4 searchField">
       <mat-form-field class="selectTables" id="tableSelector" >
         <mat-select [(ngModel)]="tablesModel" (change)="storeCurrentTable($event.value)" >
@@ -14,13 +14,11 @@
         </mat-select>
       </mat-form-field>
     </div>
-
     <div class="col-sm-1 searchField">
-      <button id="addRow" mat-button class='dataBtn' (click)="clearSelectedRows();openModal(workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser);getDropDown()">
+      <button id="addRow" mat-button class='searchFieldBtn' (click)="clearSelectedRows();openModal(workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser);getDropDown()">
         <i class="fas fa-plus-circle"></i>
       </button>
     </div>
-
   </div>
   <div class="row" id="gridGraphMetricsPageDiv">
     <div class="col-12">
@@ -200,7 +198,6 @@
     <h4 class="modal-title pull-left"> Agile Story</h4>
   </div>
   <div class="modal-body">
-    
     Agile Story ID:<dx-text-box id="agileStoryid" [(value)]="agileStoryid"></dx-text-box>
     <br />
     Agile Sprint:<dx-select-box  [dataSource] = "originalDataSource" displayExpr="agile_sprint_name" valueExpr= "agile_sprint_id" [(ngModel)]="agileSprintName"></dx-select-box>
@@ -241,10 +238,3 @@
 </ng-template>
 
 <app-loading-panel></app-loading-panel>
-
-<div>
-<p>
-
-</p>
-
-</div>

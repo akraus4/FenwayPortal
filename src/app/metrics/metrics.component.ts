@@ -34,7 +34,7 @@ export class MetricsComponent implements OnInit {
   }
 
   ngOnInit() {
-    document.getElementById('gridGraphMetricsPageDiv').style.display = 'block';
+    document.getElementById('metricsPageGridDiv').style.display = 'block';
     this.getAllTeams();
   };
 
