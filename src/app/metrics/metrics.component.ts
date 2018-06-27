@@ -57,9 +57,9 @@ export class MetricsComponent implements OnInit {
       this.currentSprintId.push(sprint_ids[i].agile_sprint_id);
     }
     if (this.currentSprintId==""){
-      (<HTMLInputElement>document.getElementById("formCompleteButton")).disabled = true;
+      (<HTMLInputElement>document.getElementById("metricsSearchBtn")).disabled = true;
     } else {
-      (<HTMLInputElement>document.getElementById("formCompleteButton")).disabled = false;
+      (<HTMLInputElement>document.getElementById("metricsSearchBtn")).disabled = false;
     }
   }
 
