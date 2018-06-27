@@ -1,3 +1,39 @@
-<p>
-  agile-team works!
-</p>
+<div class="row">
+  <div class="col-sm-12">
+    <header number=0></header>
+  </div>
+</div>
+<div id="System Properties">
+    <!-- <dx-select-box id="selectSystemDropDown" placeholder="System Name" [dataSource] = "" displayExpr="" valueExpr= "" [(ngModel)]=""></dx-select-box> -->
+    <dx-select-box  id="selectSystemDropDown" placeholder="System Name" [dataSource]="selectBoxDataSource" [searchEnabled]="true"></dx-select-box>
+
+    <dx-button id="addSystemButton" text="Add" (onClick)="buttonClicked()"  hoverStateEnabled="true"><i class="fas fa-plus"></i></dx-button>
+
+    <dx-button id="editSystemButton" text="Edit" (onClick)="buttonClicked()" hoverStateEnabled="true"><i class="fas fa-pencil-alt"></i></dx-button>
+
+    <!-- <dx-text-box id="typeTextField" placeholder="Type" [(value)]=""></dx-text-box> -->
+    <dx-text-box id="typeTextField" placeholder="Type"></dx-text-box>
+
+    <!-- <dx-select-box id="selectTeamDropDown" placeholder="Team" [dataSource] = "" displayExpr="" valueExpr= "" [(ngModel)]=""></dx-select-box> -->
+    <dx-select-box id="selectTeamDropDown" placeholder="Team" [dataSource]="selectBoxDataSource" [searchEnabled]="true"></dx-select-box>
+
+    <dx-check-box id="activeCheckBox" text="Active" [value]="false" (onValueChanged)="checkBoxToggled($event)"></dx-check-box>
+
+    <dx-button id="submitButton" text="Submit" (onClick)="buttonClicked()" visible="true" hoverStateEnabled="true"></dx-button>
+
+    <dx-button id="cancelButton" text="Cancel" (onClick)="buttonClicked()" visible="true" hoverStateEnabled="true"></dx-button>
+</div>
+
+  <div class="row" id="metricsPageGridDiv">
+    <div class="col-12">
+      <dx-data-grid id="gridContainer" [dataSource]="" [showRowLines]="true" [showBorders]="true">
+        <dxo-export [enabled]="true" fileName="Employees" [allowExportSelectedData]="true"></dxo-export>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+        <dxo-sorting mode="none"></dxo-sorting>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxi-column dataField="agile_story_id" caption="Team Members"></dxi-column>
+        <dxi-column dataField="agile_sprint_name" caption="System Users"></dxi-column>
+      </dx-data-grid>
+    </div>
+  </div>
+  <app-loading-panel></app-loading-panel>

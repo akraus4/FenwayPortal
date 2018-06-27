@@ -23,7 +23,6 @@ export class HomePageComponent implements OnInit {
 		this.results = [];
 		
 		// this.getUsers();
-		
 	}
 
 
