@@ -42,6 +42,7 @@ import {
   DxFormModule, DxTextBoxModule,
   DxTemplateModule
 } from 'devextreme-angular';
+import { AgileTeamComponent } from './agile-team/agile-team.component';
 
 
 
@@ -61,6 +62,7 @@ import {
     SignInComponent,
     TeamComponent,
     FooterComponent,
+    AgileTeamComponent,
 
 
   ],
