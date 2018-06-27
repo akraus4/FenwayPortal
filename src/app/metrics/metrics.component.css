@@ -1,19 +1,11 @@
-#page {
-    background-color: #d3d3d3;
-}
-
-.selectTeam {
-    margin-top:55px;
-}
-
 .selectDropDown {
     width: 100%;
 }
 
 .box h3 {
     text-align:center;
-      position:relative;
-      top:80px;
+    position:relative;
+    top:80px;
 }
 
 .box {
