@@ -1,27 +1,39 @@
-#page {
-    background-color: #d3d3d3;
+#systemComponents
+/* {
+    margin-top: 25px;
+    margin-left: 10px;
+} */
+#addSystemButton{
+    margin-bottom: 10px;
 }
-
-.selectTeam {
-    margin-top:55px;
+#editSystemButton{
+    margin-bottom: 10px;
 }
-
-.selectDropDown {
-    width: 100%;
+#selectSystemDropDown{
+    margin-bottom: 10px;
 }
-
-.box h3 {
-    text-align:center;
-      position:relative;
-      top:80px;
+#typeTextField{
+    margin-bottom: 10px;
 }
-
-.box {
-    width:70%;
-    height:200px;
-    background:#FFF;
-    margin:40px auto;
+#selectTeamDropDown{
+    margin-bottom: 10px;
 }
+#agileTeamSubmitCancelBtnContainer{
+    margin-bottom: -42px;
+}
+#activeCheckBox{
+    margin-bottom: 10px;
+}
+#submitButton
+{
+    height: 42px;
+}
+#cancelButton{
+    height: 42px;
+}
+#agileTeamGridContainer
+#gridContainer
+#agileTeamGrid
 
 /*This is where you change the color of every odd row in grid*/
 /deep/ .dx-datagrid-rowsview .dx-row:nth-child(odd) {
@@ -49,4 +61,11 @@
     width: 25px;
     background-repeat: no-repeat;
     color: transparent;
+}
+
+@media only screen and (max-width: 600px) {
+    .gridWidgetContainer {
+        padding-left: 27px;
+        padding-right: 0;
+    }
 }
