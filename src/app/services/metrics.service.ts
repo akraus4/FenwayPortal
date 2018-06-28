@@ -19,7 +19,6 @@ export class MetricsService {
 	// let result = this.http.get('http://localhost:3000/');console.log(JSON.stringify(result)); return result
 	// }
 
-
 	getAllTeams() {
 		let result = this.http.get(this.url + '/findAllTeams');
 		return result
@@ -60,18 +59,12 @@ export class MetricsService {
 		return result
 	}
 
-
-
 	// addUser(data) {
 	// 	let headers = new Headers({"Content-Type": "application/json"});
 	// 	let options = new RequestOptions({ headers: headers });
 	// 	return this.http.post('http://localhost:3000/adduser', JSON.stringify(data), options)
 	// 		.map(res => res.json());
 	// }
-
-
-	
-  
 
 	showLoadingPanel(): void {
         this.loadingVisible.next(true);

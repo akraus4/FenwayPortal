@@ -1,6 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+.box {
+    width:70%;
+    height:200px;
+    background:#FFF;
+    margin:40px auto;
+}
+
+.box h3 {
+    text-align:center;
+    position:relative;
+    top:80px;
+}
+
 .effect7:before, .effect7:after {
     content:"";
     position:absolute;
@@ -20,20 +33,10 @@
     right:10px;
     left:auto;
     -webkit-transform:skew(8deg) rotate(3deg);
-       -moz-transform:skew(8deg) rotate(3deg);
-        -ms-transform:skew(8deg) rotate(3deg);
-         -o-transform:skew(8deg) rotate(3deg);
-            transform:skew(8deg) rotate(3deg);
-}
-
-.searchWidgetContainer {
-    /* z-index: 1; */
-    margin-bottom: -53px;
-    /* margin-top: 55px; */
-}
-
-.searchField {
-    z-index: 4;
+    -moz-transform:skew(8deg) rotate(3deg);
+    -ms-transform:skew(8deg) rotate(3deg);
+    -o-transform:skew(8deg) rotate(3deg);
+    transform:skew(8deg) rotate(3deg);
 }
 
 .gridWidgetContainer {
@@ -50,8 +53,11 @@
     box-shadow:0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
 }
 
-.searchFieldBtn { 
-    /* it's .dataBtn in data.component.css */
+.searchField {
+    z-index: 4;
+}
+
+.searchFieldButton { 
     border-radius: 4px;
     -webkit-box-shadow: 0 1px 3px transparent;
     box-shadow: 0 1px 3px transparent;
@@ -65,4 +71,14 @@
     width: 42px;
     font-size: 18px;
     /* margin-top: 6%; */
+}
+
+.searchWidgetContainer {
+    /* z-index: 1; */
+    margin-bottom: -53px;
+    /* margin-top: 55px; */
+}
+
+.selectDropDown {
+    width: 100%;
 }
