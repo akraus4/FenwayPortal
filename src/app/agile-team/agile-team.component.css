@@ -27,9 +27,11 @@
 #submitButton
 {
     height: 42px;
+    visibility: hidden
 }
 #cancelButton{
     height: 42px;
+    visibility: hidden
 }
 #agileTeamGridContainer
 #gridContainer
@@ -67,5 +69,16 @@
     .gridWidgetContainer {
         padding-left: 27px;
         padding-right: 0;
+        top:-40px;
+    }
+}
+
+@media (min-width:601px) and (max-width:800px) {
+    .gridWidgetContainer {
+        padding-left: 0;
+        padding-right: 0;
+        top: 0;
+        left: 21px;
+        margin-right: 30px;
     }
 }
