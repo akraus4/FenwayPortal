@@ -280,12 +280,14 @@ li.primaryListItem {
     box-shadow: 0px 0px 2px #6d6c6d; */
 }
 
-@media(min-width:769px) {
+@media only screen and (min-width:801px) {
+   
+    
     #sidebar-wrapper {
         top: 0;
     }
-
-    /*#wrapper {
+/* 
+    #wrapper {
         width: 50px;
     }
 
@@ -313,21 +315,113 @@ li.primaryListItem {
         margin-left: -5%;
         padding-left: 0;
     }*/
+} 
+
+@media only screen and (max-width:600px) {
+    .sidebar-brand{
+        display: none;
+    }
+    #wrapper .sidebar-brand {
+        width: 240px;
+        padding-right: 15px;
+        height: 65px;
+    }
+    
+    #wrapper #homePageTab {
+        margin-top: 0; 
+    }
+    
+    
+    #wrapper .sidebar-nav > .sidebar-brand a:hover {
+        width: 225px;
+        padding-right: 15px;
+    }
+    
+    
+    #wrapper .sidebar-nav li a:hover {
+        width: 240px;
+        padding-right: 15px;
+    }
+    
+    #wrapper .sidebar-nav li a {
+        width: 225px;
+    }
+    
+    #wrapper .sidebar-nav {
+        width: 225px;
+    }
+    
+    #wrapper #sidebar-wrapper {
+        width: 45px;
+        top: 50px
+    }
+    
+    #wrapper span {
+        visibility: hidden;
+    }
 }
 
-@media(max-width:575px) {
-    /* #sidebar-wrapper {
+@media (min-width:601px) and (max-width:800px) {
+    .sidebar-brand{
+        display: none;
+    }
+    #wrapper .sidebar-brand {
+        width: 240px;
+        padding-right: 15px;
+        height: 65px;
+    }
+    
+    #wrapper #homePageTab {
+        margin-top: 0; 
+    }
+    
+    
+    #wrapper .sidebar-nav > .sidebar-brand a:hover {
+        width: 225px;
+        padding-right: 15px;
+    }
+    
+    
+    #wrapper .sidebar-nav li a:hover {
+        width: 240px;
+        padding-right: 15px;
+    }
+    
+    #wrapper .sidebar-nav li a {
+        width: 225px;
+    }
+    
+    #wrapper .sidebar-nav {
+        width: 225px;
+    }
+    
+    #wrapper #sidebar-wrapper {
+        width: 45px;
+        top: 50px
+    }
+    
+    #wrapper span {
+        visibility: hidden;
+    }
+}
+
+/* @media(max-width:575px) {
+
+
+    #sidebar-wrapper {
         top: 115px;
-    } */
-}
+    } 
 
-@media(min-width:770px) {
+  
+} */
+
+/* @media(min-width:770px) {
     #divNav.toggled {
         display: block;
         margin-left: -5%;
         padding-left: 0;
     }
-}
+} */
 
 /*#region Scroll*/
 
@@ -375,12 +469,11 @@ html {
 }
 
 
-@media only screen and (max-width: 600px) {
-    #wrapper {
-        display: block;
+/* @media only screen and (max-width: 600px) {
+    #wrapper #sidebar-wrapper {
+        width: 45px;
     }
-}
-
+} */
 /*#endregion*/
 
 /*#region Ipad_Styling*/
