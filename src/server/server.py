@@ -2,6 +2,8 @@
 import MySQLdb
 from flask import Flask, json, jsonify, request
 from flask_cors import CORS
+from google.oauth2 import id_token
+from google.auth.transport import requests
 
 app = Flask(__name__)
 CORS(app)
@@ -577,6 +579,76 @@ def findDropDownData(table_name):
             iSystem=iSystem+1
         jsonList.insert(1, jsonListSystem)
     return json.dumps(jsonList)
+
+
+
+
+
+
+# (Receive token by HTTPS POST)
+# ...
+try:
+    # print(token)
+    print(id_token)
+    CLIENT_ID = '788526420286-nfoaufj427k7s71ujkktdvo71irgi5rm.apps.googleusercontent.com'
+    # Specify the CLIENT_ID of the app that accesses the backend:
+    idinfo = id_token.verify_oauth2_token(id_token, requests.Request(), CLIENT_ID)
+
+    # Or, if multiple clients access the backend server:
+    # idinfo = id_token.verify_oauth2_token(token, requests.Request())
+    # if idinfo['aud'] not in [CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]:
+    #     raise ValueError('Could not verify audience.')
+
+    if idinfo['iss'] not in ['accounts.google.com', 'https://accounts.google.com']:
+        raise ValueError('Wrong issuer.')
+
+    # If auth request is from a G Suite domain:
+    # if idinfo['hd'] != GSUITE_DOMAIN_NAME:
+    #     raise ValueError('Wrong hosted domain.')
+
+    # ID token is valid. Get the user's Google Account ID from the decoded token.
+    userid = idinfo['sub']
+except ValueError:
+    # Invalid token
+    pass 
+
+
+
+
+
+
+
+# @app.route("/getColumnData/<tableName>")
+# def getColumnData():
+#     column = []
+#     cur.execute("SELECT * FROM agile_sprint")
+#     for row in cur.fetchall():
+#         column['agile_sprint_id'] = row[0]
+#         column['agile_sprint_name']= row[1]
+# 	    column['agile_system_id']= row[2]
+# 	    column['sprint_description']= row[3]
+# 	    column['sprint_start_date']= row[4]
+# 	    column['sprint_end_date']= row[5]
+#     return json.dumps(column)
+
+# @app.route("/getColumnData")
+# def getColumnData():
+#     allTeams = []
+#     individualTeam = {}
+#     i = 0
+#     cur.execute("SELECT * FROM agile_sprint")
+#     for row in cur.fetchall():
+#         individualTeam['agile_sprint_id'] = row[0]
+#         individualTeam['agile_sprint_name'] = row[1]
+#         individualTeam['agile_system_id'] = row[2]
+#         individualTeam['sprint_description'] = row[3]
+#         individualTeam['sprint_start_date'] = row[4]
+#         individualTeam['sprint_end_date'] = row[5]
+#         allTeams.insert(i, individualTeam)
+#         individualTeam = {}
+#         i = i+1
+#     return json.dumps(allTeams)
+
 
 if __name__ == "__main__":
     app.run()

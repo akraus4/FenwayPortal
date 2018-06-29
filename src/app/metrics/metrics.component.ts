@@ -4,7 +4,7 @@ import { MetricsService } from '../services/metrics.service';
 import { MatTableDataSource } from '@angular/material';
 import { DxButtonModule } from 'devextreme-angular';
 import { DxDataGridModule } from 'devextreme-angular';
-
+import { Routes, RouterModule, Router } from '@angular/router';
 
 // if(!/localhost/.test(document.location.host)) {
 //   enableProdMode();
@@ -23,6 +23,7 @@ export class MetricsComponent implements OnInit {
   title = 'POST Request'
   TeamChoices = [];
   metricsService: any;
+  signInComponent: any;
   SprintChoices = [];
   StoryChoices;
   TeamMemberChoices = [];
@@ -38,10 +39,10 @@ export class MetricsComponent implements OnInit {
   currentTeamMemberId: string;
   // dataSource = this.StoryChoices;
   // dataSource: WeekData[];
-  constructor(@Inject(MetricsService) metricsService) {
+  constructor(@Inject(MetricsService) metricsService ) {
     this.metricsService = metricsService;
-
   }
+
 
   ngOnInit() {
     document.getElementById('gridGraphMetricsPageDiv').style.display = 'block';
@@ -53,6 +54,8 @@ export class MetricsComponent implements OnInit {
 
   Team = new FormControl();    //This is the array for the team selection.
   Sprint = new FormControl();    //This is the array for the sprint selection.
+
+
 
   getAllTeams() {
     this.metricsService.getAllTeams()
