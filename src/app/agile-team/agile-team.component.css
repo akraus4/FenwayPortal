@@ -1,8 +1,4 @@
 #systemComponents
-/* {
-    margin-top: 25px;
-    margin-left: 10px;
-} */
 #addSystemButton{
     margin-bottom: 10px;
 }
@@ -10,6 +6,9 @@
     margin-bottom: 10px;
 }
 #selectSystemDropDown{
+    margin-bottom: 10px;
+}
+#systemTextField{
     margin-bottom: 10px;
 }
 #typeTextField{
@@ -24,14 +23,11 @@
 #activeCheckBox{
     margin-bottom: 10px;
 }
-#submitButton
-{
+#submitButton{
     height: 42px;
-    visibility: hidden
 }
 #cancelButton{
     height: 42px;
-    visibility: hidden
 }
 #agileTeamGridContainer
 #gridContainer
@@ -81,4 +77,8 @@
         left: 21px;
         margin-right: 30px;
     }
+}
+
+.remove{
+    display: none;
 }
