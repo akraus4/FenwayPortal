@@ -12,10 +12,10 @@
     <dx-select-box id="selectSystemDropDown" placeholder="System Name" [dataSource]="systemSelectBoxDataSource" [searchEnabled]="true"></dx-select-box>
     <dx-text-box id="systemTextField" placeholder="System Name"></dx-text-box>
     <dx-text-box id="typeTextField" placeholder="Type" [(readOnly)]="readOnly"></dx-text-box>
-    <dx-select-box id="selectTeamDropDown" placeholder="Team" [dataSource]="teamSelectBoxDataSource" [searchEnabled]="true" readOnly="true"></dx-select-box>
-    <dx-check-box id="activeCheckBox" text="Active" [value]="false" (onValueChanged)="checkBoxToggled($event)" readOnly="true"></dx-check-box>
+    <dx-select-box id="selectTeamDropDown" placeholder="Team" [dataSource]="teamSelectBoxDataSource" [searchEnabled]="true" [(readOnly)]="readOnly"></dx-select-box>
+    <dx-check-box id="activeCheckBox" text="Active" [value]="false" (onValueChanged)="checkBoxToggled($event)" [(readOnly)]="readOnly"></dx-check-box>
     <div id="agileTeamSubmitCancelBtnContainer">
-      <dx-button id="submitButton" text="{{buttonLbl}}" (onClick)="submitButtonClicked()" hoverStateEnabled="true" disabled="true"></dx-button>
+      <dx-button id="submitButton" text="{{buttonLbl}}" (onClick)="submitButtonClicked()" hoverStateEnabled="true" [(disabled)]="disabled"></dx-button>
       <dx-button id="cancelButton" text="Cancel" (onClick)="cancelButtonClicked()" hoverStateEnabled="true"></dx-button>
     </div>
   </div>

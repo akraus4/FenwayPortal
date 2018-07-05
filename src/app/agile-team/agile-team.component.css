@@ -1,36 +1,49 @@
 #systemComponents
-#addSystemButton{
+
+#addSystemButton {
     margin-bottom: 10px;
 }
-#editSystemButton{
+
+#editSystemButton {
     margin-bottom: 10px;
 }
-#selectSystemDropDown{
+
+#selectSystemDropDown {
     margin-bottom: 10px;
 }
-#systemTextField{
+
+#systemTextField {
     margin-bottom: 10px;
 }
-#typeTextField{
+
+#typeTextField {
     margin-bottom: 10px;
 }
-#selectTeamDropDown{
+
+#selectTeamDropDown {
     margin-bottom: 10px;
 }
-#agileTeamSubmitCancelBtnContainer{
+
+#agileTeamSubmitCancelBtnContainer {
     margin-bottom: -42px;
 }
-#activeCheckBox{
+
+#activeCheckBox {
     margin-bottom: 10px;
 }
-#submitButton{
+
+#submitButton {
     height: 42px;
 }
-#cancelButton{
+
+#cancelButton {
     height: 42px;
 }
+
 #agileTeamGridContainer
+
 #gridContainer
+
 #agileTeamGrid
 
 /*This is where you change the color of every odd row in grid*/
@@ -79,6 +92,6 @@
     }
 }
 
-.remove{
+.remove {
     display: none;
 }

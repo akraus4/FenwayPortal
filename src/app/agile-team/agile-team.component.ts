@@ -11,17 +11,19 @@ export class AgileTeamComponent implements OnInit {
   systemSelectBoxDataSource = ["System 1", "System 2", "System 3"];
   teamSelectBoxDataSource = ["Team 1", "Team 2", "Team 3"];
   buttonLbl:string;
-  readOnly;
+  readOnly:boolean;
+  disabled:boolean;
 
   constructor() { }
 
   ngOnInit() {
+    this.readOnly = true;
+    this.disabled = true;
     $('#systemTextField').addClass('remove');
     $('#typeTextField').addClass('remove');
     $('#selectTeamDropDown').addClass('remove');
     $('#activeCheckBox').addClass('remove');
     $('#agileTeamSubmitCancelBtnContainer').addClass('remove');
-    this.readOnly = true;
   }
 
   addSystemButtonClicked() {
