@@ -9,11 +9,11 @@
   <div id="systemComponents" class="col-lg-4 col-sm-12 searchField">
     <dx-button id="addSystemButton" (onClick)="addSystemButtonClicked()" hoverStateEnabled="true" icon="fas fa-plus"></dx-button>
     <dx-button id="editSystemButton" (onClick)="editSystemButtonClicked()" hoverStateEnabled="true" icon="fas fa-pencil-alt"></dx-button>
-    <dx-select-box id="selectSystemDropDown" placeholder="System Name" [dataSource]="systemSelectBoxDataSource" [searchEnabled]="true"></dx-select-box>
-    <dx-text-box id="systemTextField" placeholder="System Name"></dx-text-box>
-    <dx-text-box id="typeTextField" placeholder="Type" [(readOnly)]="readOnly"></dx-text-box>
+    <dx-select-box id="selectSystemDropDown" placeholder="System Name" [dataSource]="systemSelectBoxDataSource" [searchEnabled]="true" (onValueChanged)="systemValueChanged($event)"></dx-select-box>
+    <dx-text-box id="systemTextField" placeholder="System Name" [(value)]="systemValue"></dx-text-box>
+    <dx-text-box id="typeTextField" placeholder="Type" [(readOnly)]="readOnly" [(value)]="typeValue"></dx-text-box>
     <dx-select-box id="selectTeamDropDown" placeholder="Team" [dataSource]="teamSelectBoxDataSource" [searchEnabled]="true" [(readOnly)]="readOnly"></dx-select-box>
-    <dx-check-box id="activeCheckBox" text="Active" [value]="false" (onValueChanged)="checkBoxToggled($event)" [(readOnly)]="readOnly"></dx-check-box>
+    <dx-check-box id="activeCheckBox" text="Active" [(value)]="activeValue" (onValueChanged)="checkBoxToggled($event)" [(readOnly)]="readOnly"></dx-check-box>
     <div id="agileTeamSubmitCancelBtnContainer">
       <dx-button id="submitButton" text="{{buttonLbl}}" (onClick)="submitButtonClicked()" hoverStateEnabled="true" [(disabled)]="disabled"></dx-button>
       <dx-button id="cancelButton" text="Cancel" (onClick)="cancelButtonClicked()" hoverStateEnabled="true"></dx-button>

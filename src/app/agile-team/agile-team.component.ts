@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DxSelectBoxModule, DxButtonModule, DxCheckBoxModule, DxTextBoxModule, DxDataGridModule } from 'devextreme-angular'
+import DataSource from "devextreme/data/data_source";
 import * as $ from "jquery";
 
 @Component({
@@ -9,12 +10,21 @@ import * as $ from "jquery";
 })
 export class AgileTeamComponent implements OnInit {
   systemSelectBoxDataSource = ["System 1", "System 2", "System 3"];
-  teamSelectBoxDataSource = ["Team 1", "Team 2", "Team 3"];
+  teamSelectBoxDataSource:DataSource;
+  // teamSelectBoxDataSource = ["Team 1", "Team 2", "Team 3"];
   buttonLbl:string;
   readOnly:boolean;
   disabled:boolean;
+  activeValue:boolean;
+  newSystemValue:any;
+  systemValue:any;
+  typeValue:any;
 
-  constructor() { }
+  constructor() { 
+    this.teamSelectBoxDataSource = new DataSource({
+      store: ["Team 1", "Team 2", "Team 3"]
+    });
+  }
 
   ngOnInit() {
     this.readOnly = true;
@@ -26,10 +36,22 @@ export class AgileTeamComponent implements OnInit {
     $('#agileTeamSubmitCancelBtnContainer').addClass('remove');
   }
 
+  systemValueChanged(e) {
+    let previousSystemValue = e.previousSystemValue;
+    this.newSystemValue = e.value;
+    // Event handling commands go here
+    $('#typeTextField').removeClass('remove');
+    $('#selectTeamDropDown').removeClass('remove');
+    $('#activeCheckBox').removeClass('remove');
+  }
+
   addSystemButtonClicked() {
     // alert("The Add Button was clicked");
     this.buttonLbl = "Add";
     this.readOnly = false;
+    this.systemValue = undefined;
+    this.typeValue = undefined;
+    this.activeValue = undefined;
     $('#editSystemButton').addClass('remove');
     $('#selectSystemDropDown').addClass('remove');
     $('#systemTextField').removeClass('remove');
@@ -37,13 +59,13 @@ export class AgileTeamComponent implements OnInit {
     $('#selectTeamDropDown').removeClass('remove');
     $('#activeCheckBox').removeClass('remove');
     $('#agileTeamSubmitCancelBtnContainer').removeClass('remove');
-    
   }
 
   editSystemButtonClicked() {
     // alert("The Edit Button was clicked");
     this.buttonLbl = "Update";
     this.readOnly = false;
+    this.systemValue = this.newSystemValue;
     $('#addSystemButton').addClass('remove');
     $('#selectSystemDropDown').addClass('remove');
     $('#systemTextField').removeClass('remove');
@@ -54,12 +76,12 @@ export class AgileTeamComponent implements OnInit {
   }
 
   checkBoxToggled(e) {
-    if(e.value == true){
-      alert("Checkbox Checked")
-    }
-    else{
-      alert("Checkbox Unchecked")
-    }
+    // if(e.value == true){
+    //   alert("Checkbox Checked")
+    // }
+    // else{
+    //   alert("Checkbox Unchecked")
+    // }
   };
 
   submitButtonClicked() {
@@ -68,14 +90,16 @@ export class AgileTeamComponent implements OnInit {
 
   cancelButtonClicked() {
     // alert("The Cancel Button was clicked"
-    this.readOnly = true;
+    this.ngOnInit();
+    this.teamSelectBoxDataSource.load();
     $('#editSystemButton').removeClass('remove');
     $('#addSystemButton').removeClass('remove');
     $('#selectSystemDropDown').removeClass('remove');
-    $('#systemTextField').addClass('remove');
-    $('#selectTeamDropDown').addClass('remove');
-    $('#typeTextField').addClass('remove');
-    $('#activeCheckBox').addClass('remove');
-    $('#agileTeamSubmitCancelBtnContainer').addClass('remove');
+    // this.readOnly = true;
+    // $('#systemTextField').addClass('remove');
+    // $('#selectTeamDropDown').addClass('remove');
+    // $('#typeTextField').addClass('remove');
+    // $('#activeCheckBox').addClass('remove');
+    // $('#agileTeamSubmitCancelBtnContainer').addClass('remove');
   }
 }
