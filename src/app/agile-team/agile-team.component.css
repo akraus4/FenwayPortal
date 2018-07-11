@@ -36,7 +36,11 @@
     height: 42px;
 }
 
-#cancelButton {
+#cancelAddButton {
+    height: 42px;
+}
+
+#cancelEditButton {
     height: 42px;
 }
 
