@@ -89,7 +89,7 @@ export class DataComponent implements OnInit {
   drop_name;
   originalDataSource;
   dropDownData;
-  dropDownData1
+  dropDownData1;
   dropDownData2;
   dropdownDataInt = 0;
 

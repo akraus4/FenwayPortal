@@ -92,6 +92,7 @@ import {
     DxNumberBoxModule,
     DxFormModule,
     DxTextBoxModule,
+
     DxTemplateModule,
     ModalModule.forRoot(),
     RouterModule.forRoot([
@@ -105,6 +106,7 @@ import {
       { path: "demo", component: DemoComponent },
       { path: "view-score", component: ViewScoreComponent },
       { path: "team", component: TeamComponent },
+      { path: "signIn", component: SignInComponent},
       { path: "**", redirectTo: "home" }
 
     ]),

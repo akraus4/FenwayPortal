@@ -22,7 +22,9 @@
   </div>
   <div class="row" id="gridGraphMetricsPageDiv">
     <div class="col-12">
-      <dx-data-grid id="gridContainer" [dataSource]="TableChoices" [hoverStateEnabled]="true" [showRowLines]="true" [showBorders]="true" [columns]="columnChoices" (onRowClick)="onRowClick($event,workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser)">
+<dx-data-grid id="gridContainer" [dataSource]="TableChoices" [hoverStateEnabled]="true" [showRowLines]="true" [showBorders]="true" [columns]="columnChoices" (onRowClick)="onRowClick($event,workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser)">
+          <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+          <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
         <dxo-export [enabled]="true" fileName="Employees" [allowExportSelectedData]="true"></dxo-export>
         <dxo-selection mode="single"></dxo-selection>
         <dxo-header-filter [visible]="true"></dxo-header-filter>
