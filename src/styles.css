@@ -79,3 +79,17 @@
 .selectDropDown {
     width: 100%;
 }
+
+.confirmModalBtn{
+    height: 35px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+}
+
+ .submitBtn{
+    background-color: #64b246;
+}
+.cancelBtn{
+    background-color: #f45342;
+}

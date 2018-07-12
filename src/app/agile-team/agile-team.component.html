@@ -15,7 +15,7 @@
     <dx-select-box id="selectTeamDropDown" placeholder="Team" [dataSource]="teamSelectBoxDataSource" [searchEnabled]="true" readOnly="true"></dx-select-box>
     <dx-check-box id="activeCheckBox" text="Active" [value]="false" (onValueChanged)="checkBoxToggled($event)" readOnly="true"></dx-check-box>
     <div id="agileTeamSubmitCancelBtnContainer">
-      <dx-button id="submitButton" text="{{buttonLbl}}" (onClick)="submitButtonClicked()" hoverStateEnabled="true" disabled="true"></dx-button>
+      <dx-button id="submitButton" text="{{buttonLbl}}" (onClick)="openModal(agileWork)" hoverStateEnabled="true" ></dx-button>
       <dx-button id="cancelButton" text="Cancel" (onClick)="cancelButtonClicked()" hoverStateEnabled="true"></dx-button>
     </div>
   </div>
@@ -32,4 +32,13 @@
   </div>
 
 </div>
+<ng-template #agileWork>
+        <div class="modal-body">
+          <p id="agileChange">Are you sure you want to make these changes?</p>
+        </div>
+        <div class="modal-footer">
+          <dx-button id="confirmYesBtn" class="confirmModalBtn submitBtn" text="Yes" hoverStateEnabled="true"></dx-button>
+          <dx-button id="confirmNoBtn" class="confirmModalBtn cancelBtn" text="No" (onClick)="confirmNoClicked()" hoverStateEnabled="true"></dx-button>
+        </div>
+  </ng-template>
 <app-loading-panel></app-loading-panel>
