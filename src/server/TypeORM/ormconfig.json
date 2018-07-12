@@ -2,15 +2,15 @@
     "database": {
         "driver": "mysql",
         "type": "mysql",
-        "host": "52.55.14.143",
+        "host": "localhost",
         "port": 3306,
-        "username": "fg_user_dev2",
-        "password": "6UhjVvAgM_Jm",
-        "database": "fg_metrics_dev2",
-        "synchronize": true,
+        "username": "root",
+        "password": "password",
+        "database": "PORTAL",
+        "synchronize": false,
         "logging": false,
         "entities": [
-            "src/entity/**/*.ts"
+            "src/entities/**/*.ts"
         ]
     },
     "migrations": [
@@ -20,7 +20,7 @@
         "src/subscriber/**/*.ts"
     ],
     "cli": {
-        "entitiesDir": "src/entity",
+        "entitiesDir": "src/entities",
         "migrationsDir": "src/migration",
         "subscribersDir": "src/subscriber"
     }
