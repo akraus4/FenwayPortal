@@ -55,3 +55,25 @@
   @media (max-width: 385px){
     .copyright {width: 50%;}
   }
+
+  @media (max-width: 600px){
+    .facebook_logo {
+      position: relative;
+      visibility: hidden;
+    }
+    
+    .twitter_logo {
+      position: relative;
+      visibility: hidden;
+    }
+    
+    .linkedin_logo {
+      position: relative;
+      visibility: hidden;
+    }
+    
+    .fg_logo {
+      position: relative;
+      visibility: hidden;
+    }
+  }

@@ -10,7 +10,9 @@ import { DxTextBoxModule, DxNumberBoxModule, DxSelectBoxModule } from 'devextrem
 import data_grid from 'devextreme/ui/data_grid';
 import { DxiDataGridColumn } from 'devextreme-angular/ui/nested/base/data-grid-column-dxi';
 import DataSource from 'devextreme/data/data_source';
-
+import { FormControl } from '@angular/forms';
+import { confirm } from 'devextreme/ui/dialog';
+import * as $ from "jquery";
 @Component({
   selector: 'app-data',
   templateUrl: './data.component.html',
@@ -18,87 +20,85 @@ import DataSource from 'devextreme/data/data_source';
 })
 
 export class DataComponent implements OnInit {
-  @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent
+  metricsService: any; //connects to metricService.ts
+  dataService: any; // connects to dataService.ts
   modalRef: BsModalRef;
   title: string = "Data Management";
   columnChoices: Array<any> = [];
+  columnTeamChoices: Array<any> = [];
+  Team = new FormControl();    //This is the array for the team selection.
   tablesModel;
+  teamId;
+  currentTeamId: Array<any> = [];
+  workTeams: string;
+  teamsModel;
   table: string;
-  dataService: any;
+  team: string;
   TableChoices;
+  TeamChoices = [];
   key: string;
-  metricsService: any;
   val: any;
   viewValue: any;
   statementExecuted: any;
+
   selectionChangedRaised = false;
-  //variables for work_user
+  //Variables for work_user
   workUserId: string;
   firstName: string;
   lastName: string;
   email: string;
-  //variables for work_team
+  //Variables for work_team
   workTeamID: string;
   workTeamName: string;
   projectNameworkTeam: string;
   projectName: string;
-  //variables for work_team_member
+  //Variables for work_team_member
   workTeamMemberId: string;
   expectedHours: string;
-  //variables for work_dailyhours
+  //Variables for work_dailyhours
   workDailyHoursId: string;
   workDate: string;
   hours: string;
-  //variables for agile_system
+  //Variables for agile_system
   agileSystemId: string;
   agileSystemName: string;
   agileSystemType: string;
-  //variables for agile_system_user
+  //Variables for agile_system_user
   agileSystemUserId: string;
   agileSystemUserName: string;
   workTeamMemberID: string;
   workUserID: string;
-  //variables for agile_sprint
+  //Variables for agile_sprint
   agileSprintId: string;
   agileSprintName: string;
   sprintDescription: string;
   sprintStartDate: string;
   sprintEndDate: string;
-  //variables for agile_story
+  //Variables for agile_story
   agileStoryid: string;
   storyType: string;
   storyStatus: string;
   storyPoints: string;
   workTeamMemberName: string;
-  //variables for agile_story_agile_system_user
+  //Variables for agile_story_agile_system_user
   agileStoryAgileSystemUserId: string;
   agileSystemUserStoryPoints: string;
 
-  // Data sources for each dropdown in the data templates
+
+  //Data sources for each dropdown in the data templates
   drop_name;
   originalDataSource;
   dropDownData;
-  dropDownData1
+  dropDownData1;
   dropDownData2;
   dropdownDataInt = 0;
 
-  constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
-    this.dataService = dataService;
-    // this.columnChoices = this.columns;
-    this.metricsService = metricsService;
-  }
-
-  keys = [
-    { value: 0, viewValue: "This Foreign Key" },
-    { value: 1, viewValue: "That Foreign Key" }
-  ]
-
-  //Dropdown choices for 'Select Table"
+  //Dropdown choices for main table drop down
   tables = [
     { value: 'work_user', viewValue: "Work User" },
     { value: 'work_team', viewValue: "Work Team" },
     { value: 'work_team_member', viewValue: "Work Team Member" },
-    // { value: 3, viewValue: "Work Daily Hours" },
+    { value: 'work_dailyhours', viewValue: "Work Daily Hours" },
     { value: 'agile_system', viewValue: "Agile System" },
     { value: 'agile_system_user', viewValue: "Agile System User" },
     { value: 'agile_sprint', viewValue: "Agile Sprint" },
@@ -106,18 +106,27 @@ export class DataComponent implements OnInit {
     { value: 'agile_story_agile_system_user', viewValue: "Agile Story Agile System User" }
   ];
 
+  constructor(private modalService: BsModalService, @Inject(DataService) dataService, @Inject(MetricsService) metricsService) {
+    this.dataService = dataService;
+    this.metricsService = metricsService;
+  }
+
+  @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent
+
+  //On page load
   ngOnInit() {
     this.workUserOnInit();
     this.tablesModel = this.tables[0].value;
-    // $("#id").dxSelectBox("instance").option("value", 0);
   }
 
+  //Default table called on page load
   workUserOnInit() {
     this.tablesModel = 'work_user'
-    this.setupTable()
+    this.getTableData()
     this.metricsService.hideLoadingPanel();
   }
 
+  //Handles clicks on grid by row
   onRowClick(e, workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser) {
     var component = e.component,
       prevClickTime = component.lastClickTime;
@@ -127,7 +136,6 @@ export class DataComponent implements OnInit {
       //Double click code
       this.openModal(workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser)
       this.getDropDown()
-
     }
     else {
       //Single click code
@@ -135,11 +143,66 @@ export class DataComponent implements OnInit {
     }
   }
 
+  //Clears the selected rows
   clearSelectedRows() {
     this.dataGrid.instance.deselectAll()
   }
 
-  //Determines which template to call and how the fields should be populated when opened
+  //Stores the name of the table selected in main drop down in data management
+  storeCurrentTable(tableId: string) {
+    this.tablesModel = tableId;
+    if (this.tablesModel == "work_dailyhours") {
+      $("#workDailyhoursFilter").removeClass("ghost");
+      this.getAllTeams();
+    }
+    else {
+      this.getTableData()
+    }
+  }
+
+  //Pulls data from python to populate grids(excluding work_dailyhours)
+  getTableData() {
+    this.metricsService.showLoadingPanel()
+    if (this.tablesModel != "work_dailyhours") {
+      this.dataService.findTableData(this.tablesModel)
+        .map(res => { return res.json(); })
+        .subscribe((results) => { this.TableChoices = results; this.getColumns(); });
+    }
+    this.metricsService.hideLoadingPanel();
+  }
+
+  //Handles selected teams in drop down filter for work_dailyhours in data management
+  storeCurrentTeam(teamId: string) {
+    var i = 0;
+    for (i = 0; i < teamId.length; i++) {
+      if (i == 0) {
+        this.workTeams = teamId[i];
+      }
+      else {
+        this.workTeams = this.workTeams + "', '" + teamId[i];
+      }
+    }
+    this.setupWorkDailyhours()
+  }
+
+  //Pulls the teams that will be used to populate drop down filter for work dailyhours in data management
+  getAllTeams() {
+    this.getColumns();
+    this.dataService.findWorkTeams()
+      .map(res => { return res.json(); })
+      .subscribe((results) => { this.TeamChoices = results });
+  }
+
+  //Gets work teams to populate work_dailyhours drop down in Data Management Page
+  setupWorkDailyhours() {
+    this.metricsService.showLoadingPanel()
+    this.dataService.findWorkDailyhoursData(this.tablesModel, this.workTeams)
+      .map(res => { return res.json(); })
+      .subscribe((results) => { this.TableChoices = results; this.getColumns(); });
+    this.metricsService.hideLoadingPanel();
+  }
+
+  //Determines which template to call and how the fields should be populated when opened in add/edit modal
   openModal(workUser: TemplateRef<any>, workTeam: TemplateRef<any>, workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>, agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>) {
     this.metricsService.showLoadingPanel();
     let selectedData = this.dataGrid.instance.getSelectedRowsData();
@@ -213,32 +276,22 @@ export class DataComponent implements OnInit {
     }
   }
 
+  //Closes the modal opened above
   closeModal() {
     this.modalService.hide(1);
   }
 
-  storeCurrentTable(tableId: string) {
-    this.tablesModel = tableId;
-    this.setupTable();
+  //Confirmation pop-up to determine if changes wish to be saved from modal(import { confirm } from 'devextreme/ui/dialog';)
+  //just need to call showConfirm() where confirmation is needed
+  showConfirm(workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser) {
+    var that = this
+    var result = confirm("Are you sure?", "Confirm changes");
+    result.then(function (dialogResult) {
+      dialogResult ? that.getEditTableData(workUser, workTeam, workTeamMember, workDailyhours, agileSystem, agileSystemUser, agileSprint, agileStory, agileStoryAgileSystemUser) : null
+    });
   }
 
-  //   selectTable(e) {
-  //     var i = e.value;
-  //     this.currentTable = this.tables[i].viewValue
-  //   this.setupTable();
-  // }
-
-  setupTable() {
-    this.metricsService.showLoadingPanel()
-    this.getTableData()
-  }
-  //pulls data from python to populate grid
-  getTableData() {
-    this.dataService.findTableData(this.tablesModel)
-      .map(res => { return res.json(); })
-      .subscribe((results) => { this.TableChoices = results; this.getColumns(); this.metricsService.hideLoadingPanel(); });
-  }
-
+  //Gets the information to populate all of the drop downs in the edit modal
   getDropDown() {
     if (this.tablesModel != "work_user" && this.tablesModel != "work_team") {
       this.dataService.findDropDownData(this.tablesModel)
@@ -246,59 +299,23 @@ export class DataComponent implements OnInit {
         .subscribe((results) => {
           var newResults = JSON.stringify(results).split('],[');
           this.originalDataSource = results;
-          // if (this.dropdownDataInt == 0) {
-          //   this.dropDownData = results;
-          //   console.log("1")
-          // }
-          // else  if (this.dropdownDataInt == 1) {
-          //   this.dropDownData1 = results;
-          //   console.log("2")
-          // }
-          // else  if (this.dropdownDataInt == 2) {
-          //   this.dropDownData2 = results;
-          //   console.log("3")
-          // }
-          // this.dropdownDataInt++;
           var ddResult1 = newResults[0].concat(']');
           ddResult1 = ddResult1.substr(1);
           ddResult1 = JSON.parse(ddResult1);
-          // console.log(ddResult1);
 
           if (newResults[1] != null) {
             var ddResult2 = '[' + newResults[1];
             ddResult2 = ddResult2.slice(0, -1);
             ddResult2 = JSON.parse(ddResult2);
-            // console.log(ddResult2);
           };
-
-          // else {
-          //   console.log('made');
-          //   var ddResult2 = '[' + newResults[1];
-          //   ddResult2 = ddResult2.concat(']');
-          //   ddResult2 = JSON.parse(ddResult2);
-          //   console.log(ddResult1 + ddResult2);
-          // }
-          // var ddResult3 = '[' + newResults[1];
-          // ddResult3 = ddResult3.slice(0, -1);
-          // ddResult3 = JSON.parse(ddResult3);
-          // console.log(ddResult3);
-
-          // var ddResult1 = newResults[0].concat(']');
-          // ddResult1 = ddResult1.substr(1);
-          // ddResult1 = JSON.parse(ddResult1);
-          // console.log(ddResult1);
-          // console.log(newResults[1]);
-          // console.log(newResults[2]);
           this.dropDownData = ddResult1;
           this.dropDownData1 = ddResult2;
-          // this.dropDownData2 = ddResult3;
-          // console.log(JSON.stringify(results));
         });
     }
     this.metricsService.hideLoadingPanel();
   }
 
-  //sets the columns in the main grid
+  //Sets the columns in the main grid 
   getColumns() {
     if (this.tablesModel == "work_user") {
       this.columnChoices = [
@@ -307,6 +324,7 @@ export class DataComponent implements OnInit {
         { dataField: "lastname", caption: "Last Name" },
         { dataField: "email", caption: "Email" },
       ];
+      $("#workDailyhoursFilter").addClass("ghost");
     }
     else if (this.tablesModel == "work_team") {
       this.columnChoices = [
@@ -315,6 +333,7 @@ export class DataComponent implements OnInit {
         { dataField: "project_id", caption: "Project ID" },
         { dataField: "project_name", caption: "Project Name" },
       ];
+      $("#workDailyhoursFilter").addClass("ghost");
     }
     else if (this.tablesModel == "work_team_member") {
       this.columnChoices = [
@@ -326,6 +345,7 @@ export class DataComponent implements OnInit {
         { dataField: "lastname", caption: "Last Name" },
         { dataField: "expected_hours", caption: "Expected Hours" },
       ];
+      $("#workDailyhoursFilter").addClass("ghost");
     }
     else if (this.tablesModel == "work_dailyhours") {
       this.columnChoices = [
@@ -342,7 +362,7 @@ export class DataComponent implements OnInit {
         { dataField: "agile_system_name", caption: "System Name" },
         { dataField: "agile_system_type", caption: "System Type" },
         { dataField: "work_team_name", caption: "Team" }
-      ];
+      ]; $("#workDailyhoursFilter").addClass("ghost");
     }
     else if (this.tablesModel == "agile_system_user") {
       this.columnChoices = [
@@ -352,7 +372,7 @@ export class DataComponent implements OnInit {
         // { dataField: "work_team_member_id", caption: "Work Team Member ID" },
         { dataField: "firstname", caption: "First Name" },
         { dataField: "lastname", caption: "Last Name" },
-      ];
+      ]; $("#workDailyhoursFilter").addClass("ghost");
     }
     else if (this.tablesModel == "agile_sprint") {
       this.columnChoices = [
@@ -362,7 +382,7 @@ export class DataComponent implements OnInit {
         { dataField: "sprint_description", caption: "Sprint Description" },
         { dataField: "sprint_start_date", caption: "Sprint Start Date" },
         { dataField: "sprint_end_date", caption: "Sprint End Date" }
-      ];
+      ]; $("#workDailyhoursFilter").addClass("ghost");
     }
     else if (this.tablesModel == "agile_story") {
       this.columnChoices = [
@@ -373,7 +393,7 @@ export class DataComponent implements OnInit {
         { dataField: "story_type", caption: "Story Type" },
         { dataField: "story_status", caption: "Story status" },
         { dataField: "story_points", caption: "Story Points" },
-      ];
+      ]; $("#workDailyhoursFilter").addClass("ghost");
     }
     else if (this.tablesModel == "agile_story_agile_system_user") {
       this.columnChoices = [
@@ -381,9 +401,10 @@ export class DataComponent implements OnInit {
         { dataField: "agile_story_id", caption: "Story ID" },
         { dataField: "agile_system_user_name", caption: "User System Name" },
         { dataField: "agile_system_user_story_points", caption: "User Story Points" }
-      ];
+      ]; $("#workDailyhoursFilter").addClass("ghost");
     }
   };
+
 
   // Passes data from modal to python to be inserted into the database depending on which modal is open
   getEditTableData(workUser: TemplateRef<any>, workTeam: TemplateRef<any>, workTeamMember: TemplateRef<any>, workDailyhours: TemplateRef<any>, agileSystem: TemplateRef<any>, agileSystemUser: TemplateRef<any>, agileSprint: TemplateRef<any>, agileStory: TemplateRef<any>, agileStoryAgileSystemUser: TemplateRef<any>) {
@@ -398,9 +419,6 @@ export class DataComponent implements OnInit {
         .map(res => { return res.json(); })
         .subscribe((results) => { this.statementExecuted = results; });
       this.closeModal()
-      // this.dataService.findTableData(this.tablesModel)
-      //   .map(res => { return res.json(); })
-      //   .subscribe((results) => { this.TableChoices = results; this.getColumns(); this.metricsService.hideLoadingPanel(); });
     }
     else if (this.tablesModel == "work_team_member") {
       this.dataService.editTableDataWTeamMember(this.workTeamMemberId, this.workTeamID, this.workUserID, this.expectedHours)
