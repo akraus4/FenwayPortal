@@ -8,7 +8,6 @@ from google.auth.transport import requests
 app = Flask(__name__)
 CORS(app)
 
-
 db = MySQLdb.connect(
 
 # Development Database
@@ -37,9 +36,7 @@ def findAllTeams():
     jsonList = []
     addObject = {}
     i = 0
-
     cur.execute("SELECT * FROM agile_system ORDER BY agile_system_name ASC")
-
     for row in cur.fetchall():
         addObject['agile_system_id'] = row[0]
         addObject['agile_system_name'] = row[1]
@@ -48,7 +45,6 @@ def findAllTeams():
         jsonList.insert(i, addObject)
         addObject = {}
         i = i+1
-
     return json.dumps(jsonList)
 
 # Create list of JSON objects for Select sprint drop down in Metrics Management Page
@@ -59,7 +55,6 @@ def findAllSprintsBySystem(system_id):
     i = 0
     cur.execute("SELECT * FROM agile_sprint WHERE agile_system_id = '" +
                 system_id + "' ORDER BY agile_sprint_name ASC")
-
     for row in cur.fetchall():
         addObject['agile_sprint_id'] = row[0]
         addObject['agile_sprint_name'] = row[1]
@@ -70,10 +65,26 @@ def findAllSprintsBySystem(system_id):
         jsonList.insert(i, addObject)
         addObject = {}
         i = i+1
-
     return json.dumps(jsonList)
 
-# Creates list of JSON objects for table in Metrics Management Page
+@app.route("/findTeamMemberByTeam/<work_team_id>")
+def findTeamMemberByTeam(work_team_id):
+    jsonList = []
+    addObject = {}
+    i = 0
+    cur.execute("SELECT work_team_member_id, firstname, lastname FROM work_team_member A INNER JOIN work_user B ON B.work_user_id = A.work_user_id WHERE A.work_team_id = '" +
+                work_team_id + "' ORDER BY firstname ASC")
+    for row in cur.fetchall():
+        addObject['work_team_member_id'] = row[0]
+        addObject['name'] = row[1] + " " + row[2]
+        # addObject['work_user_id'] = row[2]
+        # addObject['expected_hours'] = row[3]
+        jsonList.insert(i, addObject)
+        addObject = {}
+        i = i+1
+    return json.dumps(jsonList)
+
+# Create list of JSON objects for table in View Metrics Page
 @app.route("/findAllStoriesWithUsersBySprint/<sprint_id>")
 def findAllStoriesWithUsersBySprint(sprint_id):
     jsonList = []
@@ -89,7 +100,6 @@ def findAllStoriesWithUsersBySprint(sprint_id):
                 + "where agile_story.agile_sprint_id in ('" + sprint_id + "') "
                 + "and agile_story.agile_story_id = agile_story_agile_system_user.agile_story_id "
                 + "and agile_story_agile_system_user.agile_system_user_id = agile_system_user.agile_system_user_id;")
-
     for row in cur.fetchall():
         addObject['agile_story_id'] = row[0]
         addObject['agile_story_name'] = row[1]
@@ -116,15 +126,12 @@ def findAllStoriesWithUsersBySprint(sprint_id):
         jsonList.insert(i, addObject)
         addObject = {}
         i = i+1
-
     return json.dumps(jsonList)
 
 # Create list of JSON objects for tables in Data Management Page
 @app.route("/findTableData/<table_name>")
 def findTableData(table_name):
-
     print("Paramater: " + table_name)
-
     if table_name == "work_user":
         jsonList = []
         addObject = {}
@@ -138,7 +145,6 @@ def findTableData(table_name):
             jsonList.insert(i, addObject)
             addObject = {}
             i = i+1
-
     elif table_name == "work_team":
         jsonList = []
         addObject = {}
@@ -152,7 +158,6 @@ def findTableData(table_name):
             jsonList.insert(i, addObject)
             addObject = {}
             i = i+1
-
     elif table_name == "work_team_member":
         jsonList = []
         addObject = {}
@@ -169,7 +174,6 @@ def findTableData(table_name):
             jsonList.insert(i, addObject)
             addObject = {}
             i = i+1
-
     elif table_name == "work_dailyhours":
         jsonList = []
         addObject = {}
@@ -184,7 +188,6 @@ def findTableData(table_name):
             jsonList.insert(i, addObject)
             addObject = {}
             i=i+1
-
     elif table_name == "agile_system":
         jsonList = []
         addObject = {}
@@ -207,7 +210,6 @@ def findTableData(table_name):
             jsonList.insert(i, addObject)
             addObject = {}
             i = i+1
-
     elif table_name == "agile_system_user":
         jsonList = []
         addObject = {}
@@ -230,7 +232,6 @@ def findTableData(table_name):
             jsonList.insert(i, addObject)
             addObject = {}
             i = i+1
-
     elif table_name == "agile_sprint":
         jsonList = []
         addObject = {}
@@ -251,7 +252,6 @@ def findTableData(table_name):
             jsonList.insert(i, addObject)
             addObject = {}
             i = i+1
-
     elif table_name == "agile_story":
         jsonList = []
         addObject = {}
@@ -275,7 +275,6 @@ def findTableData(table_name):
             jsonList.insert(i, addObject)
             addObject = {}
             i = i+1
-
     elif table_name == "agile_story_agile_system_user":
         jsonList = []
         addObject = {}
@@ -298,20 +297,16 @@ def findTableData(table_name):
             addObject['agile_system_id'] = row[13]
             addObject['work_team_member_id'] = row[14]
             addObject['work_user_id'] = row[15]
-
             jsonList.insert(i, addObject)
             addObject = {}
             i = i+1
-
     return json.dumps(jsonList)
 
 # Gets data for work_dailyhours table in Data Management Page
 # @app.route("/findWorkDailyhoursData/<table_name>/<workTeams>")
 # def findWorkDailyhoursData(table_name,workTeams):
-
 #     print("Paramater: " + table_name)
 #     print("team: " + workTeams) 
-
 #     if table_name == "work_dailyhours":
 #         jsonList = []
 #         addObject = {}
@@ -337,9 +332,7 @@ def findWorkTeams():
     jsonList = []
     addObject = {}
     i = 0
-
     cur.execute("SELECT * FROM work_team ORDER BY work_team_name ASC")
-
     for row in cur.fetchall():
         addObject['work_team_id'] = row[0]
         addObject['work_team_name'] = row[1]
@@ -348,7 +341,6 @@ def findWorkTeams():
         jsonList.insert(i, addObject)
         addObject = {}
         i = i+1
-
     return json.dumps(jsonList)
 
 # Insert/update statement to handle the modal add or edit for work_dailyhours table in data management
@@ -433,13 +425,10 @@ def editTableDataASAgileSystemUser(aStoryAgileSystemUserId,aStoryId,aSystemUserI
     statementExecuted = "True"
     return statementExecuted
 
-
 # finds data to populate drop downs in edit/add modals for data management
 @app.route("/findDropDownData/<table_name>")
 def findDropDownData(table_name):
-    
     # print("Paramater: " + table_name)
-
     if table_name == "work_team":
         jsonList = []
         addObject = {}
@@ -500,35 +489,56 @@ def findDropDownData(table_name):
             addObject = {}
             i=i+1
     elif table_name == "agile_system_user":
+        # jsonList = []
+        # addObjectSystem = {}
+        # addObjectMember = {}
+        # addObjectUser = {}
+        # iSystem=0
+        # iMember=0
+        # iUser=0
+        # jsonListSystem = []
+        # jsonListMember = []
+        # jsonListUser = []
+        # sqlSystem = 'SELECT agile_system_id, agile_system_name FROM agile_system;'
+        # sqlMember = 'SELECT work_team_member_id, firstname, lastname FROM work_team_member A INNER JOIN work_user B ON A.work_user_id = B.work_user_id;'
+        # sqlUser = 'SELECT work_user_id, firstname, lastname FROM work_user;'
+        # cur.execute(sqlSystem)
+        # for row in cur.fetchall():
+        #     addObjectSystem['agile_system_id'] = row[0]
+        #     addObjectSystem['agile_system_name'] = row[1]
+        #     jsonListSystem.insert(iSystem, addObjectSystem)
+        #     addObjectSystem = {}
+        #     iSystem=iSystem+1
+        # jsonList.insert(0, jsonListSystem)
+        # print(jsonList)
+        # cur.execute(sqlMember)
+        # for row in cur.fetchall():
+        #     addObjectMember['work_team_member_id'] = row[0]
+        #     addObjectMember['name'] = row[1] + ' ' + row[2]
+        #     jsonListMember.insert(iMember, addObjectMember)
+        #     addObjectMember = {}
+        #     iMember=iMember+1
+        # jsonList.insert(1, jsonListMember)
+        # print(jsonList)
+        # cur.execute(sqlUser)
+        # for row in cur.fetchall():
+        #     addObjectUser['work_user_id'] = row[0]
+        #     addObjectUser['name'] = row[1] + ' ' + row[2]
+        #     jsonListUser.insert(iUser, addObjectUser)
+        #     addObjectUser = {}
+        #     iUser=iUser+1
+        # jsonList.insert(1, jsonListUser)
+        # print(jsonList)
         jsonList = []
         addObjectSystem = {}
-        # addObjectMember = {}
-        addObjectUser = {}
         iSystem=0
-        # iMember=0
-        iUser=0
-        jsonListSystem = []
-        # jsonListMember = []
-        jsonListUser = []
-        sqlSystem = 'SELECT agile_system_id, agile_system_name from agile_system;'
-        # sqlMember = 'SELECT work_team_member_id FROM work_team_member;'
-        sqlUser = 'SELECT work_user_id, firstname, lastname from work_user;'
-        cur.execute(sqlSystem)
+        cur.execute('SELECT agile_system_id, agile_system_name FROM agile_system;')
         for row in cur.fetchall():
             addObjectSystem['agile_system_id'] = row[0]
             addObjectSystem['agile_system_name'] = row[1]
-            jsonListSystem.insert(iSystem, addObjectSystem)
+            jsonList.insert(iSystem, addObjectSystem)
             addObjectSystem = {}
             iSystem=iSystem+1
-        jsonList.insert(0, jsonListSystem)
-        cur.execute(sqlUser)
-        for row in cur.fetchall():
-            addObjectUser['work_user_id'] = row[0]
-            addObjectUser['name'] = row[1] + ' ' + row[2]
-            jsonListUser.insert(iUser, addObjectUser)
-            addObjectUser = {}
-            iUser=iUser+1
-        jsonList.insert(1, jsonListUser)
     elif table_name == "agile_sprint":
         jsonList = []
         addObject = {}
@@ -540,7 +550,6 @@ def findDropDownData(table_name):
             jsonList.insert(i, addObject)
             addObject = {}
             i= i +1
-
     elif table_name == "agile_story":
         jsonList = []
         addObject = {}

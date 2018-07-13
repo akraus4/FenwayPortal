@@ -1,18 +1,25 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
 import { DxDataGridComponent } from 'devextreme-angular';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 
 export class DataService {
-
 	developmentURL = 'http://localhost:5000'
 	productionURL = ''
 	url = this.developmentURL
 	http: any;
+	allTeams = new Subject();
 
 	constructor(@Inject(Http) http) {
 		this.http = http;
+	}
+
+	getAllWorkTeams() {
+		let result = this.http.get(this.url + '/findTableData/work_team');
+		return result
 	}
 
 	//Not pulling data because our work team ID's do not match with work team tables.
@@ -20,7 +27,11 @@ export class DataService {
 		let result = this.http.get(this.url + '/findTableData/' + table_name);
 		console.log(JSON.stringify(result));
 		return result
-
+	}
+	getTeamMemberByTeam(work_team_id) {
+		let result = this.http.get(this.url + '/findTeamMemberByTeam/' + work_team_id);
+		// console.log(JSON.stringify(result));
+		return result
 	}
 	editTableDataWUser(wUserId, fName, lName, email) {
 		let result = this.http.get(this.url + '/editTableDataWUser/' + wUserId + '/' + fName + '/' + lName + '/' + email);
@@ -73,7 +84,6 @@ export class DataService {
 		// console.log('Result 2 = ' + result);
 		var results = JSON.stringify(result).split(', ');
 		// console.log('Result Story = ' + JSON.stringify(results[0]));
-
 		return result
 	}
 }
@@ -82,6 +92,5 @@ export class DataService {
 // 		let result = this.http.get(this.url + '/findSystemUserWithSystemWithTeamMemberWithWorkUser');
 // 		console.log(JSON.stringify(result));
 // 		return result
-
 // 	}
 // }

@@ -9,6 +9,7 @@ export class MetricsService {
 	productionURL = '' 
 	url = this.developmentURL
 	http: any;
+	loadingVisible = new BehaviorSubject<boolean>(false);
 
 	constructor(@Inject(Http) http) {
 		this.http = http;	
@@ -17,7 +18,6 @@ export class MetricsService {
 	// getUsers() {
 	// let result = this.http.get('http://localhost:3000/');console.log(JSON.stringify(result)); return result
 	// }
-
 
 	getAllTeams() {
 		let result = this.http.get(this.url + '/getAllAgileSystems');
@@ -34,12 +34,6 @@ export class MetricsService {
 		// console.log(JSON.stringify(result));
 		return result
 	}
-
-	// getAllUsersBySystem(system_id) {
-	// 	let result = this.http.get(this.url +'/findAllUsersBySystem/' + system_id);
-	// 	// console.log(JSON.stringify(result));
-	// 	return result
-	// }
 
 	getAllStoriesWithUsersBySprint(sprint_id) {
 		// var stories = [];
@@ -65,18 +59,12 @@ export class MetricsService {
 		return result
 	}
 
-
-
 	// addUser(data) {
 	// 	let headers = new Headers({"Content-Type": "application/json"});
 	// 	let options = new RequestOptions({ headers: headers });
 	// 	return this.http.post('http://localhost:3000/adduser', JSON.stringify(data), options)
 	// 		.map(res => res.json());
 	// }
-
-
-	loadingVisible = new BehaviorSubject<boolean>(false);
-  
 
 	showLoadingPanel(): void {
         this.loadingVisible.next(true);

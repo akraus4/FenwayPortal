@@ -73,7 +73,6 @@ export class DataComponent implements OnInit {
   //variables for agile_story_agile_system_user
   agileStoryAgileSystemUserId: string;
   agileSystemUserStoryPoints: string;
-
   // Data sources for each dropdown in the data templates
   drop_name;
   originalDataSource;
@@ -81,6 +80,10 @@ export class DataComponent implements OnInit {
   dropDownData1;
   dropDownData2;
   dropdownDataInt = 0;
+  // Data sources and ngModel for agile system user
+  workTeamDS;
+  workTeamModel;
+  workTeamMemberDS;
 
   keys = [
     { value: 0, viewValue: "This Foreign Key" },
@@ -140,6 +143,8 @@ export class DataComponent implements OnInit {
 
   clearSelectedRows() {
     this.dataGrid.instance.deselectAll()
+    this.workTeamModel = null;
+    this.workTeamMemberID = null;
   }
 
   //Determines which template to call and how the fields should be populated when opened
@@ -187,7 +192,7 @@ export class DataComponent implements OnInit {
       this.agileSystemUserName = selectedData[0] ? selectedData[0].agile_system_user_name : null
       this.agileSystemName = selectedData[0] ? selectedData[0].agile_system_id : null
       // this.workTeamMemberID = selectedData[0] ? selectedData[0].work_team_member_id : null
-      this.workUserID = selectedData[0] ? selectedData[0].work_user_id : null
+      // this.workUserID = selectedData[0] ? selectedData[0].work_user_id : null
       this.modalRef = this.modalService.show(agileSystemUser)
     }
     else if (this.tablesModel == "agile_sprint") {
@@ -231,10 +236,22 @@ export class DataComponent implements OnInit {
   //   this.setupTable();
   // }
 
+  getTeamMemberByTeam(work_team_id) {
+    if (work_team_id != null) {
+    console.log(work_team_id);
+    this.metricsService.showLoadingPanel();
+    this.dataService.getTeamMemberByTeam(work_team_id)
+      .map(res => { return res.json(); })
+      .subscribe((results) => {this.workTeamMemberDS = results; this.metricsService.hideLoadingPanel();});
+    // this.getAllUsersByTeam(system_id);
+    }
+  }
+
   setupTable() {
     this.metricsService.showLoadingPanel()
     this.getTableData()
   }
+
   //pulls data from python to populate grid
   getTableData() {
     this.dataService.findTableData(this.tablesModel)
@@ -249,6 +266,8 @@ export class DataComponent implements OnInit {
         .subscribe((results) => {
           var newResults = JSON.stringify(results).split('],[');
           this.originalDataSource = results;
+          console.log(JSON.stringify(this.dataService.allTeams));
+          this.workTeamDS = this.dataService.allTeams;
           // if (this.dropdownDataInt == 0) {
           //   this.dropDownData = results;
           //   console.log("1")
@@ -262,18 +281,19 @@ export class DataComponent implements OnInit {
           //   console.log("3")
           // }
           // this.dropdownDataInt++;
+          console.log(newResults[0]);
           var ddResult1 = newResults[0].concat(']');
-          ddResult1 = ddResult1.substr(1);
+          ddResult1 = ddResult1.slice(1);
+          console.log(ddResult1);
           ddResult1 = JSON.parse(ddResult1);
           // console.log(ddResult1);
-
+          console.log('***************');
           if (newResults[1] != null) {
             var ddResult2 = '[' + newResults[1];
             ddResult2 = ddResult2.slice(0, -1);
             ddResult2 = JSON.parse(ddResult2);
             // console.log(ddResult2);
           };
-
           // else {
           //   console.log('made');
           //   var ddResult2 = '[' + newResults[1];
@@ -285,7 +305,6 @@ export class DataComponent implements OnInit {
           // ddResult3 = ddResult3.slice(0, -1);
           // ddResult3 = JSON.parse(ddResult3);
           // console.log(ddResult3);
-
           // var ddResult1 = newResults[0].concat(']');
           // ddResult1 = ddResult1.substr(1);
           // ddResult1 = JSON.parse(ddResult1);
