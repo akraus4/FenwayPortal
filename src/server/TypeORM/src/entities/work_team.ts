@@ -1,18 +1,18 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {Entity, PrimaryColumn, Column} from "typeorm";
 
-@Entity()
-export class work_team {
+@Entity({name : "work_team"})
+export class WorkTeam {
 
-    @PrimaryGeneratedColumn()
+  @PrimaryColumn('uuid', {name : "work_team_id"})
     work_team_id: string;
 
-    @Column()
+    @Column("varchar", {name : "work_team_name"})
     work_team_name: string;
 
-    @Column()
-    project_namework_team: string;
+    @Column("varchar", {name : "project_id"})
+    project_id: string;
 
-    @Column()
+    @Column("varchar", {name : "project_name"})
     project_name: string;
 
 }

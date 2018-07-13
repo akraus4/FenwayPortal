@@ -1,10 +1,12 @@
-import { Component, OnInit, TemplateRef } from '@angular/core';
+import { Component, OnInit, Inject, TemplateRef } from '@angular/core';
 import { DxSelectBoxModule, DxButtonModule, DxCheckBoxModule, DxTextBoxModule, DxDataGridModule } from 'devextreme-angular';
 import * as $ from 'jquery';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import DataSource from "devextreme/data/data_source";
+import { MetricsService } from '../services/metrics.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-agile-team',
@@ -12,8 +14,9 @@ import DataSource from "devextreme/data/data_source";
   styleUrls: ['./agile-team.component.css']
 })
 export class AgileTeamComponent implements OnInit {
-  systemSelectBoxDataSource = ['System 1', 'System 2', 'System 3'];
-  teamSelectBoxDataSource = ['Team 1', 'Team 2', 'Team 3'];
+  systemSelectBoxDataSource;
+  teamSelectBoxDataSource;
+  metricsService: any;
   buttonLbl: string;
   modalRef: BsModalRef;
   readOnly:boolean;
@@ -27,7 +30,9 @@ export class AgileTeamComponent implements OnInit {
   teamValue:any;
   isSystemEmpty:boolean=true;
 
-  constructor(private modalService: BsModalService) { }
+  constructor(private modalService: BsModalService, @Inject(MetricsService) metricsService) {
+    this.metricsService = metricsService;
+  }
 
   ngOnInit() {
     this.readOnly = true;
@@ -41,6 +46,27 @@ export class AgileTeamComponent implements OnInit {
     $('#agileTeamSubmitCancelBtnContainer').addClass('remove');
     $('#cancelAddButton').addClass('remove');
     $('#cancelEditButton').addClass('remove');
+    // document.getElementById('metricsPageGridDiv').style.display = 'block';
+    this.getAllSystems();
+    this.getAllWorkTeams();
+  }
+
+  getAllSystems() {
+    this.metricsService.getAllSystems()
+      .map(res => { return res.json(); })
+      .subscribe((results) => {
+        this.systemSelectBoxDataSource = results;
+        console.log('Systems ===== ' + JSON.stringify(this.systemSelectBoxDataSource));
+      });
+  }
+
+  getAllWorkTeams() {
+    this.metricsService.getAllWorkTeams()
+      .map(res => { return res.json(); })
+      .subscribe((results) => {
+        this.teamSelectBoxDataSource = results;
+        console.log('WorkTeams ===== ' + JSON.stringify(this.teamSelectBoxDataSource));
+      });
   }
 
   systemDropDownValueChanged(e) {

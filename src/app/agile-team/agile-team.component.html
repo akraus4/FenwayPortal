@@ -9,7 +9,8 @@
   <div id="systemComponents" class="col-lg-4 col-sm-12 searchField">
     <dx-button id="addSystemButton" (onClick)="addSystemButtonClicked()" hoverStateEnabled="true" icon="fas fa-plus"></dx-button>
     <dx-button id="editSystemButton" (onClick)="editSystemButtonClicked()" hoverStateEnabled="true" icon="fas fa-pencil-alt"></dx-button>
-    <dx-select-box id="selectSystemDropDown" placeholder="System Name" [dataSource]="systemSelectBoxDataSource" [searchEnabled]="true" [(ngModel)]="systemDropDownValue" (onValueChanged)="systemDropDownValueChanged($event)"></dx-select-box>
+    <dx-select-box id="selectSystemDropDown" placeholder="System Name" [dataSource]="systemSelectBoxDataSource" displayExpr="agile_system_name" valueExpr= "agile_system_id" [searchEnabled]="true" [(ngModel)]="systemDropDownValue" (onValueChanged)="systemDropDownValueChanged($event)">
+      </dx-select-box>
     <dx-text-box id="systemTextField" placeholder="System Name" [(ngModel)]="systemTextFieldValue" (onValueChanged)="systemTextFieldValueChanged($event)"></dx-text-box>
     <dx-text-box id="typeTextField" placeholder="Type" [(readOnly)]="readOnly" [(ngModel)]="typeValue" (onValueChanged)="typeValueChanged($event)"></dx-text-box>
     <dx-select-box id="selectTeamDropDown" placeholder="Team" [dataSource]="teamSelectBoxDataSource" [searchEnabled]="true" [(readOnly)]="readOnly" [(ngModel)]="teamValue" (onValueChanged)="teamValueChanged($event)"></dx-select-box>
