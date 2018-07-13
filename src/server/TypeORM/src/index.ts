@@ -80,7 +80,7 @@ createConnection({
     password: "password",
     database: "PORTAL",
     entities: [
-        __dirname + "/entity/*.ts", WorkUser, AgileSystem
+        __dirname + "/entity/*.ts", WorkUser, AgileSystem, WorkTeam
     ],
     synchronize: true,
     logging: false

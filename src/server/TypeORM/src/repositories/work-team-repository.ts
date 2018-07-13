@@ -1,5 +1,3 @@
-import { AgileSystem } from "../entities/agile_system";
-import { AgileSprint } from "../entities/agile_sprint";
 import { WorkTeam } from "../entities/work_team";
 import { getManager } from "typeorm";
 
