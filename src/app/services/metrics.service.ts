@@ -5,8 +5,8 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 @Injectable()
 
 export class MetricsService {
-	developmentURL = 'http://localhost:5000'
-	productionURL = ''
+	developmentURL = 'http://localhost:3000'
+	productionURL = '' 
 	url = this.developmentURL
 	http: any;
 	loadingVisible = new BehaviorSubject<boolean>(false);
@@ -20,7 +20,7 @@ export class MetricsService {
 	// }
 
 	getAllTeams() {
-		let result = this.http.get(this.url + '/findAllTeams');
+		let result = this.http.get(this.url + '/getAllAgileSystems');
 		return result
 	}
 

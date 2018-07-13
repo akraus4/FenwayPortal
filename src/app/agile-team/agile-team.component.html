@@ -9,14 +9,15 @@
   <div id="systemComponents" class="col-lg-4 col-sm-12 searchField">
     <dx-button id="addSystemButton" (onClick)="addSystemButtonClicked()" hoverStateEnabled="true" icon="fas fa-plus"></dx-button>
     <dx-button id="editSystemButton" (onClick)="editSystemButtonClicked()" hoverStateEnabled="true" icon="fas fa-pencil-alt"></dx-button>
-    <dx-select-box id="selectSystemDropDown" placeholder="System Name" [dataSource]="systemSelectBoxDataSource" [searchEnabled]="true"></dx-select-box>
-    <dx-text-box id="systemTextField" placeholder="System Name"></dx-text-box>
-    <dx-text-box id="typeTextField" placeholder="Type" [(readOnly)]="readOnly"></dx-text-box>
-    <dx-select-box id="selectTeamDropDown" placeholder="Team" [dataSource]="teamSelectBoxDataSource" [searchEnabled]="true" readOnly="true"></dx-select-box>
-    <dx-check-box id="activeCheckBox" text="Active" [value]="false" (onValueChanged)="checkBoxToggled($event)" readOnly="true"></dx-check-box>
+    <dx-select-box id="selectSystemDropDown" placeholder="System Name" [dataSource]="systemSelectBoxDataSource" [searchEnabled]="true" [(ngModel)]="systemDropDownValue" (onValueChanged)="systemDropDownValueChanged($event)"></dx-select-box>
+    <dx-text-box id="systemTextField" placeholder="System Name" [(ngModel)]="systemTextFieldValue" (onValueChanged)="systemTextFieldValueChanged($event)"></dx-text-box>
+    <dx-text-box id="typeTextField" placeholder="Type" [(readOnly)]="readOnly" [(ngModel)]="typeValue" (onValueChanged)="typeValueChanged($event)"></dx-text-box>
+    <dx-select-box id="selectTeamDropDown" placeholder="Team" [dataSource]="teamSelectBoxDataSource" [searchEnabled]="true" [(readOnly)]="readOnly" [(ngModel)]="teamValue" (onValueChanged)="teamValueChanged($event)"></dx-select-box>
+    <dx-check-box id="activeCheckBox" text="Active" (onValueChanged)="checkBoxToggled($event)" [(readOnly)]="readOnly" [(ngModel)]="activeValue"></dx-check-box>
     <div id="agileTeamSubmitCancelBtnContainer">
-      <dx-button id="submitButton" text="{{buttonLbl}}" (onClick)="openModal(agileWork)" hoverStateEnabled="true" ></dx-button>
-      <dx-button id="cancelButton" text="Cancel" (onClick)="cancelButtonClicked()" hoverStateEnabled="true"></dx-button>
+      <dx-button id="submitButton" text="{{buttonLbl}}" (onClick)="openModal(submitConfirmationModal)" hoverStateEnabled="true" [(disabled)]="submitButtonDisabled"></dx-button>
+      <dx-button id="cancelAddButton" text="Cancel" (onClick)="cancelAddButtonClicked()" hoverStateEnabled="true"></dx-button>
+      <dx-button id="cancelEditButton" text="Cancel" (onClick)="cancelEditButtonClicked()" hoverStateEnabled="true"></dx-button>
     </div>
   </div>
 
@@ -32,7 +33,7 @@
   </div>
 
 </div>
-<ng-template #agileWork>
+<ng-template #submitConfirmationModal>
         <div class="modal-body">
           <p id="agileChange">Are you sure you want to make these changes?</p>
         </div>

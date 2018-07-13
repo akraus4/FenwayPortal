@@ -14,6 +14,7 @@ export class MetricsComponent implements OnInit {
   title = 'POST Request'
   TeamChoices = [];
   metricsService: any;
+  signInComponent: any;
   SprintChoices = [];
   StoryChoices;
   TeamMemberChoices = [];
@@ -32,6 +33,7 @@ export class MetricsComponent implements OnInit {
   constructor(@Inject(MetricsService) metricsService) {
     this.metricsService = metricsService;
   }
+
 
   ngOnInit() {
     document.getElementById('metricsPageGridDiv').style.display = 'block';
