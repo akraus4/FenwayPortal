@@ -38,10 +38,10 @@ def findAllTeams():
     i = 0
     cur.execute("SELECT * FROM agile_system ORDER BY agile_system_name ASC")
     for row in cur.fetchall():
-        addObject['agile_system_id'] = row[0]
-        addObject['agile_system_name'] = row[1]
-        addObject['agile_system_type'] = row[2]
-        addObject['work_team_id'] = row[3]
+        addObject['agile_system_name'] = row[0]
+        addObject['agile_system_type'] = row[1]
+        addObject['work_team_id'] = row[2]
+        addObject['agile_system_id'] = row[3]
         jsonList.insert(i, addObject)
         addObject = {}
         i = i+1

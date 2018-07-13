@@ -6,6 +6,7 @@ import { DataService } from './services/data.service'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit {
   title = 'app';
   dataService: any;
@@ -23,4 +24,5 @@ export class AppComponent implements OnInit {
       .map(res => { return res.json(); })
       .subscribe((results) => { this.dataService.allTeams = results; console.log(this.dataService.allTeams) });
   }
-}
+};
+

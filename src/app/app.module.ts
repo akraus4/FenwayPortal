@@ -30,20 +30,24 @@ import { SignInComponent } from './sign-in/sign-in.component';
 import { DataService } from './services/data.service';
 import { MatInputModule } from '@angular/material';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { DxButtonModule, DxLoadPanelModule, DxDataGridModule, DxPieChartModule, DxDropDownBoxModule, DxListModule   } from 'devextreme-angular';
 import notify from 'devextreme/ui/notify';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { LoadingPanelComponent } from './loading-panel/loading-panel.component';
 import { TeamComponent } from './team/team.component';
+import { AgileTeamComponent } from './agile-team/agile-team.component';
 import {
+  DxButtonModule,
+  DxLoadPanelModule,
+  DxDataGridModule,
+  DxPieChartModule,
+  DxDropDownBoxModule,
+  DxListModule,
   DxCheckBoxModule,
   DxSelectBoxModule,
   DxNumberBoxModule,
   DxFormModule, DxTextBoxModule,
   DxTemplateModule
 } from 'devextreme-angular';
-
-
 
 
 @NgModule({
@@ -62,9 +66,7 @@ import {
     SignInComponent,
     TeamComponent,
     FooterComponent,
-    
-
-
+    AgileTeamComponent,
   ],
 
   imports: [
@@ -73,7 +75,6 @@ import {
     MatFormFieldModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
-    DxCheckBoxModule,
     DxNumberBoxModule,
     DxFormModule,
     DxTextBoxModule,
@@ -97,6 +98,7 @@ import {
     RouterModule.forRoot([
       { path: "", redirectTo: "home", pathMatch: "full" },
       { path: "home", component: HomePageComponent },
+      { path: "agile-team", component: AgileTeamComponent },
       { path: "scorecard", component: ScorecardComponent },
       { path: "data", component: DataComponent },
       { path: "lineup", component: LineupComponent },
@@ -112,8 +114,8 @@ import {
     HttpModule,
     FormsModule,
     DxLoadPanelModule,
-    DxDropDownBoxModule ,
-    DxListModule  
+    DxDropDownBoxModule,
+    DxListModule
   ],
 
   providers: [MetricsService, DataService],
