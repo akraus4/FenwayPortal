@@ -12,7 +12,10 @@
     <dx-select-box id="selectSystemDropDown" placeholder="System Name" [dataSource]="systemSelectBoxDataSource" [searchEnabled]="true" [(ngModel)]="systemDropDownValue" (onValueChanged)="systemDropDownValueChanged($event)"></dx-select-box>
     <dx-text-box id="systemTextField" placeholder="System Name" [(ngModel)]="systemTextFieldValue" (onValueChanged)="systemTextFieldValueChanged($event)"></dx-text-box>
     <dx-text-box id="typeTextField" placeholder="Type" [(readOnly)]="readOnly" [(ngModel)]="typeValue" (onValueChanged)="typeValueChanged($event)"></dx-text-box>
-    <dx-select-box id="selectTeamDropDown" placeholder="Team" [dataSource]="teamSelectBoxDataSource" [searchEnabled]="true" [(readOnly)]="readOnly" [(ngModel)]="teamValue" (onValueChanged)="teamValueChanged($event)"></dx-select-box>
+    <dx-select-box id="selectTeamDropDown" placeholder="Team" [dataSource]="teamSelectBoxDataSource" [searchEnabled]="true" [(readOnly)]="readOnly" [(ngModel)]="teamValue" (onValueChanged)="teamValueChanged($event)">
+      <mat-option *ngFor="let TeamChoice of TeamChoices" [value]="TeamChoice">{{TeamChoice.agile_system_name}}
+      </mat-option>
+    </dx-select-box>
     <dx-check-box id="activeCheckBox" text="Active" (onValueChanged)="checkBoxToggled($event)" [(readOnly)]="readOnly" [(ngModel)]="activeValue"></dx-check-box>
     <div id="agileTeamSubmitCancelBtnContainer">
       <dx-button id="submitButton" text="{{buttonLbl}}" (onClick)="submitButtonClicked()" hoverStateEnabled="true" [(disabled)]="submitButtonDisabled"></dx-button>

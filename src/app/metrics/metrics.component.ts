@@ -39,6 +39,7 @@ export class MetricsComponent implements OnInit {
     document.getElementById('metricsPageGridDiv').style.display = 'block';
     this.getAllTeams();
   };
+  
 
   getAllTeams() {
     this.metricsService.getAllTeams()

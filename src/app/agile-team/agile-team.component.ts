@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { DxSelectBoxModule, DxButtonModule, DxCheckBoxModule, DxTextBoxModule, DxDataGridModule } from 'devextreme-angular'
 import DataSource from "devextreme/data/data_source";
 import * as $ from "jquery";
+import { MetricsService } from '../services/metrics.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-agile-team',
@@ -9,7 +11,7 @@ import * as $ from "jquery";
   styleUrls: ['./agile-team.component.css']
 })
 export class AgileTeamComponent implements OnInit {
-  systemSelectBoxDataSource = ["System 1", "System 2", "System 3"];
+  systemSelectBoxDataSource = [];
   teamSelectBoxDataSource = ["Team 1", "Team 2", "Team 3"];
   buttonLbl:string;
   readOnly:boolean;
@@ -22,8 +24,22 @@ export class AgileTeamComponent implements OnInit {
   systemTextFieldValue:any;
   teamValue:any;
   isSystemEmpty:boolean=true;
+  TeamChoices = [];
+  metricsService: any;
+  TeamMemberChoices = [];
+  SystemTeam = new FormControl(); 
 
-  constructor() {}
+
+  constructor(@Inject(MetricsService) metricsService) {
+    this.metricsService = metricsService;
+  }
+
+  getAllTeams() {
+    this.metricsService.getAllTeams()
+      .map(res => { return res.json(); })
+      .subscribe((results) => { this.TeamChoices = results });
+  }
+
 
   ngOnInit() {
     this.readOnly = true;
