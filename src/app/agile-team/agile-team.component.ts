@@ -28,6 +28,7 @@ export class AgileTeamComponent implements OnInit {
   systemDropDownValue:any;
   systemTextFieldValue:any;
   teamValue:any;
+  currentSystem;
   isSystemEmpty:boolean=true;
 
   constructor(private modalService: BsModalService, @Inject(MetricsService) metricsService) {
@@ -70,6 +71,7 @@ export class AgileTeamComponent implements OnInit {
   }
 
   systemDropDownValueChanged(e) {
+    var i = 0;
     if(this.isSystemEmpty) {
       this.isSystemEmpty = false;
     } else {
@@ -78,6 +80,13 @@ export class AgileTeamComponent implements OnInit {
       $('#typeTextField').removeClass('remove');
       $('#selectTeamDropDown').removeClass('remove');
       $('#activeCheckBox').removeClass('remove');
+      for(let system of this.systemSelectBoxDataSource){
+        if(e == system.agile_system_id){
+          console.log('Here *******  ' + e);
+          this.systemTextFieldValue = system.agile_system_name;
+          this.typeValue = system.agile_system_type;
+        }
+      }
     }
     if(this.systemDropDownValue == undefined){
       $('#editSystemButton').addClass('remove');
@@ -146,7 +155,6 @@ export class AgileTeamComponent implements OnInit {
   editSystemButtonClicked() {
     this.buttonLbl = "Update";
     this.readOnly = false;
-    this.systemTextFieldValue = this.systemDropDownValue;
     $('#addSystemButton').addClass('remove');
     $('#selectSystemDropDown').addClass('remove');
     $('#systemTextField').removeClass('remove');
