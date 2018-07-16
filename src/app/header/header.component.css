@@ -1,21 +1,68 @@
 #headerRow{
-    width: 150%;
-    margin-left: -25%;
+    /* width: 150%;
+    margin-left: -12%; */
+    position: fixed;
+    right: 0;
+    left:0;
+    top:-1px;
     -webkit-box-shadow:0px 0px 7px #6d6c6d;
- -moz-box-shadow:0px 0px 7px #6d6c6d;
- box-shadow:0px 0px 7px #6d6c6d;
+    -moz-box-shadow:0px 0px 7px #6d6c6d;
+    box-shadow:0px 0px 7px #6d6c6d;
 }
 
 #header{
     text-align: left;
     font-size: 31px;
-    color: #1a3b68;
-    padding-left: 10%;
-    background: white;
+    color: white;
+    padding-left: 292px;
+    background: #1a3b68;
     font-family: Monda,'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-weight: bold;
 }
 
-#signin{
-    background: white;
+@media only screen and (max-width: 600px) {
+    #header {
+        text-align: center;
+        padding-bottom: 0px;
+        padding-top: 6px;
+        padding-left: 10px;
+        font-size: 24px;
+        left: 0;
+        right: 0px;
+        top: 0;
+        Height: 50px;
+        position: fixed;
+        background-color: #1a3b68;
+        color: white;
+    }
+
+    #headerRow {
+            z-index: 1;
+            -webkit-box-shadow:0px 0px 0px white;
+            -moz-box-shadow:0px 0px 0px white;
+            box-shadow:0px 0px 0px white;
+    }
+}
+    @media (min-width:601px) and (max-width:800px) {
+        #header {
+            text-align: center;
+            padding-bottom: 0px;
+            padding-top: 6px;
+            padding-left: 0px;
+            font-size: 24px;
+            left: 0px;
+            right: 0px;
+            top: 0;
+            Height: 50px;
+            position: fixed;
+            background-color: #1a3b68;
+            color: white;
+        }
+
+        #headerRow {
+                z-index: 1;
+                -webkit-box-shadow:0px 0px 0px white;
+                -moz-box-shadow:0px 0px 0px white;
+                box-shadow:0px 0px 0px white;
+        }
 }

@@ -12,7 +12,7 @@ headername="";
 
   constructor() { }
 
-  headers = ['View Metrics','View Scorecards','Set Lineup','New Scorecard','Schedule Demo','Load Data','Evaluation Management','Associate Evaluation', 'Home'];
+  headers = ['View Metrics','View Scorecards','Set Lineup','New Scorecard','Schedule Demo', 'Agile Team Management','Evaluation Management','Associate Evaluation', 'Home'];
 
   ngOnInit() {
     this.headername = this.headers[this.number];
