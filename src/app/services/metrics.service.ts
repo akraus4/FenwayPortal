@@ -6,21 +6,26 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 export class MetricsService {
 	developmentURL = 'http://localhost:3000'
-	productionURL = '' 
+	productionURL = ''
 	url = this.developmentURL
 	http: any;
 	loadingVisible = new BehaviorSubject<boolean>(false);
 
 	constructor(@Inject(Http) http) {
-		this.http = http;	
+		this.http = http;
 	}
 
 	// getUsers() {
 	// let result = this.http.get('http://localhost:3000/');console.log(JSON.stringify(result)); return result
 	// }
 
-	getAllTeams() {
+	getAllSystems() {
 		let result = this.http.get(this.url + '/getAllAgileSystems');
+		return result
+  }
+
+  getAllWorkTeams() {
+		let result = this.http.get(this.url + '/getAllWorkTeams');
 		return result
 	}
 

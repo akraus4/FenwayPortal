@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
-.box {
+/* .box {
     width:70%;
     height:200px;
     background:#FFF;
@@ -37,13 +37,13 @@
     -ms-transform:skew(8deg) rotate(3deg);
     -o-transform:skew(8deg) rotate(3deg);
     transform:skew(8deg) rotate(3deg);
-}
+} */
 
 .gridWidgetContainer {
     background-color: white;
-    padding-top: 25px;
+    /* padding-top: 25px;
     padding-left: 20px;
-    padding-right: 20px;
+    padding-right: 20px; */
     margin-top: 76px;
     padding-bottom: 10px;
     border-radius: 3px;
@@ -54,7 +54,7 @@
     z-index: 4;
 }
 
-.searchFieldButton { 
+.searchFieldButton {
     border-radius: 4px;
     -webkit-box-shadow: 0 1px 3px transparent;
     box-shadow: 0 1px 3px transparent;
@@ -78,4 +78,18 @@
 
 .selectDropDown {
     width: 100%;
+}
+
+.confirmModalBtn{
+    height: 35px;
+    text-align: center;
+    font-weight: bold;
+    color: white;
+}
+
+ .submitBtn{
+    background-color: #64b246;
+}
+.cancelBtn{
+    background-color: #f45342;
 }

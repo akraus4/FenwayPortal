@@ -1,7 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { DxSelectBoxModule, DxButtonModule, DxCheckBoxModule, DxTextBoxModule, DxDataGridModule } from 'devextreme-angular'
+import { Component, OnInit, Inject, TemplateRef } from '@angular/core';
+import { DxSelectBoxModule, DxButtonModule, DxCheckBoxModule, DxTextBoxModule, DxDataGridModule } from 'devextreme-angular';
+import * as $ from 'jquery';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import DataSource from "devextreme/data/data_source";
-import * as $ from "jquery";
+import { MetricsService } from '../services/metrics.service';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-agile-team',
@@ -9,9 +14,11 @@ import * as $ from "jquery";
   styleUrls: ['./agile-team.component.css']
 })
 export class AgileTeamComponent implements OnInit {
-  systemSelectBoxDataSource = ["System 1", "System 2", "System 3"];
-  teamSelectBoxDataSource = ["Team 1", "Team 2", "Team 3"];
-  buttonLbl:string;
+  systemSelectBoxDataSource;
+  teamSelectBoxDataSource;
+  metricsService: any;
+  buttonLbl: string;
+  modalRef: BsModalRef;
   readOnly:boolean;
   submitButtonDisabled:boolean;
   activeValue:boolean;
@@ -21,9 +28,12 @@ export class AgileTeamComponent implements OnInit {
   systemDropDownValue:any;
   systemTextFieldValue:any;
   teamValue:any;
+  currentSystem;
   isSystemEmpty:boolean=true;
 
-  constructor() {}
+  constructor(private modalService: BsModalService, @Inject(MetricsService) metricsService) {
+    this.metricsService = metricsService;
+  }
 
   ngOnInit() {
     this.readOnly = true;
@@ -37,10 +47,32 @@ export class AgileTeamComponent implements OnInit {
     $('#agileTeamSubmitCancelBtnContainer').addClass('remove');
     $('#cancelAddButton').addClass('remove');
     $('#cancelEditButton').addClass('remove');
+    // document.getElementById('metricsPageGridDiv').style.display = 'block';
+    this.getAllSystems();
+    this.getAllWorkTeams();
+  }
+
+  getAllSystems() {
+    this.metricsService.getAllSystems()
+      .map(res => { return res.json(); })
+      .subscribe((results) => {
+        this.systemSelectBoxDataSource = results;
+        console.log('Systems ===== ' + JSON.stringify(this.systemSelectBoxDataSource));
+      });
+  }
+
+  getAllWorkTeams() {
+    this.metricsService.getAllWorkTeams()
+      .map(res => { return res.json(); })
+      .subscribe((results) => {
+        this.teamSelectBoxDataSource = results;
+        console.log('WorkTeams ===== ' + JSON.stringify(this.teamSelectBoxDataSource));
+      });
   }
 
   systemDropDownValueChanged(e) {
-    if(this.isSystemEmpty) { 
+    var i = 0;
+    if(this.isSystemEmpty) {
       this.isSystemEmpty = false;
     } else {
       // console.log("made it!!!!!");
@@ -48,6 +80,13 @@ export class AgileTeamComponent implements OnInit {
       $('#typeTextField').removeClass('remove');
       $('#selectTeamDropDown').removeClass('remove');
       $('#activeCheckBox').removeClass('remove');
+      for(let system of this.systemSelectBoxDataSource){
+        if(e == system.agile_system_id){
+          console.log('Here *******  ' + e);
+          this.systemTextFieldValue = system.agile_system_name;
+          this.typeValue = system.agile_system_type;
+        }
+      }
     }
     if(this.systemDropDownValue == undefined){
       $('#editSystemButton').addClass('remove');
@@ -89,8 +128,15 @@ export class AgileTeamComponent implements OnInit {
     }
   }
 
+
+  openModal(submitConfirmationModal: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(submitConfirmationModal);
+  }
+
+
   addSystemButtonClicked() {
-    this.buttonLbl = "Add";
+    // alert("The Add Button was clicked");
+    this.buttonLbl = 'Add';
     this.readOnly = false;
     this.systemTextFieldValue = undefined;
     this.typeValue = undefined;
@@ -109,7 +155,6 @@ export class AgileTeamComponent implements OnInit {
   editSystemButtonClicked() {
     this.buttonLbl = "Update";
     this.readOnly = false;
-    this.systemTextFieldValue = this.systemDropDownValue;
     $('#addSystemButton').addClass('remove');
     $('#selectSystemDropDown').addClass('remove');
     $('#systemTextField').removeClass('remove');
@@ -120,6 +165,13 @@ export class AgileTeamComponent implements OnInit {
     $('#cancelEditButton').removeClass('remove');
   }
 
+  // checkBoxToggled(e) {
+  //   if (e.value === true) {
+  //     alert('Checkbox Checked');
+  //   } else {
+  //     alert('Checkbox Unchecked');
+  //   }
+  // }
   submitButtonClicked() {
     alert("The Submit Button was clicked");
   }
@@ -152,5 +204,9 @@ export class AgileTeamComponent implements OnInit {
     $('#systemTextField').addClass('remove');
     $('#agileTeamSubmitCancelBtnContainer').addClass('remove');
     $('#cancelEditButton').addClass('remove');
+  }
+
+  confirmNoClicked() {
+    this.modalService.hide(1);
   }
 }
