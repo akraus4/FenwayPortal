@@ -1,4 +1,5 @@
-import {Entity, PrimaryColumn, Column} from "typeorm";
+import {Entity, PrimaryColumn, Column, ManyToOne} from "typeorm";
+import { AgileSystem } from "./agile_system";
 
 @Entity({name : "agile_sprint"})
 export class AgileSprint {
@@ -20,5 +21,8 @@ export class AgileSprint {
 
     @Column("varchar", {name : "sprint_end_date"})
     sprint_end_date: Date;
+
+    @ManyToOne(type => AgileSystem, agileSystem => agileSystem.agile_system_id)
+    agile_system: AgileSystem;
 
 }

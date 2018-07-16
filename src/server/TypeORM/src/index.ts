@@ -10,7 +10,7 @@ import {AgileSystem} from "./entities/agile_system";
 import "reflect-metadata";
 import {work_dailyhours} from "./entities/work_dailyhours";
 import {work_team_member} from "./entities/work_team_member";
-import {work_team} from "./entities/work_team";
+import {WorkTeam} from "./entities/work_team";
 import {WorkUser} from "./entities/work_user";
 import { Request, Response } from "express";
 
@@ -23,7 +23,7 @@ const config = require('../ormconfig.json')
  */
 import * as empController from "./controllers/employee-controller";
 import * as wUserController from "./controllers/work_user-controller";
-import * as aSystemController from "./controllers/agile_system-controller";
+import * as metController from "./controllers/metricsController";
 
 
  
@@ -64,7 +64,7 @@ app.use(function(req, res, next) {
 
 app.get("/GetAllEmployees", empController.getAllEmployees);
 app.get("/GetAllWorkUsers", wUserController.getAllWorkUsers);
-app.get("/getAllAgileSystems", aSystemController.getAllAgileSystems);
+app.get("/getAllAgileSystems", metController.getAllAgileSystems);
 
 
 
