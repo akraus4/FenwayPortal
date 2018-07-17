@@ -5,16 +5,14 @@ import { getManager } from "typeorm";
 
 export class AgileSystemRepo {
 
-    getAllAgileSystems() {
-        // get Work_User repository and find all work_users.
-
-        return getManager().getRepository(AgileSystem).find();
-
+    static getAllAgileSystems() {
+        return getManager().getRepository(AgileSystem).find({ relations: ["work_team"] });
     }
-  //   getAllWorkTeams() {
-  //     // get Work_User repository and find all work_users.
+    static getAllWorkTeams() {
+        return getManager().getRepository(WorkTeam).find();
+    }
 
-  //     return getManager().getRepository(WorkTeam).find();
-
-  // }
+    static getAllSprintsBySystem(systemId) {
+        return getManager().getRepository(AgileSprint).find();
+    }
 }

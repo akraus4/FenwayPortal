@@ -44,6 +44,7 @@ create table agile_system (
     agile_system_name varchar(255),
     agile_system_type varchar(255),
     work_team_id varchar(255),
+    active boolean,
     PRIMARY KEY(agile_system_id)
 );
 

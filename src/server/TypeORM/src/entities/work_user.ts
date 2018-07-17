@@ -4,7 +4,7 @@ import {Entity, PrimaryGeneratedColumn, Column, PrimaryColumn, BeforeInsert} fro
 @Entity({name : "work_user"})
 export class WorkUser {
 
-    @PrimaryColumn('uuid', {name : "work_user_id"})
+    @PrimaryGeneratedColumn('uuid', {name : "work_user_id"})
     work_user_id: string;
 
     @Column("varchar", {name : "firstname"})

@@ -3,13 +3,13 @@ import {createConnection, ConnectionOptions} from "typeorm";
 import * as express from 'express';
 import * as bodyParser from "body-parser";
 import {AgileSprint} from "./entities/agile_sprint";
-import {agile_story_agile_system_user} from "./entities/agile_story_agile_system_user";
-import {agile_story} from "./entities/agile_story";
-import {agile_system_user} from "./entities/agile_system_user";
+import {AgileStoryAgileSystemUser} from "./entities/agile_story_agile_system_user";
+import {AgileStory} from "./entities/agile_story";
+import {AgileSystemUser} from "./entities/agile_system_user";
 import {AgileSystem} from "./entities/agile_system";
 import "reflect-metadata";
 import {work_dailyhours} from "./entities/work_dailyhours";
-import {work_team_member} from "./entities/work_team_member";
+import {WorkTeamMember} from "./entities/work_team_member";
 import {WorkTeam} from "./entities/work_team";
 import {WorkUser} from "./entities/work_user";
 import { Request, Response } from "express";
@@ -65,8 +65,8 @@ app.use(function(req, res, next) {
 app.get("/GetAllEmployees", empController.getAllEmployees);
 app.get("/GetAllWorkUsers", wUserController.getAllWorkUsers);
 app.get("/getAllAgileSystems", aSystemController.getAllAgileSystems);
-app.get("/getAllWorkTeams", workTeamController.getAllWorkTeams);
-
+app.get("/getAllWorkTeams", aSystemController.getAllWorkTeams);
+app.get("/getAllSprintsBySystem/:systemId", aSystemController.getAllSprintsBySystem);
 
 /**
  * Create connection to DB using configuration provided in
@@ -76,11 +76,11 @@ createConnection({
     type: "mysql",
     host: "localhost",
     port: 3306,
-    username: "root",
-    password: "password",
+    username: "fg_user",
+    password: "fg_user",
     database: "PORTAL",
     entities: [
-        __dirname + "/entity/*.ts", WorkUser, AgileSystem, WorkTeam
+        __dirname + "/entity/*.ts", WorkUser, AgileSystem, WorkTeam, AgileSprint
     ],
     synchronize: true,
     logging: false

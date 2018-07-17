@@ -35,7 +35,7 @@ export class MetricsService {
 	}
 
 	getAllSprintsBySystem(system_id) {
-		let result = this.http.get(this.url + '/findAllSprintsBySystem/' + system_id);
+		let result = this.http.get(this.url + '/getAllSprintsBySystem/' + system_id);
 		// console.log(JSON.stringify(result));
 		return result
 	}

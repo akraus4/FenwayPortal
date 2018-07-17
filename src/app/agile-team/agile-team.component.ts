@@ -82,9 +82,12 @@ export class AgileTeamComponent implements OnInit {
       $('#activeCheckBox').removeClass('remove');
       for(let system of this.systemSelectBoxDataSource){
         if(e == system.agile_system_id){
-          console.log('Here *******  ' + e);
+          console.log('Here *******  ' + system.work_team);
+          this.currentSystem = system;
           this.systemTextFieldValue = system.agile_system_name;
           this.typeValue = system.agile_system_type;
+          this.teamValue = system.work_team.work_team_id;
+          this.activeValue = system.active;
         }
       }
     }

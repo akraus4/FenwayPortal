@@ -6,8 +6,8 @@ export let getAllWorkTeams = async (req: Request, res: Response) => {
 
   console.log("Received getAllWorkTeams ==> GET");
 
-  wTeamRepo.getAllWorkTeams().then((result: any) => {
-      console.log("Result : " + JSON.stringify(result));
-      res.send(result);
-  });
+  // wTeamRepo.getAllWorkTeams().then((result: any) => {
+  //     console.log("Result : " + JSON.stringify(result));
+  //     res.send(result);
+  // });
 };

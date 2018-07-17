@@ -47,9 +47,10 @@ export class MetricsComponent implements OnInit {
   }
 
   getAllSprintsByTeam(system_id) {
+    console.log(system_id);
     this.metricsService.getAllSprintsBySystem(system_id)
       .map(res => { return res.json(); })
-      .subscribe((results) => this.SprintChoices = results);
+      .subscribe((results) => {this.SprintChoices = results; console.log(results);});
   }
 
   storeSprintId(sprint_ids) {

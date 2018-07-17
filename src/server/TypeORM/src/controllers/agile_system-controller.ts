@@ -3,23 +3,30 @@ import { AgileSystem } from "../entities/agile_system";
 import { Request, Response } from "express";
 
 export let getAllAgileSystems = async (req: Request, res: Response) => {
-    let aSystemRepo: AgileSystemRepo = new AgileSystemRepo();
-
     console.log("Received getAllAgileSystems ==> GET");
 
-    aSystemRepo.getAllAgileSystems().then((result: any) => {
+    AgileSystemRepo.getAllAgileSystems().then((result: any) => {
         console.log("Result : " + JSON.stringify(result));
         res.send(result);
     });
 };
 
-// export let getAllWorkTeams = async (req: Request, res: Response) => {
-//   let aSystemRepo: AgileSystemRepo = new AgileSystemRepo();
+export let getAllWorkTeams = async (req: Request, res: Response) => {
 
-//   console.log("Received getAllWorkTeams ==> GET");
+  console.log("Received getAllWorkTeams ==> GET");
 
-//   aSystemRepo.getAllWorkTeams().then((result: any) => {
-//       console.log("Result : " + JSON.stringify(result));
-//       res.send(result);
-//   });
-// };
+  AgileSystemRepo.getAllWorkTeams().then((result: any) => {
+      console.log("Result : " + JSON.stringify(result));
+      res.send(result);
+  });
+};
+
+export let getAllSprintsBySystem = async (req: Request, res: Response) => {
+  var systemId = req.params.systemId;
+    console.log("Received getAllWorkTeams ==> GET");
+  
+    AgileSystemRepo.getAllSprintsBySystem(systemId).then((result: any) => {
+        console.log("Result : " + JSON.stringify(result));
+        res.send(result);
+    });
+  };
