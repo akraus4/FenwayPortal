@@ -1,12 +1,16 @@
 #systemComponents
 
-#addSystemButton {
+.serchBtns{
+    margin-bottom: 10px;
+}
+
+/* #addSystemButton {
     margin-bottom: 10px;
 }
 
 #editSystemButton {
     margin-bottom: 10px;
-}
+} */
 
 #selectSystemDropDown {
     margin-bottom: 10px;

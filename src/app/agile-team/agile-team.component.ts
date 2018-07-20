@@ -30,6 +30,7 @@ export class AgileTeamComponent implements OnInit {
   teamValue:any;
   currentSystem;
   isSystemEmpty:boolean=true;
+  systemUserGridDataSource;
 
   constructor(private modalService: BsModalService, @Inject(MetricsService) metricsService) {
     this.metricsService = metricsService;
@@ -40,6 +41,7 @@ export class AgileTeamComponent implements OnInit {
     this.activeValue = false;
     this.submitButtonDisabled = true;
     $('#editSystemButton').addClass('remove');
+    $('#addUserButton').addClass('remove');
     $('#systemTextField').addClass('remove');
     $('#typeTextField').addClass('remove');
     $('#selectTeamDropDown').addClass('remove');
@@ -47,6 +49,9 @@ export class AgileTeamComponent implements OnInit {
     $('#agileTeamSubmitCancelBtnContainer').addClass('remove');
     $('#cancelAddButton').addClass('remove');
     $('#cancelEditButton').addClass('remove');
+    $('#systemUserTextField').addClass('remove');
+    $('#selectTeamMemberDropDown').addClass('remove');
+    $('#activeSystemUserCheckBox').addClass('remove');
     // document.getElementById('metricsPageGridDiv').style.display = 'block';
     this.getAllSystems();
     this.getAllWorkTeams();
@@ -70,6 +75,15 @@ export class AgileTeamComponent implements OnInit {
       });
   }
 
+  getAllSystemUsersBySystem(system_id) {
+    console.log(system_id);
+    this.metricsService.getAllSystemUsersBySystem(system_id)
+      .map(res => { return res.json(); })
+      .subscribe((results) => {this.systemUserGridDataSource = results; console.log(results); console.log('Work User ======= ' + JSON.stringify(results[0].work_team_member.work_user));});
+  }
+
+
+
   systemDropDownValueChanged(e) {
     var i = 0;
     if(this.isSystemEmpty) {
@@ -77,22 +91,27 @@ export class AgileTeamComponent implements OnInit {
     } else {
       // console.log("made it!!!!!");
       $('#editSystemButton').removeClass('remove');
+      $('#addUserButton').removeClass('remove');
       $('#typeTextField').removeClass('remove');
       $('#selectTeamDropDown').removeClass('remove');
       $('#activeCheckBox').removeClass('remove');
+      this.getAllSystemUsersBySystem(e);
       for(let system of this.systemSelectBoxDataSource){
         if(e == system.agile_system_id){
-          console.log('Here *******  ' + system.work_team);
+          console.log('Here *******  ' + JSON.stringify(system.work_team.work_team_id));
           this.currentSystem = system;
           this.systemTextFieldValue = system.agile_system_name;
           this.typeValue = system.agile_system_type;
-          this.teamValue = system.work_team.work_team_id;
+          // this.teamValue = JSON.stringify(system.work_team.work_team_id);
+          this.teamValue = this.currentSystem.work_team.work_team_id;
+          console.log(this.teamValue);
           this.activeValue = system.active;
         }
       }
     }
     if(this.systemDropDownValue == undefined){
       $('#editSystemButton').addClass('remove');
+      $('#addUserButton').addClass('remove');
       $('#typeTextField').addClass('remove');
       $('#selectTeamDropDown').addClass('remove');
       $('#activeCheckBox').addClass('remove');
@@ -146,6 +165,7 @@ export class AgileTeamComponent implements OnInit {
     this.teamValue = undefined;
     this.activeValue = false;
     $('#editSystemButton').addClass('remove');
+    $('#addUserButton').addClass('remove');
     $('#selectSystemDropDown').addClass('remove');
     $('#systemTextField').removeClass('remove');
     $('#typeTextField').removeClass('remove');
@@ -159,6 +179,7 @@ export class AgileTeamComponent implements OnInit {
     this.buttonLbl = "Update";
     this.readOnly = false;
     $('#addSystemButton').addClass('remove');
+    $('#addUserButton').addClass('remove');
     $('#selectSystemDropDown').addClass('remove');
     $('#systemTextField').removeClass('remove');
     $('#typeTextField').removeClass('remove');
@@ -181,15 +202,16 @@ export class AgileTeamComponent implements OnInit {
 
   cancelAddButtonClicked() {
     this.readOnly = true;
-    this.typeValue = undefined;
-    this.teamValue = undefined;
-    this.activeValue = false;
     $('#selectSystemDropDown').removeClass('remove');
     $('#systemTextField').addClass('remove');
     $('#agileTeamSubmitCancelBtnContainer').addClass('remove');
     $('#cancelAddButton').addClass('remove');
     if(this.systemDropDownValue != undefined){
       $('#editSystemButton').removeClass('remove');
+      $('#addUserButton').removeClass('remove');
+      this.typeValue = this.currentSystem.agile_system_type;
+      this.teamValue = this.currentSystem.work_team.work_team_id;
+      this.activeValue = this.currentSystem.active;
     } else if (this.systemDropDownValue == undefined){
       $('#selectTeamDropDown').addClass('remove');
       $('#typeTextField').addClass('remove');
@@ -199,10 +221,11 @@ export class AgileTeamComponent implements OnInit {
 
   cancelEditButtonClicked() {
     this.readOnly = true;
-    this.typeValue = undefined;
-    this.teamValue = undefined;
-    this.activeValue = false;
+    this.typeValue = this.currentSystem.agile_system_type;
+    this.teamValue = this.currentSystem.work_team.work_team_id;
+    this.activeValue = this.currentSystem.active;
     $('#addSystemButton').removeClass('remove');
+    $('#addUserButton').removeClass('remove');
     $('#selectSystemDropDown').removeClass('remove');
     $('#systemTextField').addClass('remove');
     $('#agileTeamSubmitCancelBtnContainer').addClass('remove');

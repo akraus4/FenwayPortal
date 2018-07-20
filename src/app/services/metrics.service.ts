@@ -64,6 +64,11 @@ export class MetricsService {
 		return result
 	}
 
+	getAllSystemUsersBySystem(systemId) {
+		let result = this.http.get(this.url + '/getAllSystemUsersBySystem/' + systemId);
+		return result
+	}
+
 	// addUser(data) {
 	// 	let headers = new Headers({"Content-Type": "application/json"});
 	// 	let options = new RequestOptions({ headers: headers });

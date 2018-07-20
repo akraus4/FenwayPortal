@@ -67,6 +67,9 @@ app.get("/GetAllWorkUsers", wUserController.getAllWorkUsers);
 app.get("/getAllAgileSystems", aSystemController.getAllAgileSystems);
 app.get("/getAllWorkTeams", aSystemController.getAllWorkTeams);
 app.get("/getAllSprintsBySystem/:systemId", aSystemController.getAllSprintsBySystem);
+app.get("/getAllStoriesWithUsersBySprint/:sprintId", aSystemController.getAllStoriesWithUsersBySprint);
+app.get("/getAllTeamMembersByTeam/:teamId", aSystemController.getAllTeamMembersByTeam);
+app.get("/getAllSystemUsersBySystem/:systemId", aSystemController.getAllSystemUsersBySystem);
 
 /**
  * Create connection to DB using configuration provided in
@@ -80,7 +83,7 @@ createConnection({
     password: "fg_user",
     database: "PORTAL",
     entities: [
-        __dirname + "/entity/*.ts", WorkUser, AgileSystem, WorkTeam, AgileSprint
+        __dirname + "/entity/*.ts", WorkUser, AgileSystem, WorkTeam, AgileSprint, WorkTeamMember, AgileSystemUser
     ],
     synchronize: true,
     logging: false

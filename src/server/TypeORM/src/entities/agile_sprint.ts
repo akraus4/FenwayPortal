@@ -14,7 +14,7 @@ export class AgileSprint {
 
     @ManyToOne(type => AgileSystem)
     @JoinColumn({name : "agile_system_id"})
-    agille_system: AgileSystem;
+    agile_system: AgileSystem;
 
     @Column("varchar", {name : "sprint_description"})
     sprint_description: number;
