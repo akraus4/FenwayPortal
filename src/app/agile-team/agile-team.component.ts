@@ -14,13 +14,13 @@ import { FormControl } from '@angular/forms';
   styleUrls: ['./agile-team.component.css']
 })
 export class AgileTeamComponent implements OnInit {
-  systemSelectBoxDataSource;
-  teamSelectBoxDataSource;
+  
   metricsService: any;
-  buttonLbl: string;
+  submitButtonLbl: string;
   modalRef: BsModalRef;
-  readOnly:boolean;
-  submitButtonDisabled:boolean;
+  currentSystem;
+  
+  //NgModels
   activeValue:boolean;
   newSystemValue:any;
   systemValue:any;
@@ -28,9 +28,20 @@ export class AgileTeamComponent implements OnInit {
   systemDropDownValue:any;
   systemTextFieldValue:any;
   teamValue:any;
-  currentSystem;
-  isSystemEmpty:boolean=true;
+  readOnly:boolean;
+  submitButtonDisabled:boolean;
+
+  //Datasources
   systemUserGridDataSource;
+  systemSelectBoxDataSource;
+  teamSelectBoxDataSource;
+
+//Flags
+  isSystemEmpty:boolean=true;
+  isSystemAdd:boolean=false;
+  isSystemEdit:boolean=false;
+  isSystemUserAdd:boolean=false;
+  isSystemUserEdit:boolean=false;
 
   constructor(private modalService: BsModalService, @Inject(MetricsService) metricsService) {
     this.metricsService = metricsService;
@@ -47,15 +58,85 @@ export class AgileTeamComponent implements OnInit {
     $('#selectTeamDropDown').addClass('remove');
     $('#activeCheckBox').addClass('remove');
     $('#agileTeamSubmitCancelBtnContainer').addClass('remove');
-    $('#cancelAddButton').addClass('remove');
-    $('#cancelEditButton').addClass('remove');
+    // $('#cancelAddButton').addClass('remove');
+    // $('#cancelEditButton').addClass('remove');
     $('#systemUserTextField').addClass('remove');
     $('#selectTeamMemberDropDown').addClass('remove');
     $('#activeSystemUserCheckBox').addClass('remove');
-    // document.getElementById('metricsPageGridDiv').style.display = 'block';
     this.getAllSystems();
     this.getAllWorkTeams();
   }
+
+  
+  openModal(submitConfirmationModal: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(submitConfirmationModal);
+  }
+
+  //#region Top button click events
+
+  addSystemButtonClicked() {
+    this.isSystemAdd = true;
+    this.isSystemEdit = false;
+    this.isSystemUserAdd = false;
+    this.isSystemUserEdit = false;
+    this.submitButtonLbl = 'Add';
+    this.readOnly = false;
+    this.systemTextFieldValue = undefined;
+    this.typeValue = undefined;
+    this.teamValue = undefined;
+    this.activeValue = false;
+    $('#editSystemButton').addClass('remove');
+    $('#addUserButton').addClass('remove');
+    $('#selectSystemDropDown').addClass('remove');
+    $('#systemTextField').removeClass('remove');
+    $('#typeTextField').removeClass('remove');
+    $('#selectTeamDropDown').removeClass('remove');
+    $('#activeCheckBox').removeClass('remove');
+    $('#agileTeamSubmitCancelBtnContainer').removeClass('remove');
+    // $('#cancelAddButton').removeClass('remove');
+  }
+
+  addUserButtonClicked(){
+    this.isSystemAdd = false;
+    this.isSystemEdit = false;
+    this.isSystemUserAdd = true;
+    this.isSystemUserEdit = false;
+    this.submitButtonLbl = 'Add';
+
+    $('#selectSystemDropDown').addClass('remove');
+    // $('#systemTextField').removeClass('remove');
+    $('#typeTextField').addClass('remove');
+    $('#selectTeamDropDown').addClass('remove');
+    $('#activeCheckBox').addClass('remove');
+
+    $('#editSystemButton').addClass('remove');
+    $('#addSystemButton').addClass('remove');
+
+    this.addSystemUserFields();
+    $('#agileTeamSubmitCancelBtnContainer').removeClass('remove');
+  }
+
+  editSystemButtonClicked() {
+    this.isSystemAdd = false;
+    this.isSystemEdit = true;
+    this.isSystemUserAdd = false;
+    this.isSystemUserEdit = false;
+    this.submitButtonLbl = "Update";
+    this.readOnly = false;
+    $('#addSystemButton').addClass('remove');
+    $('#addUserButton').addClass('remove');
+    $('#selectSystemDropDown').addClass('remove');
+    $('#systemTextField').removeClass('remove');
+    $('#typeTextField').removeClass('remove');
+    $('#selectTeamDropDown').removeClass('remove');
+    $('#activeCheckBox').removeClass('remove');
+    $('#agileTeamSubmitCancelBtnContainer').removeClass('remove');
+    // $('#cancelAddButton').removeClass('remove');
+  }
+
+  //#endregion Top button click events
+
+  //#region Get methods
 
   getAllSystems() {
     this.metricsService.getAllSystems()
@@ -82,7 +163,9 @@ export class AgileTeamComponent implements OnInit {
       .subscribe((results) => {this.systemUserGridDataSource = results; console.log(results); console.log('Work User ======= ' + JSON.stringify(results[0].work_team_member.work_user));});
   }
 
+//#endregion Get methods
 
+//#region System value changes
 
   systemDropDownValueChanged(e) {
     var i = 0;
@@ -150,89 +233,83 @@ export class AgileTeamComponent implements OnInit {
     }
   }
 
-
-  openModal(submitConfirmationModal: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(submitConfirmationModal);
-  }
+  //#endregion System value changes
 
 
-  addSystemButtonClicked() {
-    // alert("The Add Button was clicked");
-    this.buttonLbl = 'Add';
-    this.readOnly = false;
-    this.systemTextFieldValue = undefined;
-    this.typeValue = undefined;
-    this.teamValue = undefined;
-    this.activeValue = false;
-    $('#editSystemButton').addClass('remove');
-    $('#addUserButton').addClass('remove');
-    $('#selectSystemDropDown').addClass('remove');
-    $('#systemTextField').removeClass('remove');
-    $('#typeTextField').removeClass('remove');
-    $('#selectTeamDropDown').removeClass('remove');
-    $('#activeCheckBox').removeClass('remove');
-    $('#agileTeamSubmitCancelBtnContainer').removeClass('remove');
-    $('#cancelAddButton').removeClass('remove');
-  }
+//#region Submit Cancel button click events
 
-  editSystemButtonClicked() {
-    this.buttonLbl = "Update";
-    this.readOnly = false;
-    $('#addSystemButton').addClass('remove');
-    $('#addUserButton').addClass('remove');
-    $('#selectSystemDropDown').addClass('remove');
-    $('#systemTextField').removeClass('remove');
-    $('#typeTextField').removeClass('remove');
-    $('#selectTeamDropDown').removeClass('remove');
-    $('#activeCheckBox').removeClass('remove');
-    $('#agileTeamSubmitCancelBtnContainer').removeClass('remove');
-    $('#cancelEditButton').removeClass('remove');
-  }
-
-  // checkBoxToggled(e) {
-  //   if (e.value === true) {
-  //     alert('Checkbox Checked');
-  //   } else {
-  //     alert('Checkbox Unchecked');
-  //   }
-  // }
   submitButtonClicked() {
     alert("The Submit Button was clicked");
   }
 
   cancelAddButtonClicked() {
     this.readOnly = true;
+    this.removeSystemUserFields();
     $('#selectSystemDropDown').removeClass('remove');
     $('#systemTextField').addClass('remove');
     $('#agileTeamSubmitCancelBtnContainer').addClass('remove');
-    $('#cancelAddButton').addClass('remove');
+
+    if (this.isSystemUserAdd){
+      $('#selectTeamDropDown').removeClass('remove');
+      $('#typeTextField').removeClass('remove');
+      $('#activeCheckBox').removeClass('remove');
+    }
+    
     if(this.systemDropDownValue != undefined){
       $('#editSystemButton').removeClass('remove');
       $('#addUserButton').removeClass('remove');
+      $('#addSystemButton').removeClass('remove');
       this.typeValue = this.currentSystem.agile_system_type;
       this.teamValue = this.currentSystem.work_team.work_team_id;
       this.activeValue = this.currentSystem.active;
-    } else if (this.systemDropDownValue == undefined){
+    } else {
+      console.log("HEEERERERERERE");
       $('#selectTeamDropDown').addClass('remove');
       $('#typeTextField').addClass('remove');
       $('#activeCheckBox').addClass('remove');
     }
   }
 
-  cancelEditButtonClicked() {
-    this.readOnly = true;
-    this.typeValue = this.currentSystem.agile_system_type;
-    this.teamValue = this.currentSystem.work_team.work_team_id;
-    this.activeValue = this.currentSystem.active;
-    $('#addSystemButton').removeClass('remove');
-    $('#addUserButton').removeClass('remove');
-    $('#selectSystemDropDown').removeClass('remove');
-    $('#systemTextField').addClass('remove');
-    $('#agileTeamSubmitCancelBtnContainer').addClass('remove');
-    $('#cancelEditButton').addClass('remove');
-  }
+  // cancelEditButtonClicked() {
+  //   this.readOnly = true;
+  //   this.typeValue = this.currentSystem.agile_system_type;
+  //   this.teamValue = this.currentSystem.work_team.work_team_id;
+  //   this.activeValue = this.currentSystem.active;
+  //   $('#addSystemButton').removeClass('remove');
+  //   $('#addUserButton').removeClass('remove');
+  //   $('#selectSystemDropDown').removeClass('remove');
+  //   $('#systemTextField').addClass('remove');
+  //   $('#agileTeamSubmitCancelBtnContainer').addClass('remove');
+  //   $('#cancelEditButton').addClass('remove');
+  // }
 
   confirmNoClicked() {
     this.modalService.hide(1);
+  }
+
+  //#endregion Submit Cancel button click events
+
+  removeSystemFields(){
+    $('#typeTextField').addClass('remove');
+      $('#selectTeamDropDown').addClass('remove');
+      $('#activeCheckBox').addClass('remove');
+  }
+
+  addSystemFields(){
+    $('#typeTextField').removeClass('remove');
+      $('#selectTeamDropDown').removeClass('remove');
+      $('#activeCheckBox').removeClass('remove');
+  }
+
+  removeSystemUserFields(){
+    $('#systemUserTextField').addClass('remove');
+      $('#selectTeamMemberDropDown').addClass('remove');
+      $('#activeSystemUserCheckBox').addClass('remove');
+  }
+
+  addSystemUserFields(){
+    $('#systemUserTextField').removeClass('remove');
+      $('#selectTeamMemberDropDown').removeClass('remove');
+      $('#activeSystemUserCheckBox').removeClass('remove');
   }
 }

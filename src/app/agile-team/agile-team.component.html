@@ -10,21 +10,21 @@
     <dx-button id="addSystemButton" class="serchBtns" (onClick)="addSystemButtonClicked()" hoverStateEnabled="true" icon="fas fa-plus"></dx-button>
     <dx-button id="editSystemButton" class="serchBtns" (onClick)="editSystemButtonClicked()" hoverStateEnabled="true" icon="fas fa-pencil-alt"></dx-button>
     <dx-button id="addUserButton" class="serchBtns" (onClick)="addUserButtonClicked()" hoverStateEnabled="true" icon="fas fa-user-plus"></dx-button>
-    <dx-select-box id="selectSystemDropDown" placeholder="System Name" [dataSource]="systemSelectBoxDataSource" displayExpr="agile_system_name" valueExpr= "agile_system_id" [searchEnabled]="true" [(ngModel)]="systemDropDownValue" (onValueChanged)="systemDropDownValueChanged($event.value)"></dx-select-box>
-    <dx-text-box id="systemTextField" placeholder="System Name" [(ngModel)]="systemTextFieldValue" (onValueChanged)="systemTextFieldValueChanged($event)"></dx-text-box>
-    <dx-text-box id="typeTextField" placeholder="Type" [(readOnly)]="readOnly" [(ngModel)]="typeValue" (onValueChanged)="typeValueChanged($event)"></dx-text-box>
-    <dx-select-box id="selectTeamDropDown" placeholder="Team" [dataSource]="teamSelectBoxDataSource" displayExpr="work_team_name" valueExpr= "work_team_id" [searchEnabled]="true" [(readOnly)]="readOnly" [(ngModel)]="teamValue" (onValueChanged)="teamValueChanged($event)"></dx-select-box>
-    <dx-check-box id="activeCheckBox" text="Active" (onValueChanged)="checkBoxToggled($event)" [(readOnly)]="readOnly" [(ngModel)]="activeValue"></dx-check-box>
+    <dx-select-box id="selectSystemDropDown" class="editFields" placeholder="System Name" [dataSource]="systemSelectBoxDataSource" displayExpr="agile_system_name" valueExpr= "agile_system_id" [searchEnabled]="true" [(ngModel)]="systemDropDownValue" (onValueChanged)="systemDropDownValueChanged($event.value)"></dx-select-box>
+    <dx-text-box id="systemTextField" class="editFields" placeholder="System Name" [(ngModel)]="systemTextFieldValue" (onValueChanged)="systemTextFieldValueChanged($event)"></dx-text-box>
+    <dx-text-box id="typeTextField" class="editFields" placeholder="Type" [(readOnly)]="readOnly" [(ngModel)]="typeValue" (onValueChanged)="typeValueChanged($event)"></dx-text-box>
+    <dx-select-box id="selectTeamDropDown" class="editFields" placeholder="Team" [dataSource]="teamSelectBoxDataSource" displayExpr="work_team_name" valueExpr= "work_team_id" [searchEnabled]="true" [(readOnly)]="readOnly" [(ngModel)]="teamValue" (onValueChanged)="teamValueChanged($event)"></dx-select-box>
+    <dx-check-box id="activeCheckBox" class="editFields" text="Active" (onValueChanged)="checkBoxToggled($event)" [(readOnly)]="readOnly" [(ngModel)]="activeValue"></dx-check-box>
 
-    <dx-text-box id="systemUserTextField" placeholder="System User Name" [(ngModel)]="systemUserTextFieldValue" (onValueChanged)="systemUSerTextFieldValueChanged($event)"></dx-text-box>
+    <dx-text-box id="systemUserTextField" class="editFields" placeholder="System User Name" [(ngModel)]="systemUserTextFieldValue" (onValueChanged)="systemUSerTextFieldValueChanged($event)"></dx-text-box>
     <!-- <dx-select-box id="selectSystemUserDropDown" placeholder="Team" [dataSource]="teamSelectBoxDataSource" displayExpr="work_team_name" valueExpr= "work_team_id" [searchEnabled]="true" [(readOnly)]="readOnly" [(ngModel)]="teamValue" (onValueChanged)="teamValueChanged($event)"></dx-select-box> -->
-    <dx-select-box id="selectTeamMemberDropDown" placeholder="Team Member" [dataSource]="teamSelectBoxDataSource" displayExpr="work_team_name" valueExpr= "work_team_id" [searchEnabled]="true" [(readOnly)]="readOnly" [(ngModel)]="teamMemberValue" (onValueChanged)="teamMemberValueChanged($event)"></dx-select-box>
-    <dx-check-box id="activeSystemUserCheckBox" text="Active" (onValueChanged)="checkBoxSystemUserToggled($event)" [(readOnly)]="readOnly" [(ngModel)]="activeSystemUserValue"></dx-check-box>
+    <dx-select-box id="selectTeamMemberDropDown" class="editFields" placeholder="Team Member" [dataSource]="teamSelectBoxDataSource" displayExpr="work_team_name" valueExpr= "work_team_id" [searchEnabled]="true" [(readOnly)]="readOnly" [(ngModel)]="teamMemberValue" (onValueChanged)="teamMemberValueChanged($event)"></dx-select-box>
+    <dx-check-box id="activeSystemUserCheckBox" class="editFields" text="Active" (onValueChanged)="checkBoxSystemUserToggled($event)" [(readOnly)]="readOnly" [(ngModel)]="activeSystemUserValue"></dx-check-box>
 
     <div id="agileTeamSubmitCancelBtnContainer">
-      <dx-button id="submitButton" text="{{buttonLbl}}" (onClick)="openModal(submitConfirmationModal)" hoverStateEnabled="true" [(disabled)]="submitButtonDisabled"></dx-button>
+      <dx-button id="submitButton" text="{{submitButtonLbl}}" (onClick)="openModal(submitConfirmationModal)" hoverStateEnabled="true" [(disabled)]="submitButtonDisabled"></dx-button>
       <dx-button id="cancelAddButton" text="Cancel" (onClick)="cancelAddButtonClicked()" hoverStateEnabled="true"></dx-button>
-      <dx-button id="cancelEditButton" text="Cancel" (onClick)="cancelEditButtonClicked()" hoverStateEnabled="true"></dx-button>
+      <!-- <dx-button id="cancelEditButton" text="Cancel" (onClick)="cancelEditButtonClicked()" hoverStateEnabled="true"></dx-button> -->
     </div>
 
     <!-- <div id="systemUserSubmitCancelBtnContainer">
