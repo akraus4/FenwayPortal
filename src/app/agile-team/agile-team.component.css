@@ -1,14 +1,18 @@
 #systemComponents
 
-#addSystemButton {
+.serchBtns, .editFields{
+    margin-bottom: 10px;
+}
+
+/* #addSystemButton {
     margin-bottom: 10px;
 }
 
 #editSystemButton {
     margin-bottom: 10px;
-}
+} */
 
-#selectSystemDropDown {
+/* #selectSystemDropDown {
     margin-bottom: 10px;
 }
 
@@ -22,15 +26,15 @@
 
 #selectTeamDropDown {
     margin-bottom: 10px;
-}
+} */
 
 #agileTeamSubmitCancelBtnContainer {
     margin-bottom: -42px;
 }
 
-#activeCheckBox {
+/* #activeCheckBox {
     margin-bottom: 10px;
-}
+} */
 
 #submitButton {
     height: 42px;

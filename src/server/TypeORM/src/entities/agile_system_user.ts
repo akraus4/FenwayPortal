@@ -1,21 +1,30 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from "typeorm";
+import { AgileSystem} from "../entities/agile_system";
+import { WorkTeamMember} from "../entities/work_team_member";
+@Entity({name : "agile_system_user"})
+export class AgileSystemUser {
 
-@Entity()
-export class agile_system_user {
-
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid', {name : "agile_system_user_id"})
     agile_system_user_id: string;
 
-    @Column()
+    @Column("varchar", {name : "agile_system_user_name"})
     agile_system_user_name: string;
 
-    @Column()
-    agile_system_id: string;
+    // @Column()
+    // agile_system_id: string;
 
-    @Column()
-    work_team_member_id: string;
+    @ManyToOne(type => AgileSystem)
+    @JoinColumn({name : "agile_system_id"})
+    agile_system: AgileSystem;
 
-    @Column()
-    work_user_id: string;
+    @ManyToOne(type => WorkTeamMember)
+    @JoinColumn({name : "work_team_member_id"})
+    work_team_member: WorkTeamMember;
+
+    // @Column("varchar", {name : "work_team_member_id"})
+    // work_team_member_id: string;
+
+    // @Column("varchar", {name : "work_user_id"})
+    // work_user_id: string;
 
 }

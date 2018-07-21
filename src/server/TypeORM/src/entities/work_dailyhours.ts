@@ -1,18 +1,22 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
+import {Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn} from "typeorm";
+import { WorkTeamMember} from "../entities/work_team_member";
 
-@Entity()
-export class work_dailyhours {
+@Entity({name : "work_dailyhours"})
+export class WorkDailyHours {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid', {name : "work_dailyhours_id"})
     work_dailyhours_id: string;
 
-    @Column()
-    work_team_member_id: string;
+    // @Column()
+    // work_team_member_id: string;
+    @ManyToOne(type => WorkTeamMember)
+    @JoinColumn({name : "work_team_member_id"})
+    work_team_member: WorkTeamMember;
 
-    @Column()
+    @Column({name : "work_date"})
     work_date: Date;
 
-    @Column()
+    @Column({name : "hours"})
     hours: number;
 
 }
