@@ -58,10 +58,10 @@ export class MetricsComponent implements OnInit {
     for (i = 0; i < sprint_ids.length; i++) {
       this.currentSprintId.push(sprint_ids[i].agile_sprint_id);
     }
-    if (this.currentSprintId==""){
-      (<HTMLInputElement>document.getElementById("metricsSearchBtn")).disabled = true;
+    if (this.currentSprintId==''){
+      (<HTMLInputElement>document.getElementById('metricsSearchBtn')).disabled = true;
     } else {
-      (<HTMLInputElement>document.getElementById("metricsSearchBtn")).disabled = false;
+      (<HTMLInputElement>document.getElementById('metricsSearchBtn')).disabled = false;
     }
   }
 
@@ -99,7 +99,7 @@ export class MetricsComponent implements OnInit {
     var i = 0
     for (i = 0; i < this.storyData.length; i++) {
       var user = this.storyData[i].agile_system_user_name
-      var name = user.split(" <")
+      var name = user.split(' <')
       this.storyData[i].agile_system_user_name = name[0]
     }
   }
@@ -135,26 +135,26 @@ export class MetricsComponent implements OnInit {
     this.storiesBySprint = [];
     this.storyCount = 0;
     this.storiesBySprintCount = 0;
-    var lastStory = "";
-    var lastSprint = "";
+    var lastStory = '';
+    var lastSprint = '';
     var numberOfStories = this.StoryChoices.length - 1;
     for (i = 0; i < this.StoryChoices.length; i++) {
-      if (lastSprint == this.StoryChoices[i].agile_sprint_id || lastSprint == "") {
+      if (lastSprint == this.StoryChoices[i].agile_sprint_id || lastSprint == '') {
         if (lastStory != this.StoryChoices[i].agile_story_id) {
           this.storiesBySprintCount++;
           lastStory = this.StoryChoices[i].agile_story_id;
         }
         if (i == numberOfStories) {
           var getStoriesBySprint = {
-            "arg": this.StoryChoices[i - 1].agile_sprint_name,
-            "val": this.storiesBySprintCount
+            'arg': this.StoryChoices[i - 1].agile_sprint_name,
+            'val': this.storiesBySprintCount
           };
           this.storiesBySprint.push(getStoriesBySprint);
         }
       } else {
         var getStoriesBySprint = {
-          "arg": this.StoryChoices[i - 1].agile_sprint_name,
-          "val": this.storiesBySprintCount
+          'arg': this.StoryChoices[i - 1].agile_sprint_name,
+          'val': this.storiesBySprintCount
         };
         this.storiesBySprint.push(getStoriesBySprint);
         this.storiesBySprintCount = 0;

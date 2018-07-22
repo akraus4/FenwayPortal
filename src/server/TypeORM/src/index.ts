@@ -70,6 +70,7 @@ app.get("/getAllSprintsBySystem/:systemId", aSystemController.getAllSprintsBySys
 app.get("/getAllStoriesWithUsersBySprint/:sprintId", aSystemController.getAllStoriesWithUsersBySprint);
 app.get("/getAllTeamMembersByTeam/:teamId", aSystemController.getAllTeamMembersByTeam);
 app.get("/getAllSystemUsersBySystem/:systemId", aSystemController.getAllSystemUsersBySystem);
+// app.get("/getAllSystemUsersBySystem/:systemId", aSystemController.getAllSystemUsersBySystem);
 
 /**
  * Create connection to DB using configuration provided in

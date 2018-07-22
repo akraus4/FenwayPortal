@@ -21,6 +21,9 @@ export class AgileSystemUser {
     @JoinColumn({name : "work_team_member_id"})
     work_team_member: WorkTeamMember;
 
+    @Column('tinyint', {name : "active"})
+    active: boolean;
+
     // @Column("varchar", {name : "work_team_member_id"})
     // work_team_member_id: string;
 

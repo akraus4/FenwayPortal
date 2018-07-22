@@ -35,10 +35,23 @@ export class MetricsService {
 	}
 
 	getAllSprintsBySystem(system_id) {
-		let result = this.http.get(this.url + '/findAllSprintsBySystem/' + system_id);
+		let result = this.http.get(this.url + '/getAllSprintsBySystem/' + system_id);
 		// console.log(JSON.stringify(result));
 		return result
 	}
+
+	getAllSystemUsersBySystem(sprint_id) {
+		let result = this.http.get(this.url + '/getAllSystemUsersBySystem/' + sprint_id);
+		// console.log(JSON.stringify(result));
+		return result
+	}
+
+	getAllTeamMembersByTeam(team_id) {
+		let result = this.http.get(this.url + '/getAllTeamMembersByTeam/' + team_id);
+		// console.log(JSON.stringify(result));
+		return result
+	}
+
 
 	getAllStoriesWithUsersBySprint(sprint_id) {
 		// var stories = [];
@@ -59,8 +72,8 @@ export class MetricsService {
 		// return stories;
 	}
 
-	getAllStoriesAndUsersBySprint(sprint_id, story_id) {
-		let result = this.http.get(this.url + '/findAllStoriesAndUsersBySprint/' + sprint_id + story_id);
+	getAllStoriesAndUsersBySprint(sprint_id) {
+		let result = this.http.get(this.url + '/getAllStoriesAndUsersBySprint/' + sprint_id);
 		return result
 	}
 

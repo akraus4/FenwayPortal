@@ -22,8 +22,8 @@
     <dx-check-box id="activeSystemUserCheckBox" class="editFields" text="Active" (onValueChanged)="checkBoxSystemUserToggled($event)" [(readOnly)]="readOnly" [(ngModel)]="activeSystemUserValue"></dx-check-box>
 
     <div id="agileTeamSubmitCancelBtnContainer">
-      <dx-button id="submitButton" text="{{submitButtonLbl}}" (onClick)="openModal(submitConfirmationModal)" hoverStateEnabled="true" [(disabled)]="submitButtonDisabled"></dx-button>
-      <dx-button id="cancelAddButton" text="Cancel" (onClick)="cancelAddButtonClicked()" hoverStateEnabled="true"></dx-button>
+      <dx-button id="submitButton" class="submitBtn" text="{{submitButtonLbl}}" (onClick)="openModal(submitConfirmationModal)" hoverStateEnabled="true" [(disabled)]="submitButtonDisabled"></dx-button>
+      <dx-button id="cancelAddButton" class="cancelBtn" text="Cancel" (onClick)="cancelAddButtonClicked()" hoverStateEnabled="true"></dx-button>
       <!-- <dx-button id="cancelEditButton" text="Cancel" (onClick)="cancelEditButtonClicked()" hoverStateEnabled="true"></dx-button> -->
     </div>
 
@@ -35,12 +35,12 @@
   </div>
 
   <div class="col-lg-8 col-sm-12" id="agileTeamGrid">
-    <dx-data-grid id="gridContainer" [dataSource]="systemUserGridDataSource" [showRowLines]="true" [showBorders]="true">
+    <dx-data-grid id="gridContainer" [dataSource]="systemUserGridDataSource" [showRowLines]="true" [showBorders]="true" (onRowClick)="onRowClick($event)">
       <dxo-export [enabled]="true" fileName="Employees" [allowExportSelectedData]="true"></dxo-export>
       <dxo-header-filter [visible]="true"></dxo-header-filter>
       <dxo-sorting mode="multiple"></dxo-sorting>
       <dxo-paging [pageSize]="10"></dxo-paging>
-      <dxi-column dataField="work_team_member.work_user.firstname" caption="Team Members"></dxi-column>
+      <dxi-column dataField="full_name" caption="Team Members"></dxi-column>
       <dxi-column dataField="agile_system_user_name" caption="System Users"></dxi-column>
     </dx-data-grid>
   </div>
