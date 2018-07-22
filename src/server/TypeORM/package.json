@@ -4,14 +4,22 @@
    "description": "Awesome project developed with TypeORM.",
    "devDependencies": {
       "ts-node": "3.3.0",
+      "@types/chai": "^4.1.2",
+      "@types/mocha": "^2.2.48",
       "@types/node": "^8.0.29",
-      "typescript": "2.5.2"
-   },
-   "dependencies": {
+      "@types/request-promise": "^4.1.41",
       "@types/uuid": "^3.4.3",
+      "chai": "^4.1.2",
+      "mocha": "^5.2.0",
+      "tslint": "^5.9.1",
+      "tslint-config-standard": "^7.0.0",
+      "typescript": "^2.8.1"
+    },
+   "dependencies": {
       "cors": "^2.8.4",
       "mysql": "^2.15.0",
       "reflect-metadata": "^0.1.10",
+      "request-promise": "^4.2.2",
       "typeorm": "0.2.7",
       "uuidv4": "^1.0.1"
    },
