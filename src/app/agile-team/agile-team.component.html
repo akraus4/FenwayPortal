@@ -18,7 +18,7 @@
 
     <dx-text-box id="systemUserTextField" class="editFields" placeholder="System User Name" [(ngModel)]="systemUserTextFieldValue" (onValueChanged)="systemUSerTextFieldValueChanged($event)"></dx-text-box>
     <!-- <dx-select-box id="selectSystemUserDropDown" placeholder="Team" [dataSource]="teamSelectBoxDataSource" displayExpr="work_team_name" valueExpr= "work_team_id" [searchEnabled]="true" [(readOnly)]="readOnly" [(ngModel)]="teamValue" (onValueChanged)="teamValueChanged($event)"></dx-select-box> -->
-    <dx-select-box id="selectTeamMemberDropDown" class="editFields" placeholder="Team Member" [dataSource]="teamSelectBoxDataSource" displayExpr="work_team_name" valueExpr= "work_team_id" [searchEnabled]="true" [(readOnly)]="readOnly" [(ngModel)]="teamMemberValue" (onValueChanged)="teamMemberValueChanged($event)"></dx-select-box>
+    <dx-select-box id="selectTeamMemberDropDown" class="editFields" placeholder="Team Member" [dataSource]="systemUserGridDataSource" displayExpr="full_name" valueExpr= "work_team_member_id" [searchEnabled]="true" [(readOnly)]="readOnly" [(ngModel)]="teamMemberValue" (onValueChanged)="teamMemberValueChanged($event)"></dx-select-box>
     <dx-check-box id="activeSystemUserCheckBox" class="editFields" text="Active" (onValueChanged)="checkBoxSystemUserToggled($event)" [(readOnly)]="readOnly" [(ngModel)]="activeSystemUserValue"></dx-check-box>
 
     <div id="agileTeamSubmitCancelBtnContainer">
@@ -51,7 +51,7 @@
           <p id="agileChange">Are you sure you want to make these changes?</p>
         </div>
         <div class="modal-footer">
-          <dx-button id="confirmYesBtn" class="confirmModalBtn submitBtn" text="Yes" hoverStateEnabled="true"></dx-button>
+          <dx-button id="confirmYesBtn" class="confirmModalBtn submitBtn" text="Yes" hoverStateEnabled="true" (onClick)="submitButtonClicked()" ></dx-button>
           <dx-button id="confirmNoBtn" class="confirmModalBtn cancelBtn" text="No" (onClick)="confirmNoClicked()" hoverStateEnabled="true"></dx-button>
         </div>
   </ng-template>

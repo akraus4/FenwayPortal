@@ -70,6 +70,8 @@ app.get("/getAllSprintsBySystem/:systemId", aSystemController.getAllSprintsBySys
 app.get("/getAllStoriesWithUsersBySprint/:sprintId", aSystemController.getAllStoriesWithUsersBySprint);
 app.get("/getAllTeamMembersByTeam/:teamId", aSystemController.getAllTeamMembersByTeam);
 app.get("/getAllSystemUsersBySystem/:systemId", aSystemController.getAllSystemUsersBySystem);
+app.get("/saveSystem/:system", aSystemController.saveSystem);
+app.get("/updateSystem/:system", aSystemController.updateSystem);
 // app.get("/getAllSystemUsersBySystem/:systemId", aSystemController.getAllSystemUsersBySystem);
 
 /**

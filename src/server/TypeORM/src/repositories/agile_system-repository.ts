@@ -29,8 +29,32 @@ export class AgileSystemRepo {
         return getManager().getRepository(AgileStory).find({ relations: ["agile_sprint"] });
     }
 
+    static saveSystem(system) {
+        console.log("System = " + system);
+        system = JSON.parse(system);
+
+        return getManager().insert(AgileSystem, { 
+            agile_system_name: system.agile_system_name,
+            agile_system_type: system.agile_system_type,
+            work_team: system.work_team,
+            active: system.active
+        });
+    }
+
+    static updateSystem(system) {
+        console.log("System = " + system);
+        system = JSON.parse(system);
+
+        return getManager().update(AgileSystem, system.agile_system_id, { 
+            agile_system_name: system.agile_system_name,
+            agile_system_type: system.agile_system_type,
+            work_team: system.work_team,
+            active: system.active
+        });
+    }
+
     static async getAllTeamMembersByTeam(teamId) {
-        return  getManager().getRepository(WorkTeamMember).find({ relations: ["work_team", "work_user"], where: { work_team:  teamId } });
+        return getManager().getRepository(WorkTeamMember).find({ relations: ["work_team", "work_user"], where: { work_team: teamId } });
     }
 
     // static async getAllTeamMembersByTeam(systemId) {
@@ -86,3 +110,5 @@ export class AgileSystemRepo {
         return getManager().getRepository(AgileSystemUser).find({ relations: ["agile_system", "work_team_member", "work_team_member.work_user"], where: { agile_system: systemId } });
     }
 }
+
+

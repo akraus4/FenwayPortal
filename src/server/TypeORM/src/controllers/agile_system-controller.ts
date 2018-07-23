@@ -61,3 +61,25 @@ export let getAllSystemUsersBySystem = async (req: Request, res: Response) => {
         res.send(result);
     });
 };
+
+export let saveSystem = async (req: Request, res: Response) => {
+    console.log("Received saveSystem ==> GET");
+    var system = req.params.system;
+    
+
+    AgileSystemRepo.saveSystem(system).then((result: any) => {
+        console.log("Result : " + JSON.stringify(result));
+        res.send(result);
+    });
+};
+
+export let updateSystem = async (req: Request, res: Response) => {
+    console.log("Received updateSystem ==> GET");
+    var system = req.params.system;
+    
+
+    AgileSystemRepo.updateSystem(system).then((result: any) => {
+        console.log("Result : " + JSON.stringify(result));
+        res.send(result);
+    });
+};

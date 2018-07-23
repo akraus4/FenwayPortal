@@ -52,6 +52,18 @@ export class MetricsService {
 		return result
 	}
 
+	saveSystem(system) {
+		let result = this.http.get(this.url + '/saveSystem/' + system);
+		// console.log(JSON.stringify(result));
+		return result
+	}
+
+	updateSystem(system) {
+		let result = this.http.get(this.url + '/updateSystem/' + system);
+		// console.log(JSON.stringify(result));
+		return result
+	}
+
 
 	getAllStoriesWithUsersBySprint(sprint_id) {
 		// var stories = [];
