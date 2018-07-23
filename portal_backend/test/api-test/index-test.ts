@@ -18,7 +18,7 @@ let options = {
   json: true,
   resolveWithFullResponse: true
 }
-
+// Not used
 describe('Calling Route (/GetAllWorkUsers)', function () {
   before(async () => {
         // server = await startApiServer(village)
@@ -28,7 +28,7 @@ describe('Calling Route (/GetAllWorkUsers)', function () {
       options.method = 'GET'
     })
     it('should return full response', () => {
-      options.uri = `${baseUrl}GetAllEmployees`
+      options.uri = `${baseUrl}GetAllWorkUsers`
       return request(options)
       .then(res => {
         expect(res.statusCode).to.equal(200)
@@ -64,7 +64,7 @@ describe('Calling Route (/GetAllWorkTeams)', function () {
       options.method = 'GET'
     })
     it('should return full response', () => {
-      options.uri = `${baseUrl}GetAllEmployees`
+      options.uri = `${baseUrl}GetAllWorkTeams`
       return request(options)
       .then(res => {
         expect(res.statusCode).to.equal(200)
@@ -82,7 +82,8 @@ describe('Calling Route (/GetAllSprintsBySystem)', function () {
       options.method = 'GET'
     })
     it('should return full response', () => {
-      options.uri = `${baseUrl}GetAllEmployees`
+      let systemId = 1
+      options.uri = `${baseUrl}GetAllSprintsBySystem/${systemId}`
       return request(options)
       .then(res => {
         expect(res.statusCode).to.equal(200)
@@ -90,24 +91,25 @@ describe('Calling Route (/GetAllSprintsBySystem)', function () {
     })
   })
 })
-
-describe('Calling Route (/GetAllStoriesWithUsersBySprint)', function () {
-  before(async () => {
-        // server = await startApiServer(village)
-  })
-  describe('GET', () => {
-    before(() => {
-      options.method = 'GET'
-    })
-    it('should return full response', () => {
-      options.uri = `${baseUrl}GetAllEmployees`
-      return request(options)
-      .then(res => {
-        expect(res.statusCode).to.equal(200)
-      })
-    })
-  })
-})
+// Not used
+// describe('Calling Route (/GetAllStoriesWithUsersBySprint)', function () {
+//   before(async () => {
+//         // server = await startApiServer(village)
+//   })
+//   describe('GET', () => {
+//     before(() => {
+//       options.method = 'GET'
+//     })
+//     it('should return full response', () => {
+//       let sprintId = 1
+//       options.uri = `${baseUrl}GetAllStoriesWithUsersBySprint/${sprintId}`
+//       return request(options)
+//       .then(res => {
+//         expect(res.statusCode).to.equal(200)
+//       })
+//     })
+//   })
+// })
 
 describe('Calling Route (/GetAllTeamMembersByTeam)', function () {
   before(async () => {
@@ -118,7 +120,8 @@ describe('Calling Route (/GetAllTeamMembersByTeam)', function () {
       options.method = 'GET'
     })
     it('should return full response', () => {
-      options.uri = `${baseUrl}GetAllEmployees`
+      let teamId = 1
+      options.uri = `${baseUrl}GetAllTeamMembersByTeam/${teamId}`
       return request(options)
       .then(res => {
         expect(res.statusCode).to.equal(200)
@@ -136,7 +139,46 @@ describe('Calling Route (/GetAllSystemUsersBySystem)', function () {
       options.method = 'GET'
     })
     it('should return full response', () => {
-      options.uri = `${baseUrl}GetAllEmployees`
+      let systemId = 100
+      options.uri = `${baseUrl}GetAllSystemUsersBySystem/${systemId}`
+      return request(options)
+      .then(res => {
+        expect(res.statusCode).to.equal(200)
+      })
+    })
+  })
+})
+
+describe('Calling Route (/saveSystem/:system)', function () {
+  before(async () => {
+        // server = await startApiServer(village)
+  })
+  describe('GET', () => {
+    before(() => {
+      options.method = 'GET'
+    })
+    it('should return full response', () => {
+      let systemId = 100
+      options.uri = `${baseUrl}GetAllSystemUsersBySystem/${systemId}`
+      return request(options)
+      .then(res => {
+        expect(res.statusCode).to.equal(200)
+      })
+    })
+  })
+})
+
+describe('Calling Route (/update/:system)', function () {
+  before(async () => {
+        // server = await startApiServer(village)
+  })
+  describe('GET', () => {
+    before(() => {
+      options.method = 'GET'
+    })
+    it('should return full response', () => {
+      let systemId = 100
+      options.uri = `${baseUrl}GetAllSystemUsersBySystem/${systemId}`
       return request(options)
       .then(res => {
         expect(res.statusCode).to.equal(200)
