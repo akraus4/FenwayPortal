@@ -19,41 +19,23 @@ let options = {
   resolveWithFullResponse: true
 }
 
-// describe('Calling Route (/GetAllEmployees)', function () {
-//   before(async () => {
-//         // server = await startApiServer(village)
-//   })
-//   describe('GET', () => {
-//     before(() => {
-//       options.method = 'GET'
-//     })
-//     it('should return full response', () => {
-//       options.uri = `${baseUrl}GetAllEmployees`
-//       return request(options)
-//       .then(res => {
-//         expect(res.statusCode).to.equal(200)
-//       })
-//     })
-//   })
-// })
-
-// describe('Calling Route (/GetAllWorkUsers)', function () {
-//   before(async () => {
-//         // server = await startApiServer(village)
-//   })
-//   describe('GET', () => {
-//     before(() => {
-//       options.method = 'GET'
-//     })
-//     it('should return full response', () => {
-//       options.uri = `${baseUrl}GetAllEmployees`
-//       return request(options)
-//       .then(res => {
-//         expect(res.statusCode).to.equal(200)
-//       })
-//     })
-//   })
-// })
+describe('Calling Route (/GetAllWorkUsers)', function () {
+  before(async () => {
+        // server = await startApiServer(village)
+  })
+  describe('GET', () => {
+    before(() => {
+      options.method = 'GET'
+    })
+    it('should return full response', () => {
+      options.uri = `${baseUrl}GetAllEmployees`
+      return request(options)
+      .then(res => {
+        expect(res.statusCode).to.equal(200)
+      })
+    })
+  })
+})
 
 describe('Calling Route (/GetAllAgileSystems)', function () {
   before(async () => {
@@ -73,92 +55,92 @@ describe('Calling Route (/GetAllAgileSystems)', function () {
   })
 })
 
-// describe('Calling Route (/GetAllWorkTeams)', function () {
-//   before(async () => {
-//         // server = await startApiServer(village)
-//   })
-//   describe('GET', () => {
-//     before(() => {
-//       options.method = 'GET'
-//     })
-//     it('should return full response', () => {
-//       options.uri = `${baseUrl}GetAllEmployees`
-//       return request(options)
-//       .then(res => {
-//         expect(res.statusCode).to.equal(200)
-//       })
-//     })
-//   })
-// })
+describe('Calling Route (/GetAllWorkTeams)', function () {
+  before(async () => {
+        // server = await startApiServer(village)
+  })
+  describe('GET', () => {
+    before(() => {
+      options.method = 'GET'
+    })
+    it('should return full response', () => {
+      options.uri = `${baseUrl}GetAllEmployees`
+      return request(options)
+      .then(res => {
+        expect(res.statusCode).to.equal(200)
+      })
+    })
+  })
+})
 
-// describe('Calling Route (/GetAllSprintsBySystem)', function () {
-//   before(async () => {
-//         // server = await startApiServer(village)
-//   })
-//   describe('GET', () => {
-//     before(() => {
-//       options.method = 'GET'
-//     })
-//     it('should return full response', () => {
-//       options.uri = `${baseUrl}GetAllEmployees`
-//       return request(options)
-//       .then(res => {
-//         expect(res.statusCode).to.equal(200)
-//       })
-//     })
-//   })
-// })
+describe('Calling Route (/GetAllSprintsBySystem)', function () {
+  before(async () => {
+        // server = await startApiServer(village)
+  })
+  describe('GET', () => {
+    before(() => {
+      options.method = 'GET'
+    })
+    it('should return full response', () => {
+      options.uri = `${baseUrl}GetAllEmployees`
+      return request(options)
+      .then(res => {
+        expect(res.statusCode).to.equal(200)
+      })
+    })
+  })
+})
 
-// describe('Calling Route (/GetAllStoriesWithUsersBySprint)', function () {
-//   before(async () => {
-//         // server = await startApiServer(village)
-//   })
-//   describe('GET', () => {
-//     before(() => {
-//       options.method = 'GET'
-//     })
-//     it('should return full response', () => {
-//       options.uri = `${baseUrl}GetAllEmployees`
-//       return request(options)
-//       .then(res => {
-//         expect(res.statusCode).to.equal(200)
-//       })
-//     })
-//   })
-// })
+describe('Calling Route (/GetAllStoriesWithUsersBySprint)', function () {
+  before(async () => {
+        // server = await startApiServer(village)
+  })
+  describe('GET', () => {
+    before(() => {
+      options.method = 'GET'
+    })
+    it('should return full response', () => {
+      options.uri = `${baseUrl}GetAllEmployees`
+      return request(options)
+      .then(res => {
+        expect(res.statusCode).to.equal(200)
+      })
+    })
+  })
+})
 
-// describe('Calling Route (/GetAllTeamMembersByTeam)', function () {
-//   before(async () => {
-//         // server = await startApiServer(village)
-//   })
-//   describe('GET', () => {
-//     before(() => {
-//       options.method = 'GET'
-//     })
-//     it('should return full response', () => {
-//       options.uri = `${baseUrl}GetAllEmployees`
-//       return request(options)
-//       .then(res => {
-//         expect(res.statusCode).to.equal(200)
-//       })
-//     })
-//   })
-// })
+describe('Calling Route (/GetAllTeamMembersByTeam)', function () {
+  before(async () => {
+        // server = await startApiServer(village)
+  })
+  describe('GET', () => {
+    before(() => {
+      options.method = 'GET'
+    })
+    it('should return full response', () => {
+      options.uri = `${baseUrl}GetAllEmployees`
+      return request(options)
+      .then(res => {
+        expect(res.statusCode).to.equal(200)
+      })
+    })
+  })
+})
 
-// describe('Calling Route (/GetAllSystemUsersBySystem)', function () {
-//   before(async () => {
-//         // server = await startApiServer(village)
-//   })
-//   describe('GET', () => {
-//     before(() => {
-//       options.method = 'GET'
-//     })
-//     it('should return full response', () => {
-//       options.uri = `${baseUrl}GetAllEmployees`
-//       return request(options)
-//       .then(res => {
-//         expect(res.statusCode).to.equal(200)
-//       })
-//     })
-//   })
-// })
+describe('Calling Route (/GetAllSystemUsersBySystem)', function () {
+  before(async () => {
+        // server = await startApiServer(village)
+  })
+  describe('GET', () => {
+    before(() => {
+      options.method = 'GET'
+    })
+    it('should return full response', () => {
+      options.uri = `${baseUrl}GetAllEmployees`
+      return request(options)
+      .then(res => {
+        expect(res.statusCode).to.equal(200)
+      })
+    })
+  })
+})

@@ -1,12 +1,12 @@
-import { WorkUser } from "../entities/work_user";
-import { getManager } from "typeorm";
+import { WorkUser } from '../entities/work_user'
+import { getManager } from 'typeorm'
 
 export class WorkUserRepo {
+  getAllWorkUsers() {
+    // get Work_User repository and find all work_users.
 
-    getAllWorkUsers() {
-        // get Work_User repository and find all work_users.
-
-        return getManager().getRepository(WorkUser).find();
-
-    }
+    return getManager()
+      .getRepository(WorkUser)
+      .find()
+  }
 }
