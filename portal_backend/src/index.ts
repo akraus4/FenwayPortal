@@ -48,7 +48,7 @@ app.listen(app.get('port'), () => {
 /**
  * Primary app routes.
  */
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*')
   res.header(
     'Access-Control-Allow-Headers',
@@ -57,8 +57,23 @@ app.use(function(req, res, next) {
   next()
 })
 
+// Routes for agile_systems
+// Index
+app.get('/AgileSystems', aSystemController.getAllAgileSystems)
+// Create
+app.put('/AgileSystems', aSystemController.createAgileSystem)
+// Read
+app.get('/AgileSystems/:systemId', aSystemController.getAgileSystem)
+// Update
+app.post('/AgileSystems/:systemId', aSystemController.updateAgileSystem)
+// Delete
+app.delete('/AgileSystems/:systemId', aSystemController.deleteAgileSystem)
+
+// app.get('/saveSystem/:system', aSystemController.saveSystem)
+// app.get('/updateSystem/:system', aSystemController.updateSystem)
+// app.get("/getAllSystemUsersBySystem/:systemId", aSystemController.getAllSystemUsersBySystem);
+
 app.get('/GetAllWorkUsers', wUserController.getAllWorkUsers)
-app.get('/getAllAgileSystems', aSystemController.getAllAgileSystems)
 app.get('/getAllWorkTeams', aSystemController.getAllWorkTeams)
 app.get(
   '/getAllSprintsBySystem/:systemId',
@@ -76,9 +91,6 @@ app.get(
   '/getAllSystemUsersBySystem/:systemId',
   aSystemController.getAllSystemUsersBySystem
 )
-app.get('/saveSystem/:system', aSystemController.saveSystem)
-app.get('/updateSystem/:system', aSystemController.updateSystem)
-// app.get("/getAllSystemUsersBySystem/:systemId", aSystemController.getAllSystemUsersBySystem);
 
 /**
  * Create connection to DB using configuration provided in
@@ -97,11 +109,14 @@ createConnection({
     AgileSystem,
     WorkTeam,
     AgileSprint,
+    AgileStory,
     WorkTeamMember,
     AgileSystemUser
   ],
   synchronize: true,
   logging: false
 })
-  .then(async connection => {})
+  .then(async connection => {
+    console.log('Connected to Database')
+  })
   .catch(error => console.log(error))
