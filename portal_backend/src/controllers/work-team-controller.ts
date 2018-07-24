@@ -9,5 +9,7 @@ export let getAllWorkTeams = async (req: Request, res: Response) => {
   wTeamRepo.getAllWorkTeams().then((result: any) => {
     console.log('Result : ' + JSON.stringify(result))
     res.send(result)
-  });
-};
+  }).catch(error => {
+    console.log(error)
+  })
+}

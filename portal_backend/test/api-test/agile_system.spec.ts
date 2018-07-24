@@ -20,7 +20,7 @@ let options = {
 }
 
 // Test index of all agile systems
-describe('Calling Route (/AgileSystems)', function () {
+describe('Calling Route (api/AgileSystems)', function () {
   before(async () => {
     // server = await startApiServer(village)
   })
@@ -29,7 +29,7 @@ describe('Calling Route (/AgileSystems)', function () {
       options.method = 'GET'
     })
     it('should return a success status', () => {
-      options.uri = `${baseUrl}AgileSystems`
+      options.uri = `${baseUrl}api/AgileSystems`
       return request(options).then(res => {
         expect(res.statusCode).to.equal(200)
       })
@@ -38,7 +38,7 @@ describe('Calling Route (/AgileSystems)', function () {
 })
 
 // Test create an agile system
-describe('Calling Route (/AgileSystems)', function () {
+describe('Calling Route (api/AgileSystems)', function () {
   before(async () => {
     // server = await startApiServer(village)
   })
@@ -54,7 +54,7 @@ describe('Calling Route (/AgileSystems)', function () {
     })
     it('should return a success status', () => {
       let systemId = 100
-      options.uri = `${baseUrl}AgileSystems/`
+      options.uri = `${baseUrl}api/AgileSystems/`
       return request(options).then(res => {
         expect(res.statusCode).to.equal(200)
       })
@@ -63,7 +63,7 @@ describe('Calling Route (/AgileSystems)', function () {
 })
 
 // Test update an agile system
-describe('Calling Route (/AgileSystems/:systemId)', function () {
+describe('Calling Route (api/AgileSystems/:systemId)', function () {
   before(async () => {
     // server = await startApiServer(village)
   })
@@ -79,7 +79,7 @@ describe('Calling Route (/AgileSystems/:systemId)', function () {
     })
     it('should return a success status', () => {
       let systemId = 100
-      options.uri = `${baseUrl}AgileSystems/${systemId}`
+      options.uri = `${baseUrl}api/AgileSystems/${systemId}`
       return request(options).then(res => {
         expect(res.statusCode).to.equal(200)
       })
