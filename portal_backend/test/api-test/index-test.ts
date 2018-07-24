@@ -37,24 +37,6 @@ describe('Calling Route (/GetAllWorkUsers)', function () {
   })
 })
 
-describe('Calling Route (/GetAllAgileSystems)', function () {
-  before(async () => {
-        // server = await startApiServer(village)
-  })
-  describe('GET', () => {
-    before(() => {
-      options.method = 'GET'
-    })
-    it('should return full response', () => {
-      options.uri = `${baseUrl}GetAllAgileSystems`
-      return request(options)
-      .then(res => {
-        expect(res.statusCode).to.equal(200)
-      })
-    })
-  })
-})
-
 describe('Calling Route (/GetAllWorkTeams)', function () {
   before(async () => {
         // server = await startApiServer(village)
@@ -92,24 +74,24 @@ describe('Calling Route (/GetAllSprintsBySystem)', function () {
   })
 })
 // Not used
-// describe('Calling Route (/GetAllStoriesWithUsersBySprint)', function () {
-//   before(async () => {
-//         // server = await startApiServer(village)
-//   })
-//   describe('GET', () => {
-//     before(() => {
-//       options.method = 'GET'
-//     })
-//     it('should return full response', () => {
-//       let sprintId = 1
-//       options.uri = `${baseUrl}GetAllStoriesWithUsersBySprint/${sprintId}`
-//       return request(options)
-//       .then(res => {
-//         expect(res.statusCode).to.equal(200)
-//       })
-//     })
-//   })
-// })
+describe('Calling Route (/GetAllStoriesWithUsersBySprint)', function () {
+  before(async () => {
+        // server = await startApiServer(village)
+  })
+  describe('GET', () => {
+    before(() => {
+      options.method = 'GET'
+    })
+    it('should return full response', () => {
+      let sprintId = 100
+      options.uri = `${baseUrl}GetAllStoriesWithUsersBySprint/${sprintId}`
+      return request(options)
+      .then(res => {
+        expect(res.statusCode).to.equal(200)
+      })
+    })
+  })
+})
 
 describe('Calling Route (/GetAllTeamMembersByTeam)', function () {
   before(async () => {
@@ -131,44 +113,6 @@ describe('Calling Route (/GetAllTeamMembersByTeam)', function () {
 })
 
 describe('Calling Route (/GetAllSystemUsersBySystem)', function () {
-  before(async () => {
-        // server = await startApiServer(village)
-  })
-  describe('GET', () => {
-    before(() => {
-      options.method = 'GET'
-    })
-    it('should return full response', () => {
-      let systemId = 100
-      options.uri = `${baseUrl}GetAllSystemUsersBySystem/${systemId}`
-      return request(options)
-      .then(res => {
-        expect(res.statusCode).to.equal(200)
-      })
-    })
-  })
-})
-
-describe('Calling Route (/saveSystem/:system)', function () {
-  before(async () => {
-        // server = await startApiServer(village)
-  })
-  describe('GET', () => {
-    before(() => {
-      options.method = 'GET'
-    })
-    it('should return full response', () => {
-      let systemId = 100
-      options.uri = `${baseUrl}GetAllSystemUsersBySystem/${systemId}`
-      return request(options)
-      .then(res => {
-        expect(res.statusCode).to.equal(200)
-      })
-    })
-  })
-})
-
-describe('Calling Route (/update/:system)', function () {
   before(async () => {
         // server = await startApiServer(village)
   })

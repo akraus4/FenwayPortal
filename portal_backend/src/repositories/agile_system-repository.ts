@@ -7,38 +7,14 @@ import { WorkTeam } from '../entities/work_team'
 import { getManager } from 'typeorm'
 
 export class AgileSystemRepo {
-  static getAllAgileSystems() {
+  static getAllAgileSystems () {
     return getManager()
       .getRepository(AgileSystem)
       .find({ relations: ['work_team'] })
   }
-  static getAllWorkTeams() {
-    return getManager()
-      .getRepository(WorkTeam)
-      .find()
-  }
-
-  static getAllSprintsBySystem(systemId) {
-    // const sprints = await getManager().getRepository(AgileSprint).find({relations: ["agile_system"], where: {agile_system: systemId} });
-    // const sprints = await getManager().getRepository(AgileSprint).find({relations: ["agile_system"] });
-
-    return getManager()
-      .getRepository(AgileSprint)
-      .find({ relations: ['agile_system'], where: { agile_system: systemId } })
-  }
-
-  static getAllStoriesWithUsersBySprint(sprintId) {
-    console.log('Sprint Ids = ' + sprintId)
-    // let stories = getManager().getRepository(AgileStory).find({ relations: ["agile_sprint"] });
-
-    return getManager()
-      .getRepository(AgileStory)
-      .find({ relations: ['agile_sprint'] })
-  }
 
   static saveSystem (system) {
-    console.log('System = ' + system)
-    system = JSON.parse(system)
+    console.log('System = ' + JSON.stringify(system))
 
     return getManager().insert(AgileSystem, {
       agile_system_name: system.agile_system_name,
@@ -48,11 +24,10 @@ export class AgileSystemRepo {
     })
   }
 
-  static updateSystem (system) {
-    console.log('System = ' + system)
-    system = JSON.parse(system)
+  static updateSystem (systemId, system) {
+    console.log('System = ' + JSON.stringify(system))
 
-    return getManager().update(AgileSystem, system.agile_system_id, {
+    return getManager().update(AgileSystem, systemId, {
       agile_system_name: system.agile_system_name,
       agile_system_type: system.agile_system_type,
       work_team: system.work_team,
@@ -60,6 +35,30 @@ export class AgileSystemRepo {
     })
   }
 
+  static getAllWorkTeams () {
+    return getManager()
+      .getRepository(WorkTeam)
+      .find()
+  }
+
+  static getAllSprintsBySystem (systemId) {
+    // const sprints = await getManager().getRepository(AgileSprint).find({relations: ["agile_system"], where: {agile_system: systemId} });
+    // const sprints = await getManager().getRepository(AgileSprint).find({relations: ["agile_system"] });
+
+    return getManager()
+      .getRepository(AgileSprint)
+      .find({ relations: ['agile_system'], where: { agile_system: systemId } })
+  }
+
+  static getAllStoriesWithUsersBySprint (sprintId) {
+    console.log('Sprint Ids = ' + sprintId)
+    // let stories = getManager().getRepository(AgileStory).find({ relations: ["agile_sprint"] });
+
+    return getManager()
+      .getRepository(AgileStory)
+      .find()
+      // .find({ relations: ['agile_sprint'] })
+  }
   static async getAllTeamMembersByTeam (teamId) {
     return getManager()
       .getRepository(WorkTeamMember)

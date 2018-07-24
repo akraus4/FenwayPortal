@@ -29,6 +29,6 @@
    },
    "scripts": {
       "start": "ts-node src/index.ts",
-      "test": "ts-mocha test/*/*"
+      "test": "ts-mocha test/*/*.spec.ts"
    }
 }
