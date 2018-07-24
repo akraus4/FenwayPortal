@@ -22,9 +22,9 @@ export class MetricsService {
 	getAllSystems() {
 		let result = this.http.get(this.url + '/getAllAgileSystems');
 		return result
-  }
+	}
 
-  getAllWorkTeams() {
+	getAllWorkTeams() {
 		let result = this.http.get(this.url + '/getAllWorkTeams');
 		return result
 	}
@@ -53,17 +53,28 @@ export class MetricsService {
 	}
 
 	saveSystem(system) {
-		let result = this.http.get(this.url + '/saveSystem/' + system);
+		let result = this.http.post(this.url + '/saveSystem/' + system);
 		// console.log(JSON.stringify(result));
 		return result
 	}
 
 	updateSystem(system) {
-		let result = this.http.get(this.url + '/updateSystem/' + system);
+		let result = this.http.post(this.url + '/updateSystem/' + system);
 		// console.log(JSON.stringify(result));
 		return result
 	}
 
+	saveSystemUser(systemUser) {
+		let result = this.http.post(this.url + '/saveSystemUser/' + systemUser);
+		// console.log(JSON.stringify(result));
+		return result
+	}
+
+	updateSystemUser(systemUser) {
+		let result = this.http.post(this.url + '/updateSystemUser/' + systemUser);
+		// console.log(JSON.stringify(result));
+		return result
+	}
 
 	getAllStoriesWithUsersBySprint(sprint_id) {
 		// var stories = [];
@@ -73,13 +84,13 @@ export class MetricsService {
 		// for (i = num; i < sprint_id.length; i++) {
 		// 	console.log("sprint id = " + sprint_id[i].agile_sprint_id)
 		// console.log('@@@@@@@@@@ ' + sprint_id.length )
-			let result = this.http.get(this.url + '/findAllStoriesWithUsersBySprint/' + sprint_id);
-			// console.log("result = " + result)
-			// stories.push(result);
-			// console.log(JSON.stringify(stories))
-			// console.log(JSON.stringify(result));
-			return result
-	//	}
+		let result = this.http.get(this.url + '/findAllStoriesWithUsersBySprint/' + sprint_id);
+		// console.log("result = " + result)
+		// stories.push(result);
+		// console.log(JSON.stringify(stories))
+		// console.log(JSON.stringify(result));
+		return result
+		//	}
 		// console.log(stories)
 		// return stories;
 	}
@@ -97,10 +108,10 @@ export class MetricsService {
 	// }
 
 	showLoadingPanel(): void {
-        this.loadingVisible.next(true);
-    }
+		this.loadingVisible.next(true);
+	}
 
-    hideLoadingPanel(): void {
-        this.loadingVisible.next(false);
-    }
+	hideLoadingPanel(): void {
+		this.loadingVisible.next(false);
+	}
 }
