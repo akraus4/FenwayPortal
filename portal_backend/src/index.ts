@@ -21,6 +21,7 @@ import * as wUserController from './controllers/work_user-controller'
 import * as aSystemController from './controllers/agile_system-controller'
 import * as workTeamController from './controllers/work-team-controller'
 
+import * as controller from './controllers/controller'
 /**
  * Create Express server.
  */
@@ -58,37 +59,38 @@ app.use(function (req, res, next) {
 })
 
 // Routes for agile_systems
+app.get('/api/:entityType', controller.getAll)
 // Index
-app.get('/AgileSystems', aSystemController.getAllAgileSystems)
+app.get('/api/AgileSystems', aSystemController.getAllAgileSystems)
 // Create
-app.put('/AgileSystems', aSystemController.createAgileSystem)
+app.put('/api/AgileSystems', aSystemController.createAgileSystem)
 // Read
-app.get('/AgileSystems/:systemId', aSystemController.getAgileSystem)
+app.get('/api/AgileSystems/:systemId', aSystemController.getAgileSystem)
 // Update
-app.post('/AgileSystems/:systemId', aSystemController.updateAgileSystem)
+app.post('/api/AgileSystems/:systemId', aSystemController.updateAgileSystem)
 // Delete
-app.delete('/AgileSystems/:systemId', aSystemController.deleteAgileSystem)
+app.delete('/api/AgileSystems/:systemId', aSystemController.deleteAgileSystem)
 
 // app.get('/saveSystem/:system', aSystemController.saveSystem)
 // app.get('/updateSystem/:system', aSystemController.updateSystem)
 // app.get("/getAllSystemUsersBySystem/:systemId", aSystemController.getAllSystemUsersBySystem);
 
-app.get('/GetAllWorkUsers', wUserController.getAllWorkUsers)
-app.get('/getAllWorkTeams', aSystemController.getAllWorkTeams)
+app.get('/api/GetAllWorkUsers', wUserController.getAllWorkUsers)
+app.get('/api/getAllWorkTeams', aSystemController.getAllWorkTeams)
 app.get(
-  '/getAllSprintsBySystem/:systemId',
+  '/api/getAllSprintsBySystem/:systemId',
   aSystemController.getAllSprintsBySystem
 )
 app.get(
-  '/getAllStoriesWithUsersBySprint/:sprintId',
+  '/api/getAllStoriesWithUsersBySprint/:sprintId',
   aSystemController.getAllStoriesWithUsersBySprint
 )
 app.get(
-  '/getAllTeamMembersByTeam/:teamId',
+  '/api/getAllTeamMembersByTeam/:teamId',
   aSystemController.getAllTeamMembersByTeam
 )
 app.get(
-  '/getAllSystemUsersBySystem/:systemId',
+  '/api/getAllSystemUsersBySystem/:systemId',
   aSystemController.getAllSystemUsersBySystem
 )
 
