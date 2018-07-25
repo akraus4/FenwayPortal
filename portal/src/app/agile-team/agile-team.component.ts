@@ -144,7 +144,7 @@ export class AgileTeamComponent implements OnInit {
   //#region Get methods
 
   getAllSystems() {
-    this.metricsService.getAll('AgileSystems')
+    this.metricsService.getAll('AgileSystems', 'workTeam')
       .map(res => { return res.json(); })
       .subscribe((results) => {
         this.systemSelectBoxDataSource = results;
@@ -153,7 +153,7 @@ export class AgileTeamComponent implements OnInit {
   }
 
   getAllWorkTeams() {
-    this.metricsService.getAll('WorkTeams')
+    this.metricsService.getAll('WorkTeams', '')
       .map(res => { return res.json(); })
       .subscribe((results) => {
         this.teamSelectBoxDataSource = results;
@@ -284,6 +284,7 @@ export class AgileTeamComponent implements OnInit {
       $('#selectTeamDropDown').addClass('remove');
       $('#activeCheckBox').addClass('remove');
     }
+    console.log(this.currentSystem.workTeam.workTeamId);
     this.getAllTeamMembersByTeam(this.currentSystem.workTeam.workTeamId);
   }
 

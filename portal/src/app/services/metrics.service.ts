@@ -16,9 +16,9 @@ export class MetricsService {
 	}
 
 	getAll(entity, relations) {
-		console.log(entity, relations);
-		let result = this.http.get(`${this.url}/api/${entity}/?relationships=${relations}`);
-		console.log(JSON.stringify(result));
+		console.log(`Entity = ${entity} Relations = ${relations}`);
+		let result = this.http.get(`${this.url}/api/${entity}/?relations=${relations}`);
+		console.log(result);
 		return result
 	}
 

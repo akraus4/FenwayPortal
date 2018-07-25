@@ -34,8 +34,9 @@ const EntityType = {
 // Controller methods
 export const getAll = async (req: Request, res: Response) => {
   console.log(`Received getAll for ${req.params.entityType} ==> GET`)
-let relations = req.query.relations? req.query.relations.split(','):[];
-  return getAllRecords(EntityType[req.params.entityType], relations).then((result) => {
+  console.log(req.query.relations)
+
+  return getAllRecords(EntityType[req.params.entityType], req.query.relations).then((result) => {
     console.log(result) 
     res.send(result)
   }).catch(error => {
@@ -44,10 +45,14 @@ let relations = req.query.relations? req.query.relations.split(','):[];
 }
 
 // Repository
-// async function getAllRecords<Entity> (entity: ObjectType<Entity> | string, relations: Array<string> = []) {
-function getAllRecords <T> (entity: ObjectType<T>, relations: Array<string> = []) {
+function getAllRecords <T> (entity: ObjectType<T>, relations: string) {
   const manager = getManager()
-  return manager.find(entity, { relations: relations })
+  let options: any = {};
+  if(relations){
+    options.relations = relations.split(',')
+  }
+  console.log(`Relations = ${relations}`)
+  return manager.find(entity, options)
 }
 
 // export async function createRecord<T> (entity: ObjectType<T>, attributes: Seed<T>, manager?: EntityManager, relations: object = {}): Promise<T> {
