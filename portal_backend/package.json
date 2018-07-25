@@ -11,6 +11,7 @@
       "@types/uuid": "^3.4.3",
       "chai": "^4.1.2",
       "mocha": "^5.2.0",
+      "nodemon": "^1.18.3",
       "ts-mocha": "1.2.0",
       "ts-node": "3.3.0",
       "tslint": "^5.9.1",
@@ -28,7 +29,9 @@
       "uuidv4": "^1.0.1"
    },
    "scripts": {
-      "start": "ts-node src/index.ts",
-      "test": "ts-mocha test/*/*.spec.ts"
+      "start": "nodemon ts-node src/index.ts",
+      "test": "ts-mocha test/*/*.spec.ts",
+      "watch": "nodemon -e ts -w ./src -x npm run watch:serve",
+      "watch:serve": "ts-node --inspect src/index.ts"
    }
 }

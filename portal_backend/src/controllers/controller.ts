@@ -1,9 +1,8 @@
 // import { AgileSystemRepo } from '../repositories/agile_system-repository'
 import { AgileSystem } from '../entities/agile_system'
 import { Request, Response } from 'express'
-// import { AgileSystemRepo } from '../repositories/agile_system-repository'
 import { getManager } from 'typeorm'
-import { doesNotThrow } from 'assert';
+
 /**
  * Represents some Type of the Object.
  */
@@ -11,14 +10,17 @@ declare type ObjectType<T> = {
   new (): T;
 } | Function
 
+// Valid EntityTypes
 const EntityType = {
   'AgileSystems': AgileSystem
 }
 
+// Controller methods
 export const getAll = async (req: Request, res: Response) => {
   console.log(`Received getAll for ${req.params.entityType} ==> GET`)
 
-  return getAllRecords(EntityType[req.params.entityType]).then((result) => {
+  return getAllRecords(EntityType[req.params.entityType], req.query.relationships.split(',')).then((result) => {
+    console.log(result)
     res.send(result)
   }).catch(error => {
     console.log(error)

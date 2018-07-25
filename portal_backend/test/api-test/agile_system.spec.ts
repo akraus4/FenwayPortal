@@ -16,7 +16,8 @@ let options = {
   },
   body: {},
   json: true,
-  resolveWithFullResponse: true
+  resolveWithFullResponse: true,
+  timeout: 2500 // a little more than the 2000 for promise
 }
 
 // Test index of all agile systems
@@ -29,7 +30,7 @@ describe('Calling Route (api/AgileSystems)', function () {
       options.method = 'GET'
     })
     it('should return a success status', () => {
-      options.uri = `${baseUrl}api/AgileSystems`
+      options.uri = `${baseUrl}api/AgileSystems?relationships=work_team`
       return request(options).then(res => {
         expect(res.statusCode).to.equal(200)
       })
