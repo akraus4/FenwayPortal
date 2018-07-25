@@ -30,7 +30,7 @@ describe('Calling Route (api/AgileSystems)', function () {
       options.method = 'GET'
     })
     it('should return a success status', () => {
-      options.uri = `${baseUrl}api/AgileSystems?relationships=work_team`
+      options.uri = `${baseUrl}api/AgileSystems?relationships=workTeam`
       return request(options).then(res => {
         expect(res.statusCode).to.equal(200)
       })
@@ -43,13 +43,13 @@ describe('Calling Route (api/AgileSystems)', function () {
   before(async () => {
     // server = await startApiServer(village)
   })
-  describe('PUT Request with ID', () => {
+  describe('PUT Request', () => {
     before(() => {
       options.method = 'PUT',
       options.body = {
-        agile_system_name: 'TEST1',
-        agile_system_type: 'TRELLO',
-        work_team_id: '',
+        agileSystemName: 'TEST1',
+        agileSystemType: 'TRELLO',
+        workTeam: '100',
         active: true
       }
     })
@@ -72,9 +72,9 @@ describe('Calling Route (api/AgileSystems/:systemId)', function () {
     before(() => {
       options.method = 'POST',
       options.body = {
-        agile_system_name: 'TEST1',
-        agile_system_type: 'TRELLO',
-        work_team_id: '',
+        agileSystemName: 'TEST1',
+        agileSystemType: 'TRELLO',
+        workTeam: '100',
         active: true
       }
     })

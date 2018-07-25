@@ -2,7 +2,7 @@ import { Entity, PrimaryGeneratedColumn, PrimaryColumn, Column } from 'typeorm'
 
 @Entity({ name: 'work_team' })
 export class WorkTeam {
-  @PrimaryGeneratedColumn({ name: 'work_team_id' })
+  @PrimaryGeneratedColumn('uuid', { name: 'work_team_id' })
   work_team_id: string
 
   @Column('varchar', { name: 'work_team_name' })

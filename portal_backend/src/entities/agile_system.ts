@@ -12,13 +12,13 @@ import { WorkTeam } from '../entities/work_team'
 @Entity({ name: 'agile_system' })
 export class AgileSystem {
   @PrimaryGeneratedColumn('uuid', { name: 'agile_system_id' })
-  agile_system_id: string
+  agileSystemId: string
 
   @Column('varchar', { name: 'agile_system_name' })
-  agile_system_name: string
+  agileSystemName: string
 
   @Column('varchar', { name: 'agile_system_type' })
-  agile_system_type: string
+  agileSystemType: string
 
   // @Column('uuid', {name : "work_team_id"})
   // work_team_id: string;
@@ -28,5 +28,5 @@ export class AgileSystem {
 
   @ManyToOne(type => WorkTeam)
   @JoinColumn({ name: 'work_team_id' })
-  work_team: WorkTeam
+  workTeam: WorkTeam
 }

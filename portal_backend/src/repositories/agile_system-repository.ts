@@ -17,9 +17,9 @@ export class AgileSystemRepo {
     console.log('System = ' + JSON.stringify(system))
 
     return getManager().insert(AgileSystem, {
-      agile_system_name: system.agile_system_name,
-      agile_system_type: system.agile_system_type,
-      work_team: system.work_team,
+      agileSystemName: system.agileSystemName,
+      agileSystemType: system.agileSystemType,
+      workTeam: system.workTeam,
       active: system.active
     })
   }
@@ -28,9 +28,9 @@ export class AgileSystemRepo {
     console.log('System = ' + JSON.stringify(system))
 
     return getManager().update(AgileSystem, systemId, {
-      agile_system_name: system.agile_system_name,
-      agile_system_type: system.agile_system_type,
-      work_team: system.work_team,
+      agileSystemName: system.agileSystemName,
+      agileSystemType: system.agileSystemType,
+      workTeam: system.workTeam,
       active: system.active
     })
   }
