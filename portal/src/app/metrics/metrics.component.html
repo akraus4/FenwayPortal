@@ -9,8 +9,8 @@
     <div class="col-4 searchField">
       <!--  This is the drop down to select the team/teams   -->
       <mat-form-field class="selectDropDown">
-        <mat-select placeholder="Select Team" [formControl]="Team" (change)="getAllSprintsByTeam($event.value.agile_system_id)">
-          <mat-option *ngFor="let TeamChoice of TeamChoices" [value]="TeamChoice">{{TeamChoice.agile_system_name}}
+        <mat-select placeholder="Select Team" [formControl]="Team" (change)="getAllSprintsByTeam($event.value.agileSystemId)">
+          <mat-option *ngFor="let TeamChoice of TeamChoices" [value]="TeamChoice">{{TeamChoice.agileSystemName}}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -19,7 +19,7 @@
     <div class="col-4 searchField">
       <mat-form-field class="selectDropDown">
         <mat-select placeholder='Select Sprints' [formControl]="Sprint" (change)="storeSprintId($event.value)" multiple>
-          <mat-option *ngFor="let SprintChoice of SprintChoices" [value]="SprintChoice">{{ SprintChoice.agile_sprint_name }}
+          <mat-option *ngFor="let SprintChoice of SprintChoices" [value]="SprintChoice">{{ SprintChoice.agileSprintName }}
           </mat-option>
         </mat-select>
       </mat-form-field>
@@ -41,12 +41,11 @@
         <dxo-header-filter [visible]="true"></dxo-header-filter>
         <dxo-sorting mode="none"></dxo-sorting>
         <dxo-paging [pageSize]="10"></dxo-paging>
-        <dxi-column dataField="agile_story_id" caption="Story ID"></dxi-column>
-        <!-- <dxi-column dataField="agile_story_id" caption="Story Name"></dxi-column> -->
-        <dxi-column dataField="agile_sprint_name" caption="Sprint"></dxi-column>
-        <dxi-column dataField="story_type" caption="Story Type"></dxi-column>
-        <dxi-column dataField="agile_system_user_story_points" caption="User's Story Pts"></dxi-column>
-        <dxi-column dataField="agile_system_user_name" caption="User"></dxi-column>
+        <dxi-column dataField="agileStoryId" caption="Story ID"></dxi-column>
+        <dxi-column dataField="agileSprintName" caption="Sprint"></dxi-column>
+        <dxi-column dataField="storyType" caption="Story Type"></dxi-column>
+        <dxi-column dataField="agileSystemUserStoryPoints" caption="User's Story Pts"></dxi-column>
+        <dxi-column dataField="agileSystemUserName" caption="User"></dxi-column>
       </dx-data-grid>
     </div>
   </div>

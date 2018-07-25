@@ -9,27 +9,27 @@ import { AgileSprint } from '../entities/agile_sprint'
 @Entity({ name: 'agile_story' })
 export class AgileStory {
   @PrimaryGeneratedColumn('uuid', { name: 'agile_story_id' })
-  agile_story_id: string
+  agileStoryId: string
 
   @Column('varchar', { name: 'agile_story_name' })
-  agile_story_name: string
+  agileStoryName: string
 
   // @Column()
   // agile_sprint_id: string;
 
   @ManyToOne(type => AgileSprint)
   @JoinColumn({ name: 'agile_sprint_id' })
-  agile_sprint: AgileSprint
+  agileSprint: AgileSprint
 
   @Column('varchar', { name: 'story_description' })
-  story_description: string
+  storyDescription: string
 
   @Column('varchar', { name: 'story_type' })
-  story_type: string
+  storyType: string
 
   @Column('varchar', { name: 'story_status' })
-  story_status: string
+  storyStatus: string
 
   @Column('varchar', { name: 'story_points' })
-  story_points: string
+  storyPoints: string
 }

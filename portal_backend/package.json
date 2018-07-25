@@ -29,7 +29,7 @@
       "uuidv4": "^1.0.1"
    },
    "scripts": {
-      "start": "nodemon ts-node src/index.ts",
+      "start": "ts-node src/index.ts",
       "test": "ts-mocha test/*/*.spec.ts",
       "watch": "nodemon -e ts -w ./src -x npm run watch:serve",
       "watch:serve": "ts-node --inspect src/index.ts"

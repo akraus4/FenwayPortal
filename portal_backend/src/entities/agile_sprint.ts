@@ -3,24 +3,24 @@ import { AgileSystem } from '../entities/agile_system'
 @Entity({ name: 'agile_sprint' })
 export class AgileSprint {
   @PrimaryColumn('uuid', { name: 'agile_sprint_id' })
-  agile_sprint_id: string
+  agileSprintId: string
 
   @Column('varchar', { name: 'agile_sprint_name' })
-  agile_sprint_name: string
+  agileSprintName: string
 
   // @Column('uuid', {name : "agile_system_id"})
   // agile_system_id: string;
 
   @ManyToOne(type => AgileSystem)
   @JoinColumn({ name: 'agile_system_id' })
-  agile_system: AgileSystem
+  agileSystem: AgileSystem
 
   @Column('varchar', { name: 'sprint_description' })
-  sprint_description: number
+  sprintDscription: number
 
   @Column('varchar', { name: 'sprint_start_date' })
-  sprint_start_date: Date
+  sprintStartDate: Date
 
   @Column('varchar', { name: 'sprint_end_date' })
-  sprint_end_date: Date
+  sprintEndDate: Date
 }

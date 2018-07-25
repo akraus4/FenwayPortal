@@ -10,7 +10,7 @@ import { WorkTeam } from '../entities/work_team'
 @Entity({ name: 'work_team_member' })
 export class WorkTeamMember {
   @PrimaryGeneratedColumn('uuid', { name: 'work_team_member_id' })
-  work_team_member_id: string
+  workTeamMemberId: string
 
   // @Column()
   // work_team_id: string;
@@ -20,11 +20,11 @@ export class WorkTeamMember {
 
   @ManyToOne(type => WorkTeam)
   @JoinColumn({ name: 'work_team_id' })
-  work_team: WorkTeam
+  workTeam: WorkTeam
 
   @ManyToOne(type => WorkUser)
   @JoinColumn({ name: 'work_user_id' })
-  work_user: WorkUser
+  workUser: WorkUser
 
   // @Column("varchar", {name : "expected_hours"})
   // expected_hours: string;

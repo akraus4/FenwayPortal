@@ -10,7 +10,7 @@ import {
 @Entity({ name: 'work_user' })
 export class WorkUser {
   @PrimaryGeneratedColumn('uuid', { name: 'work_user_id' })
-  work_user_id: string
+  workUserId: string
 
   @Column('varchar', { name: 'firstname' })
   firstname: string

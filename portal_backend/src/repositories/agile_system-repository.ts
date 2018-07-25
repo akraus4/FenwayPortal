@@ -10,7 +10,7 @@ export class AgileSystemRepo {
   static getAllAgileSystems () {
     return getManager()
       .getRepository(AgileSystem)
-      .find({ relations: ['work_team'] })
+      .find({ relations: ['workTeam'] })
   }
 
   static saveSystem (system) {
@@ -47,7 +47,7 @@ export class AgileSystemRepo {
 
     return getManager()
       .getRepository(AgileSprint)
-      .find({ relations: ['agile_system'], where: { agile_system: systemId } })
+      .find({ relations: ['agileSystem'], where: { agile_system: systemId } })
   }
 
   static getAllStoriesWithUsersBySprint (sprintId) {
@@ -63,8 +63,8 @@ export class AgileSystemRepo {
     return getManager()
       .getRepository(WorkTeamMember)
       .find({
-        relations: ['work_team', 'work_user'],
-        where: { work_team: teamId }
+        relations: ['workTeam', 'workUser'],
+        where: { worTeam: teamId }
       })
   }
 
@@ -121,11 +121,11 @@ export class AgileSystemRepo {
       .getRepository(AgileSystemUser)
       .find({
         relations: [
-          'agile_system',
-          'work_team_member',
-          'work_team_member.work_user'
+          'agileSystem',
+          'workTeamMember',
+          'workTeamMember.workUser'
         ],
-        where: { agile_system: systemId }
+        where: { agileSystem: systemId }
       })
   }
 }

@@ -15,9 +15,9 @@ export class MetricsService {
 		this.http = http;
 	}
 
-	getAll(entity) {
-		console.log(entity);
-		let result = this.http.get(this.url + '/api/' + entity);
+	getAll(entity, relations) {
+		console.log(entity, relations);
+		let result = this.http.get(`${this.url}/api/${entity}/?relationships=${relations}`);
 		console.log(JSON.stringify(result));
 		return result
 	}
@@ -36,7 +36,7 @@ export class MetricsService {
 	}
 
 	updateSystem(system) {
-		var systemId = system.agile_sprint_id;
+		var systemId = system.agileSprintId;
 		let result = this.http.put(this.url + '/AgileSystems/' + systemId);
 		// console.log(JSON.stringify(result));
 		return result
@@ -60,8 +60,8 @@ export class MetricsService {
 		return result
 	}
 
-	getAllSprintsBySystem(system_id) {
-		let result = this.http.get(this.url + '/getAllSprintsBySystem/' + system_id);
+	getAllSprintsBySystem(systemId) {
+		let result = this.http.get(this.url + '/getAllSprintsBySystem/' + systemId);
 		// console.log(JSON.stringify(result));
 		return result
 	}
@@ -70,8 +70,8 @@ export class MetricsService {
 
 	//#region System Users
 
-	getAllSystemUsersBySystem(sprint_id) {
-		let result = this.http.get(this.url + '/getAllSystemUsersBySystem/' + sprint_id);
+	getAllSystemUsersBySystem(sprintId) {
+		let result = this.http.get(this.url + '/getAllSystemUsersBySystem/' + sprintId);
 		// console.log(JSON.stringify(result));
 		return result
 	}
@@ -92,8 +92,8 @@ export class MetricsService {
 
 	//#region Team Members
 
-	getAllTeamMembersByTeam(team_id) {
-		let result = this.http.get(this.url + '/getAllTeamMembersByTeam/' + team_id);
+	getAllTeamMembersByTeam(teamId) {
+		let result = this.http.get(this.url + '/getAllTeamMembersByTeam/' + teamId);
 		// console.log(JSON.stringify(result));
 		return result
 	}
@@ -102,7 +102,7 @@ export class MetricsService {
 
 	//#region Stories
 
-	getAllStoriesWithUsersBySprint(sprint_id) {
+	getAllStoriesWithUsersBySprint(sprintId) {
 		// var stories = [];
 		// var num: number = 0;
 		// var i: number;
@@ -110,7 +110,7 @@ export class MetricsService {
 		// for (i = num; i < sprint_id.length; i++) {
 		// 	console.log("sprint id = " + sprint_id[i].agile_sprint_id)
 		// console.log('@@@@@@@@@@ ' + sprint_id.length )
-		let result = this.http.get(this.url + '/findAllStoriesWithUsersBySprint/' + sprint_id);
+		let result = this.http.get(this.url + '/findAllStoriesWithUsersBySprint/' + sprintId);
 		// console.log("result = " + result)
 		// stories.push(result);
 		// console.log(JSON.stringify(stories))
@@ -121,8 +121,8 @@ export class MetricsService {
 		// return stories;
 	}
 
-	getAllStoriesAndUsersBySprint(sprint_id) {
-		let result = this.http.get(this.url + '/getAllStoriesAndUsersBySprint/' + sprint_id);
+	getAllStoriesAndUsersBySprint(sprintId) {
+		let result = this.http.get(this.url + '/getAllStoriesAndUsersBySprint/' + sprintId);
 		return result
 	}
 
