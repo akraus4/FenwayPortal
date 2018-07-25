@@ -41,7 +41,7 @@ export class MetricsComponent implements OnInit {
   };
 
   getAllTeams() {
-    this.metricsService.getAllSystems()
+    this.metricsService.getAll('AgileSystems')
       .map(res => { return res.json(); })
       .subscribe((results) => { this.TeamChoices = results });
   }

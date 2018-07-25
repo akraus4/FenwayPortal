@@ -21,7 +21,8 @@ export class AgileTeamComponent implements OnInit {
 
   //Current Values
   currentTeamMembers;
-  currentSystemUsers
+  currentSystemUsers;
+  currentSystemUserId;
   currentSystem;
 
   //NgModels
@@ -100,7 +101,6 @@ export class AgileTeamComponent implements OnInit {
     $('#selectTeamDropDown').removeClass('remove');
     $('#activeCheckBox').removeClass('remove');
     $('#agileTeamSubmitCancelBtnContainer').removeClass('remove');
-    // $('#cancelAddButton').removeClass('remove');
   }
 
   addUserButtonClicked() {
@@ -148,7 +148,7 @@ export class AgileTeamComponent implements OnInit {
   //#region Get methods
 
   getAllSystems() {
-    this.metricsService.getAllSystems()
+    this.metricsService.getAll('AgileSystems')
       .map(res => { return res.json(); })
       .subscribe((results) => {
         this.systemSelectBoxDataSource = results;
@@ -157,7 +157,7 @@ export class AgileTeamComponent implements OnInit {
   }
 
   getAllWorkTeams() {
-    this.metricsService.getAllWorkTeams()
+    this.metricsService.getAll('WorkTeams')
       .map(res => { return res.json(); })
       .subscribe((results) => {
         this.teamSelectBoxDataSource = results;
@@ -223,7 +223,9 @@ export class AgileTeamComponent implements OnInit {
           }
           i++;
         }
+        this.metricsService.hideLoadingPanel();
       });
+
   }
 
   //#endregion Get methods
@@ -231,11 +233,11 @@ export class AgileTeamComponent implements OnInit {
   //#region System value changes
 
   onRowClick(e) {
-
+    this.metricsService.showLoadingPanel();
     this.readOnly = false;
     this.isSystemUserEdit = true;
     var component = e.component,
-      prevClickTime = component.lastClickTime;
+    prevClickTime = component.lastClickTime;
     component.lastClickTime = new Date();
     let selectedData = this.dataGrid.instance.getSelectedRowsData();
     console.log(e.key.active);
@@ -245,7 +247,8 @@ export class AgileTeamComponent implements OnInit {
       console.log(e.key.work_team_member_id);
       $('#editSystemButton').addClass('remove');
       $('#addSystemButton').addClass('remove');
-      $('#selectSystemDropDown').addClass('remove');
+      // $('#selectSystemDropDown').addClass('remove');
+      this.currentSystemUserId = e.key.agile_system_user_id;
       this.submitButtonLbl = 'Add';
       this.addSystemUserFields();
       this.removeSystemFields();
@@ -270,7 +273,7 @@ export class AgileTeamComponent implements OnInit {
       $('#typeTextField').removeClass('remove');
       $('#selectTeamDropDown').removeClass('remove');
       $('#activeCheckBox').removeClass('remove');
-      this.getAllSystemUsersBySystem(e);
+      // this.getAllSystemUsersBySystem(e);
       for (let system of this.systemSelectBoxDataSource) {
         if (e == system.agile_system_id) {
           this.currentSystem = system;
@@ -353,6 +356,7 @@ export class AgileTeamComponent implements OnInit {
   //#region Submit Cancel button click events
 
   submitButtonClicked() {
+    this.metricsService.showLoadingPanel();
     if (this.isSystemAdd) {
       console.log('*********************save system ******************');
       this.saveSystem();
@@ -414,6 +418,7 @@ export class AgileTeamComponent implements OnInit {
         this.getAllSystems();
         console.log('WorkTeams ===== ' + JSON.stringify(this.teamSelectBoxDataSource));
         this.modalService.hide(1);
+        this.metricsService.hideLoadingPanel();
       });
   }
 
@@ -434,6 +439,52 @@ export class AgileTeamComponent implements OnInit {
         $('#agileTeamSubmitCancelBtnContainer').addClass('remove');
         this.currentSystem = system;
         this.systemDropDownValue = system.agile_system_id;
+        this.getAllSystems();
+        console.log('WorkTeams ===== ' + JSON.stringify(this.teamSelectBoxDataSource));
+        this.modalService.hide(1);
+        this.metricsService.hideLoadingPanel();
+      });
+  }
+
+  saveSystemUser() {
+    let systemUser = {
+      'agile_system_name': this.systemUserTextFieldValue,
+      'agile_system': this.systemDropDownValue,
+      'work_team_member': this.teamMemberValue,
+      'active': this.activeSystemUserValue
+    }
+    this.metricsService.saveSystemUser(JSON.stringify(systemUser))
+      .map(res => { return res.json(); })
+      .subscribe((results) => {
+        $('#agileTeamSubmitCancelBtnContainer').removeClass('remove');
+        // $('#selectSystemDropDown').addClass('remove');
+        // $('#systemTextField').addClass('remove');
+        this.readOnly = true;
+        // this.currentSystem = systemUser;
+        // this.getAllSystemUsersBySystem(this.currentSystem);
+        console.log('WorkTeams ===== ' + JSON.stringify(this.teamSelectBoxDataSource));
+        this.modalService.hide(1);
+      });
+  }
+
+  updateSystemUser() {
+    let systemUser = {
+      'agile_system_user_id': this.currentSystemUserId,
+      'agile_system_name': this.systemUserTextFieldValue,
+      'agile_system': this.systemDropDownValue,
+      'work_team_member': this.teamMemberValue,
+      'active': this.activeSystemUserValue
+    }
+    this.metricsService.updateSystemUser(JSON.stringify(systemUser))
+      .map(res => { return res.json(); })
+      .subscribe((results) => {
+        this.readOnly = true;
+        $('#selectSystemDropDown').removeClass('remove');
+        $('#systemTextField').addClass('remove');
+        $('#agileTeamSubmitCancelBtnContainer').addClass('remove');
+        // this.currentSystem = systemUser;
+        // this.systemDropDownValue = systemUser.agile_system_id;
+        // this.getAllSystemUsersBySystem(this.currentSystem);
         this.getAllSystems();
         console.log('WorkTeams ===== ' + JSON.stringify(this.teamSelectBoxDataSource));
         this.modalService.hide(1);

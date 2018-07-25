@@ -1,5 +1,6 @@
 // import { AgileSystemRepo } from '../repositories/agile_system-repository'
 import { AgileSystem } from '../entities/agile_system'
+import { WorkTeam } from '../entities/work_team'
 import { Request, Response } from 'express'
 // import { AgileSystemRepo } from '../repositories/agile_system-repository'
 import { getManager } from 'typeorm'
@@ -12,7 +13,8 @@ declare type ObjectType<T> = {
 } | Function
 
 const EntityType = {
-  'AgileSystems': AgileSystem
+  'AgileSystems': AgileSystem,
+  'WorkTeams': WorkTeam
 }
 
 export const getAll = async (req: Request, res: Response) => {

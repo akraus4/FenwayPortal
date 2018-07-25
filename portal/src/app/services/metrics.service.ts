@@ -15,19 +15,45 @@ export class MetricsService {
 		this.http = http;
 	}
 
-	// getUsers() {
-	// let result = this.http.get('http://localhost:3000/');console.log(JSON.stringify(result)); return result
-	// }
-
-	getAllSystems() {
-		let result = this.http.get(this.url + '/getAllAgileSystems');
+	getAll(entity) {
+		console.log(entity);
+		let result = this.http.get(this.url + '/api/' + entity);
+		console.log(JSON.stringify(result));
 		return result
 	}
+
+	//#region System
+
+	getAllSystems() {
+		let result = this.http.get(this.url + '/AgileSystems');
+		return result
+	}
+
+	saveSystem(system) {
+		let result = this.http.post(this.url + '/AgileSystems/');
+		// console.log(JSON.stringify(result));
+		return result
+	}
+
+	updateSystem(system) {
+		var systemId = system.agile_sprint_id;
+		let result = this.http.put(this.url + '/AgileSystems/' + systemId);
+		// console.log(JSON.stringify(result));
+		return result
+	}
+
+	//#endregion System
+
+	//#region Teams
 
 	getAllWorkTeams() {
 		let result = this.http.get(this.url + '/getAllWorkTeams');
 		return result
 	}
+
+	//#endregion Teams
+
+	//#region Sprints
 
 	getAllSprints() {
 		let result = this.http.get(this.url + '/findAllSprints');
@@ -40,32 +66,18 @@ export class MetricsService {
 		return result
 	}
 
+	//#endregion Sprints
+
+	//#region System Users
+
 	getAllSystemUsersBySystem(sprint_id) {
 		let result = this.http.get(this.url + '/getAllSystemUsersBySystem/' + sprint_id);
 		// console.log(JSON.stringify(result));
 		return result
 	}
 
-	getAllTeamMembersByTeam(team_id) {
-		let result = this.http.get(this.url + '/getAllTeamMembersByTeam/' + team_id);
-		// console.log(JSON.stringify(result));
-		return result
-	}
-
-	saveSystem(system) {
-		let result = this.http.post(this.url + '/saveSystem/' + system);
-		// console.log(JSON.stringify(result));
-		return result
-	}
-
-	updateSystem(system) {
-		let result = this.http.post(this.url + '/updateSystem/' + system);
-		// console.log(JSON.stringify(result));
-		return result
-	}
-
 	saveSystemUser(systemUser) {
-		let result = this.http.post(this.url + '/saveSystemUser/' + systemUser);
+		let result = this.http.post(this.url + '/AgileSystems/');
 		// console.log(JSON.stringify(result));
 		return result
 	}
@@ -75,6 +87,20 @@ export class MetricsService {
 		// console.log(JSON.stringify(result));
 		return result
 	}
+
+	//#endregion System Users
+
+	//#region Team Members
+
+	getAllTeamMembersByTeam(team_id) {
+		let result = this.http.get(this.url + '/getAllTeamMembersByTeam/' + team_id);
+		// console.log(JSON.stringify(result));
+		return result
+	}
+
+	//#endregion Team Members
+
+	//#region Stories
 
 	getAllStoriesWithUsersBySprint(sprint_id) {
 		// var stories = [];
@@ -100,12 +126,7 @@ export class MetricsService {
 		return result
 	}
 
-	// addUser(data) {
-	// 	let headers = new Headers({"Content-Type": "application/json"});
-	// 	let options = new RequestOptions({ headers: headers });
-	// 	return this.http.post('http://localhost:3000/adduser', JSON.stringify(data), options)
-	// 		.map(res => res.json());
-	// }
+	//#endregion Stories
 
 	showLoadingPanel(): void {
 		this.loadingVisible.next(true);
