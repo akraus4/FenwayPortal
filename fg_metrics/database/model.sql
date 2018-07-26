@@ -5,6 +5,7 @@ create table work_user (
     firstname varchar(255),
     lastname varchar(255),
     email varchar(255),
+    active tinyint(1),
     PRIMARY KEY(work_user_id)
 );
 
@@ -15,6 +16,7 @@ create table work_team (
     work_team_name varchar(255),
     project_id varchar(255), -- From Timecard System
     project_name varchar(255), -- From Timecard System
+    active tinyint(1),
     PRIMARY KEY(work_team_id)
 );
 
@@ -24,6 +26,7 @@ create table work_team_member (
     work_team_member_id varchar(255),
     work_team_id varchar(255),
     work_user_id varchar(255),
+    active tinyint(1),
     PRIMARY KEY(work_team_member_id)
 );
 
@@ -34,6 +37,7 @@ create table work_dailyhours (
     work_team_member_id varchar(255),
     work_date date,
     hours int(11),
+    active tinyint(1),
     PRIMARY KEY(work_dailyhours_id)
 );
 
@@ -44,6 +48,7 @@ create table agile_system (
     agile_system_name varchar(255),
     agile_system_type varchar(255),
     work_team_id varchar(255),
+    active tinyint(1),
     PRIMARY KEY(agile_system_id)
 );
 
@@ -55,6 +60,7 @@ create table agile_system_user (
     agile_system_id varchar(255),
     work_team_member_id varchar(255),
     work_user_id varchar(255),
+    active tinyint(1),
     PRIMARY KEY(agile_system_user_id)
 );
 
@@ -67,6 +73,7 @@ create table agile_sprint (
     sprint_description varchar(255),
     sprint_start_date date,
     sprint_end_date date,
+    active tinyint(1),
     PRIMARY KEY(agile_sprint_id)
 );
 
@@ -80,6 +87,7 @@ create table agile_story (
     story_type varchar(255), 
     story_status varchar(255),
     story_points varchar(255),
+    active tinyint(1),
     PRIMARY KEY(agile_story_id)
 );
 
@@ -90,5 +98,6 @@ create table agile_story_agile_system_user (
     agile_story_id varchar(255),
     agile_system_user_id varchar(255),
     agile_system_user_story_points varchar(255),
+    active tinyint(1),
     PRIMARY KEY(agile_story_agile_system_user_id)
 );

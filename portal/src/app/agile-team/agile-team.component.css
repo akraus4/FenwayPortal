@@ -4,47 +4,15 @@
     margin-bottom: 10px;
 }
 
-/* #addSystemButton {
-    margin-bottom: 10px;
-}
-
-#editSystemButton {
-    margin-bottom: 10px;
-} */
-
-/* #selectSystemDropDown {
-    margin-bottom: 10px;
-}
-
-#systemTextField {
-    margin-bottom: 10px;
-}
-
-#typeTextField {
-    margin-bottom: 10px;
-}
-
-#selectTeamDropDown {
-    margin-bottom: 10px;
-} */
-
 #agileTeamSubmitCancelBtnContainer {
     margin-bottom: -42px;
 }
-
-/* #activeCheckBox {
-    margin-bottom: 10px;
-} */
 
 #submitButton {
     height: 42px;
 }
 
 #cancelAddButton {
-    height: 42px;
-}
-
-#cancelEditButton {
     height: 42px;
 }
 

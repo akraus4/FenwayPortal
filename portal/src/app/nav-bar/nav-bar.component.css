@@ -2,7 +2,6 @@
     z-index: 1000;
     position: fixed;
     left: 0;
-    /*height: 100%;*/
     top: 89.5px;
     bottom: 40px;
     overflow-y: auto;
@@ -11,7 +10,6 @@
     -moz-transition: all 0.9s ease;
     -o-transition: all 0.9s ease;
     transition: all 0.9s ease;
-    /*height:83.9vh;*/
     -ms-overflow-style: -ms-autohiding-scrollbar;
     padding-right: 15px;
     overflow-x:hidden;
