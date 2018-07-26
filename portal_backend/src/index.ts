@@ -22,6 +22,7 @@ import * as aSystemController from './controllers/agile_system-controller'
 import * as workTeamController from './controllers/work-team-controller'
 
 import * as controller from './controllers/controller'
+
 /**
  * Create Express server.
  */
@@ -58,21 +59,18 @@ app.use(function (req, res, next) {
   next()
 })
 
-// Routes for agile_systems
-app.get('/api/:entityType', controller.getAll)
+// Routes for entity CRUD
 // Index
-app.get('/api/AgileSystems', aSystemController.getAllAgileSystems)
+app.get('/api/:entityType', controller.getAll)
 // Create
-app.put('/api/AgileSystems', aSystemController.createAgileSystem)
+app.put('/api/:entityType', controller.save)
 // Read
-app.get('/api/AgileSystems/:systemId', aSystemController.getAgileSystem)
+app.get('/api/:entityType/:id', controller.get)
 // Update
-app.post('/api/AgileSystems/:systemId', aSystemController.updateAgileSystem)
+app.post('/api/:entityType/:id', controller.update)
 // Delete
-app.delete('/api/AgileSystems/:systemId', aSystemController.deleteAgileSystem)
+app.delete('/api/:entityType/:id', controller.remove)
 
-// app.get('/saveSystem/:system', aSystemController.saveSystem)
-// app.get('/updateSystem/:system', aSystemController.updateSystem)
 // app.get("/getAllSystemUsersBySystem/:systemId", aSystemController.getAllSystemUsersBySystem);
 
 app.get('/api/GetAllWorkUsers', wUserController.getAllWorkUsers)

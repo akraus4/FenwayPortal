@@ -37,7 +37,53 @@ export const getAll = async (req: Request, res: Response) => {
   console.log(req.query.relations)
 
   return getAllRecords(EntityType[req.params.entityType], req.query.relations).then((result) => {
-    console.log(result) 
+    console.log(result)
+    res.send(result)
+  }).catch(error => {
+    console.log(error)
+  })
+}
+
+export const get = async (req: Request, res: Response) => {
+  console.log(`Received get for ${req.params.entityType} ${req.params.id} ==> GET`)
+
+  return getRecord(EntityType[req.params.entityType], req.params.id, req.query.relations).then((result) => {
+    console.log(result)
+    res.send(result)
+  }).catch(error => {
+    console.log(error)
+  })
+}
+
+export const save = async (req: Request, res: Response) => {
+  console.log(`Received save for ${req.params.entityType} ==> PUT`)
+  console.log(req.body)
+
+  return saveRecord(EntityType[req.params.entityType], req.body).then((result) => {
+    console.log(result)
+    res.send(result)
+  }).catch(error => {
+    console.log(error)
+  })
+}
+
+export const update = async (req: Request, res: Response) => {
+  console.log(`Received update for ${req.params.entityType} ${req.params.id} ==> POST`)
+  console.log(req.body)
+
+  return updateRecord(EntityType[req.params.entityType], req.params.id, req.body).then((result) => {
+    console.log(result)
+    res.send(result)
+  }).catch(error => {
+    console.log(error)
+  })
+}
+
+export const remove = async (req: Request, res: Response) => {
+  console.log(`Received remove for ${req.params.entityType} ${req.params.id} ==> DELETE`)
+
+  return removeRecord(EntityType[req.params.entityType], req.params.id).then((result) => {
+    console.log(result)
     res.send(result)
   }).catch(error => {
     console.log(error)
@@ -47,12 +93,40 @@ export const getAll = async (req: Request, res: Response) => {
 // Repository
 function getAllRecords <T> (entity: ObjectType<T>, relations: string) {
   const manager = getManager()
-  let options: any = {};
-  if(relations){
+  let options: any = {}
+  if (relations) {
     options.relations = relations.split(',')
   }
   console.log(`Relations = ${relations}`)
   return manager.find(entity, options)
+}
+
+function getRecord <T> (entity: ObjectType<T>, id: string, relations: string) {
+  const manager = getManager()
+  let options: any = {}
+  if (relations) {
+    options.relations = relations.split(',')
+  }
+  console.log(`Relations = ${relations}`)
+  return manager.findOne(entity, id, options)
+}
+
+function saveRecord <T> (entity: ObjectType<T>, attributes: any) {
+  console.log('Object = ' + JSON.stringify(attributes))
+
+  return getManager().insert(entity, attributes)
+}
+
+function updateRecord <T> (entity: ObjectType<T>, id: string, attributes: any) {
+  console.log('Object = ' + JSON.stringify(attributes))
+
+  return getManager().update(entity, id, attributes)
+}
+
+function removeRecord <T> (entity: ObjectType<T>, id: string) {
+  const manager = getManager()
+  let options: any = {}
+  return manager.delete(entity, id, options)
 }
 
 // export async function createRecord<T> (entity: ObjectType<T>, attributes: Seed<T>, manager?: EntityManager, relations: object = {}): Promise<T> {

@@ -3,10 +3,12 @@ import * as mocha from 'mocha'
 import * as request from 'request-promise'
 
 const expect = chai.expect
-// Configuration of port and version would be a plus
-// const baseUrl = `http://localhost:${localConfig.api.port}/${localConfig.api.version}/`
 const baseUrl = `http://localhost:3000/`
 
+// Id of system that will be generated and tested and removed
+let systemId
+
+// default options for request
 let options = {
   method: '',
   uri: '',
@@ -20,29 +22,8 @@ let options = {
   timeout: 2500 // a little more than the 2000 for promise
 }
 
-// Test index of all agile systems
-describe('Calling Route (api/AgileSystems)', function () {
-  before(async () => {
-    // server = await startApiServer(village)
-  })
-  describe('GET Request', () => {
-    before(() => {
-      options.method = 'GET'
-    })
-    it('should return a success status', () => {
-      options.uri = `${baseUrl}api/AgileSystems?relationships=workTeam`
-      return request(options).then(res => {
-        expect(res.statusCode).to.equal(200)
-      })
-    })
-  })
-})
-
 // Test create an agile system
 describe('Calling Route (api/AgileSystems)', function () {
-  before(async () => {
-    // server = await startApiServer(village)
-  })
   describe('PUT Request', () => {
     before(() => {
       options.method = 'PUT',
@@ -54,9 +35,10 @@ describe('Calling Route (api/AgileSystems)', function () {
       }
     })
     it('should return a success status', () => {
-      let systemId = 100
       options.uri = `${baseUrl}api/AgileSystems/`
       return request(options).then(res => {
+        console.log(res.body.identifiers[0].agileSystemId)
+        systemId = res.body.identifiers[0].agileSystemId
         expect(res.statusCode).to.equal(200)
       })
     })
@@ -65,9 +47,6 @@ describe('Calling Route (api/AgileSystems)', function () {
 
 // Test update an agile system
 describe('Calling Route (api/AgileSystems/:systemId)', function () {
-  before(async () => {
-    // server = await startApiServer(village)
-  })
   describe('POST Request with ID', () => {
     before(() => {
       options.method = 'POST',
@@ -79,7 +58,54 @@ describe('Calling Route (api/AgileSystems/:systemId)', function () {
       }
     })
     it('should return a success status', () => {
-      let systemId = 100
+      options.uri = `${baseUrl}api/AgileSystems/${systemId}`
+      return request(options).then(res => {
+        expect(res.statusCode).to.equal(200)
+      })
+    })
+  })
+})
+
+// Test index of all agile systems
+describe('Calling Route (api/AgileSystems)', function () {
+  describe('GET Request', () => {
+    before(() => {
+      options.method = 'GET'
+    })
+    it('should return a success status', () => {
+      options.uri = `${baseUrl}api/AgileSystems?relations=workTeam`
+      return request(options).then(res => {
+        expect(res.statusCode).to.equal(200)
+      })
+    })
+  })
+})
+
+// Test get an agile systems
+describe('Calling Route (api/AgileSystems/:systemId)', function () {
+  describe('GET Request', () => {
+    before(() => {
+      options.method = 'GET'
+    })
+    it('should return a success status', () => {
+      options.uri = `${baseUrl}api/AgileSystems/${systemId}?relations=workTeam`
+      return request(options).then(res => {
+        expect(res.statusCode).to.equal(200)
+      })
+    })
+  })
+})
+
+// Test delete an agile systems
+describe('Calling Route (api/AgileSystems/:systemId)', function () {
+  before(async () => {
+    // server = await startApiServer(village)
+  })
+  describe('DELETE Request with ID', () => {
+    before(() => {
+      options.method = 'DELETE'
+    })
+    it('should return a success status', () => {
       options.uri = `${baseUrl}api/AgileSystems/${systemId}`
       return request(options).then(res => {
         expect(res.statusCode).to.equal(200)
