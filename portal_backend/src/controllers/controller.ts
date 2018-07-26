@@ -33,71 +33,75 @@ const EntityType = {
 
 // Controller methods
 export const getAll = async (req: Request, res: Response) => {
-  console.log(`Received getAll for ${req.params.entityType} ==> GET`)
-  console.log(req.query.relations)
+  console.log(`Received getAll for ${req.params.entityType} with relations ${req.query.relations} with conditions ${req.query.conditions}`)
 
-  return getAllRecords(EntityType[req.params.entityType], req.query.relations).then((result) => {
-    console.log(result)
+  return getAllRecords(EntityType[req.params.entityType], req.query.relations, req.query.conditions).then((result) => {
+    console.log(`Result ${JSON.stringify(result)}`)
     res.send(result)
   }).catch(error => {
-    console.log(error)
+    console.log(`Error: ${error}`)
   })
 }
 
 export const get = async (req: Request, res: Response) => {
-  console.log(`Received get for ${req.params.entityType} ${req.params.id} ==> GET`)
+  console.log(`Received get for ${req.params.entityType} with id ${req.params.id} with relations ${req.query.relations}`)
 
   return getRecord(EntityType[req.params.entityType], req.params.id, req.query.relations).then((result) => {
-    console.log(result)
+    console.log(`Result ${JSON.stringify(result)}`)
     res.send(result)
   }).catch(error => {
-    console.log(error)
+    console.log(`Error: ${error}`)
   })
 }
 
 export const save = async (req: Request, res: Response) => {
-  console.log(`Received save for ${req.params.entityType} ==> PUT`)
-  console.log(req.body)
+  console.log(`Received save for ${req.params.entityType} of ${JSON.stringify(req.body)}`)
 
   return saveRecord(EntityType[req.params.entityType], req.body).then((result) => {
-    console.log(result)
+    console.log(`Result ${JSON.stringify(result)}`)
     res.send(result)
   }).catch(error => {
-    console.log(error)
+    console.log(`Error: ${error}`)
   })
 }
 
 export const update = async (req: Request, res: Response) => {
-  console.log(`Received update for ${req.params.entityType} ${req.params.id} ==> POST`)
-  console.log(req.body)
+  console.log(`Received update for ${req.params.entityType} with id ${req.params.id} of ${JSON.stringify(req.body)}`)
 
   return updateRecord(EntityType[req.params.entityType], req.params.id, req.body).then((result) => {
-    console.log(result)
+    console.log(`Result ${JSON.stringify(result)}`)
     res.send(result)
   }).catch(error => {
-    console.log(error)
+    console.log(`Error: ${error}`)
   })
 }
 
 export const remove = async (req: Request, res: Response) => {
-  console.log(`Received remove for ${req.params.entityType} ${req.params.id} ==> DELETE`)
+  console.log(`Received remove for ${req.params.entityType} with id ${req.params.id}`)
 
   return removeRecord(EntityType[req.params.entityType], req.params.id).then((result) => {
-    console.log(result)
+    console.log(`Result ${JSON.stringify(result)}`)
     res.send(result)
   }).catch(error => {
-    console.log(error)
+    console.log(`Error: ${error}`)
   })
 }
 
 // Repository
-function getAllRecords <T> (entity: ObjectType<T>, relations: string) {
+function getAllRecords <T> (entity: ObjectType<T>, relations: string, conditions: string) {
   const manager = getManager()
   let options: any = {}
   if (relations) {
     options.relations = relations.split(',')
   }
-  console.log(`Relations = ${relations}`)
+  if (conditions) {
+    options.where = {}
+    let clauses = conditions.split('&')
+    for (let x in clauses) {
+      let values = clauses[x].split('=')
+      options.where[values[0]] = values[1]
+    }
+  }
   return manager.find(entity, options)
 }
 
@@ -107,19 +111,14 @@ function getRecord <T> (entity: ObjectType<T>, id: string, relations: string) {
   if (relations) {
     options.relations = relations.split(',')
   }
-  console.log(`Relations = ${relations}`)
   return manager.findOne(entity, id, options)
 }
 
 function saveRecord <T> (entity: ObjectType<T>, attributes: any) {
-  console.log('Object = ' + JSON.stringify(attributes))
-
   return getManager().insert(entity, attributes)
 }
 
 function updateRecord <T> (entity: ObjectType<T>, id: string, attributes: any) {
-  console.log('Object = ' + JSON.stringify(attributes))
-
   return getManager().update(entity, id, attributes)
 }
 
@@ -128,25 +127,3 @@ function removeRecord <T> (entity: ObjectType<T>, id: string) {
   let options: any = {}
   return manager.delete(entity, id, options)
 }
-
-// export async function createRecord<T> (entity: ObjectType<T>, attributes: Seed<T>, manager?: EntityManager, relations: object = {}): Promise<T> {
-//     const m = manager || getManager()
-//     const record = m.create(entity, attributes as any)
-//     for (let relId of m.connection.getMetadata(entity).relationIds) {
-//       relations[relId.relation.propertyName] = attributes[relId.propertyName]
-//     }
-//     for (let r in relations) {
-//       if (relations[r] !== undefined) {
-//         if (typeof relations[r] === 'string') {
-//           record[r] = { id: relations[r] }
-//         } else if (typeof relations[r] === 'object' && 'id' in relations[r]) {
-//           record[r] = { id: relations[r].id }
-//         }
-//       }
-//     }
-//     const ret = await m.save(record)
-//     for (let rel of m.connection.getMetadata(entity).relations) {
-//       ret[`__has_${rel.propertyName}__`] = false
-//     }
-//     return ret
-//   }
