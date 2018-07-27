@@ -9,7 +9,7 @@ import { WorkTeamMember } from '../entities/work_team_member'
 import { WorkUser } from '../entities/work_user'
 import { WorkDailyHours } from '../entities/work_dailyhours'
 import { Request, Response } from 'express'
-import { getManager } from 'typeorm'
+import { getManager, In } from 'typeorm'
 
 /**
  * Represents some Type of the Object.
@@ -100,6 +100,10 @@ function getAllRecords <T> (entity: ObjectType<T>, relations: string, conditions
     for (let x in clauses) {
       let values = clauses[x].split('=')
       options.where[values[0]] = values[1]
+      if (values[1].startsWith('[') && values[1].endsWith(']')) {
+        // We have an array and need to do an In
+        options.where[values[0]] = In(values[1].substr(1, values[1].length - 2).split(','))
+      }
     }
   }
   return manager.find(entity, options)
