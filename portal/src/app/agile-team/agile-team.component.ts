@@ -90,7 +90,7 @@ export class AgileTeamComponent implements OnInit {
     this.systemTextFieldValue = undefined;
     this.typeValue = undefined;
     this.teamValue = undefined;
-    this.activeValue = false;
+    this.activeValue = true;
     $('#editSystemButton').addClass('remove');
     $('#addUserButton').addClass('remove');
     $('#selectSystemDropDown').addClass('remove');
@@ -408,15 +408,16 @@ export class AgileTeamComponent implements OnInit {
       'workTeam': this.teamValue,
       'active': this.activeValue
     }
-    this.metricsService.saveSystem(JSON.stringify(system))
+    this.metricsService.save('AgileSystems', system)
       .map(res => { return res.json(); })
       .subscribe((results) => {
-        $('#agileTeamSubmitCancelBtnContainer').removeClass('remove');
-        $('#selectSystemDropDown').addClass('remove');
+        $('#agileTeamSubmitCancelBtnContainer').addClass('remove');
+        $('#selectSystemDropDown').removeClass('remove');
         $('#systemTextField').addClass('remove');
         this.readOnly = true;
         this.currentSystem = system;
         this.getAllSystems();
+        this.getAllTeamMembersByTeam(system.workTeam.workTeamId);
         console.log('WorkTeams ===== ' + JSON.stringify(this.teamSelectBoxDataSource));
         this.modalService.hide(1);
         this.metricsService.hideLoadingPanel();
@@ -431,7 +432,8 @@ export class AgileTeamComponent implements OnInit {
       'workTteam': this.teamValue,
       'active': this.activeValue
     }
-    this.metricsService.updateSystem(JSON.stringify(system))
+    console.log('here');
+    this.metricsService.update('AgileSystems', system.agileSystemId, system)
       .map(res => { return res.json(); })
       .subscribe((results) => {
         this.readOnly = true;
@@ -457,7 +459,7 @@ export class AgileTeamComponent implements OnInit {
     this.metricsService.saveSystemUser(JSON.stringify(systemUser))
       .map(res => { return res.json(); })
       .subscribe((results) => {
-        $('#agileTeamSubmitCancelBtnContainer').removeClass('remove');
+        $('#agileTeamSubmitCancelBtnContainer').addClass('remove');
         this.readOnly = true;
         console.log('WorkTeams ===== ' + JSON.stringify(this.teamSelectBoxDataSource));
         this.modalService.hide(1);

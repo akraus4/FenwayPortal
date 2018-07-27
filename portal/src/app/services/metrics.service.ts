@@ -1,6 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Http, Headers, RequestOptions} from '@angular/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+
+const httpOptions = {
+	headers: new Headers({ 'Content-Type': 'application/json' })
+};
 
 @Injectable()
 
@@ -11,14 +15,35 @@ export class MetricsService {
 	http: any;
 	loadingVisible = new BehaviorSubject<boolean>(false);
 
+	// constructor(@Inject(Http) http) {
+	// 	this.http = http;
+	// }
+
 	constructor(@Inject(Http) http) {
 		this.http = http;
 	}
 
+	
 	getAll(entity, relations, conditions) {
 		console.log(`URL ====  ${this.url}/api/${entity}?relations=${relations}&conditions=${conditions}`);
 		let result = this.http.get(`${this.url}/api/${entity}?relations=${relations}&conditions=${conditions}`);
 		console.log(result);
+		return result
+	}
+
+	save(entity, object) {
+		console.log(`URL ====  ${this.url}/api/${entity}`);
+		let body = JSON.stringify(object);
+		let result = this.http.post(`${this.url}/api/${entity}`, body, httpOptions);
+		// console.log(JSON.stringify(result));
+		return result
+	}
+
+	update(entity, id, object) {
+		console.log(`URL ====  ${this.url}/api/${entity}/${id}`);
+		let body = JSON.stringify(object);
+		let result = this.http.put(`${this.url}/api/${entity}/${id}`, body, httpOptions);
+		// console.log(JSON.stringify(result));
 		return result
 	}
 
@@ -76,11 +101,7 @@ export class MetricsService {
 		return result
 	}
 
-	saveSystemUser(systemUser) {
-		let result = this.http.post(this.url + '/AgileSystems/');
-		// console.log(JSON.stringify(result));
-		return result
-	}
+	
 
 	updateSystemUser(systemUser) {
 		let result = this.http.post(this.url + '/updateSystemUser/' + systemUser);

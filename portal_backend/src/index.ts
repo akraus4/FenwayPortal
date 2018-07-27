@@ -56,6 +56,7 @@ app.use(function (req, res, next) {
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Accept'
   )
+  res.header( 'Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
   next()
 })
 
@@ -63,11 +64,11 @@ app.use(function (req, res, next) {
 // Index
 app.get('/api/:entityType', controller.getAll)
 // Create
-app.put('/api/:entityType', controller.save)
+app.post('/api/:entityType', controller.save)
 // Read
 app.get('/api/:entityType/:id', controller.get)
 // Update
-app.post('/api/:entityType/:id', controller.update)
+app.put('/api/:entityType/:id', controller.update)
 // Delete
 app.delete('/api/:entityType/:id', controller.remove)
 
