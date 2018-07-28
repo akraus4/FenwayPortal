@@ -32,7 +32,7 @@ export class MetricsService {
 	}
 
 	save(entity, object) {
-		console.log(`URL ====  ${this.url}/api/${entity}`);
+		console.log(`URL Post ====  ${this.url}/api/${entity}`);
 		let body = JSON.stringify(object);
 		let result = this.http.post(`${this.url}/api/${entity}`, body, httpOptions);
 		// console.log(JSON.stringify(result));
@@ -40,7 +40,7 @@ export class MetricsService {
 	}
 
 	update(entity, id, object) {
-		console.log(`URL ====  ${this.url}/api/${entity}/${id}`);
+		console.log(`URL Put ====  ${this.url}/api/${entity}/${id}`);
 		let body = JSON.stringify(object);
 		let result = this.http.put(`${this.url}/api/${entity}/${id}`, body, httpOptions);
 		// console.log(JSON.stringify(result));

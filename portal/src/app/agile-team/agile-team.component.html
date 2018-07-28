@@ -9,7 +9,6 @@
   <div id="systemComponents" class="col-lg-4 col-sm-12 searchField">
     <dx-button id="addSystemButton" class="serchBtns" (onClick)="addSystemButtonClicked()" hoverStateEnabled="true" icon="fas fa-plus"></dx-button>
     <dx-button id="editSystemButton" class="serchBtns" (onClick)="editSystemButtonClicked()" hoverStateEnabled="true" icon="fas fa-pencil-alt"></dx-button>
-    <dx-button id="addUserButton" class="serchBtns" (onClick)="addUserButtonClicked()" hoverStateEnabled="true" icon="fas fa-user-plus"></dx-button>
     <dx-select-box id="selectSystemDropDown" class="editFields" placeholder="System Name" [dataSource]="systemSelectBoxDataSource" displayExpr="agileSystemName" valueExpr= "agileSystemId" [searchEnabled]="true" [(ngModel)]="systemDropDownValue" (onValueChanged)="systemDropDownValueChanged($event.value)"></dx-select-box>
     <dx-text-box id="systemTextField" class="editFields" placeholder="System Name" [(ngModel)]="systemTextFieldValue" (onValueChanged)="systemTextFieldValueChanged($event)"></dx-text-box>
     <dx-text-box id="typeTextField" class="editFields" placeholder="Type" [(readOnly)]="readOnly" [(ngModel)]="typeValue" (onValueChanged)="typeValueChanged($event)"></dx-text-box>
@@ -17,20 +16,13 @@
     <dx-check-box id="activeCheckBox" class="editFields" text="Active" (onValueChanged)="checkBoxToggled($event)" [(readOnly)]="readOnly" [(ngModel)]="activeValue"></dx-check-box>
 
     <dx-text-box id="systemUserTextField" class="editFields" placeholder="System User Name" [(ngModel)]="systemUserTextFieldValue" (onValueChanged)="systemUSerTextFieldValueChanged($event)"></dx-text-box>
-    <dx-select-box id="selectTeamMemberDropDown" class="editFields" placeholder="Team Member" [dataSource]="systemUserGridDataSource" displayExpr="fullName" valueExpr= "workTeamMemberId" [searchEnabled]="true" [(readOnly)]="readOnly" [(ngModel)]="teamMemberValue" (onValueChanged)="teamMemberValueChanged($event)"></dx-select-box>
+    <dx-text-box id="teamMemberTextField" class="editFields" placeholder="Team Member" [(ngModel)]="teamMemberValue" readOnly="true" ></dx-text-box>
     <dx-check-box id="activeSystemUserCheckBox" class="editFields" text="Active" (onValueChanged)="checkBoxSystemUserToggled($event)" [(readOnly)]="readOnly" [(ngModel)]="activeSystemUserValue"></dx-check-box>
 
     <div id="agileTeamSubmitCancelBtnContainer">
       <dx-button id="submitButton" class="submitBtn" text="{{submitButtonLbl}}" (onClick)="openModal(submitConfirmationModal)" hoverStateEnabled="true" [(disabled)]="submitButtonDisabled"></dx-button>
       <dx-button id="cancelAddButton" class="cancelBtn" text="Cancel" (onClick)="cancelAddButtonClicked()" hoverStateEnabled="true"></dx-button>
-      <!-- <dx-button id="cancelEditButton" text="Cancel" (onClick)="cancelEditButtonClicked()" hoverStateEnabled="true"></dx-button> -->
     </div>
-
-    <!-- <div id="systemUserSubmitCancelBtnContainer">
-      <dx-button id="systemUserSubmitButton" text="{{systemUserButtonLbl}}" (onClick)="openModal(submitConfirmationModal)" hoverStateEnabled="true" [(disabled)]="systemUserSubmitButtonDisabled"></dx-button>
-      <dx-button id="systemUserCancelEditButton" text="Cancel" (onClick)="systemUserCancelEditButtonClicked()" hoverStateEnabled="true"></dx-button>
-    </div> -->
-
   </div>
 
   <div class="col-lg-8 col-sm-12" id="agileTeamGrid">
@@ -41,6 +33,7 @@
       <dxo-paging [pageSize]="10"></dxo-paging>
       <dxi-column dataField="fullName" caption="Team Members"></dxi-column>
       <dxi-column dataField="agileSystemUserName" caption="System Users"></dxi-column>
+      <dxi-column dataField="activeView" caption="Active" width="100"></dxi-column>
     </dx-data-grid>
   </div>
 
@@ -50,7 +43,7 @@
           <p id="agileChange">Are you sure you want to make these changes?</p>
         </div>
         <div class="modal-footer">
-          <dx-button id="confirmYesBtn" class="confirmModalBtn submitBtn" text="Yes" hoverStateEnabled="true" (onClick)="submitButtonClicked()" ></dx-button>
+          <dx-button id="confirmYesBtn" class="confirmModalBtn submitBtn" text="Yes" hoverStateEnabled="true" (onClick)="confirmYesButtonClicked()" ></dx-button>
           <dx-button id="confirmNoBtn" class="confirmModalBtn cancelBtn" text="No" (onClick)="confirmNoClicked()" hoverStateEnabled="true"></dx-button>
         </div>
   </ng-template>
