@@ -16,12 +16,6 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAllTeams()
   }
 
-  getAllTeams() {
-    this.dataService.getAllWorkTeams()
-      .map(res => { return res.json(); })
-      .subscribe((results) => { this.dataService.allTeams = results; console.log(this.dataService.allTeams) });
-  }
 }

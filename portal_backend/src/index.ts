@@ -105,14 +105,7 @@ createConnection({
   password: 'fg_user',
   database: 'PORTAL',
   entities: [
-    __dirname + '/entity/*.ts',
-    WorkUser,
-    AgileSystem,
-    WorkTeam,
-    AgileSprint,
-    AgileStory,
-    WorkTeamMember,
-    AgileSystemUser
+    __dirname + '/entities/*.ts',
   ],
   synchronize: true,
   logging: false

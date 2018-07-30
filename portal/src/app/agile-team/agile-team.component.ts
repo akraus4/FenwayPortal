@@ -20,10 +20,9 @@ export class AgileTeamComponent implements OnInit {
   modalRef: BsModalRef;
 
   //Current Values
-  currentTeamMembers;
-  currentTeamMemberId;
-  currentSystemUsers;
-  currentSystemUserId;
+  currentTeamMemberId; //Used to identify team member when a user is saved/updated.
+  currentSystemUsers; //Used for loop to attach system user to team member.
+  currentSystemUserId; //Used to attach the system users id to object when updating.
   currentSystem;
 
   //NgModels
@@ -47,7 +46,6 @@ export class AgileTeamComponent implements OnInit {
   isSystemEmpty: boolean = true;
   isSystemAdd: boolean = false;
   isSystemEdit: boolean = false;
-  isSystemUserAdd: boolean = false;
   isSystemUserEdit: boolean = false;
   readOnly: boolean;
   submitButtonDisabled: boolean;
@@ -79,7 +77,6 @@ export class AgileTeamComponent implements OnInit {
   addSystemButtonClicked() {
     this.isSystemAdd = true;
     this.isSystemEdit = false;
-    this.isSystemUserAdd = false;
     this.isSystemUserEdit = false;
     this.submitButtonLbl = 'Add';
     this.readOnly = false;
@@ -96,33 +93,9 @@ export class AgileTeamComponent implements OnInit {
     $('#agileTeamSubmitCancelBtnContainer').removeClass('remove');
   }
 
-  // addUserButtonClicked() {
-  //   this.isSystemAdd = false;
-  //   this.isSystemEdit = false;
-  //   this.isSystemUserAdd = true;
-  //   this.isSystemUserEdit = false;
-  //   this.readOnly = false;
-  //   this.submitButtonLbl = 'Add';
-
-  //   // $('#selectSystemDropDown').addClass('remove');
-  //   $('#typeTextField').addClass('remove');
-  //   $('#selectTeamDropDown').addClass('remove');
-  //   $('#activeCheckBox').addClass('remove');
-  //   this.activeSystemUserValue = true;
-  //   this.systemUserTextFieldValue = undefined;
-  //   this.teamMemberValue = undefined;
-
-  //   $('#editSystemButton').addClass('remove');
-  //   $('#addSystemButton').addClass('remove');
-
-  //   this.addSystemUserFields();
-  //   $('#agileTeamSubmitCancelBtnContainer').removeClass('remove');
-  // }
-
   editSystemButtonClicked() {
     this.isSystemAdd = false;
     this.isSystemEdit = true;
-    this.isSystemUserAdd = false;
     this.isSystemUserEdit = false;
     this.submitButtonLbl = 'Update';
     this.readOnly = false;
@@ -165,34 +138,32 @@ export class AgileTeamComponent implements OnInit {
       .map(res => { return res.json(); })
       .subscribe((results) => {
         this.currentSystemUsers = results;
-        console.log(JSON.stringify(results));
+        console.log(`GetAllSystemUsersBySystem Results === ${JSON.stringify(results)}`);
         this.getAllTeamMembersByTeam(this.currentSystem.workTeam.workTeamId);
       });
   }
 
   getAllTeamMembersByTeam(teamId) {
-    console.log('Team id = ' + teamId);
     let condition = `workTeam=${teamId}`;
     this.metricsService.getAll('WorkTeamMembers', 'workTeam,workUser', condition)
       .map(res => { return res.json(); })
       .subscribe((results) => {
-        this.systemUserGridDataSource = [];
-        this.currentTeamMembers = results;
-        console.log(JSON.stringify(results));
-        var currentTeamMember;
-        var teamMembers = [];
-        var i = 0;
+        console.log(`GetAllTeamMembersByTeam Results ==== ${JSON.stringify(results)}`);
+        this.systemUserGridDataSource = []; //Clears grid
+        var currentTeamMember; //Used to determine if the team member has a system user connected to it.
         for (let teamMember of results) {
           currentTeamMember = '';
           for (let systemUser of this.currentSystemUsers) {
+            //Populates grid with True or False instead of 1 or 0.
             var activeView;
-            if (systemUser.active == 1){
+            if (systemUser.active == 1) {
               activeView = 'True';
             } else if (systemUser.active == 0) {
               activeView = 'False';
-            } 
+            }
+            //If a team member is connected to a system user.
             if (systemUser.workTeamMember.workTeamMemberId == teamMember.workTeamMemberId) {
-              let tm = {
+              let member = {
                 'workTeamMemberId': teamMember.workTeamMemberId,
                 'fullName': teamMember.workUser.firstname + ' ' + teamMember.workUser.lastname,
                 'workUser': teamMember.workUser,
@@ -203,28 +174,26 @@ export class AgileTeamComponent implements OnInit {
                 'activeView': activeView,
                 'active': systemUser.active
               }
-              currentTeamMember = tm;
-              console.log("TM = " + JSON.stringify(tm));
-              this.systemUserGridDataSource.push(tm);
-            }
-            if (currentTeamMember == '' && this.currentSystemUsers.length <= i) {
-              activeView = '';
-              let tm = {
-                'workTeamMemberId': teamMember.workTeamMemberId,
-                'fullName': teamMember.workUser.firstname + ' ' + teamMember.workUser.lastname,
-                'workUser': teamMember.workUser,
-                'workTeam': teamMember.workTeam,
-
-                'agileSystemUserId': '',
-                'agileSystemUserName': '',
-                'activeView': activeView,
-                'active': 0
-              }
-              console.log("TM2 = " + JSON.stringify(tm));
-              this.systemUserGridDataSource.push(tm);
+              currentTeamMember = member;
+              this.systemUserGridDataSource.push(member);
             }
           }
-          i++;
+          //If the the team member isn't connected to a system user.
+          if (currentTeamMember == '') {
+            activeView = '';
+            let memberNoSystemUser = {
+              'workTeamMemberId': teamMember.workTeamMemberId,
+              'fullName': teamMember.workUser.firstname + ' ' + teamMember.workUser.lastname,
+              'workUser': teamMember.workUser,
+              'workTeam': teamMember.workTeam,
+
+              'agileSystemUserId': '',
+              'agileSystemUserName': '',
+              'activeView': '',
+              'active': 0
+            }
+            this.systemUserGridDataSource.push(memberNoSystemUser);
+          }
         }
         this.metricsService.hideLoadingPanel();
       });
@@ -233,28 +202,32 @@ export class AgileTeamComponent implements OnInit {
 
   //#endregion Get methods
 
-  //#region System value changes
+  //#region Value changes
 
+  //Grid double click event
   onRowClick(e) {
     // this.metricsService.showLoadingPanel();
     this.readOnly = false;
+    this.isSystemAdd = false;
+    this.isSystemEdit = false;
     this.isSystemUserEdit = true;
     var component = e.component,
-      prevClickTime = component.lastClickTime;
+    prevClickTime = component.lastClickTime;
     component.lastClickTime = new Date();
     let selectedData = this.dataGrid.instance.getSelectedRowsData();
     console.log(e.key.active);
 
     if (prevClickTime && (component.lastClickTime - prevClickTime < 300)) {
       //Double click code
-      console.log(e.key.workTeamMemberId);
       $('#editSystemButton').addClass('remove');
       $('#addSystemButton').addClass('remove');
-      this.currentSystemUserId = e.key.agileSystemUserId;
-      this.submitButtonLbl = 'Update';
+      $('#agileTeamSubmitCancelBtnContainer').removeClass('remove');
       this.addSystemUserFields();
       this.removeSystemFields();
-      $('#agileTeamSubmitCancelBtnContainer').removeClass('remove');
+
+      this.currentSystemUserId = e.key.agileSystemUserId;
+      this.submitButtonLbl = 'Update';
+
       this.activeSystemUserValue = e.key.active;
       this.systemUserTextFieldValue = e.key.agileSystemUserName;
       this.currentTeamMemberId = e.key.workTeamMemberId;
@@ -296,6 +269,7 @@ export class AgileTeamComponent implements OnInit {
 
   }
 
+  //Enable submit button once all fields have values.
   systemTextFieldValueChanged(e) {
     if (this.systemTextFieldValue != undefined && this.typeValue != undefined && this.teamValue != undefined && this.activeValue != undefined) {
       this.submitButtonDisabled = false;
@@ -347,7 +321,7 @@ export class AgileTeamComponent implements OnInit {
   //#endregion System value changes
 
 
-  //#region Submit Cancel button click events
+  //#region Submit/Cancel/Confirmation button click events
 
   confirmYesButtonClicked() {
     this.metricsService.showLoadingPanel();
@@ -355,10 +329,7 @@ export class AgileTeamComponent implements OnInit {
       this.saveSystem();
     } else if (this.isSystemEdit) {
       this.updateSystem();
-    } else if (this.isSystemUserAdd) {
-      this.saveSystemUser();
     } else if (this.isSystemUserEdit) {
-      console.log('SystemUser = ' + this.currentSystemUserId);
       if (this.currentSystemUserId != '') {
         this.updateSystemUser();
       } else {
@@ -433,7 +404,7 @@ export class AgileTeamComponent implements OnInit {
         $('#selectSystemDropDown').removeClass('remove');
         $('#systemTextField').addClass('remove');
         $('#agileTeamSubmitCancelBtnContainer').addClass('remove');
-        
+
         this.currentSystem = system;
         this.systemDropDownValue = system.agileSystemId;
         this.getAllSystems();

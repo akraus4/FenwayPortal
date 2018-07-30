@@ -57,9 +57,9 @@ export class MetricsComponent implements OnInit {
     var i = 0;
     this.currentSprintId = [];
     for (i = 0; i < sprintIds.length; i++) {
-      this.currentSprintId.push(sprintIds[i].agilesprintId);
+      this.currentSprintId.push(sprintIds[i].agileSprintId);
     }
-    if (this.currentSprintId==''){
+    if (this.currentSprintId == '') {
       (<HTMLInputElement>document.getElementById('metricsSearchBtn')).disabled = true;
     } else {
       (<HTMLInputElement>document.getElementById('metricsSearchBtn')).disabled = false;
@@ -82,16 +82,43 @@ export class MetricsComponent implements OnInit {
   }
 
   getAllStoriesWithUsersBySprint() {
-    this.metricsService.showLoadingPanel()
-    this.getSprintIdString()
-    this.metricsService.getAllStoriesWithUsersBySprint(this.sprintIds)
-      .map(res => { console.log(res); return res.json(); })
+    this.metricsService.showLoadingPanel();
+    // this.getSprintIdString();
+    var i = 0;
+    for (i = 0; i < this.currentSprintId.length; i++) {
+      if (i == 0) {
+        this.sprintIds = this.currentSprintId[i];
+      } else {
+        this.sprintIds = this.sprintIds + "," + this.currentSprintId[i];
+      }
+    }
+    this.metricsService.getAllStoriesPointsByUser(this.sprintIds)
+      .map(res => { return res.json(); })
       .subscribe((results) => {
-        this.storyData = results;
-        this.getFullName();
-        this.StoryChoices = this.storyData;
-        this.getStoryCount()
-        this.getUsersPoints()
+        // this.storyData = results;
+        // this.getFullName();
+        
+        var newResults = [];
+        for (let story of results) {
+          for (let userPoints of story.agileStoryAgileSystemUsers) {
+            let newStory = {
+              'agileStoryId': story.agileStoryId,
+              'agileStoryName': story.agileStoryName,
+              'agileSprintName': story.agileSprint.agileSprintName,
+              'storyDescription': story.storyDescription,
+              'storyType': story.storyType,
+              'storyStatus': story.storyStatus,
+              'totalPoints': story.storyPoints,
+              'systemUser': userPoints.agileSystemUser,
+              'fullName': `${userPoints.agileSystemUser.workTeamMember.workUser.firstname} ${userPoints.agileSystemUser.workTeamMember.workUser.lastname}`,
+              'userPoints': userPoints.agileSystemUserStoryPoints
+            }
+            console.log(`New Story === ${newStory}`)
+            newResults.push(newStory);
+          }
+
+        }
+        this.StoryChoices = newResults;
         this.metricsService.hideLoadingPanel()
       });
   }

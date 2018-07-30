@@ -41,11 +41,14 @@
         <dxo-header-filter [visible]="true"></dxo-header-filter>
         <dxo-sorting mode="none"></dxo-sorting>
         <dxo-paging [pageSize]="10"></dxo-paging>
-        <dxi-column dataField="agileStoryId" caption="Story ID"></dxi-column>
         <dxi-column dataField="agileSprintName" caption="Sprint"></dxi-column>
+        <dxi-column dataField="agileStoryName" caption="Story Name"></dxi-column>
+        <dxi-column dataField="storyStatus" caption="Story Status"></dxi-column>
         <dxi-column dataField="storyType" caption="Story Type"></dxi-column>
-        <dxi-column dataField="agileSystemUserStoryPoints" caption="User's Story Pts"></dxi-column>
-        <dxi-column dataField="agileSystemUserName" caption="User"></dxi-column>
+        <dxi-column dataField="totalPoints" caption="Total Pts"></dxi-column>
+        <dxi-column dataField="fullName" caption="User"></dxi-column>
+        <dxi-column dataField="userPoints" caption="User's Pts"></dxi-column>
+        
       </dx-data-grid>
     </div>
   </div>
