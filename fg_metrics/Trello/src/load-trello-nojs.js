@@ -17,15 +17,6 @@ getTrello.getList("59395d4f04c5416b8e7ed9a9").then((listResult) => {
                 sprintName = "Sprint " + sprint[2];
                 sprintStartDate = sprint[3];
                 sprintEndDate = sprint[4];
-                // let listInfo = {
-                //         'sprint_id': sprintID,
-                //         'system_id': systemID,
-                //         'sprint_name': "Sprint " + sprint[2],
-                //         'sprint_start_date': sprint[3],
-                //         'sprint_end_date': sprint[4]
-                // }
-                // newList = listInfo;
-                // console.log(newList)
         }
         getTrello.getAcceptedCards().then((result) => {
                 var newStories = [];
