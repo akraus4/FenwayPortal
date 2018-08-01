@@ -1,6 +1,7 @@
 var getTrello = require('./getTrello');
 var config = require('../config/config');
-var team = config.teams.dataScrubbers;
+//Add the config path to the team you wish to pulled data for.
+var team = config.teams.noJS;
 var systemID;
 var sprintID;
 var sprintName;
@@ -52,7 +53,8 @@ getTrello.getList(team.boardId, team.key, team.token, team.acceptedListInt).then
                 // var path = `C:\\Metrics\\Exports\\${team.teamName}_${sprintName}.json`;
                 var fileName = `${team.teamName}_${sprintName}.json`;
                 var dir = team.path;
-                mkDirByPathSync(dir, {isRelativeToScript: true});
+                var path;
+                mkDirByPathSync(dir);
 
                 fs.writeFile(dir + fileName, JSON.stringify(stories, null, 4), (err) => {
                         if (err) {

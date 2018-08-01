@@ -1,0 +1,24 @@
+{
+    "sprint_id": "5b2d19e0fbbae0dc34fa68e2",
+    "sprint_name": "Sprint 28",
+    "sprint_start_date": "6/20/2018",
+    "sprint_end_date": "7/3/2018",
+    "stories: ": [
+        {
+            "story_id": "5b27d997e1f4f36caab45203",
+            "story_points": "3",
+            "assigned _ to": {
+                "user": "5948088318eaeff7e944bea9",
+                "user_points": "3"
+            }
+        },
+        {
+            "story_id": "5b296f8882a4ff074361e83e",
+            "story_points": "2",
+            "assigned _ to": {
+                "user": "5948088318eaeff7e944bea9",
+                "user_points": "2"
+            }
+        }
+    ]
+}
