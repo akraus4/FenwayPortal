@@ -1,43 +1,75 @@
 {
   "ref:agile_system": {
-    "agile_system_id": "SALTNS",
+    "agile_system_id": "AS1",
     "agile_system_type": "JIRA",
-    "agile_system_name": "SALTNS",
+    "agile_system_name": "SALT-Notifications",
+    "work_team_id": "WT1",
     "ref:agile_system_user": [
       {
-        "agile_system_user_id": "jmasch",
-        "agile_system_id": "SALTNS",
-        "work_user_id": "00292975dbafcb000b96f2b6ae9619a4"
+        "agile_system_user_id": "ASU1",
+        "agile_system_user_name": "jmasch",
+        "agile_system_id": "AS1",
+        "work_team_member_id": "WTM1",
+        "work_user_id": "WU1"
       },
       {
-        "agile_system_user_id": "dbarbier",
-        "agile_system_id": "SALTNS",
-        "work_user_id": "01e23048dbbc3a0034a679daae96199d"
+        "agile_system_user_id": "ASU2",
+        "agile_system_user_name": "dbarbier",
+        "agile_system_id": "AS1",
+        "work_team_member_id": "WTM2",
+        "work_user_id": "WU2"
       }
     ],
     "ref:agile_sprint": [
       {
-        "agile_sprint_id": "12345",
-        "agile_system_id": "SALTNS",
+        "agile_sprint_id": "AP1",
+        "agile_system_id": "AS1",
         "agile_sprint_name": "Sprint 1",
-        "sprint_start_date": "",
-        "sprint_end_date": "",
+        "sprint_description": "Setup Working Environment for New Project",
+        "sprint_start_date": "2018-04-02",
+        "sprint_end_date": "2018-04-13",
         "ref:agile_story": [
           {
-            "agile_story_id": "S1",
-            "agile_sprint_id": "12345",
-            "agile_story_name": "",
-            "story_type": "",
-            "story_points": "",
+            "agile_story_id": "AT1",
+            "agile_sprint_id": "AP1",
+            "agile_story_name": "Load Initial Database",
+            "story_description": "Fill in sample data to get started",
+            "story_status": "Completed",
+            "story_type": "Story",
+            "story_points": "5",
             "ref:agile_story_agile_system_user": [
               {
-                "agile_story_agile_system_user_id": "54321",
-                "agile_story_id": "S1",
-                "agile_system_user_id": "e93709b8-3362-11e8-b696-03dcf7b7b73f",
-                "agile_system_user_story_points": ""
+                "agile_story_agile_system_user_id": "ASAS1",
+                "agile_story_id": "AT1",
+                "agile_system_user_id": "ASU1",
+                "agile_system_user_story_points": "3"
+              },
+              {
+                "agile_story_agile_system_user_id": "ASAS2",
+                "agile_story_id": "AT1",
+                "agile_system_user_id": "ASU1",
+                "agile_system_user_story_points": "2"
+              }
+            ]
+          },
+          {
+            "agile_story_id": "AT2",
+            "agile_sprint_id": "AP1",
+            "agile_story_name": "Create User Roles",
+            "story_description": "Fill in roles for testing",
+            "story_status": "In Progress",
+            "story_type": "Story",
+            "story_points": "3",
+            "ref:agile_story_agile_system_user": [
+              {
+                "agile_story_agile_system_user_id": "ASAS2",
+                "agile_story_id": "AT1",
+                "agile_system_user_id": "ASU1",
+                "agile_system_user_story_points": "2"
               }
             ]
           }
+
         ]
       }
     ]

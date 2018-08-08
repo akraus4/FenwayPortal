@@ -1,0 +1,37 @@
+{
+  "team_id": "6bcf8bf3db7c070034a679daae9619c2",
+  "sprint": [
+    {
+      "sprint_id": "RxcMemberPortal\\Iteration 11",
+      "sprint_name": "Iteration 11",
+      "sprint_start_date": "2018-04-02",
+      "sprint_end_date": "2018-04-13",
+      "stories": [
+        {
+          "story_id": 2054,
+          "story_points": 2,
+          "assigned_to": [
+            {
+              "user": "jemas <jemas@fenwaygroup.com>",
+              "user_points": 1
+            },
+            {
+              "user": "gavin simon <gsimon@fenwaygroup.com>",
+              "user_points": 1
+            }
+          ]
+        },
+        {
+          "story_id": 2057,
+          "story_points": 0,
+          "assigned_to": [
+            {
+              "user": "gavin simon <gsimon@fenwaygroup.com>",
+              "user_points": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

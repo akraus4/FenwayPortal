@@ -1,7 +1,7 @@
 var config = require("../config/config");
 
 const mysql = require("mysql");
-const uuidv1 = require("uuid/v1");
+// const uuidv1 = require("uuid/v1");
 
 exports.postTimecards = timecards => {
   return new Promise((resolve, reject) => {
@@ -65,7 +65,7 @@ exports.postTimecards = timecards => {
         // Add or update work_team_member
         if (timecard["user.sys_id"] && timecard["resource_plan.sys_id"]) {
           var work_team_member = {};
-          work_team_member.work_team_member_id = uuidv1();
+          work_team_member.work_team_member_id = timecard["user.sys_id"] + timecard["resource_plan.sys_id"];
           work_team_member.work_user_id = timecard["user.sys_id"];
           work_team_member.work_team_id = timecard["resource_plan.sys_id"];
 
@@ -91,7 +91,8 @@ exports.postTimecards = timecards => {
           var currentdate = new Date(timecard["week_starts_on"]);
           weekdays.forEach(weekday => {
             var dailyhours = {};
-            dailyhours.work_dailyhours_id = uuidv1();
+            dailyhours.work_dailyhours_id = '' + work_team_member.work_team_member_id + currentdate.getFullYear() +
+              (currentdate.getMonth() + 1) + currentdate.getDate() ;
             dailyhours.work_team_member_id =
               work_team_member.work_team_member_id;
             dailyhours.work_date =
