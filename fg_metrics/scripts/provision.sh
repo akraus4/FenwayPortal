@@ -22,8 +22,15 @@ SELECT User, Host, Password FROM mysql.user;
 EOF
 mysql -u root -p < create_db.sql
 
+# Install Dotnet Core
+rpm -Uvh https://packages.microsoft.com/config/rhel/7/packages-microsoft-prod.rpm
+yum update
+yum install aspnetcore-runtime-2.1
+yum install dotnet-sdk-2.1
+
 # App Specific Provisioning
 yum install npm -y
 
 mkdir -pv /opt/metrics
 chown centos: /opt/metrics
+
