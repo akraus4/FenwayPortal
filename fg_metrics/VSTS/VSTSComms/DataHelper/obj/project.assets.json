@@ -5965,26 +5965,23 @@
   },
   "packageFolders": {
     "C:\\Users\\kbran\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Working\\Projects\\Fenway\\VSTSComms\\DataHelper\\DataHelper.csproj",
+      "projectUniqueName": "E:\\Working\\Projects\\GitHub\\CoachesPortal\\Coaches_Portal\\fg_metrics\\VSTS\\VSTSComms\\DataHelper\\DataHelper.csproj",
       "projectName": "DataHelper",
-      "projectPath": "E:\\Working\\Projects\\Fenway\\VSTSComms\\DataHelper\\DataHelper.csproj",
+      "projectPath": "E:\\Working\\Projects\\GitHub\\CoachesPortal\\Coaches_Portal\\fg_metrics\\VSTS\\VSTSComms\\DataHelper\\DataHelper.csproj",
       "packagesPath": "C:\\Users\\kbran\\.nuget\\packages\\",
-      "outputPath": "E:\\Working\\Projects\\Fenway\\VSTSComms\\DataHelper\\obj\\",
+      "outputPath": "E:\\Working\\Projects\\GitHub\\CoachesPortal\\Coaches_Portal\\fg_metrics\\VSTS\\VSTSComms\\DataHelper\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
         "C:\\Users\\kbran\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netstandard2.0"

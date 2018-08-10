@@ -21,3 +21,15 @@ E:\Working\Projects\Fenway\VSTSComms\VSTSComms\obj\Debug\netcoreapp2.0\VSTSComms
 E:\Working\Projects\Fenway\VSTSComms\VSTSComms\obj\Debug\netcoreapp2.0\VSTSComms.dll
 E:\Working\Projects\Fenway\VSTSComms\VSTSComms\obj\Debug\netcoreapp2.0\VSTSComms.pdb
 E:\Working\Projects\Fenway\VSTSComms\VSTSComms\obj\Debug\netcoreapp2.0\VSTSComms.csprojAssemblyReference.cache
+E:\Working\Projects\GitHub\CoachesPortal\Coaches_Portal\fg_metrics\VSTS\VSTSComms\VSTSComms\bin\Debug\netcoreapp2.0\appSettings.json
+E:\Working\Projects\GitHub\CoachesPortal\Coaches_Portal\fg_metrics\VSTS\VSTSComms\VSTSComms\bin\Debug\netcoreapp2.0\VSTSComms.deps.json
+E:\Working\Projects\GitHub\CoachesPortal\Coaches_Portal\fg_metrics\VSTS\VSTSComms\VSTSComms\bin\Debug\netcoreapp2.0\VSTSComms.runtimeconfig.json
+E:\Working\Projects\GitHub\CoachesPortal\Coaches_Portal\fg_metrics\VSTS\VSTSComms\VSTSComms\bin\Debug\netcoreapp2.0\VSTSComms.runtimeconfig.dev.json
+E:\Working\Projects\GitHub\CoachesPortal\Coaches_Portal\fg_metrics\VSTS\VSTSComms\VSTSComms\bin\Debug\netcoreapp2.0\VSTSComms.dll
+E:\Working\Projects\GitHub\CoachesPortal\Coaches_Portal\fg_metrics\VSTS\VSTSComms\VSTSComms\bin\Debug\netcoreapp2.0\VSTSComms.pdb
+E:\Working\Projects\GitHub\CoachesPortal\Coaches_Portal\fg_metrics\VSTS\VSTSComms\VSTSComms\obj\Debug\netcoreapp2.0\VSTSComms.csprojAssemblyReference.cache
+E:\Working\Projects\GitHub\CoachesPortal\Coaches_Portal\fg_metrics\VSTS\VSTSComms\VSTSComms\obj\Debug\netcoreapp2.0\VSTSComms.csproj.CoreCompileInputs.cache
+E:\Working\Projects\GitHub\CoachesPortal\Coaches_Portal\fg_metrics\VSTS\VSTSComms\VSTSComms\obj\Debug\netcoreapp2.0\VSTSComms.AssemblyInfoInputs.cache
+E:\Working\Projects\GitHub\CoachesPortal\Coaches_Portal\fg_metrics\VSTS\VSTSComms\VSTSComms\obj\Debug\netcoreapp2.0\VSTSComms.AssemblyInfo.cs
+E:\Working\Projects\GitHub\CoachesPortal\Coaches_Portal\fg_metrics\VSTS\VSTSComms\VSTSComms\obj\Debug\netcoreapp2.0\VSTSComms.dll
+E:\Working\Projects\GitHub\CoachesPortal\Coaches_Portal\fg_metrics\VSTS\VSTSComms\VSTSComms\obj\Debug\netcoreapp2.0\VSTSComms.pdb

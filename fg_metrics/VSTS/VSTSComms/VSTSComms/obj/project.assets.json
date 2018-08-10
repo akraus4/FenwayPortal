@@ -6655,11 +6655,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Working\\Projects\\Fenway\\VSTSComms\\VSTSComms\\VSTSComms.csproj",
+      "projectUniqueName": "E:\\Working\\Projects\\GitHub\\CoachesPortal\\Coaches_Portal\\fg_metrics\\VSTS\\VSTSComms\\VSTSComms\\VSTSComms.csproj",
       "projectName": "VSTSComms",
-      "projectPath": "E:\\Working\\Projects\\Fenway\\VSTSComms\\VSTSComms\\VSTSComms.csproj",
+      "projectPath": "E:\\Working\\Projects\\GitHub\\CoachesPortal\\Coaches_Portal\\fg_metrics\\VSTS\\VSTSComms\\VSTSComms\\VSTSComms.csproj",
       "packagesPath": "C:\\Users\\kbran\\.nuget\\packages\\",
-      "outputPath": "E:\\Working\\Projects\\Fenway\\VSTSComms\\VSTSComms\\obj\\",
+      "outputPath": "E:\\Working\\Projects\\GitHub\\CoachesPortal\\Coaches_Portal\\fg_metrics\\VSTS\\VSTSComms\\VSTSComms\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
