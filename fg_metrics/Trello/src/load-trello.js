@@ -1,8 +1,9 @@
 var getTrello = require('./getTrello');
 var config = require('../config/config');
+
 //Add the config path to the team you wish to pulled data for.
 var team = config.teams.noJS;
-var systemID;
+
 var sprintID;
 var sprintName;
 var sprintStartDate;
@@ -43,20 +44,24 @@ getTrello.getList(team.boardId, team.key, team.token, team.acceptedListInt).then
 
                 }
 
-                let stories = {
+                let sprint = {
                         "sprint_id": sprintID,
                         "sprint_name": sprintName,
                         "sprint_start_date": sprintStartDate,
                         "sprint_end_date": sprintEndDate,
                         "stories: ": newStories
                 };
-                // var path = `C:\\Metrics\\Exports\\${team.teamName}_${sprintName}.json`;
+
+                let teams = {
+                        "team_id": team.boardId,
+                        "sprint": sprint
+                }
+
                 var fileName = `${team.teamName}_${sprintName}.json`;
                 var dir = team.path;
-                var path;
                 mkDirByPathSync(dir);
 
-                fs.writeFile(dir + fileName, JSON.stringify(stories, null, 4), (err) => {
+                fs.writeFile(dir + fileName, JSON.stringify(teams, null, 4), (err) => {
                         if (err) {
                                 console.error(err);
                                 return;

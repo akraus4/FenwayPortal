@@ -345,9 +345,9 @@ export class AgileTeamComponent implements OnInit {
     $('#systemTextField').addClass('remove');
     $('#agileTeamSubmitCancelBtnContainer').addClass('remove');
 
-    if (this.isSystemUserAdd) {
-      this.addSystemFields();
-    }
+    // if (this.isSystemUserAdd) {
+    //   this.addSystemFields();
+    // }
 
     if (this.systemDropDownValue != undefined) {
       $('#editSystemButton').removeClass('remove');
