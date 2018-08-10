@@ -38,9 +38,9 @@ if [[ -z $1 ]]; then
 fi
 
 case $ENVIRONMENT in
-    [pP][Rr][Oo][Dd])   APP_PATH="/opt/metrics/environments/prod/fg-metrics"      ;;
-    [dD][eE][vV]1)      APP_PATH="/opt/metrics/environments/dev1/fg-metrics"      ;;
-    [dD][eE][vV]2)      APP_PATH="/opt/metrics/environments/dev2/fg-metrics"      ;;
+    [pP][Rr][Oo][Dd])   APP_PATH="/opt/metrics/environments/prod/Coaches_Portal/fg_metrics/Timecards"      ;;
+    [dD][eE][vV]1)      APP_PATH="/opt/metrics/environments/dev1/Coaches_Portal/fg_metrics/Timecards"      ;;
+    [dD][eE][vV]2)      APP_PATH="/opt/metrics/environments/dev2/Coaches_Portal/fg_metrics/Timecards"      ;;
     *)
         ENVIRONMENT="error"
         logger "ERROR" "Unknown Environment."
