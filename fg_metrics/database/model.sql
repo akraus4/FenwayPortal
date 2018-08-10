@@ -37,7 +37,6 @@ create table work_dailyhours (
     work_team_member_id varchar(255),
     work_date date,
     hours int(11),
-    active tinyint(1),
     PRIMARY KEY(work_dailyhours_id)
 );
 
@@ -73,7 +72,6 @@ create table agile_sprint (
     sprint_description varchar(255),
     sprint_start_date date,
     sprint_end_date date,
-    active tinyint(1),
     PRIMARY KEY(agile_sprint_id)
 );
 
@@ -87,7 +85,6 @@ create table agile_story (
     story_type varchar(255), 
     story_status varchar(255),
     story_points varchar(255),
-    active tinyint(1),
     PRIMARY KEY(agile_story_id)
 );
 
@@ -98,6 +95,5 @@ create table agile_story_agile_system_user (
     agile_story_id varchar(255),
     agile_system_user_id varchar(255),
     agile_system_user_story_points varchar(255),
-    active tinyint(1),
     PRIMARY KEY(agile_story_agile_system_user_id)
 );

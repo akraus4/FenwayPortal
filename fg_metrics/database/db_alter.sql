@@ -1,8 +1,16 @@
-create database metrics;
-create user 'metrics'@'localhost' identified by 'metrics';
-grant all privileges on *.* to 'metrics'@'localhost';
+use fg_metrics_dev;
 
--- Local portal db and user
-create database portal;
-create user 'fg_user'@'localhost' identified by 'fg_user';
-grant all privileges on *.* to 'fg_user'@'localhost';
+alter table work_user
+add column active tinyint(1);
+
+alter table work_team
+add column active tinyint(1);
+
+alter table work_team_member
+add column active tinyint(1);
+
+alter table agile_system
+add column active tinyint(1);
+
+alter table agile_system_user
+add column active tinyint(1);
