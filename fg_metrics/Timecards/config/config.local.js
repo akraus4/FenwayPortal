@@ -8,9 +8,9 @@ var config = {
     },
     database: {
         host: 'localhost',
-        user: 'metrics',
-        password: 'metrics',
-        database: 'metrics'
+        user: 'fg_user',
+        password: 'fg_user',
+        database: 'portal'
     }
 }
 
