@@ -124,7 +124,7 @@ namespace VSTSComms.Import
             if (ex == null)
             {
                 //worked fine move to processed
-                File.Move(file, $@"{_appSetting.ProcessedDirectory}\{fileName}");
+                File.Move(file, $@"{_appSetting.ProcessedDirectory}/{fileName}");
                 WriteToLog($"File {fileName} was processed successsfully.");
             }
             else
@@ -135,14 +135,14 @@ namespace VSTSComms.Import
                 WriteToLog(sbErrorMessage.ToString());
 
                 //errors move to errors folder
-                File.Move(file, $@"{_appSetting.ErrorsDirectory}\{fileName}");
+                File.Move(file, $@"{_appSetting.ErrorsDirectory}/{fileName}");
             }
         }
 
         private void WriteToLog(string message)
         {
             message = $"{DateTime.Now.ToString()}|{message}";
-            string fileNameAndPath = $@"{_appSetting.LogsDirectory}\{DateTime.Now.Date.ToString("yyyyMMdd")}.txt";
+            string fileNameAndPath = $@"{_appSetting.LogsDirectory}/{DateTime.Now.Date.ToString("yyyyMMdd")}.txt";
             File.AppendAllLines(fileNameAndPath, new[] { message });
         }
 
@@ -226,7 +226,7 @@ namespace VSTSComms.Import
 
         private void InitializeSettings()
         {
-            string file = $@"{AppDomain.CurrentDomain.BaseDirectory}appSettings.JSON";
+            string file = $@"{AppDomain.CurrentDomain.BaseDirectory}appSettings.json";
 
             string fileContents = Utilities.Miscellaneous.GetFileContents(file);
             _appSetting = JsonConvert.DeserializeObject<AppSetting>(fileContents);
