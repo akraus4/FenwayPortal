@@ -21,7 +21,8 @@ namespace VSTSComms
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseMySql("Server=ec2-52-55-14-143.compute-1.amazonaws.com;User Id=fg_user_dev;Password=b_cH0RT1rH_S;Database=fg_metrics_dev");
+//                optionsBuilder.UseMySql("Server=ec2-52-55-14-143.compute-1.amazonaws.com;User Id=fg_user_dev;Password=b_cH0RT1rH_S;Database=fg_metrics_dev");
+                optionsBuilder.UseMySql("Server=localhost;User Id=fg_user;Password=fg_user;Database=portal");
                 optionsBuilder.EnableSensitiveDataLogging(true);
              
             }
@@ -133,6 +134,10 @@ namespace VSTSComms
                 entity.Property(e => e.WorkTeamId)
                     .HasColumnName("work_team_id")
                     .HasMaxLength(255);
+
+                entity.Property(e => e.Active)
+                    .HasColumnName("active");
+
             });
 
             modelBuilder.Entity<AgileSystemUser>(entity =>
@@ -155,6 +160,9 @@ namespace VSTSComms
                 entity.Property(e => e.WorkTeamMemberId)
                     .HasColumnName("work_team_member_id")
                     .HasMaxLength(255);
+
+                entity.Property(e => e.Active)
+                    .HasColumnName("active");
 
                 //entity.Property(e => e.WorkUserId)
                 //    .HasColumnName("work_user_id")
