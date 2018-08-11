@@ -1,8 +1,0 @@
-E:\Working\Projects\Fenway\VSTSComms\DataHelper\bin\Debug\netstandard2.0\DataHelper.deps.json
-E:\Working\Projects\Fenway\VSTSComms\DataHelper\bin\Debug\netstandard2.0\DataHelper.dll
-E:\Working\Projects\Fenway\VSTSComms\DataHelper\obj\Debug\netstandard2.0\DataHelper.csproj.CoreCompileInputs.cache
-E:\Working\Projects\Fenway\VSTSComms\DataHelper\obj\Debug\netstandard2.0\DataHelper.AssemblyInfoInputs.cache
-E:\Working\Projects\Fenway\VSTSComms\DataHelper\obj\Debug\netstandard2.0\DataHelper.AssemblyInfo.cs
-E:\Working\Projects\Fenway\VSTSComms\DataHelper\bin\Debug\netstandard2.0\DataHelper.pdb
-E:\Working\Projects\Fenway\VSTSComms\DataHelper\obj\Debug\netstandard2.0\DataHelper.dll
-E:\Working\Projects\Fenway\VSTSComms\DataHelper\obj\Debug\netstandard2.0\DataHelper.pdb

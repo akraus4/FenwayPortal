@@ -9,5 +9,6 @@ namespace VSTSComms
         public string AgileSystemName { get; set; }
         public string AgileSystemType { get; set; }
         public string WorkTeamId { get; set; }
+        public bool Active { get; set; }
     }
 }

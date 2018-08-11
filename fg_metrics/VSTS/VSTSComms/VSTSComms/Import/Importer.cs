@@ -152,7 +152,7 @@ namespace VSTSComms.Import
             AgileSystemUser agileSystemUser = _dataContext.AgileSystemUser.Where(x => x.AgileSystemId == systemId && x.AgileSystemUserName == assignee.ID).FirstOrDefault();
             if (agileSystemUser == null)
             {
-                agileSystemUser = new AgileSystemUser() { AgileSystemId = systemId, AgileSystemUserId = assignee.ID };
+                agileSystemUser = new AgileSystemUser() { AgileSystemId = systemId, AgileSystemUserId = assignee.ID, Active = true };
                 _dataContext.AgileSystemUser.Add(agileSystemUser);
             }
             return agileSystemUser;
@@ -171,7 +171,8 @@ namespace VSTSComms.Import
                     {
                         AgileSystemUserId = Guid.NewGuid().ToString(),
                         AgileSystemUserName = user,
-                        AgileSystemId = agileSystem.AgileSystemId
+                        AgileSystemId = agileSystem.AgileSystemId,
+                        Active = true
                         //work values populated upon cross reference (manual)
                     };
                     _dataContext.AgileSystemUser.Add(asu);
