@@ -44,7 +44,7 @@ exports.getTimecards = () => {
         }
 
         var gr = new GlideRecord(config.servicenow.instance,'time_card',config.servicenow.user,config.servicenow.password,'v2')
-        gr.setReturnFields('user.sys_id,user.first_name,user.last_name,user.email,u_pay_period,total,week_starts_on,u_week_ends_on,saturday,sunday,monday,tuesday,wednesday,thursday,friday,resource_plan.sys_id,resource_plan.short_description');
+        gr.setReturnFields('user.sys_id,user.first_name,user.last_name,user.email,user.active,u_pay_period,total,week_starts_on,u_week_ends_on,saturday,sunday,monday,tuesday,wednesday,thursday,friday,resource_plan.sys_id,resource_plan.short_description,resource_plan.active');
         gr.addEncodedQuery('week_starts_on>=' + week_starts_on);
         // Use gr.setLimit(10); if testing
         gr.query().then(function(result){ //returns promise 

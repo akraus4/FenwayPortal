@@ -23,17 +23,20 @@ exports.postTimecards = timecards => {
             timecard["resource_plan.short_description"];
           work_team.project_id = timecard["resource_plan.sys_id"];
           work_team.project_name = timecard["resource_plan.short_description"];
+          work_team.active = timecard["resource_plan.active"] === 'true' ? 1 : 0;
 
-          var sql = `insert into work_team (work_team_id, work_team_name, project_id, project_name) values ("${
-            work_team.work_team_id
-          }","${work_team.work_team_name}","${work_team.project_id}","${
-            work_team.project_name
-          }")
-                                on duplicate key update work_team_name="${
-                                  work_team.work_team_name
-                                }", project_id="${
-            work_team.project_id
-          }", project_name="${work_team.project_name}"`;
+          var sql = `insert into work_team (work_team_id, work_team_name, project_id, project_name, active) 
+            values (
+              "${work_team.work_team_id}",
+              "${work_team.work_team_name}",
+              "${work_team.project_id}",
+              "${work_team.project_name}",
+              "${work_team.active}")
+            on duplicate key update 
+              work_team_name="${work_team.work_team_name}", 
+              project_id="${work_team.project_id}", 
+              project_name="${work_team.project_name}",
+              active="${work_team.active}"`;
           connection.query(sql, (err, result) => {
             if (err) throw err;
           });
@@ -46,34 +49,39 @@ exports.postTimecards = timecards => {
           work_user.firstname = timecard["user.first_name"];
           work_user.lastname = timecard["user.last_name"];
           work_user.email = timecard["user.email"];
+          work_user.active = timecard["user.active"] === 'true' ? 1 : 0;
 
-          var sql = `insert into work_user (work_user_id, firstname, lastname, email) values ("${
-            work_user.work_user_id
-          }","${work_user.firstname}","${work_user.lastname}","${
-            work_user.email
-          }")
-                                on duplicate key update firstname="${
-                                  work_user.firstname
-                                }", lastname="${work_user.lastname}", email="${
-            work_user.email
-          }"`;
+          var sql = `insert into work_user (work_user_id, firstname, lastname, email, active) 
+            values (
+              "${work_user.work_user_id}",
+              "${work_user.firstname}",
+              "${work_user.lastname}",
+              "${work_user.email}",
+              "${work_user.active}")
+            on duplicate key update 
+              firstname="${work_user.firstname}",
+              lastname="${work_user.lastname}",
+              email="${work_user.email}",
+              active="${work_user.active}"`;
           connection.query(sql, (err, result) => {
             if (err) throw err;
           });
         }
 
-        // Add or update work_team_member
+        // Add a work_team_member if if it does not exist (no updates)
         if (timecard["user.sys_id"] && timecard["resource_plan.sys_id"]) {
           var work_team_member = {};
           work_team_member.work_team_member_id = timecard["user.sys_id"] + timecard["resource_plan.sys_id"];
           work_team_member.work_user_id = timecard["user.sys_id"];
           work_team_member.work_team_id = timecard["resource_plan.sys_id"];
+          work_team_member.active = 1;
 
-          var sql = `insert ignore into work_team_member (work_team_member_id, work_user_id, work_team_id) values ("${
-            work_team_member.work_team_member_id
-          }","${work_team_member.work_user_id}","${
-            work_team_member.work_team_id
-          }")`;
+          var sql = `insert ignore into work_team_member (work_team_member_id, work_user_id, work_team_id, active) 
+            values (
+              "${work_team_member.work_team_member_id}",
+              "${work_team_member.work_user_id}",
+              "${work_team_member.work_team_id}",
+              "${work_team_member.active}")`;
           connection.query(sql, (err, result) => {
             if (err) throw err;
           });
