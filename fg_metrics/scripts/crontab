@@ -2,9 +2,9 @@ SHELL=/bin/bash
 PATH=/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin
 # 0 0,12 * * * /opt/metrics/scripts/import-timecards.sh dev2 > /dev/null 2>&1
 #0 0,12 * * * /opt/metrics/scripts/import-timecards-all-envs.sh > /dev/null 2>&1
-0 * * * * /opt/metrics/environments/dev1/Coaches_Portal/fg_metrics/scripts/import-timecards-dev.sh > /dev/null 2>&1
+*/5 * * * * /opt/metrics/environments/dev1/Coaches_Portal/fg_metrics/scripts/import-timecards-dev.sh > /dev/null 2>&1
 0 * * * * /opt/metrics/environments/dev2/Coaches_Portal/fg_metrics/scripts/import-timecards-dev2.sh > /dev/null 2>&1
 0 * * * * /opt/metrics/environments/prod/Coaches_Portal/fg_metrics/scripts/import-timecards-prod.sh > /dev/null 2>&1
-0 * * * * /opt/metrics/environments/dev1/Coaches_Portal/fg_metrics/scripts/import-sprints-dev.sh > /dev/null 2>&1
+*/5 * * * * /opt/metrics/environments/dev1/Coaches_Portal/fg_metrics/scripts/import-sprints-dev.sh > /dev/null 2>&1
 0 * * * * /opt/metrics/environments/dev2/Coaches_Portal/fg_metrics/scripts/import-sprints-dev2.sh > /dev/null 2>&1
 0 * * * * /opt/metrics/environments/prod/Coaches_Portal/fg_metrics/scripts/import-sprints-prod.sh > /dev/null 2>&1
