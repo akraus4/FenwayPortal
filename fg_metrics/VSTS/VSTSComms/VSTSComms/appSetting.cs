@@ -7,6 +7,21 @@ namespace VSTSComms
 {
     public class AppSetting
     {
+        [JsonProperty(PropertyName = "VerboseLogging")]
+        private string VerboseLogging { get; set; }
+
+        public bool VerboseLoggingEnabled
+        {
+            get
+            {
+                if (!string.IsNullOrEmpty(VerboseLogging) && string.Compare(VerboseLogging, "true", true) == 0)
+                    return true;
+                else
+                    return false;
+
+            }
+        }
+
         [JsonProperty(PropertyName = "environment")]
         public string Environment { get; set; }
         [JsonProperty(PropertyName = "team_fields_to_query")]

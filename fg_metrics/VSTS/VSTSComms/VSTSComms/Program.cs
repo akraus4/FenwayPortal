@@ -3,22 +3,18 @@ using Newtonsoft.Json;
 using System;
 using System.Configuration;
 using VSTSComms;
+using VSTSComms.Utilities;
 
 namespace VSTSComms
 {
     class Program
     {
-        enum RunType
-        {
-            Extract,
-            Load,
-            Both
-        }
+       
         
         static void Main(string[] args)
         {
             var environmentName = VSTSComms.Utilities.Miscellaneous.GetEnvironment();
-
+            bool verboseLogging = VSTSComms.Utilities.Miscellaneous.VerboseLogging();
             var builder = new ConfigurationBuilder()
                 .AddJsonFile($"appsettings.json", true, true)
                 .AddJsonFile($"appsettings.{environmentName}.json", true, true)
@@ -26,39 +22,46 @@ namespace VSTSComms
             IConfigurationRoot Configuration = builder.Build();
             Configuration = builder.Build();
 
-            RunType runType = RunType.Both;
+            Miscellaneous.RunType runType = Miscellaneous.RunType.Both;
             if (args.Length > 0)
             {
                 var input = args[0].ToString().ToLower();
                 switch (input)
                 {
                     case "extract":
-                        runType = RunType.Extract;
+                        runType = Miscellaneous.RunType.Extract;
                         break;
                     case "load":
-                        runType = RunType.Load;
+                        runType = Miscellaneous.RunType.Load;
                         break;
                     default:
                         break;
                 }
             }
             Console.WriteLine($"Run type = {runType.ToString()}.");
-            if (runType == RunType.Both || runType == RunType.Extract)
+
+            var settings = Utilities.Miscellaneous.GetSettingsFile();
+            if (verboseLogging == true)
             {
-                Console.WriteLine("File extract starting.");
+                Utilities.Miscellaneous.WriteOutSettings(runType,settings,Configuration);
+            }
+
+            if (runType == Miscellaneous.RunType.Both || runType == Miscellaneous.RunType.Extract)
+            {
+                Utilities.Miscellaneous.WriteToLog("File extract starting.", true);
                 //export vsts
                 VSTSExport work = new VSTSExport(Configuration);
                 
                 work.ProcessTeams();
-                Console.WriteLine("File extract complete.");
+                Utilities.Miscellaneous.WriteToLog("File extract complete.",true);
             }
-            if (runType == RunType.Both || runType == RunType.Load)
+            if (runType == Miscellaneous.RunType.Both || runType == Miscellaneous.RunType.Load)
             {
-                Console.WriteLine("File load to database starting.");
+                Utilities.Miscellaneous.WriteToLog("File load to database starting.",true);
                 //import json into database
                 VSTSComms.Import.Importer importer = new Import.Importer(Configuration);
                 importer.Run();
-                Console.WriteLine("File load to database complete.");
+                Utilities.Miscellaneous.WriteToLog("File load to database complete.",true);
             }
             //Console.ReadLine();
         }
