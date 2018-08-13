@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -16,6 +17,20 @@ namespace VSTSComms.Utilities
             }
             else
                 return string.Empty;
+        }
+        public static AppSetting GetSettingsFile()
+        {
+            string environment = GetEnvironment();
+            string file = $@"{AppDomain.CurrentDomain.BaseDirectory}appsettings.{environment}.JSON";
+            string fileContents = GetFileContents(file);
+            return JsonConvert.DeserializeObject<AppSetting>(fileContents);
+        }
+        public static string GetEnvironment()
+        {
+            string file = $@"{AppDomain.CurrentDomain.BaseDirectory}appSettings.json";
+            string fileContents = Utilities.Miscellaneous.GetFileContents(file);
+            var appSetting = JsonConvert.DeserializeObject<AppSetting>(fileContents);
+            return appSetting.Environment;
         }
     }
 

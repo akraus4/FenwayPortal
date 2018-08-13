@@ -8,17 +8,23 @@ using System.Text;
 using System.Linq;
 using VSTSComms.VSTS;
 using VSTSComms.Ouput;
+using Microsoft.Extensions.Configuration;
 
 namespace VSTSComms
 {     
     public class VSTSExport
     {
+        private IConfigurationRoot configuration;
+
+        public VSTSExport(IConfigurationRoot configuration)
+        {
+            this.configuration = configuration;
+        }
+       
+
         public void ProcessTeams()
         {
-            string file = $@"{AppDomain.CurrentDomain.BaseDirectory}appSettings.JSON" ;
-            
-            string fileContents = GetFileContents(file);
-            AppSetting settings = JsonConvert.DeserializeObject<AppSetting>(fileContents);
+            AppSetting settings = VSTSComms.Utilities.Miscellaneous.GetSettingsFile();
 
             foreach (var team in settings.Teams)
             {
@@ -145,16 +151,7 @@ namespace VSTSComms
             return $"https://{team.TFSUrl}/{team.Collection}/{team.Project}";
         }
 
-        private string GetFileContents(string fileName)
-        {
-            // This text is added only once to the file.
-            if (File.Exists(fileName))
-            {
-                return File.ReadAllText(fileName);
-            }
-            else
-                return string.Empty;
-        }
+       
 
         private void WriteFile(string teamCode, string fileNameAndPath, string fileContent)
         {

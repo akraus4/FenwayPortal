@@ -7,6 +7,8 @@ namespace VSTSComms
 {
     public class AppSetting
     {
+        [JsonProperty(PropertyName = "environment")]
+        public string Environment { get; set; }
         [JsonProperty(PropertyName = "team_fields_to_query")]
         public string FieldsToQuery { get; set; }
         [JsonProperty(PropertyName = "output_directory")]

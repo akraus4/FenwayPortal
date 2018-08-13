@@ -5,22 +5,29 @@ using System.IO;
 using System.Text;
 using System.Linq;
 using VSTSComms.Ouput;
+using Microsoft.Extensions.Configuration;
 
 namespace VSTSComms.Import
 {
     public class Importer
     {
-        public Importer()
-        {
+        private IConfigurationRoot configuration;
 
+        public Importer(IConfigurationRoot configuration)
+        {
+            this.configuration = configuration;
         }
+
+        public Importer() { }
+
         fg_metricsContext _dataContext;
         AppSetting _appSetting;
         public void Run()
         {
             InitializeSettings();
             string[] filePaths = Directory.GetFiles(_appSetting.ImportDirectory, "*.json", SearchOption.TopDirectoryOnly);
-            _dataContext = new fg_metricsContext();
+            //set the connstring here.
+            _dataContext = new fg_metricsContext(configuration.GetConnectionString("DefaultConnection"));
 
             foreach (var file in filePaths)
             {
@@ -226,10 +233,7 @@ namespace VSTSComms.Import
 
         private void InitializeSettings()
         {
-            string file = $@"{AppDomain.CurrentDomain.BaseDirectory}appSettings.json";
-
-            string fileContents = Utilities.Miscellaneous.GetFileContents(file);
-            _appSetting = JsonConvert.DeserializeObject<AppSetting>(fileContents);
+            _appSetting = VSTSComms.Utilities.Miscellaneous.GetSettingsFile();
         }
     }
 }
