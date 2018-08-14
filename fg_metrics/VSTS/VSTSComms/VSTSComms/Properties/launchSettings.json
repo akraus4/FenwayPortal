@@ -2,7 +2,7 @@
   "profiles": {
     "VSTSComms": {
       "commandName": "Project",
-      "commandLineArgs": "load"
+      "commandLineArgs": "both"
     }
   }
 }

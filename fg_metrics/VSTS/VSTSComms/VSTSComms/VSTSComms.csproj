@@ -6,8 +6,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="AgileSprint.cs" />
+    <Compile Remove="AgileStory.cs" />
+    <Compile Remove="AgileStoryAgileSystemUser.cs" />
+    <Compile Remove="AgileSystem.cs" />
+    <Compile Remove="AgileSystemUser.cs" />
     <Compile Remove="Entities\AgileSysConnect.cs" />
     <Compile Remove="Entities\fg_metrics_dev2Context.cs" />
+    <Compile Remove="fg_metricsContext.cs" />
+    <Compile Remove="fg_metricsContextExtended.cs" />
+    <Compile Remove="WorkDailyhours.cs" />
+    <Compile Remove="WorkTeam.cs" />
+    <Compile Remove="WorkTeamMember.cs" />
+    <Compile Remove="WorkUser.cs" />
   </ItemGroup>
 
   <ItemGroup>

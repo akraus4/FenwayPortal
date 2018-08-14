@@ -6,6 +6,7 @@ using System.Text;
 using System.Linq;
 using VSTSComms.Ouput;
 using Microsoft.Extensions.Configuration;
+using VSTSComms.EntitiesMySQL;
 
 namespace VSTSComms.Import
 {
@@ -42,8 +43,12 @@ namespace VSTSComms.Import
         private Exception ProcessFile(string file)
         {
             Exception ex = null;
+            bool verboseLogging = Utilities.Miscellaneous.VerboseLogging();
+
             try
             {
+                if(verboseLogging)
+                    Utilities.Miscellaneous.WriteToLog($"Begin Processing file:{file}.", true);
                 string content = System.IO.File.ReadAllText(file);
                 VSTSComms.Ouput.OutPutObject jsonContent = JsonConvert.DeserializeObject<VSTSComms.Ouput.OutPutObject>(content);
 
@@ -52,6 +57,8 @@ namespace VSTSComms.Import
                 AgileSystem agileSystem = _dataContext.AgileSystem.Where(x => x.WorkTeamId == jsonContent.TeamID).FirstOrDefault();
                 if (agileSystem == null)
                 {
+                    if(verboseLogging)
+                        Utilities.Miscellaneous.WriteToLog($"Adding agile system for : ID = {workTeam.WorkTeamId}, Team = {workTeam.WorkTeamName}, System = {jsonContent.SystemType}.", true);
 
                     agileSystem = new AgileSystem()
                     {
@@ -63,11 +70,7 @@ namespace VSTSComms.Import
                     _dataContext.AgileSystem.Add(agileSystem);
                 }
 
-
                 AddAnyMissingUsers(agileSystem, jsonContent);
-
-
-                //WorkTeam workTeam = _dataContext.WorkTeam.Where(x => x.TeamId == jsonContent.TeamID).FirstOrDefault();
 
                 foreach (var sprint in jsonContent.Sprints)
                 {
@@ -75,13 +78,18 @@ namespace VSTSComms.Import
                     //find sprint 
                     //AgileSprint agileSprint = FindSprint(workTeam.TeamId, sprint.ID);
                     AgileSprint agileSprint = FindSprint(agileSystem.AgileSystemId, sprint.ID);
-                    if (agileSprint != null) { RemoveStories(agileSprint); }
+                    if (agileSprint != null)
+                    {
+                        RemoveStories(agileSprint);
+                    }
                     if (agileSprint == null)
                     {
                         agileSprint = new AgileSprint();
                         _dataContext.AgileSprint.Add(agileSprint);
                         agileSprint.AgileSprintId = Guid.NewGuid().ToString();
                     }
+                    if (verboseLogging)
+                        Utilities.Miscellaneous.WriteToLog($"Adding sprint: ID = {sprint.ID}, SprintName = {sprint.Name}.", true);
                     //set properties
                     agileSprint.AgileSprintName = sprint.ID;
                     agileSprint.AgileSystemId = agileSystem.AgileSystemId;
@@ -93,6 +101,8 @@ namespace VSTSComms.Import
                     {
                         AgileStory agileStory = new AgileStory() { AgileStoryId = Guid.NewGuid().ToString() };
                         _dataContext.AgileStory.Add(agileStory);
+                        if (verboseLogging)
+                            Utilities.Miscellaneous.WriteToLog($"Adding story: ID = {story.ID}, StoryPoints = {story.Points}.", true);
                         agileStory.AgileStoryName = story.ID;
                         agileStory.AgileSprintId = agileSprint.AgileSprintId;
                         agileStory.StoryDescription = story.ID;
@@ -114,12 +124,16 @@ namespace VSTSComms.Import
                                 agileStoryAgileSystemUser.AgileSystemUserId = systemUser.AgileSystemUserId;
                                 agileStoryAgileSystemUser.AgileSystemUserStoryPoints = assignee.Points.ToString();
                             }
+                            if (verboseLogging)
+                                Utilities.Miscellaneous.WriteToLog($"AgileSystemUserId = {assignee.ID}, StoryPoints = {story.Points}, Story ID {story.ID}.", true);
                         }
                     }
                 }
+                Utilities.Miscellaneous.WriteToLog($"Complete Processing file:{file}.", true);
             }
             catch (Exception ex1)
             {
+                Utilities.Miscellaneous.WriteToLog($"See the log file.  Error Processing file.:{file}.", true);
                 ex = ex1;
             }
             return ex;
@@ -214,15 +228,34 @@ namespace VSTSComms.Import
 
         private void RemoveStories(AgileSprint agileSprint)
         {
+
+            
+
+            Utilities.Miscellaneous.WriteToLog($"Sprint ID to remove:{agileSprint.AgileSprintId }");
+
             List<AgileStory> storiesToRemove = _dataContext.AgileStory.Where(x => x.AgileSprintId == agileSprint.AgileSprintId).ToList();
 
             foreach (var story in storiesToRemove)
             {
+                //remove users of the stories
+                List<AgileStoryAgileSystemUser> usersToRemove = _dataContext.AgileStoryAgileSystemUser.Where(x => x.AgileStoryId == story.AgileStoryId).ToList();
+                if (usersToRemove != null && usersToRemove.Any())
+                {
+                    Utilities.Miscellaneous.WriteToLog($"Users to Remove:{usersToRemove.First().AgileStoryAgileSystemUserId.ToString()}");
+                    _dataContext.AgileStoryAgileSystemUser.RemoveRange(usersToRemove);
+                }
+
+                //_dataContext.SaveChanges();
+                
                 //TODO: add this back after foreign keys are readded.
                 //agileSprint.AgileStory.Remove(story);
                 _dataContext.AgileStory.Remove(story);
+                Utilities.Miscellaneous.WriteToLog($"Story ID to remove:{story.AgileStoryId }");
 
+                //_dataContext.SaveChanges();
             }
+
+            
         }
 
         private AgileSprint FindSprint(string agileSystemID, string sprintID)

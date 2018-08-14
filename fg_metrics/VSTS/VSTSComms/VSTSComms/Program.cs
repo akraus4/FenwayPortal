@@ -49,9 +49,7 @@ namespace VSTSComms
             if (runType == Miscellaneous.RunType.Both || runType == Miscellaneous.RunType.Extract)
             {
                 Utilities.Miscellaneous.WriteToLog("File extract starting.", true);
-                //export vsts
                 VSTSExport work = new VSTSExport(Configuration);
-                
                 work.ProcessTeams();
                 Utilities.Miscellaneous.WriteToLog("File extract complete.",true);
             }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace VSTSComms
+namespace VSTSComms.EntitiesMySQL
 {
     public partial class AgileStoryAgileSystemUser
     {
@@ -9,5 +9,8 @@ namespace VSTSComms
         public string AgileStoryId { get; set; }
         public string AgileSystemUserId { get; set; }
         public string AgileSystemUserStoryPoints { get; set; }
+
+        public AgileStory AgileStory { get; set; }
+        public AgileSystemUser AgileSystemUser { get; set; }
     }
 }
