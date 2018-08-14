@@ -38,7 +38,7 @@ namespace VSTSComms
                         break;
                 }
             }
-            Console.WriteLine($"Run type = {runType.ToString()}.");
+            Miscellaneous.WriteToLog($"Run type = {runType.ToString()}.", true);
 
             var settings = Utilities.Miscellaneous.GetSettingsFile();
             if (verboseLogging == true)
@@ -61,7 +61,6 @@ namespace VSTSComms
                 importer.Run();
                 Utilities.Miscellaneous.WriteToLog("File load to database complete.",true);
             }
-            //Console.ReadLine();
         }
     }
 }

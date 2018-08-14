@@ -24,63 +24,81 @@ namespace VSTSComms
 
         public void ProcessTeams()
         {
-            AppSetting settings = VSTSComms.Utilities.Miscellaneous.GetSettingsFile();
-
-            foreach (var team in settings.Teams)
+            try
             {
-                Console.WriteLine($"Exporting team {team.Code}.");
+                AppSetting settings = VSTSComms.Utilities.Miscellaneous.GetSettingsFile();
 
-                string _credentials = Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:{1}", "", team.Token)));
-                string siteUrl = $@"https://{team.TFSUrl}";
-                using (var client = new HttpClient())
+                foreach (var team in settings.Teams)
                 {
-                    client.BaseAddress = new Uri(siteUrl);
-                    client.DefaultRequestHeaders.Accept.Clear();
-                    client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", _credentials);
+                    Utilities.Miscellaneous.WriteToLog($"Exporting team {team.Code}.", true);
 
-                   //GetWorkItemsByWiql(client, team);
-                   SprintResult sprintsFromSourceSystem =  GetSprintsFromTeam(client, team);
-
-                    HttpResponseMessage queryHttpResponseMessage = RunQueries(client, team);
-                    
-                    
-                    if (queryHttpResponseMessage.IsSuccessStatusCode)
+                    string _credentials = Convert.ToBase64String(System.Text.ASCIIEncoding.ASCII.GetBytes(string.Format("{0}:{1}", "", team.Token)));
+                    string siteUrl = $@"https://{team.TFSUrl}";
+                    using (var client = new HttpClient())
                     {
-                        //bind the response content to the queryResult object
-                        QueryResult queryResult = queryHttpResponseMessage.Content.ReadAsAsync<QueryResult>().Result;
-                        string queryId = queryResult.id;
+                        client.BaseAddress = new Uri(siteUrl);
+                        client.DefaultRequestHeaders.Accept.Clear();
+                        client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                        client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", _credentials);
 
-                        HttpResponseMessage httpResponseMessage = RunIDQuery(client, team, queryId);
-                        if (httpResponseMessage.IsSuccessStatusCode)
+                        //GetWorkItemsByWiql(client, team);
+                        SprintResult sprintsFromSourceSystem = GetSprintsFromTeam(client, team);
+
+                        HttpResponseMessage queryHttpResponseMessage = RunQueries(client, team);
+
+
+                        if (queryHttpResponseMessage.IsSuccessStatusCode)
                         {
-                            WorkItemQueryResult workItemQueryResult = httpResponseMessage.Content.ReadAsAsync<WorkItemQueryResult>().Result;
+                            //bind the response content to the queryResult object
+                            QueryResult queryResult = queryHttpResponseMessage.Content.ReadAsAsync<QueryResult>().Result;
+                            string queryId = queryResult.id;
 
-                            //now that we have a bunch of work items, build a list of id's so we can get details
-                            var builder = new System.Text.StringBuilder();
-                            foreach (var item in workItemQueryResult.workItems)
+                            HttpResponseMessage httpResponseMessage = RunIDQuery(client, team, queryId);
+                            if (httpResponseMessage.IsSuccessStatusCode)
                             {
-                                builder.Append(item.id.ToString()).Append(",");
+                                WorkItemQueryResult workItemQueryResult = httpResponseMessage.Content.ReadAsAsync<WorkItemQueryResult>().Result;
+
+                                //now that we have a bunch of work items, build a list of id's so we can get details
+                                var builder = new System.Text.StringBuilder();
+                                foreach (var item in workItemQueryResult.workItems)
+                                {
+                                    builder.Append(item.id.ToString()).Append(",");
+                                }
+
+                                //clean up string of id's
+                                string ids = builder.ToString().TrimEnd(new char[] { ',' });
+                                //string[] idToQuery = ids.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+
+                                HttpResponseMessage getWorkItemsHttpResponse = RunWorkItemsQuery(client, team, ids, settings);
+
+                                if (getWorkItemsHttpResponse.IsSuccessStatusCode)
+                                {
+                                    var result = getWorkItemsHttpResponse.Content.ReadAsStringAsync().Result;
+                                    RootObject ro = JsonConvert.DeserializeObject<RootObject>(result);
+                                    ro.SourceSystemSprints = sprintsFromSourceSystem;
+                                    OutPutObject output = ro.ConvertToOutput(team);
+                                    string fileContent = JsonConvert.SerializeObject(output);
+                                    WriteFile(team.Code, settings.OutputDirectory, fileContent);
+                                }
+                                else
+                                {
+                                    Utilities.Miscellaneous.WriteToLog($"The request for RunWorkItemsQuery failed.  Reason:{getWorkItemsHttpResponse.RequestMessage}.", true);
+                                }
                             }
-
-                            //clean up string of id's
-                            string ids = builder.ToString().TrimEnd(new char[] { ',' });
-                            //string[] idToQuery = ids.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
-
-                            HttpResponseMessage getWorkItemsHttpResponse = RunWorkItemsQuery(client, team, ids, settings);
-                            
-                            if (getWorkItemsHttpResponse.IsSuccessStatusCode)
+                            else
                             {
-                                var result = getWorkItemsHttpResponse.Content.ReadAsStringAsync().Result;
-                                RootObject ro = JsonConvert.DeserializeObject<RootObject>(result);
-                                ro.SourceSystemSprints = sprintsFromSourceSystem;
-                                OutPutObject output = ro.ConvertToOutput(team);
-                                string fileContent = JsonConvert.SerializeObject(output);
-                                WriteFile(team.Code, settings.OutputDirectory, fileContent);
+                                Utilities.Miscellaneous.WriteToLog($"The request for RunIDQuery failed.  Reason:{httpResponseMessage.RequestMessage}.", true);
                             }
+                        }
+                        else
+                        {
+                            Utilities.Miscellaneous.WriteToLog($"The request for RunQueries failed.  Reason:{queryHttpResponseMessage.RequestMessage}.", true);
                         }
                     }
                 }
+            }catch(Exception mainEx)
+            {
+                Utilities.Miscellaneous.WriteToLog($"Error Processing teams.  Reason:{mainEx.ToString()}.", true);
             }
         }
 

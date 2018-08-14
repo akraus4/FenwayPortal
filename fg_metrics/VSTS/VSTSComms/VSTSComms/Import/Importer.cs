@@ -13,7 +13,7 @@ namespace VSTSComms.Import
     public class Importer
     {
         private IConfigurationRoot configuration;
-
+        private bool _verboseLogging = false;
         public Importer(IConfigurationRoot configuration)
         {
             this.configuration = configuration;
@@ -40,14 +40,15 @@ namespace VSTSComms.Import
             }
 
         } 
+       
         private Exception ProcessFile(string file)
         {
             Exception ex = null;
-            bool verboseLogging = Utilities.Miscellaneous.VerboseLogging();
+            _verboseLogging = Utilities.Miscellaneous.VerboseLogging();
 
             try
             {
-                if(verboseLogging)
+                if(_verboseLogging)
                     Utilities.Miscellaneous.WriteToLog($"Begin Processing file:{file}.", true);
                 string content = System.IO.File.ReadAllText(file);
                 VSTSComms.Ouput.OutPutObject jsonContent = JsonConvert.DeserializeObject<VSTSComms.Ouput.OutPutObject>(content);
@@ -57,7 +58,7 @@ namespace VSTSComms.Import
                 AgileSystem agileSystem = _dataContext.AgileSystem.Where(x => x.WorkTeamId == jsonContent.TeamID).FirstOrDefault();
                 if (agileSystem == null)
                 {
-                    if(verboseLogging)
+                    if(_verboseLogging)
                         Utilities.Miscellaneous.WriteToLog($"Adding agile system for : ID = {workTeam.WorkTeamId}, Team = {workTeam.WorkTeamName}, System = {jsonContent.SystemType}.", true);
 
                     agileSystem = new AgileSystem()
@@ -88,7 +89,7 @@ namespace VSTSComms.Import
                         _dataContext.AgileSprint.Add(agileSprint);
                         agileSprint.AgileSprintId = Guid.NewGuid().ToString();
                     }
-                    if (verboseLogging)
+                    if (_verboseLogging)
                         Utilities.Miscellaneous.WriteToLog($"Adding sprint: ID = {sprint.ID}, SprintName = {sprint.Name}.", true);
                     //set properties
                     agileSprint.AgileSprintName = sprint.ID;
@@ -101,7 +102,7 @@ namespace VSTSComms.Import
                     {
                         AgileStory agileStory = new AgileStory() { AgileStoryId = Guid.NewGuid().ToString() };
                         _dataContext.AgileStory.Add(agileStory);
-                        if (verboseLogging)
+                        if (_verboseLogging)
                             Utilities.Miscellaneous.WriteToLog($"Adding story: ID = {story.ID}, StoryPoints = {story.Points}.", true);
                         agileStory.AgileStoryName = story.ID;
                         agileStory.AgileSprintId = agileSprint.AgileSprintId;
@@ -124,7 +125,7 @@ namespace VSTSComms.Import
                                 agileStoryAgileSystemUser.AgileSystemUserId = systemUser.AgileSystemUserId;
                                 agileStoryAgileSystemUser.AgileSystemUserStoryPoints = assignee.Points.ToString();
                             }
-                            if (verboseLogging)
+                            if (_verboseLogging)
                                 Utilities.Miscellaneous.WriteToLog($"AgileSystemUserId = {assignee.ID}, StoryPoints = {story.Points}, Story ID {story.ID}.", true);
                         }
                     }
@@ -133,7 +134,7 @@ namespace VSTSComms.Import
             }
             catch (Exception ex1)
             {
-                Utilities.Miscellaneous.WriteToLog($"See the log file.  Error Processing file.:{file}.", true);
+                Utilities.Miscellaneous.WriteToLog($"See the log file.  Error Processing file: {file}.", true);
                 ex = ex1;
             }
             return ex;
@@ -141,6 +142,8 @@ namespace VSTSComms.Import
 
         private void MarkFileAsProcessed(string file, Exception ex)
         {
+            if(_verboseLogging)
+                Utilities.Miscellaneous.WriteToLog($"Marking file as processed :{file}.", true);
             string fileName = Path.GetFileName(file);
             if (ex == null)
             {
@@ -158,6 +161,8 @@ namespace VSTSComms.Import
                 //errors move to errors folder
                 File.Move(file, $@"{_appSetting.ErrorsDirectory}/{fileName}");
             }
+            if (_verboseLogging)
+                Utilities.Miscellaneous.WriteToLog($"File marked as processed :{file}.", true);
         }
 
         private void WriteToLog(string message)
@@ -228,10 +233,8 @@ namespace VSTSComms.Import
 
         private void RemoveStories(AgileSprint agileSprint)
         {
-
-            
-
-            Utilities.Miscellaneous.WriteToLog($"Sprint ID to remove:{agileSprint.AgileSprintId }");
+            if(_verboseLogging)
+                Utilities.Miscellaneous.WriteToLog($"Sprint ID to remove:{agileSprint.AgileSprintId }");
 
             List<AgileStory> storiesToRemove = _dataContext.AgileStory.Where(x => x.AgileSprintId == agileSprint.AgileSprintId).ToList();
 
@@ -241,18 +244,16 @@ namespace VSTSComms.Import
                 List<AgileStoryAgileSystemUser> usersToRemove = _dataContext.AgileStoryAgileSystemUser.Where(x => x.AgileStoryId == story.AgileStoryId).ToList();
                 if (usersToRemove != null && usersToRemove.Any())
                 {
-                    Utilities.Miscellaneous.WriteToLog($"Users to Remove:{usersToRemove.First().AgileStoryAgileSystemUserId.ToString()}");
+                    if(_verboseLogging)
+                        Utilities.Miscellaneous.WriteToLog($"Users to Remove:{usersToRemove.First().AgileStoryAgileSystemUserId.ToString()}");
                     _dataContext.AgileStoryAgileSystemUser.RemoveRange(usersToRemove);
                 }
 
-                //_dataContext.SaveChanges();
-                
                 //TODO: add this back after foreign keys are readded.
                 //agileSprint.AgileStory.Remove(story);
                 _dataContext.AgileStory.Remove(story);
-                Utilities.Miscellaneous.WriteToLog($"Story ID to remove:{story.AgileStoryId }");
-
-                //_dataContext.SaveChanges();
+                if(_verboseLogging)
+                    Utilities.Miscellaneous.WriteToLog($"Story ID to remove:{story.AgileStoryId }");
             }
 
             
