@@ -1,6 +1,48 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+.abcRioButtonLightBlue {
+    border-radius: 5px;
+    width: 200px!important;
+    height: 30px !important;
+    background-color: #fff;
+    color: #757575;
+    display:inline-block;
+    text-decoration: none !important;
+    margin:0 auto;
+}
+
+#loginButtonDiv{
+    margin-top: 40%;
+}
+
+#loginContainer{
+    position: absolute;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    text-align: center;
+}
+
+#loginDiv{
+    width: 300px;
+    height: 200px;
+    border: solid #d3d3d3 1px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 14% !important;
+    margin:0 auto;
+  /* vertical-align: middle; */
+    /* position: absolute;
+    right: 40%;
+    left: 40%;
+    top: 40%;
+    bottom: 40%; */
+    background-color: #d3d3d3;
+    box-shadow: 5px 10px 8px #888888;
+}
+
 /* .box {
     width:70%;
     height:200px;

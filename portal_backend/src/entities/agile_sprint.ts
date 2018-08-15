@@ -8,9 +8,6 @@ export class AgileSprint {
   @Column('varchar', { name: 'agile_sprint_name' })
   agileSprintName: string
 
-  // @Column('uuid', {name : "agile_system_id"})
-  // agile_system_id: string;
-
   @ManyToOne(type => AgileSystem)
   @JoinColumn({ name: 'agile_system_id' })
   agileSystem: AgileSystem

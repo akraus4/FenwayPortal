@@ -6,18 +6,24 @@ const httpOptions = {
 	headers: new Headers({ 'Content-Type': 'application/json' })
 };
 
-@Injectable()
+const ID_TOKEN_KEY = 'id_token';
 
+@Injectable()
 export class MetricsService {
+
+	
+	
 	developmentURL = 'http://localhost:3000'
 	productionURL = ''
 	url = this.developmentURL
 	http: any;
 	loadingVisible = new BehaviorSubject<boolean>(false);
+	signInVisible = new BehaviorSubject<boolean>(true);
 
 	constructor(@Inject(Http) http) {
 		this.http = http;
 	}
+
 
 	getAll(entity, relations, conditions) {
 		console.log(`URL ====  ${this.url}/api/${entity}?relations=${relations}&conditions=${conditions}`);
@@ -61,4 +67,13 @@ export class MetricsService {
 	hideLoadingPanel(): void {
 		this.loadingVisible.next(false);
 	}
+
+	showSignInPanel(): void {
+		this.signInVisible.next(true);
+	}
+
+	hideSignInPanel(): void {
+		this.signInVisible.next(false);
+	}
+
 }

@@ -16,9 +16,6 @@ export class AgileStory {
   @Column('varchar', { name: 'agile_story_name' })
   agileStoryName: string
 
-  // @Column()
-  // agile_sprint_id: string;
-
   @ManyToOne(type => AgileSprint)
   @JoinColumn({ name: 'agile_sprint_id' })
   agileSprint: AgileSprint

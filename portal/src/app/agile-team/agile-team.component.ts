@@ -153,13 +153,19 @@ export class AgileTeamComponent implements OnInit {
         var currentTeamMember; //Used to determine if the team member has a system user connected to it.
         for (let teamMember of results) {
           currentTeamMember = '';
+          var teamMemberUserActiveView;
+            if (teamMember.active == 1) {
+              teamMemberUserActiveView = 'True';
+            } else if (teamMember.active == 0) {
+              teamMemberUserActiveView = 'False';
+            }
           for (let systemUser of this.currentSystemUsers) {
             //Populates grid with True or False instead of 1 or 0.
-            var activeView;
+            var systemUserActiveView;
             if (systemUser.active == 1) {
-              activeView = 'True';
+              systemUserActiveView = 'True';
             } else if (systemUser.active == 0) {
-              activeView = 'False';
+              systemUserActiveView = 'False';
             }
             //If a team member is connected to a system user.
             if (systemUser.workTeamMember.workTeamMemberId == teamMember.workTeamMemberId) {
@@ -168,11 +174,13 @@ export class AgileTeamComponent implements OnInit {
                 'fullName': teamMember.workUser.firstname + ' ' + teamMember.workUser.lastname,
                 'workUser': teamMember.workUser,
                 'workTeam': teamMember.workTeam,
+                'workTeamMemberActive': teamMember.active,
+                'teamMemberUserActiveView': teamMemberUserActiveView,
 
                 'agileSystemUserId': systemUser.agileSystemUserId,
                 'agileSystemUserName': systemUser.agileSystemUserName,
-                'activeView': activeView,
-                'active': systemUser.active
+                'systemUserActiveView': systemUserActiveView,
+                'systemUserActive': systemUser.active
               }
               currentTeamMember = member;
               this.systemUserGridDataSource.push(member);
@@ -180,17 +188,19 @@ export class AgileTeamComponent implements OnInit {
           }
           //If the the team member isn't connected to a system user.
           if (currentTeamMember == '') {
-            activeView = '';
+            systemUserActiveView = '';
             let memberNoSystemUser = {
               'workTeamMemberId': teamMember.workTeamMemberId,
               'fullName': teamMember.workUser.firstname + ' ' + teamMember.workUser.lastname,
               'workUser': teamMember.workUser,
               'workTeam': teamMember.workTeam,
+              'workTeamMemberActive': teamMember.active,
+              'teamMemberUserActiveView': teamMemberUserActiveView,
 
               'agileSystemUserId': '',
               'agileSystemUserName': '',
-              'activeView': '',
-              'active': 0
+              'systemUserActiveView': '',
+              'systemUserActive': 0
             }
             this.systemUserGridDataSource.push(memberNoSystemUser);
           }
@@ -345,9 +355,6 @@ export class AgileTeamComponent implements OnInit {
     $('#systemTextField').addClass('remove');
     $('#agileTeamSubmitCancelBtnContainer').addClass('remove');
 
-    // if (this.isSystemUserAdd) {
-    //   this.addSystemFields();
-    // }
 
     if (this.systemDropDownValue != undefined) {
       $('#editSystemButton').removeClass('remove');

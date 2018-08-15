@@ -20,9 +20,6 @@ export class AgileSystem {
   @Column('varchar', { name: 'agile_system_type' })
   agileSystemType: string
 
-  // @Column('uuid', {name : "work_team_id"})
-  // work_team_id: string;
-
   @Column('tinyint', { name: 'active' })
   active: boolean
 

@@ -12,8 +12,6 @@ export class WorkDailyHours {
   @PrimaryGeneratedColumn('uuid', { name: 'work_dailyhours_id' })
   workDailyhoursId: string
 
-  // @Column()
-  // work_team_member_id: string;
   @ManyToOne(type => WorkTeamMember)
   @JoinColumn({ name: 'work_team_member_id' })
   workTeamMember: WorkTeamMember

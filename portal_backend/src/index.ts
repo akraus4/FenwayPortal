@@ -1,16 +1,8 @@
 import 'reflect-metadata'
 import { createConnection, ConnectionOptions } from 'typeorm'
 import * as express from 'express'
+
 import * as bodyParser from 'body-parser'
-import { AgileSprint } from './entities/agile_sprint'
-import { AgileStoryAgileSystemUser } from './entities/agile_story_agile_system_user'
-import { AgileStory } from './entities/agile_story'
-import { AgileSystemUser } from './entities/agile_system_user'
-import { AgileSystem } from './entities/agile_system'
-import { WorkDailyHours } from './entities/work_dailyhours'
-import { WorkTeamMember } from './entities/work_team_member'
-import { WorkTeam } from './entities/work_team'
-import { WorkUser } from './entities/work_user'
 
 const config = require('../ormconfig.json')
 
@@ -22,6 +14,16 @@ import * as aSystemController from './controllers/agile_system-controller'
 import * as workTeamController from './controllers/work-team-controller'
 
 import * as controller from './controllers/controller'
+
+var fs = require('fs');
+
+const expressJwt = require('express-jwt');
+
+const RSA_PUBLIC_KEY = fs.readFileSync('./demos/public.key');
+
+const checkIfAuthenticated = expressJwt({
+    secret: RSA_PUBLIC_KEY
+}); 
 
 /**
  * Create Express server.
@@ -99,15 +101,15 @@ app.get(
  */
 createConnection({
   type: 'mysql',
-  host: 'localhost',
+  host: '52.55.14.143',
   port: 3306,
-  username: 'fg_user',
-  password: 'fg_user',
-  database: 'PORTAL',
+  username: 'fg_user_dev2',
+  password: '6UhjVvAgM_Jm',
+  database: 'fg_metrics_dev2',
   entities: [
     __dirname + '/entities/*.ts',
   ],
-  synchronize: true,
+  synchronize: false,
   logging: false
 })
   .then(async connection => {

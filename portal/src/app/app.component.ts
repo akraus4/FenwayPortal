@@ -1,5 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { DataService } from './services/data.service'
+import { Component, Inject, OnInit, TemplateRef } from '@angular/core';
+import { MetricsService } from './services/metrics.service';
+import { DxPopupModule, DxButtonModule, DxTemplateModule } from 'devextreme-angular';
 
 @Component({
   selector: 'app-root',
@@ -8,14 +9,18 @@ import { DataService } from './services/data.service'
 })
 
 export class AppComponent implements OnInit {
-  title = 'app';
-  dataService: any;
-  constructor(@Inject(DataService) dataService) {
-    this.dataService = dataService;
-    // this.columnChoices = this.columns;
+
+  signInVisible;
+
+  constructor(public metricService: MetricsService) {
+
   }
 
   ngOnInit() {
+    this.metricService.signInVisible.subscribe(
+      (signInIndicator) => this.signInVisible = signInIndicator
+    );
+    // this.metricService.showSignInPanel();
   }
 
 }

@@ -13,4 +13,7 @@ export class WorkTeam {
 
   @Column('varchar', { name: 'project_name' })
   projectName: string
+
+  @Column('tinyint', { name: 'active' })
+  active: boolean
 }

@@ -9,14 +9,9 @@ import { WorkUser } from '../entities/work_user'
 import { WorkTeam } from '../entities/work_team'
 @Entity({ name: 'work_team_member' })
 export class WorkTeamMember {
+
   @PrimaryGeneratedColumn('uuid', { name: 'work_team_member_id' })
   workTeamMemberId: string
-
-  // @Column()
-  // work_team_id: string;
-
-  // @Column()
-  // work_user_id: string;
 
   @ManyToOne(type => WorkTeam)
   @JoinColumn({ name: 'work_team_id' })
@@ -26,6 +21,6 @@ export class WorkTeamMember {
   @JoinColumn({ name: 'work_user_id' })
   workUser: WorkUser
 
-  // @Column("varchar", {name : "expected_hours"})
-  // expected_hours: string;
+  @Column('tinyint', { name: 'active' })
+  active: boolean
 }

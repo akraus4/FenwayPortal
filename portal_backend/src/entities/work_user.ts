@@ -21,8 +21,6 @@ export class WorkUser {
   @Column('varchar', { name: 'email' })
   email: string
 
-  // @BeforeInsert()
-  // addId() {
-  //     this.work_user_id = uuidv4();
-  // }
+  @Column('tinyint', { name: 'active' })
+  active: boolean
 }

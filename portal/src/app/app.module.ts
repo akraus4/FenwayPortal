@@ -35,13 +35,15 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { LoadingPanelComponent } from './loading-panel/loading-panel.component';
 import { TeamComponent } from './team/team.component';
 import { AgileTeamComponent } from './agile-team/agile-team.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptorService } from './services/auth-interceptor.service';
 import {
   DxButtonModule,
   DxLoadPanelModule,
   DxDataGridModule,
   DxPieChartModule,
   DxDropDownBoxModule,
-  DxListModule,
+  DxListModule, DxPopupModule,
   DxCheckBoxModule,
   DxSelectBoxModule,
   DxNumberBoxModule,
@@ -92,7 +94,7 @@ import {
     DxNumberBoxModule,
     DxFormModule,
     DxTextBoxModule,
-
+    DxPopupModule,
     DxTemplateModule,
     ModalModule.forRoot(),
     RouterModule.forRoot([
@@ -118,7 +120,11 @@ import {
     DxListModule
   ],
 
-  providers: [MetricsService, DataService],
+  providers: [MetricsService, DataService,  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 

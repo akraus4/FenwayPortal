@@ -2,11 +2,11 @@
     "database": {
         "driver": "mysql",
         "type": "mysql",
-        "host": "localhost",
+        "host": "52.55.14.143",
         "port": 3306,
-        "username": "fg_user",
-        "password": "fg_user",
-        "database": "PORTAL",
+        "username": "fg_user_dev2",
+        "password": "6UhjVvAgM_Jm",
+        "database": "fg_metrics_dev2",
         "synchronize": false,
         "logging": false,
         "entities": [
