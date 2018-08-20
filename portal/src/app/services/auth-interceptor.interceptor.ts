@@ -8,22 +8,24 @@ import {
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class AuthInterceptorService implements HttpInterceptor {
+export class AuthInterceptor implements HttpInterceptor {
 
     intercept(req: HttpRequest<any>,
               next: HttpHandler): Observable<HttpEvent<any>> {
-
+                console.log('made to interceptor');
         const idToken = localStorage.getItem("id_token");
 
         if (idToken) {
-            const cloned = req.clone({
-                headers: req.headers.set("Authorization",
-                    "Bearer " + idToken)
+            req = req.clone({
+                setHeaders: {
+                    authorization: `Bearer ${idToken}`
+                  }
             });
-
-            return next.handle(cloned);
+            console.log(`Interceptor Cloned === ${JSON.stringify(req)}`);
+            return next.handle(req);
         }
         else {
+            console.log(`Interceptor Req === ${req}`);
             return next.handle(req);
         }
     }

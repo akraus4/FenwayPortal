@@ -4,33 +4,67 @@ import * as express from 'express'
 
 import * as bodyParser from 'body-parser'
 
-const config = require('../ormconfig.json')
+const ormConfig = require('../ormconfig.json')
+const config = require('./config/config')
 
 /**
  * Controllers (route handlers).
  */
-import * as wUserController from './controllers/work_user-controller'
-import * as aSystemController from './controllers/agile_system-controller'
-import * as workTeamController from './controllers/work-team-controller'
-
+// import * as wUserController from './controllers/work_user-controller'
+// import * as aSystemController from './controllers/agile_system-controller'
 import * as controller from './controllers/controller'
 
 var fs = require('fs');
 
-const expressJwt = require('express-jwt');
 
-const RSA_PUBLIC_KEY = fs.readFileSync('./demos/public.key');
+var jwt = require('express-jwt')
 
-const checkIfAuthenticated = expressJwt({
-    secret: RSA_PUBLIC_KEY
-}); 
+// const RSA_PUBLIC_KEY = fs.readFileSync(config.rsaPublicKeyPath)
+
+// const checkIfAuthenticated = jwt({
+//     secret: RSA_PUBLIC_KEY,
+//     requestProperty: 'auth'
+// })
+
+
 
 /**
  * Create Express server.
  */
 const app = express()
+
+/**
+ * Primary app routes.
+ */
+app.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  )
+  res.header( 'Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+  next()
+})
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+// app.use(checkIfAuthenticated)
+
+var publicKey = fs.readFileSync('public.pub');
+app.use(jwt({ secret: publicKey }));
+app.use(function (req, res, next) {
+  console.log(req.headers)
+  console.log('Can do stuff with JWT here');
+  console.log(`User Name = ${req.user.name}`);
+  next();
+});
+
+// Handle invalid JWT
+// app.use(function(err, req, res, next) {
+//   if (err.constructor.name === 'UnauthorizedError') {
+//       res.status(401).send(`invalid token...  ${err}`);
+//   }
+// });
 
 /**
  * Express configuration.
@@ -49,18 +83,7 @@ app.listen(app.get('port'), () => {
   console.log('  Press CTRL-C to stop\n')
 })
 
-/**
- * Primary app routes.
- */
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  )
-  res.header( 'Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-  next()
-})
+
 
 // Routes for entity CRUD
 // Index
@@ -74,26 +97,28 @@ app.put('/api/:entityType/:id', controller.update)
 // Delete
 app.delete('/api/:entityType/:id', controller.remove)
 
+
+
 // app.get("/getAllSystemUsersBySystem/:systemId", aSystemController.getAllSystemUsersBySystem);
 
-app.get('/api/GetAllWorkUsers', wUserController.getAllWorkUsers)
-app.get('/api/getAllWorkTeams', aSystemController.getAllWorkTeams)
-app.get(
-  '/api/getAllSprintsBySystem/:systemId',
-  aSystemController.getAllSprintsBySystem
-)
-app.get(
-  '/api/getAllStoriesWithUsersBySprint/:sprintId',
-  aSystemController.getAllStoriesWithUsersBySprint
-)
-app.get(
-  '/api/getAllTeamMembersByTeam/:teamId',
-  aSystemController.getAllTeamMembersByTeam
-)
-app.get(
-  '/api/getAllSystemUsersBySystem/:systemId',
-  aSystemController.getAllSystemUsersBySystem
-)
+// app.get('/api/GetAllWorkUsers', wUserController.getAllWorkUsers)
+// app.get('/api/getAllWorkTeams', aSystemController.getAllWorkTeams)
+// app.get(
+//   '/api/getAllSprintsBySystem/:systemId',
+//   aSystemController.getAllSprintsBySystem
+// )
+// app.get(
+//   '/api/getAllStoriesWithUsersBySprint/:sprintId',
+//   aSystemController.getAllStoriesWithUsersBySprint
+// )
+// app.get(
+//   '/api/getAllTeamMembersByTeam/:teamId',
+//   aSystemController.getAllTeamMembersByTeam
+// )
+// app.get(
+//   '/api/getAllSystemUsersBySystem/:systemId',
+//   aSystemController.getAllSystemUsersBySystem
+// )
 
 /**
  * Create connection to DB using configuration provided in

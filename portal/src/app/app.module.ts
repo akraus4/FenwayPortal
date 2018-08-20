@@ -21,12 +21,11 @@ import { DemoComponent } from './demo/demo.component';
 import { FooterComponent } from './footer/footer.component';
 import { Injectable, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient } from '@angular/common/http';
-import { HttpModule } from '@angular/http';
+import {HttpClientModule, HttpClient } from '@angular/common/http';
+// import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { MetricsService } from './services/metrics.service';
 import 'rxjs/add/operator/map';
-import { SignInComponent } from './sign-in/sign-in.component';
 import { DataService } from './services/data.service';
 import { MatInputModule } from '@angular/material';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -36,7 +35,7 @@ import { LoadingPanelComponent } from './loading-panel/loading-panel.component';
 import { TeamComponent } from './team/team.component';
 import { AgileTeamComponent } from './agile-team/agile-team.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptorService } from './services/auth-interceptor.service';
+import { AuthInterceptor } from './services/auth-interceptor.interceptor';
 import {
   DxButtonModule,
   DxLoadPanelModule,
@@ -65,7 +64,6 @@ import {
     DataComponent,
     DemoComponent,
     LoadingPanelComponent,
-    SignInComponent,
     TeamComponent,
     FooterComponent,
     AgileTeamComponent,
@@ -108,21 +106,22 @@ import {
       { path: "demo", component: DemoComponent },
       { path: "view-score", component: ViewScoreComponent },
       { path: "team", component: TeamComponent },
-      { path: "signIn", component: SignInComponent},
       { path: "**", redirectTo: "home" }
 
     ]),
     BrowserModule,
-    HttpModule,
+    HttpClientModule,
+    // HttpModule,
     FormsModule,
     DxLoadPanelModule,
     DxDropDownBoxModule,
     DxListModule
   ],
 
-  providers: [MetricsService, DataService,  {
+  providers: [MetricsService, DataService,  
+  {
     provide: HTTP_INTERCEPTORS,
-    useClass: AuthInterceptorService,
+    useClass: AuthInterceptor,
     multi: true
   }],
   bootstrap: [AppComponent]

@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http, Headers, RequestOptions } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 const httpOptions = {
@@ -16,12 +17,10 @@ export class MetricsService {
 	developmentURL = 'http://localhost:3000'
 	productionURL = ''
 	url = this.developmentURL
-	http: any;
 	loadingVisible = new BehaviorSubject<boolean>(false);
-	signInVisible = new BehaviorSubject<boolean>(true);
 
-	constructor(@Inject(Http) http) {
-		this.http = http;
+	constructor(public http: HttpClient) {
+		// this.http = http;
 	}
 
 
@@ -35,7 +34,7 @@ export class MetricsService {
 	save(entity, object) {
 		console.log(`URL Post ====  ${this.url}/api/${entity}`);
 		let body = JSON.stringify(object);
-		let result = this.http.post(`${this.url}/api/${entity}`, body, httpOptions);
+		let result = this.http.post(`${this.url}/api/${entity}`, body);
 		// console.log(JSON.stringify(result));
 		return result
 	}
@@ -43,7 +42,7 @@ export class MetricsService {
 	update(entity, id, object) {
 		console.log(`URL Put ====  ${this.url}/api/${entity}/${id}`);
 		let body = JSON.stringify(object);
-		let result = this.http.put(`${this.url}/api/${entity}/${id}`, body, httpOptions);
+		let result = this.http.put(`${this.url}/api/${entity}/${id}`, body);
 		// console.log(JSON.stringify(result));
 		return result
 	}
@@ -68,12 +67,5 @@ export class MetricsService {
 		this.loadingVisible.next(false);
 	}
 
-	showSignInPanel(): void {
-		this.signInVisible.next(true);
-	}
-
-	hideSignInPanel(): void {
-		this.signInVisible.next(false);
-	}
 
 }

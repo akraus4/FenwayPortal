@@ -10,17 +10,12 @@ import { DxPopupModule, DxButtonModule, DxTemplateModule } from 'devextreme-angu
 
 export class AppComponent implements OnInit {
 
-  signInVisible;
-
   constructor(public metricService: MetricsService) {
 
   }
 
   ngOnInit() {
-    this.metricService.signInVisible.subscribe(
-      (signInIndicator) => this.signInVisible = signInIndicator
-    );
-    // this.metricService.showSignInPanel();
+
   }
 
 }
