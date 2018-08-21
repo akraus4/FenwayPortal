@@ -118,12 +118,12 @@ import {
     DxListModule
   ],
 
-  providers: [MetricsService, DataService,  
+  providers: [
   {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true
-  }],
+  }, MetricsService, DataService],
   bootstrap: [AppComponent]
 })
 

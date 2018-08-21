@@ -20,6 +20,8 @@ export class AuthInterceptor implements HttpInterceptor {
                 setHeaders: {
                     authorization: `Bearer ${idToken}`
                   }
+                //   ,
+                //   withCredentials: true
             });
             console.log(`Interceptor Cloned === ${JSON.stringify(req)}`);
             return next.handle(req);
