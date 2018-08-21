@@ -1,7 +1,9 @@
 package com.fenway.rally;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
@@ -32,17 +34,22 @@ public class Rally {
 	/**
 	 * Main method
 	 * @param args
-	 * @throws URISyntaxException
-	 * @throws IOException
+	 * @throws Exception 
 	 */
-	public static void main(String[] args) throws URISyntaxException, IOException {
+	public static void main(String[] args) throws Exception {
+		
 		//Check to see if a config file was specified - if not, exit out with a message
 		if (args == null || args.length == 0 || args[0] == null || args[0].isEmpty()) {
 			System.out.println("Please specify the associated config file in JSON format");
 			return;
 		}
 		//Set the configuration file as what was specified in the command line
-		File configFile = new File(args[0]);	
+		File configFile = new File(args[0]);
+		
+		/* 
+		* Use for debug purposes only
+		* File configFile = new File("c:\\scripts\\CTL_Salesforce.json");
+		*/
 		
 		//Retrieve configuration from specified JSON and set it to the configuration object
 		StringBuilder configSB = new StringBuilder();
@@ -112,6 +119,13 @@ public class Rally {
         	} catch (Exception e) {
         		System.out.println("Failed to create JSON extract of metrics - "+e.getMessage());
         	}
+        	
+        	//See if we can WinSCP this file up to the server
+        	try {
+				winSCP(pathFileName.toString());
+			} catch (Exception e) {
+				System.out.println("Failed to move file up with WinSCP - "+e.getMessage());
+			}
         	
         	//Also want to generate a CSV for easy pull-up of summary data per user per sprint
         	//Cheating with the filename - getting rid of the .json and replacing it with _sprints.csv
@@ -294,5 +308,24 @@ public class Rally {
 		}
 		return storyMap;
 	}
+	
+	/**
+	 * Executes winscp to automatically upload file specified
+	 * @param filePath
+	 * @throws Exception
+	 */
+	private static void winSCP(String filePath) throws Exception {
+		filePath = filePath.replace("/", "\\");
+		ProcessBuilder builder = new ProcessBuilder("c:\\scripts\\winscp.bat", filePath);
+		//ProcessBuilder builder = new ProcessBuilder(filePath);
+        Process p = builder.start();
+        BufferedReader r = new BufferedReader(new InputStreamReader(p.getInputStream()));
+        String line;
+        while (true) {
+            line = r.readLine();
+            if (line == null) { break; }
+            System.out.println(line);
+        }
+    }
 	
 }
