@@ -4,7 +4,7 @@ import * as express from 'express'
 
 import * as bodyParser from 'body-parser'
 
-const ormConfig = require('../ormconfig.json')
+// const ormConfig = require('../ormconfig.json')
 const config = require('./config/config')
 
 /**
@@ -14,10 +14,11 @@ const config = require('./config/config')
 // import * as aSystemController from './controllers/agile_system-controller'
 import * as controller from './controllers/controller'
 
-var fs = require('fs');
+import * as cors from 'cors'
 
+let fs = require('fs')
 
-var jwt = require('express-jwt')
+let jwt = require('express-jwt')
 
 // const RSA_PUBLIC_KEY = fs.readFileSync(config.rsaPublicKeyPath)
 
@@ -26,38 +27,54 @@ var jwt = require('express-jwt')
 //     requestProperty: 'auth'
 // })
 
-
-
 /**
  * Create Express server.
  */
 const app = express()
 
-/**
- * Primary app routes.
- */
-app.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header(
-    'Access-Control-Allow-Headers',
-    'Origin, X-Requested-With, Content-Type, Accept'
-  )
-  res.header( 'Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-  next()
-})
+// Set and use CORS
+// options for cors midddleware
+const options: cors.CorsOptions = {
+  allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'X-Access-Token', 'Authorization'],
+  credentials: true,
+  methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
+  origin: 'http://localhost:4200',
+  preflightContinue: false
+}
+// use cors middleware
+app.use(cors(options))
+// enable pre-flight
+app.options('*', cors(options))
+
+// /**
+//  * Primary app routes.
+//  */
+// app.use(function (req, res, next) {
+//   res.header('Access-Control-Allow-Origin', '*')
+//   res.header(
+//     'Access-Control-Allow-Headers',
+//     'Origin, X-Requested-With, Content-Type, Accept', 'Authorization'
+//   )
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+//   next()
+// })
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 // app.use(checkIfAuthenticated)
 
-var publicKey = fs.readFileSync('public.pub');
-app.use(jwt({ secret: publicKey }));
 app.use(function (req, res, next) {
   console.log(req.headers)
-  console.log('Can do stuff with JWT here');
-  console.log(`User Name = ${req.user.name}`);
-  next();
-});
+  next()
+})
+
+let publicKey = fs.readFileSync('public.pub')
+app.use(jwt({ secret: publicKey }))
+app.use(function (req, res, next) {
+  console.log('Can do stuff with JWT here')
+  console.log(`User Name = ${req.user.name}`)
+  next()
+})
 
 // Handle invalid JWT
 // app.use(function(err, req, res, next) {
@@ -83,8 +100,6 @@ app.listen(app.get('port'), () => {
   console.log('  Press CTRL-C to stop\n')
 })
 
-
-
 // Routes for entity CRUD
 // Index
 app.get('/api/:entityType', controller.getAll)
@@ -96,8 +111,6 @@ app.get('/api/:entityType/:id', controller.get)
 app.put('/api/:entityType/:id', controller.update)
 // Delete
 app.delete('/api/:entityType/:id', controller.remove)
-
-
 
 // app.get("/getAllSystemUsersBySystem/:systemId", aSystemController.getAllSystemUsersBySystem);
 
@@ -124,19 +137,8 @@ app.delete('/api/:entityType/:id', controller.remove)
  * Create connection to DB using configuration provided in
  * appconfig file.
  */
-createConnection({
-  type: 'mysql',
-  host: '52.55.14.143',
-  port: 3306,
-  username: 'fg_user_dev2',
-  password: '6UhjVvAgM_Jm',
-  database: 'fg_metrics_dev2',
-  entities: [
-    __dirname + '/entities/*.ts',
-  ],
-  synchronize: false,
-  logging: false
-})
+
+createConnection()
   .then(async connection => {
     console.log('Connected to Database')
   })
