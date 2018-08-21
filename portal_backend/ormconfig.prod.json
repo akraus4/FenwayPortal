@@ -1,18 +1,16 @@
 {
-    "database": {
-        "driver": "mysql",
-        "type": "mysql",
-        "host": "52.55.14.143",
-        "port": 3306,
-        "username": "fg_user",
-        "password": "uXQ1pgjZlne7",
-        "database": "fg_metrics",
-        "synchronize": false,
-        "logging": false,
-        "entities": [
-            "src/entities/**/*.ts"
-        ]
-    },
+    "driver": "mysql",
+    "type": "mysql",
+    "host": "52.55.14.143",
+    "port": 3306,
+    "username": "fg_user",
+    "password": "uXQ1pgjZlne7",
+    "database": "fg_metrics",
+    "synchronize": false,
+    "logging": false,
+    "entities": [
+        "src/entities/**/*.ts"
+    ],
     "migrations": [
         "src/migration/**/*.ts"
     ],

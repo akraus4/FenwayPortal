@@ -1,18 +1,16 @@
 {
-    "database": {
-        "driver": "mysql",
-        "type": "mysql",
-        "host": "localhost",
-        "port": 3306,
-        "username": "fg_user",
-        "password": "fg_user",
-        "database": "portal",
-        "synchronize": false,
-        "logging": false,
-        "entities": [
-            "src/entities/**/*.ts"
-        ]
-    },
+    "driver": "mysql",
+    "type": "mysql",
+    "host": "localhost",
+    "port": 3306,
+    "username": "fg_user",
+    "password": "fg_user",
+    "database": "portal",
+    "synchronize": false,
+    "logging": false,
+    "entities": [
+        "src/entities/**/*.ts"
+    ],
     "migrations": [
         "src/migration/**/*.ts"
     ],
