@@ -1,6 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { DxLoadPanelModule } from 'devextreme-angular';
-import { MetricsService } from '../services/metrics.service';
+import { Component, OnInit, Inject } from '@angular/core'
+import { MetricsService } from '../services/metrics.service'
 
 @Component({
   selector: 'app-loading-panel',
@@ -8,22 +7,18 @@ import { MetricsService } from '../services/metrics.service';
   styleUrls: ['./loading-panel.component.css']
 })
 export class LoadingPanelComponent implements OnInit {
-   metricsService: any;
 
-  loadingVisible: boolean;
-  
+  metricsService: any
+  loadingVisible: boolean
 
-  constructor( @Inject(MetricsService) metricsService) {
-    this.metricsService = metricsService;
-   
+  constructor (@Inject(MetricsService) metricsService) {
+    this.metricsService = metricsService
   }
 
-  ngOnInit() {
+  ngOnInit () {
     this.metricsService.loadingVisible.subscribe(
       (loadIndicator) => this.loadingVisible = loadIndicator
-  );
+    )
   }
 
-
-  
 }

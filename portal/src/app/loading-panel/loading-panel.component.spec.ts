@@ -1,25 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { LoadingPanelComponent } from './loading-panel.component';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { LoadingPanelComponent } from './loading-panel.component'
 
 describe('LoadingPanelComponent', () => {
-  let component: LoadingPanelComponent;
-  let fixture: ComponentFixture<LoadingPanelComponent>;
+  let component: LoadingPanelComponent
+  let fixture: ComponentFixture<LoadingPanelComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ LoadingPanelComponent ]
     })
-    .compileComponents();
-  }));
+    .compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoadingPanelComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(LoadingPanelComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})

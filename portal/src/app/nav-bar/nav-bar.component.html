@@ -6,17 +6,11 @@
                     <div id="navHeaderRow" class="row">
                         <div id="userInfoDiv" class="col-xs-10">
                             <img id='logo' [src]="logoPath">
-                            <!-- <img id='logoToggled' [src]="logoPathToggled"> -->
                         </div>
 
                         <div id="toggleIconDiv" class="col-xs-2">
                             <a (click)="toggleMenu()" id="menu-toggle">
                                 <i id="navToggleIcon" class="fa fa-bars" aria-hidden="true"></i>
-                                <!-- <div id="nav-icon1">
-                                    <span></span>
-                                    <span></span>
-                                    <span></span>
-                                  </div> -->
                             </a>
                         </div>
                     </div>
@@ -31,15 +25,6 @@
                         </p>
                     </a>
                 </li>
-
-                <!-- ----------------------Data Management---------------------- -->
-                <!-- <li [routerLinkActive]="['link-active']" class="primaryListItem">
-    <a id="dataTab" [routerLink]="['/data']" >
-        <p id="iconWrapper">
-           <i class="fa fa-database"></i> <span class="navLabels" >Data Management</span>
-        </p>
-    </a>
-</li> -->
 
                 <!-- ----------------------Agile Team Management---------------------- -->
                 <li [routerLinkActive]="['link-active']" class="primaryListItem">
@@ -113,17 +98,6 @@
                     </a>
                 </li>
 
-                <!-- ----------------------Lineup---------------------- -->
-                <!-- <li [routerLinkActive]="['link-active']"  class="primaryListItem">
-                      <a id="lineupTab" [routerLink]="['/lineup']"> 
-                        <p id="iconWrapper">
-                           <i class="fa fa-tasks"></i> <span class="navLabels">Set Lineup</span>
-                        </p>
-                    </a>
-                </li> -->
-
-
-
                 <!-- ---------------------- Score Board ---------------------- -->
                 <li [routerLinkActive]="['link-active']" class="primaryListItem">
                     <a id="scorecardTab" [routerLink]="['/scorecard']">
@@ -171,19 +145,7 @@
                                     <i class="fas fa-clipboard-list"></i><span class="navLabels">One on One</span>
                                 </p>
                             </a>
-                        </li> -->
-
-
-                <!-- ---------------------- Example ---------------------- -->
-                <!-- <li [routerLinkActive]="['link-active']" class="primaryListItem">
-            <a id="medicaidProvider" [routerLink]="['/']">
-                <p id="iconWrapper">
-                    <img id="firstCareIcon" class="glyphicon glyphicon-pencil" title="Score Board"/>
-                    <span class="navLabels" id="ytbcText">Score Board</span>
-                </p>
-            </a>
-        </li> -->
-
+                        </li> --
             </ul>
         </div>
     </div>

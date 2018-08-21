@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core'
 
 @Component({
   selector: 'header',
@@ -7,15 +7,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  @Input() number: number;
-headername="";
+  @Input() number: number
+  headername = ''
 
-  constructor() { }
+  headers = ['View Metrics','View Scorecards','Set Lineup','New Scorecard','Schedule Demo', 'Agile Team Management','Evaluation Management','Associate Evaluation', 'Home']
 
-  headers = ['View Metrics','View Scorecards','Set Lineup','New Scorecard','Schedule Demo', 'Agile Team Management','Evaluation Management','Associate Evaluation', 'Home'];
-
-  ngOnInit() {
-    this.headername = this.headers[this.number];
+  ngOnInit () {
+    this.headername = this.headers[this.number]
   }
 
 }

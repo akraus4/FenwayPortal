@@ -1,6 +1,4 @@
-import { Component, Inject, OnInit, TemplateRef } from '@angular/core';
-import { MetricsService } from './services/metrics.service';
-import { DxPopupModule, DxButtonModule, DxTemplateModule } from 'devextreme-angular';
+import { Component } from '@angular/core'
 
 @Component({
   selector: 'app-root',
@@ -8,14 +6,6 @@ import { DxPopupModule, DxButtonModule, DxTemplateModule } from 'devextreme-angu
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements OnInit {
-
-  constructor(public metricService: MetricsService) {
-
-  }
-
-  ngOnInit() {
-
-  }
+export class AppComponent {
 
 }
