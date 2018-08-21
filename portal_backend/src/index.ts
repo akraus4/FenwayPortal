@@ -4,7 +4,7 @@ import * as express from 'express'
 
 import * as bodyParser from 'body-parser'
 
-const ormConfig = require('../ormconfig.json')
+// const ormConfig = require('../ormconfig.json')
 const config = require('./config/config')
 
 /**
@@ -137,19 +137,8 @@ app.delete('/api/:entityType/:id', controller.remove)
  * Create connection to DB using configuration provided in
  * appconfig file.
  */
-createConnection({
-  type: 'mysql',
-  host: '52.55.14.143',
-  port: 3306,
-  username: 'fg_user_dev2',
-  password: '6UhjVvAgM_Jm',
-  database: 'fg_metrics_dev2',
-  entities: [
-    __dirname + '/entities/*.ts'
-  ],
-  synchronize: false,
-  logging: false
-})
+
+createConnection()
   .then(async connection => {
     console.log('Connected to Database')
   })
