@@ -8,3 +8,5 @@ It will export a JSON file in the c:\RallyMetrics directory, with the date and t
 
 For example:
 20180618_174902_CTL_Salesforce.json
+
+It will also execute a batch file (winscp.bat), which will upload the JSON file to the appropriate server and location. To use this script, modify it with the correct paths and place it in the c:\scripts directory.
