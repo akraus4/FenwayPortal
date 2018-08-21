@@ -18,7 +18,6 @@ import { AppComponent } from './app.component'
 import { FooterComponent } from './footer/footer.component'
 import { HeaderComponent } from './header/header.component'
 import { HomePageComponent } from './home-page/home-page.component'
-import { LineupComponent } from './lineup/lineup.component'
 import { LoadingPanelComponent } from './loading-panel/loading-panel.component'
 import { MetricsComponent } from './metrics/metrics.component'
 import { NavBarComponent } from './nav-bar/nav-bar.component'
@@ -35,7 +34,6 @@ import { ViewScoreComponent } from './view-score/view-score.component'
     HomePageComponent,
     HeaderComponent,
     MetricsComponent,
-    LineupComponent,
     ViewScoreComponent,
     ScorecardComponent,
     LoadingPanelComponent,
@@ -75,7 +73,6 @@ import { ViewScoreComponent } from './view-score/view-score.component'
       { path: 'home', component: HomePageComponent },
       { path: 'agile-team', component: AgileTeamComponent },
       { path: 'scorecard', component: ScorecardComponent },
-      { path: 'lineup', component: LineupComponent },
       { path: 'metrics', component: MetricsComponent },
       { path: 'view-score', component: ViewScoreComponent },
       { path: 'team', component: TeamComponent },
