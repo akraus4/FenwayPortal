@@ -38,14 +38,11 @@ export class MetricsComponent implements OnInit {
 
   getAllTeams () {
     this.metricsService.getAll('AgileSystems', 'workTeam', '')
-
-      .map(res => { return res.json() })
       .subscribe((results) => { this.TeamChoices = results })
   }
 
   getAllSprintsByTeam (systemId) {
     this.metricsService.getAll('AgileSprints', 'agileSystem', `agileSystem=${systemId}`)
-      .map(res => { return res.json() })
       .subscribe((results) => this.SprintChoices = results)
   }
 
@@ -88,7 +85,6 @@ export class MetricsComponent implements OnInit {
       }
     }
     this.metricsService.getAllStoriesPointsByUser(this.sprintIds)
-      .map(res => { return res.json() })
       .subscribe((results) => {
 
         let newResults = []

@@ -38,10 +38,10 @@ app.options('*', cors(options))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.use(function (req, res, next) {
-  console.log(req.headers)
-  next()
-})
+// app.use(function (req, res, next) {
+//   console.log(req.headers)
+//   next()
+// })
 
 // let publicKey = fs.readFileSync('public.pub')
 let getPublicKeys = () => {

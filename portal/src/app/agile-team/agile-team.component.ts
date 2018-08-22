@@ -111,7 +111,6 @@ export class AgileTeamComponent implements OnInit {
 
   getAllSystems () {
     this.metricsService.getAll('AgileSystems', 'workTeam', '')
-      .map(res => { return res.json() })
       .subscribe((results) => {
         this.systemSelectBoxDataSource = results
         console.log('Systems ===== ' + JSON.stringify(this.systemSelectBoxDataSource))
@@ -120,7 +119,6 @@ export class AgileTeamComponent implements OnInit {
 
   getAllWorkTeams () {
     this.metricsService.getAll('WorkTeams', '', '')
-      .map(res => { return res.json() })
       .subscribe((results) => {
         this.teamSelectBoxDataSource = results
         console.log('WorkTeams ===== ' + JSON.stringify(this.teamSelectBoxDataSource))
@@ -131,7 +129,6 @@ export class AgileTeamComponent implements OnInit {
     console.log(systemId)
     let condition = `agileSystem=${systemId}`
     this.metricsService.getAll('AgileSystemUsers', 'agileSystem,workTeamMember,workTeamMember.workUser', condition)
-      .map(res => { return res.json() })
       .subscribe((results) => {
         this.currentSystemUsers = results
         console.log(`GetAllSystemUsersBySystem Results === ${JSON.stringify(results)}`)
@@ -142,7 +139,6 @@ export class AgileTeamComponent implements OnInit {
   getAllTeamMembersByTeam (teamId) {
     let condition = `workTeam=${teamId}`
     this.metricsService.getAll('WorkTeamMembers', 'workTeam,workUser', condition)
-      .map(res => { return res.json() })
       .subscribe((results) => {
         console.log(`GetAllTeamMembersByTeam Results ==== ${JSON.stringify(results)}`)
         this.systemUserGridDataSource = [] // Clears grid
@@ -371,7 +367,6 @@ export class AgileTeamComponent implements OnInit {
       'active': this.activeValue
     }
     this.metricsService.save('AgileSystems', system)
-      .map(res => { return res.json() })
       .subscribe((results) => {
         $('#agileTeamSubmitCancelBtnContainer').addClass('remove')
         $('#selectSystemDropDown').removeClass('remove')
@@ -395,7 +390,6 @@ export class AgileTeamComponent implements OnInit {
       'active': this.activeValue
     }
     this.metricsService.update('AgileSystems', system.agileSystemId, system)
-      .map(res => { return res.json() })
       .subscribe((results) => {
         this.readOnly = true
         $('#selectSystemDropDown').removeClass('remove')
@@ -419,7 +413,6 @@ export class AgileTeamComponent implements OnInit {
       'active': this.activeSystemUserValue
     }
     this.metricsService.save('AgileSystemUsers', systemUser)
-      .map(res => { return res.json() })
       .subscribe((results) => {
         $('#agileTeamSubmitCancelBtnContainer').addClass('remove')
         $('#systemUserTextField').addClass('remove')
@@ -443,7 +436,6 @@ export class AgileTeamComponent implements OnInit {
     }
     console.log(`System User = ${JSON.stringify(systemUser)}`)
     this.metricsService.update('AgileSystemUsers', systemUser.agileSystemUserId, systemUser)
-      .map(res => { return res.json() })
       .subscribe((results) => {
         this.readOnly = true
         $('#systemTextField').addClass('remove')
