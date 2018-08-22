@@ -15,15 +15,16 @@ export class MetricsService {
   }
 
   getAll (entity, relations, conditions) {
-    console.log(`URL ====  ${this.url}/api/${entity}?relations=${relations}&conditions=${conditions}`)
+    // console.log(`URL ====  ${this.url}/api/${entity}?relations=${relations}&conditions=${conditions}`)
     let result = this.http.get(`${this.url}/api/${entity}?relations=${relations}&conditions=${conditions}`)
-    console.log(result)
+    // console.log(result)
     return result
   }
 
   save (entity, object) {
     console.log(`URL Post ====  ${this.url}/api/${entity}`)
     let body = JSON.stringify(object)
+    console.log(`Save Body == ${body}`)
     let result = this.http.post(`${this.url}/api/${entity}`, body)
     return result
   }
@@ -31,6 +32,7 @@ export class MetricsService {
   update (entity, id, object) {
     console.log(`URL Put ====  ${this.url}/api/${entity}/${id}`)
     let body = JSON.stringify(object)
+    console.log(`Save Body == ${body}`)
     let result = this.http.put(`${this.url}/api/${entity}/${id}`, body)
     return result
   }
