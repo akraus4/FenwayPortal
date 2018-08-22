@@ -1,31 +1,20 @@
 import 'reflect-metadata'
 import { createConnection, ConnectionOptions } from 'typeorm'
 import * as express from 'express'
-
 import * as bodyParser from 'body-parser'
 
-// const ormConfig = require('../ormconfig.json')
+let request = require('request')
+
 const config = require('./config/config')
 
 /**
  * Controllers (route handlers).
  */
-// import * as wUserController from './controllers/work_user-controller'
-// import * as aSystemController from './controllers/agile_system-controller'
 import * as controller from './controllers/controller'
-
 import * as cors from 'cors'
 
 let fs = require('fs')
-
 let jwt = require('express-jwt')
-
-// const RSA_PUBLIC_KEY = fs.readFileSync(config.rsaPublicKeyPath)
-
-// const checkIfAuthenticated = jwt({
-//     secret: RSA_PUBLIC_KEY,
-//     requestProperty: 'auth'
-// })
 
 /**
  * Create Express server.
@@ -46,37 +35,56 @@ app.use(cors(options))
 // enable pre-flight
 app.options('*', cors(options))
 
-// /**
-//  * Primary app routes.
-//  */
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
 // app.use(function (req, res, next) {
-//   res.header('Access-Control-Allow-Origin', '*')
-//   res.header(
-//     'Access-Control-Allow-Headers',
-//     'Origin, X-Requested-With, Content-Type, Accept', 'Authorization'
-//   )
-//   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+//   console.log(req.headers)
 //   next()
 // })
 
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-// app.use(checkIfAuthenticated)
+// let publicKey = fs.readFileSync('public.pub')
+let getPublicKeys = () => {
+  return new Promise((resolve, reject) => {
+    request.get('https://www.googleapis.com/oauth2/v1/certs', function (error, response, body) {
+      if (!error && response.statusCode === 200) {
+        resolve(JSON.parse(body))
+      }
+      reject(Error('Could not retrieve google public keys'))
+    })
+  })
+}
 
-app.use(function (req, res, next) {
-  console.log(req.headers)
-  next()
+let publicKeys = {}
+getPublicKeys().then(result => {
+  publicKeys = result
+}).catch(err => {
+  console.log(`Failed to fetch keys ${err}`)
 })
 
-let publicKey = fs.readFileSync('public.pub')
-app.use(jwt({ secret: publicKey }))
+app.use(jwt({
+  secret: (req, header, payload, done) => {
+    let key = publicKeys[header.kid]
+    // If we do not have the key pull a fresh set
+    if (!key) {
+      getPublicKeys().then(result => {
+        publicKeys = result
+        key = publicKeys[header.kid]
+      }).catch(err => {
+        console.log(`Failed to fetch keys ${err}`)
+      })
+    }
+    done(null, key)
+  }
+}))
+
+// Example middleware that logs user
 app.use(function (req, res, next) {
-  console.log('Can do stuff with JWT here')
   console.log(`User Name = ${req.user.name}`)
   next()
 })
 
-// Handle invalid JWT
+// Handle response for invalid JWT
 // app.use(function(err, req, res, next) {
 //   if (err.constructor.name === 'UnauthorizedError') {
 //       res.status(401).send(`invalid token...  ${err}`);
@@ -112,30 +120,9 @@ app.put('/api/:entityType/:id', controller.update)
 // Delete
 app.delete('/api/:entityType/:id', controller.remove)
 
-// app.get("/getAllSystemUsersBySystem/:systemId", aSystemController.getAllSystemUsersBySystem);
-
-// app.get('/api/GetAllWorkUsers', wUserController.getAllWorkUsers)
-// app.get('/api/getAllWorkTeams', aSystemController.getAllWorkTeams)
-// app.get(
-//   '/api/getAllSprintsBySystem/:systemId',
-//   aSystemController.getAllSprintsBySystem
-// )
-// app.get(
-//   '/api/getAllStoriesWithUsersBySprint/:sprintId',
-//   aSystemController.getAllStoriesWithUsersBySprint
-// )
-// app.get(
-//   '/api/getAllTeamMembersByTeam/:teamId',
-//   aSystemController.getAllTeamMembersByTeam
-// )
-// app.get(
-//   '/api/getAllSystemUsersBySystem/:systemId',
-//   aSystemController.getAllSystemUsersBySystem
-// )
-
 /**
  * Create connection to DB using configuration provided in
- * appconfig file.
+ * ormconfig.json file.
  */
 
 createConnection()

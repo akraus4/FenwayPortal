@@ -1,0 +1,1 @@
+C:\"Program Files (x86)"\WinSCP\winscp.com /command "open sftp://metrics_inbound@ec2-52-55-14-143.compute-1.amazonaws.com/ -privatekey=C:\""Program Files (x86)""\WinSCP\fenway_metrics_inbound.ppk" "cd /metrics_processing/dev/inbound" "put %1" "exit"

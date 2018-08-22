@@ -39,7 +39,11 @@ export class MetricsComponent implements OnInit {
 
   getAllTeams () {
     this.metricsService.getAll('AgileSystems', 'workTeam', '')
+<<<<<<< HEAD
     .subscribe((results) => { this.TeamChoices = results })
+=======
+      .subscribe((results) => { this.TeamChoices = results })
+>>>>>>> cc560676158edff50e2ae43200a030d6fb56e413
   }
 
   getAllSprintsByTeam (systemId) {
