@@ -12,7 +12,6 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept (req: HttpRequest<any>,
     next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('made to interceptor')
     const idToken = localStorage.getItem('id_token')
 
     if (idToken) {

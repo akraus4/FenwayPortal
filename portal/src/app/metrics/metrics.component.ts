@@ -9,6 +9,7 @@ import { MetricsService } from '../services/metrics.service'
 })
 
 export class MetricsComponent implements OnInit {
+  loadingVisible = false
   title = 'POST Request'
   TeamChoices = []
   metricsService: any
@@ -30,22 +31,19 @@ export class MetricsComponent implements OnInit {
 
   constructor (@Inject(MetricsService) metricsService) {
     this.metricsService = metricsService
+    this.getAllTeams()
   }
   ngOnInit () {
     document.getElementById('metricsPageGridDiv').style.display = 'block'
-    this.getAllTeams()
   }
 
   getAllTeams () {
     this.metricsService.getAll('AgileSystems', 'workTeam', '')
-
-      .map(res => { return res.json() })
-      .subscribe((results) => { this.TeamChoices = results })
+    .subscribe((results) => { this.TeamChoices = results })
   }
 
   getAllSprintsByTeam (systemId) {
     this.metricsService.getAll('AgileSprints', 'agileSystem', `agileSystem=${systemId}`)
-      .map(res => { return res.json() })
       .subscribe((results) => this.SprintChoices = results)
   }
 
@@ -79,6 +77,7 @@ export class MetricsComponent implements OnInit {
 
   getAllStoriesWithUsersBySprint () {
     this.metricsService.showLoadingPanel()
+    this.loadingVisible = true
     let i = 0
     for (i = 0; i < this.currentSprintId.length; i++) {
       if (i === 0) {
@@ -88,7 +87,6 @@ export class MetricsComponent implements OnInit {
       }
     }
     this.metricsService.getAllStoriesPointsByUser(this.sprintIds)
-      .map(res => { return res.json() })
       .subscribe((results) => {
 
         let newResults = []
@@ -113,8 +111,15 @@ export class MetricsComponent implements OnInit {
         }
         this.StoryChoices = newResults
         this.metricsService.hideLoadingPanel()
+        this.loadingVisible = false
       })
   }
+
+  // onShown () {
+  //   setTimeout(() => {
+  //     this.loadingVisible = false
+  //   }, 3000)
+  // }
 
   getFullName () {
     let i = 0
