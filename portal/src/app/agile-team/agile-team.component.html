@@ -18,11 +18,12 @@
     <dx-check-box id="activeCheckBox" class="editFields" text="Active" (onValueChanged)="checkBoxToggled($event)" [(readOnly)]="readOnly" [(ngModel)]="activeValue"></dx-check-box>
     <!-- System User Fields -->
     <dx-text-box id="teamMemberTextField" class="editFields" placeholder="Team Member" [(ngModel)]="teamMemberValue" readOnly="true" ></dx-text-box>
-    <dx-text-box id="systemUserTextField" class="editFields" placeholder="System User Name" [(ngModel)]="systemUserTextFieldValue" (onValueChanged)="systemUSerTextFieldValueChanged($event)"></dx-text-box>
-    <dx-check-box id="activeSystemUserCheckBox" class="editFields" text="Active" (onValueChanged)="checkBoxSystemUserToggled($event)" [(readOnly)]="readOnly" [(ngModel)]="activeSystemUserValue"></dx-check-box>
+    <dx-text-box id="systemUserTextField" class="editFields" placeholder="System User Name" [(ngModel)]="systemUserTextFieldValue" (onValueChanged)="systemUserTextFieldValueChanged($event)"></dx-text-box>
+    <dx-check-box id="activeSystemUserCheckBox" class="editFields" text="System User Active" (onValueChanged)="checkBoxSystemUserToggled($event)" [(readOnly)]="readOnly" [(ngModel)]="activeSystemUserValue"></dx-check-box>
     <!-- Submit/Cancel Buttons -->
     <div id="agileTeamSubmitCancelBtnContainer">
-      <dx-button id="submitButton" class="submitBtn" text="{{submitButtonLbl}}" (onClick)="openModal(submitConfirmationModal)" hoverStateEnabled="true" [(disabled)]="submitButtonDisabled"></dx-button>
+      <!-- <dx-button id="submitButton" class="submitBtn" text="{{submitButtonLbl}}" (onClick)="openModal(submitConfirmationModal)" hoverStateEnabled="true" [(disabled)]="submitButtonDisabled"></dx-button> -->
+      <dx-button id="submitButton" class="submitBtn" text="{{submitButtonLbl}}" (onClick)="submitButtonClick()" hoverStateEnabled="true" [(disabled)]="submitButtonDisabled"></dx-button>
       <dx-button id="cancelAddButton" class="cancelBtn" text="Cancel" (onClick)="cancelAddButtonClicked()" hoverStateEnabled="true"></dx-button>
     </div>
   </div>
@@ -51,4 +52,4 @@
           <dx-button id="confirmNoBtn" class="confirmModalBtn cancelBtn" text="No" (onClick)="confirmNoClicked()" hoverStateEnabled="true"></dx-button>
         </div>
   </ng-template>
-<app-loading-panel></app-loading-panel>
+

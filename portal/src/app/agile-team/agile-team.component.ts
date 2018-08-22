@@ -4,6 +4,8 @@ import * as $ from 'jquery'
 import { BsModalService } from 'ngx-bootstrap/modal'
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service'
 import { MetricsService } from '../services/metrics.service'
+import notify from 'devextreme/ui/notify'
+import { confirm } from 'devextreme/ui/dialog'
 
 @Component({
   selector: 'app-agile-team',
@@ -54,7 +56,7 @@ export class AgileTeamComponent implements OnInit {
   ngOnInit () {
     this.readOnly = true
     this.activeValue = false
-    this.submitButtonDisabled = true
+    // this.submitButtonDisabled = true
     $('#editSystemButton').addClass('remove')
     $('#systemTextField').addClass('remove')
     $('#agileTeamSubmitCancelBtnContainer').addClass('remove')
@@ -209,30 +211,36 @@ export class AgileTeamComponent implements OnInit {
   onRowClick (e) {
     //  this.metricsService.showLoadingPanel()
     this.readOnly = false
-    this.isSystemAdd = false
-    this.isSystemEdit = false
-    this.isSystemUserEdit = true
-    let component = e.component,
-    prevClickTime = component.lastClickTime;
+    let component = e.component, prevClickTime = component.lastClickTime;
     component.lastClickTime = new Date()
     let selectedData = this.dataGrid.instance.getSelectedRowsData()
     console.log(e.key.active)
 
     if (prevClickTime && (component.lastClickTime - prevClickTime < 300)) {
       // Double click code
-      $('#editSystemButton').addClass('remove')
-      $('#addSystemButton').addClass('remove')
+      // this.submitButtonDisabled = true
+      this.isSystemAdd = false
+      this.isSystemEdit = false
+      this.isSystemUserEdit = true
+      $('#editSystemButton').addClass('hide')
+      $('#addSystemButton').addClass('hide')
       $('#agileTeamSubmitCancelBtnContainer').removeClass('remove')
       this.addSystemUserFields()
       this.removeSystemFields()
-
+      // $('#selectSystemDropDown').addClass('hide')
       this.currentSystemUserId = e.key.agileSystemUserId
       this.submitButtonLbl = 'Update'
-
-      this.activeSystemUserValue = e.key.active
+      if (e.key.systemUserActiveView !== '') {
+        this.activeSystemUserValue = e.key.systemUserActive
+      } else {
+        this.activeSystemUserValue = 1
+      }
       this.systemUserTextFieldValue = e.key.agileSystemUserName
       this.currentTeamMemberId = e.key.workTeamMemberId
       this.teamMemberValue = e.key.fullName
+      // if (e.key.agileSystemUserName !== '' && this.teamMemberValue !== '') {
+      //   this.submitButtonDisabled = false
+      // }
     } else {
       // Single click code
     }
@@ -271,51 +279,53 @@ export class AgileTeamComponent implements OnInit {
 
   // Enable submit button once all fields have values.
   systemTextFieldValueChanged (e) {
-    if (this.systemTextFieldValue !== undefined && this.typeValue !== undefined && this.teamValue !== undefined && this.activeValue !== undefined) {
-      this.submitButtonDisabled = false
-    } else {
-      this.submitButtonDisabled = true
-    }
+    // if (this.systemTextFieldValue !== undefined && this.typeValue !== undefined && this.teamValue !== undefined && this.activeValue !== undefined) {
+    //   this.submitButtonDisabled = false
+    // } else {
+    //   this.submitButtonDisabled = true
+    // }
   }
 
   typeValueChanged (e) {
-    if (this.systemTextFieldValue !== undefined && this.typeValue !== undefined && this.teamValue !== undefined && this.activeValue !== undefined) {
-      this.submitButtonDisabled = false
-    } else {
-      this.submitButtonDisabled = true
-    }
+    // if (this.systemTextFieldValue !== undefined && this.typeValue !== undefined && this.teamValue !== undefined && this.activeValue !== undefined) {
+    //   this.submitButtonDisabled = false
+    // } else {
+    //   this.submitButtonDisabled = true
+    // }
   }
 
   teamValueChanged (e) {
-    if (this.systemTextFieldValue !== undefined && this.typeValue !== undefined && this.teamValue !== undefined && this.activeValue !== undefined) {
-      this.submitButtonDisabled = false
-    } else {
-      this.submitButtonDisabled = true
-    }
+    // if ((this.systemTextFieldValue !== undefined || this.systemTextFieldValue !== '') && this.typeValue !== undefined && this.teamValue !== undefined && this.activeValue !== undefined) {
+    //   this.submitButtonDisabled = false
+    // } else {
+    //   this.submitButtonDisabled = true
+    // }
   }
 
   checkBoxToggled (e) {
-    if (this.systemTextFieldValue !== undefined && this.typeValue !== undefined && this.teamValue !== undefined && this.activeValue !== undefined) {
-      this.submitButtonDisabled = false
-    } else {
-      this.submitButtonDisabled = true
-    }
+    // if (this.systemTextFieldValue !== undefined && this.typeValue !== undefined && this.teamValue !== undefined && this.activeValue !== undefined) {
+    //   this.submitButtonDisabled = false
+    // } else {
+    //   this.submitButtonDisabled = true
+    // }
   }
 
-  systemUSerTextFieldValueChanged (e) {
-    if (this.systemUserTextFieldValue !== undefined && this.teamMemberValue !== undefined && this.activeSystemUserValue !== undefined) {
-      this.submitButtonDisabled = false
-    } else {
-      this.submitButtonDisabled = true
-    }
+  systemUserTextFieldValueChanged (e) {
+    // if (e.value !== '' && this.teamMemberValue !== undefined && this.activeSystemUserValue !== undefined) {
+    //   console.log('here 1')
+    //   this.submitButtonDisabled = false
+    // } else {
+    //   this.submitButtonDisabled = true
+    // }
   }
 
   checkBoxSystemUserToggled (e) {
-    if (this.systemUserTextFieldValue !== undefined && this.teamMemberValue !== undefined && this.activeSystemUserValue !== undefined) {
-      this.submitButtonDisabled = false
-    } else {
-      this.submitButtonDisabled = true
-    }
+    // if (this.systemUserTextFieldValue !== '' && this.teamMemberValue !== undefined && this.activeSystemUserValue !== undefined) {
+    //   console.log('here 2')
+    //   this.submitButtonDisabled = false
+    // } else {
+    //   this.submitButtonDisabled = true
+    // }
   }
 
   // #endregion System value changes
@@ -347,6 +357,8 @@ export class AgileTeamComponent implements OnInit {
     if (this.systemDropDownValue !== undefined) {
       $('#editSystemButton').removeClass('remove')
       $('#addSystemButton').removeClass('remove')
+      $('#editSystemButton').removeClass('hide')
+      $('#addSystemButton').removeClass('hide')
       this.typeValue = this.currentSystem.agileSystemType
       this.teamValue = this.currentSystem.workTeam.workTeamId
       this.activeValue = this.currentSystem.active
@@ -355,11 +367,50 @@ export class AgileTeamComponent implements OnInit {
     }
   }
 
+  submitButtonClick () {
+    let that = this
+    if (this.isSystemUserEdit) {
+      if (this.systemUserTextFieldValue !== '' && this.teamMemberValue !== undefined && this.activeSystemUserValue !== undefined) {
+        const result = confirm('Are you sure you want to save System User?', 'Confirm changes')
+        result.then(function (dialogResult) {
+          if (dialogResult) {
+            if (that.currentSystemUserId !== '') {
+              that.updateSystemUser()
+            } else {
+              that.saveSystemUser()
+            }
+          }
+        })
+      } else {
+        notify('All fields must have a value!', 'error', 600)
+      }
+    } else if (this.isSystemAdd || this.isSystemEdit) {
+      if (this.systemTextFieldValue !== undefined && this.typeValue !== undefined && this.teamValue !== undefined && this.systemTextFieldValue !== '' && this.typeValue !== '' && this.teamValue !== '' && this.activeValue !== undefined) {
+        console.log(`systemTextFieldValue ==== ${this.systemTextFieldValue}`)
+        console.log(`typeValue ==== ${this.typeValue}`)
+        console.log(`teamValue ==== ${this.teamValue}`)
+        const result = confirm('Are you sure you want to save System?', 'Confirm changes')
+        result.then(function (dialogResult) {
+          if (dialogResult) {
+            if (that.isSystemAdd) {
+              that.saveSystem()
+            } else if (that.isSystemEdit) {
+              that.updateSystem()
+            }
+          }
+        })
+      } else {
+        notify('All fields must have a value!', 'error', 600)
+      }
+    }
+  }
+
   confirmNoClicked () {
     this.modalService.hide(1)
   }
 
   saveSystem () {
+    this.metricsService.showLoadingPanel()
     let system = {
       'agileSystemName': this.systemTextFieldValue,
       'agileSystemType': this.typeValue,
@@ -406,6 +457,7 @@ export class AgileTeamComponent implements OnInit {
   }
 
   saveSystemUser () {
+    this.metricsService.showLoadingPanel()
     let systemUser = {
       'agileSystemUserName': this.systemUserTextFieldValue,
       'agileSystem': this.systemDropDownValue,
