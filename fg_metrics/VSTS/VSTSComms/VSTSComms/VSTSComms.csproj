@@ -47,6 +47,9 @@
     <None Update="appSettings.local.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="appSettings.local.generic.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="appSettings.prod.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -51,13 +51,13 @@ namespace VSTSComms.Utilities
         public static AppSetting GetSettingsFile()
         {
             string environment = GetEnvironment();
-            string file = $@"{AppDomain.CurrentDomain.BaseDirectory}appsettings.{environment}.JSON";
+            string file = $@"{AppContext.BaseDirectory}appSettings.{environment}.json";
             string fileContents = GetFileContents(file);
             return JsonConvert.DeserializeObject<AppSetting>(fileContents);
         }
         public static string GetEnvironment()
         {
-            string file = $@"{AppDomain.CurrentDomain.BaseDirectory}appSettings.json";
+            string file = $@"{AppContext.BaseDirectory}appSettings.json";
             string fileContents = Utilities.Miscellaneous.GetFileContents(file);
             var appSetting = JsonConvert.DeserializeObject<AppSetting>(fileContents);
             return appSetting.Environment;
