@@ -16,8 +16,8 @@ namespace VSTSComms
             var environmentName = VSTSComms.Utilities.Miscellaneous.GetEnvironment();
             bool verboseLogging = VSTSComms.Utilities.Miscellaneous.VerboseLogging();
             var builder = new ConfigurationBuilder()
-                .AddJsonFile($"appsettings.json", true, true)
-                .AddJsonFile($"appsettings.{environmentName}.json", true, true)
+                .AddJsonFile($"appSettings.json", true, true)
+                .AddJsonFile($"appSettings.{environmentName}.json", true, true)
                 .AddEnvironmentVariables();
             IConfigurationRoot Configuration = builder.Build();
             Configuration = builder.Build();
