@@ -15,7 +15,7 @@ export class MetricsService {
   }
 
   getAll (entity, relations, conditions) {
-    // console.log(`URL ====  ${this.url}/api/${entity}?relations=${relations}&conditions=${conditions}`)
+    console.log(`URL ====  ${this.url}/api/${entity}?relations=${relations}&conditions=${conditions}`)
     let result = this.http.get(`${this.url}/api/${entity}?relations=${relations}&conditions=${conditions}`)
     // console.log(result)
     return result

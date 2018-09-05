@@ -5,14 +5,14 @@ import { BsModalService } from 'ngx-bootstrap/modal'
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service'
 import { MetricsService } from '../services/metrics.service'
 import notify from 'devextreme/ui/notify'
-import { confirm } from 'devextreme/ui/dialog'
 
 @Component({
-  selector: 'app-agile-team',
-  templateUrl: './agile-team.component.html',
-  styleUrls: ['./agile-team.component.css']
+  selector: 'app-labs',
+  templateUrl: './labs.component.html',
+  styleUrls: ['./labs.component.css']
 })
-export class AgileTeamComponent implements OnInit {
+export class LabsComponent implements OnInit {
+
   @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent
   metricsService: any
   submitButtonLbl: string
@@ -154,36 +154,30 @@ export class AgileTeamComponent implements OnInit {
             teamMemberUserActiveView = 'False'
           }
           for (let systemUser of this.currentSystemUsers) {
-            // if (systemUser.workTeamMember.workTeamMemberId !== null) {
-            try {
-              // Populates grid with True or False instead of 1 or 0.
-              let systemUserActiveView
-              if (systemUser.active === 1) {
-                systemUserActiveView = 'True'
-              } else if (systemUser.active === 0) {
-                systemUserActiveView = 'False'
-              }
-              console.log(systemUser.workTeamMember.workTeamMemberId)
-              // If a team member is connected to a system user.
-              if (systemUser.workTeamMember.workTeamMemberId === teamMember.workTeamMemberId) {
-                let member = {
-                  'workTeamMemberId': teamMember.workTeamMemberId,
-                  'fullName': teamMember.workUser.firstname + ' ' + teamMember.workUser.lastname,
-                  'workUser': teamMember.workUser,
-                  'workTeam': teamMember.workTeam,
-                  'workTeamMemberActive': teamMember.active,
-                  'teamMemberUserActiveView': teamMemberUserActiveView,
+            // Populates grid with True or False instead of 1 or 0.
+            let systemUserActiveView
+            if (systemUser.active === 1) {
+              systemUserActiveView = 'True'
+            } else if (systemUser.active === 0) {
+              systemUserActiveView = 'False'
+            }
+            // If a team member is connected to a system user.
+            if (systemUser.workTeamMember.workTeamMemberId === teamMember.workTeamMemberId) {
+              let member = {
+                'workTeamMemberId': teamMember.workTeamMemberId,
+                'fullName': teamMember.workUser.firstname + ' ' + teamMember.workUser.lastname,
+                'workUser': teamMember.workUser,
+                'workTeam': teamMember.workTeam,
+                'workTeamMemberActive': teamMember.active,
+                'teamMemberUserActiveView': teamMemberUserActiveView,
 
-                  'agileSystemUserId': systemUser.agileSystemUserId,
-                  'agileSystemUserName': systemUser.agileSystemUserName,
-                  'systemUserActiveView': systemUserActiveView,
-                  'systemUserActive': systemUser.active
-                }
-                currentTeamMember = member
-                this.systemUserGridDataSource.push(member)
+                'agileSystemUserId': systemUser.agileSystemUserId,
+                'agileSystemUserName': systemUser.agileSystemUserName,
+                'systemUserActiveView': systemUserActiveView,
+                'systemUserActive': systemUser.active
               }
-            } catch (e) {
-              console.log(e)
+              currentTeamMember = member
+              this.systemUserGridDataSource.push(member)
             }
           }
           // If the the team member isn't connected to a system user.
@@ -374,41 +368,41 @@ export class AgileTeamComponent implements OnInit {
   }
 
   submitButtonClick () {
-    let that = this
-    if (this.isSystemUserEdit) {
-      if (this.systemUserTextFieldValue !== '' && this.teamMemberValue !== undefined && this.activeSystemUserValue !== undefined) {
-        const result = confirm('Are you sure you want to save System User?', 'Confirm changes')
-        result.then(function (dialogResult) {
-          if (dialogResult) {
-            if (that.currentSystemUserId !== '') {
-              that.updateSystemUser()
-            } else {
-              that.saveSystemUser()
-            }
-          }
-        })
-      } else {
-        notify('All fields must have a value!', 'error', 600)
-      }
-    } else if (this.isSystemAdd || this.isSystemEdit) {
-      if (this.systemTextFieldValue !== undefined && this.typeValue !== undefined && this.teamValue !== undefined && this.systemTextFieldValue !== '' && this.typeValue !== '' && this.teamValue !== '' && this.activeValue !== undefined) {
-        console.log(`systemTextFieldValue ==== ${this.systemTextFieldValue}`)
-        console.log(`typeValue ==== ${this.typeValue}`)
-        console.log(`teamValue ==== ${this.teamValue}`)
-        const result = confirm('Are you sure you want to save System?', 'Confirm changes')
-        result.then(function (dialogResult) {
-          if (dialogResult) {
-            if (that.isSystemAdd) {
-              that.saveSystem()
-            } else if (that.isSystemEdit) {
-              that.updateSystem()
-            }
-          }
-        })
-      } else {
-        notify('All fields must have a value!', 'error', 600)
-      }
-    }
+    // let that = this
+    // if (this.isSystemUserEdit) {
+    //   if (this.systemUserTextFieldValue !== '' && this.teamMemberValue !== undefined && this.activeSystemUserValue !== undefined) {
+    //     const result = confirm('Are you sure you want to save System User?', 'Confirm changes')
+    //     result.then(function (dialogResult) {
+    //       if (dialogResult) {
+    //         if (that.currentSystemUserId !== '') {
+    //           that.updateSystemUser()
+    //         } else {
+    //           that.saveSystemUser()
+    //         }
+    //       }
+    //     })
+    //   } else {
+    //     notify('All fields must have a value!', 'error', 600)
+    //   }
+    // } else if (this.isSystemAdd || this.isSystemEdit) {
+    //   if (this.systemTextFieldValue !== undefined && this.typeValue !== undefined && this.teamValue !== undefined && this.systemTextFieldValue !== '' && this.typeValue !== '' && this.teamValue !== '' && this.activeValue !== undefined) {
+    //     console.log(`systemTextFieldValue ==== ${this.systemTextFieldValue}`)
+    //     console.log(`typeValue ==== ${this.typeValue}`)
+    //     console.log(`teamValue ==== ${this.teamValue}`)
+    //     const result = confirm('Are you sure you want to save System?', 'Confirm changes')
+    //     result.then(function (dialogResult) {
+    //       if (dialogResult) {
+    //         if (that.isSystemAdd) {
+    //           that.saveSystem()
+    //         } else if (that.isSystemEdit) {
+    //           that.updateSystem()
+    //         }
+    //       }
+    //     })
+    //   } else {
+    //     notify('All fields must have a value!', 'error', 600)
+    //   }
+    // }
   }
 
   confirmNoClicked () {

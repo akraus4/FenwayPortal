@@ -25,7 +25,8 @@ import { ScorecardComponent } from './scorecard/scorecard.component'
 import { AuthInterceptor } from './services/auth-interceptor.interceptor'
 import { MetricsService } from './services/metrics.service'
 import { TeamComponent } from './team/team.component'
-import { ViewScoreComponent } from './view-score/view-score.component'
+import { ViewScoreComponent } from './view-score/view-score.component';
+import { LabsComponent } from './labs/labs.component'
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ViewScoreComponent } from './view-score/view-score.component'
     LoadingPanelComponent,
     TeamComponent,
     FooterComponent,
-    AgileTeamComponent
+    AgileTeamComponent,
+    LabsComponent
   ],
 
   imports: [
@@ -71,6 +73,7 @@ import { ViewScoreComponent } from './view-score/view-score.component'
     RouterModule.forRoot([
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomePageComponent },
+      { path: 'lab', component: LabsComponent },
       { path: 'agile-team', component: AgileTeamComponent },
       { path: 'scorecard', component: ScorecardComponent },
       { path: 'metrics', component: MetricsComponent },
