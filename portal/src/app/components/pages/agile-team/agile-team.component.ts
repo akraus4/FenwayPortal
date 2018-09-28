@@ -3,7 +3,7 @@ import { DxDataGridComponent } from 'devextreme-angular'
 import * as $ from 'jquery'
 import { BsModalService } from 'ngx-bootstrap/modal'
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service'
-import { MetricsService } from '../services/metrics.service'
+import { MetricsService } from '../../../services/metrics.service'
 import notify from 'devextreme/ui/notify'
 import { confirm } from 'devextreme/ui/dialog'
 
@@ -188,20 +188,24 @@ export class AgileTeamComponent implements OnInit {
           }
           // If the the team member isn't connected to a system user.
           if (currentTeamMember === '') {
-            let memberNoSystemUser = {
-              'workTeamMemberId': teamMember.workTeamMemberId,
-              'fullName': teamMember.workUser.firstname + ' ' + teamMember.workUser.lastname,
-              'workUser': teamMember.workUser,
-              'workTeam': teamMember.workTeam,
-              'workTeamMemberActive': teamMember.active,
-              'teamMemberUserActiveView': teamMemberUserActiveView,
+            try {
+              let memberNoSystemUser = {
+                'workTeamMemberId': teamMember.workTeamMemberId,
+                'fullName': teamMember.workUser.firstname + ' ' + teamMember.workUser.lastname,
+                'workUser': teamMember.workUser,
+                'workTeam': teamMember.workTeam,
+                'workTeamMemberActive': teamMember.active,
+                'teamMemberUserActiveView': teamMemberUserActiveView,
 
-              'agileSystemUserId': '',
-              'agileSystemUserName': '',
-              'systemUserActiveView': '',
-              'systemUserActive': 0
+                'agileSystemUserId': '',
+                'agileSystemUserName': '',
+                'systemUserActiveView': '',
+                'systemUserActive': 0
+              }
+              this.systemUserGridDataSource.push(memberNoSystemUser)
+            } catch (e) {
+              console.log(e)
             }
-            this.systemUserGridDataSource.push(memberNoSystemUser)
           }
         }
         this.metricsService.hideLoadingPanel()
@@ -217,7 +221,8 @@ export class AgileTeamComponent implements OnInit {
   onRowClick (e) {
     //  this.metricsService.showLoadingPanel()
     this.readOnly = false
-    let component = e.component, prevClickTime = component.lastClickTime;
+    let component = e.component
+    let prevClickTime = component.lastClickTime
     component.lastClickTime = new Date()
     let selectedData = this.dataGrid.instance.getSelectedRowsData()
     console.log(e.key.active)
@@ -253,10 +258,8 @@ export class AgileTeamComponent implements OnInit {
   }
 
   systemDropDownValueChanged (e) {
-    let i = 0
-    if (this.isSystemEmpty) {
-      this.isSystemEmpty = false
-    } else {
+    console.log(this.systemDropDownValue)
+    if (this.systemDropDownValue !== null && this.systemDropDownValue !== undefined) {
       $('#editSystemButton').removeClass('remove')
       $('#typeTextField').removeClass('remove')
       $('#selectTeamDropDown').removeClass('remove')

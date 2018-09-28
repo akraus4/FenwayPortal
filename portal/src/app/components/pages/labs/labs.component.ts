@@ -3,7 +3,7 @@ import { DxDataGridComponent } from 'devextreme-angular'
 import * as $ from 'jquery'
 import { BsModalService } from 'ngx-bootstrap/modal'
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service'
-import { MetricsService } from '../services/metrics.service'
+import { MetricsService } from '../../../services/metrics.service'
 import notify from 'devextreme/ui/notify'
 
 @Component({

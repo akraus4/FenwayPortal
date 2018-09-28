@@ -1,5 +1,4 @@
 import { Component } from '@angular/core'
-import { Router } from '@angular/router'
 import * as $ from 'jquery'
 
 @Component({
@@ -12,7 +11,7 @@ export class NavBarComponent {
   logoPath: string
   logoPathToggled: string
 
-  constructor (private router: Router) {
+  constructor () {
     this.logoPath = './assets/FGLogoVer.png'
     this.logoPathToggled = './assets/FGLogoCircle.png'
   }

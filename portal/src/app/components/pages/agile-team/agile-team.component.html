@@ -1,12 +1,12 @@
 <div class="row">
   <div class="col-lg-12">
-    <header number=5></header>
+    <header headername="Agile Team Management"></header>
   </div>
 </div>
 
 <div id="agileTeamGridContainer" class="row gridWidgetContainer">
 
-  <div id="systemComponents" class="col-lg-4 col-sm-12 searchField">
+  <div id="systemComponents" class="col-lg-4 col-md-12 col-sm-12 searchField">
     <!-- Top Buttons -->
     <dx-button id="addSystemButton" class="serchBtns" hint="Add System" (onClick)="addSystemButtonClicked()" hoverStateEnabled="true" icon="fas fa-plus"></dx-button>
     <dx-button id="editSystemButton" class="serchBtns" hint="Update System" (onClick)="editSystemButtonClicked()" hoverStateEnabled="true" icon="fas fa-pencil-alt"></dx-button>
@@ -15,7 +15,7 @@
     <dx-text-box id="systemTextField" class="editFields" placeholder="System Name" [(ngModel)]="systemTextFieldValue" (onValueChanged)="systemTextFieldValueChanged($event)"></dx-text-box>
     <dx-text-box id="typeTextField" class="editFields" placeholder="Type" [(readOnly)]="readOnly" [(ngModel)]="typeValue" (onValueChanged)="typeValueChanged($event)"></dx-text-box>
     <dx-select-box id="selectTeamDropDown" class="editFields" placeholder="Team" [dataSource]="teamSelectBoxDataSource" displayExpr="workTeamName" valueExpr= "workTeamId" [searchEnabled]="true" [(readOnly)]="readOnly" [(ngModel)]="teamValue" (onValueChanged)="teamValueChanged($event)"></dx-select-box>
-    <dx-check-box id="activeCheckBox" class="editFields" text="Active" (onValueChanged)="checkBoxToggled($event)" [(readOnly)]="readOnly" [(ngModel)]="activeValue"></dx-check-box>
+    <dx-check-box id="activeCheckBox" class="editFields" text="System Active" (onValueChanged)="checkBoxToggled($event)" [(readOnly)]="readOnly" [(ngModel)]="activeValue"></dx-check-box>
     <!-- System User Fields -->
     <dx-text-box id="teamMemberTextField" class="editFields" placeholder="Team Member" [(ngModel)]="teamMemberValue" readOnly="true" ></dx-text-box>
     <dx-text-box id="systemUserTextField" class="editFields" placeholder="System User Name" [(ngModel)]="systemUserTextFieldValue" (onValueChanged)="systemUserTextFieldValueChanged($event)"></dx-text-box>
@@ -28,7 +28,7 @@
     </div>
   </div>
   <!-- Team Member Grid -->
-  <div class="col-lg-8 col-sm-12" id="agileTeamGrid">
+  <div class="col-lg-8 col-md-12 col-sm-12" id="agileTeamGrid">
     <dx-data-grid id="gridContainer" [dataSource]="systemUserGridDataSource" [showRowLines]="true" [showBorders]="true" (onRowClick)="onRowClick($event)">
       <dxo-export [enabled]="true" fileName="Employees" [allowExportSelectedData]="true"></dxo-export>
       <dxo-header-filter [visible]="true"></dxo-header-filter>
@@ -37,7 +37,7 @@
       <dxi-column dataField="fullName" caption="Team Members"></dxi-column>
       <dxi-column dataField="teamMemberUserActiveView" caption="Active" width="100"></dxi-column>
       <dxi-column dataField="agileSystemUserName" caption="System Users"></dxi-column>
-      <dxi-column dataField="systemUserActiveView" caption="Active" width="100"></dxi-column>
+      <dxi-column dataField="systemUserActiveView" caption="Active" title="System User Active" width="100"></dxi-column>
     </dx-data-grid>
   </div>
 

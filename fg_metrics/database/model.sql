@@ -14,6 +14,7 @@ create table work_user (
     firstname varchar(255),
     lastname varchar(255),
     email varchar(255),
+    expected_hours int(11),
     active tinyint(1),
     PRIMARY KEY(work_user_id)
 );
@@ -41,7 +42,7 @@ create table work_dailyhours (
     work_dailyhours_id varchar(255),
     work_team_member_id varchar(255),
     work_date date,
-    hours int(11),
+    hours DOUBLE(11, 2),
     PRIMARY KEY(work_dailyhours_id),
     CONSTRAINT `FK_WORK_DAILYHOURS_WORK_TEAM_MEMBER` FOREIGN KEY (`work_team_member_id`) REFERENCES `work_team_member` (`work_team_member_id`)
 );

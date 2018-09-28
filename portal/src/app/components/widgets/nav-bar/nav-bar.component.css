@@ -72,14 +72,6 @@ img {
     pointer-events:auto;
 }
 
-#infoRegistered {
-    display: none;
-}
-
-#infoSupplier {
-    display: none;
-}
-
 /* Sidebar Styles */
 
 /*Initial positioning of the sidebar*/
@@ -244,10 +236,6 @@ span.crosshair {
     cursor: crosshair;
 }
 
-#healthResourceMenuItem, #idcards, #infoView, #messageCen {
-    cursor: pointer;
-}
-
 #firstCareIcon {
     height: 9%;
     width: 9%;
@@ -282,35 +270,6 @@ li.primaryListItem {
     #sidebar-wrapper {
         top: 0;
     }
-/* 
-    #wrapper {
-        width: 50px;
-    }
-
-    #userInfoDiv {
-        display: none;
-    }
-
-    #homePageTab {
-        margin-top: -40px;
-    }
-
-    .submenu.open {
-        margin-top: -40px;
-        position: fixed;
-        left: 50px;
-        width: 35%;
-    }
-
-    ul .submenu.open {
-        padding: 0;
-    }
-
-    #divNav.toggled {
-        display: block;
-        margin-left: -5%;
-        padding-left: 0;
-    }*/
 } 
 
 @media only screen and (max-width:600px) {
@@ -356,7 +315,7 @@ li.primaryListItem {
     }
 }
 
-@media (min-width:601px) and (max-width:800px) {
+@media (min-width:601px) and (max-width:900px) {
     .sidebar-brand {
         display: none;
     }
@@ -398,20 +357,6 @@ li.primaryListItem {
         visibility: hidden;
     }
 }
-
-/* @media(max-width:575px) {
-    #sidebar-wrapper {
-        top: 115px;
-    } 
-} */
-
-/* @media(min-width:770px) {
-    #divNav.toggled {
-        display: block;
-        margin-left: -5%;
-        padding-left: 0;
-    }
-} */
 
 /*#region Scroll*/
 
@@ -457,34 +402,3 @@ html {
         position: -ms-page;
     }
 }
-
-/* @media only screen and (max-width: 600px) {
-    #wrapper #sidebar-wrapper {
-        width: 45px;
-    }
-} */
-/*#endregion*/
-
-/*#region Ipad_Styling*/
-/*@media only screen 
-and (min-device-width : 768px) 
-and (max-device-width : 1024px)  {
-    .sidebar-brand {
-        height: 40px !important;
-    }
-
-    #menu-toggle {
-        margin: 0 !important;
-        margin-left: 10px !important;
-    }
-
-    #userInfoDiv {
-        display: none !important;
-    }
-
-    #toggleIconDiv {
-        margin-left: 206px;
-    }
-
-}*/
-/*#endregion*/

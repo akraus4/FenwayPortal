@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@angular/core'
 import { Http, Headers, RequestOptions } from '@angular/http'
 import { HttpClient } from '@angular/common/http'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
+// import { config } from './Config/config'
 
 @Injectable()
 export class MetricsService {

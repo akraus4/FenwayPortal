@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core'
-import { MetricsService } from '../services/metrics.service'
+import { MetricsService } from '../../../services/metrics.service'
 
 @Component({
   selector: 'app-home-page',

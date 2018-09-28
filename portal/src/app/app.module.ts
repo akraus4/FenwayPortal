@@ -13,20 +13,19 @@ import { DxButtonModule, DxCheckBoxModule, DxDataGridModule, DxDropDownBoxModule
 import { ChartsModule } from 'ng2-charts'
 import { ModalModule } from 'ngx-bootstrap/modal'
 import 'rxjs/add/operator/map'
-import { AgileTeamComponent } from './agile-team/agile-team.component'
+import { AgileTeamComponent } from './components/pages/agile-team/agile-team.component'
 import { AppComponent } from './app.component'
-import { FooterComponent } from './footer/footer.component'
-import { HeaderComponent } from './header/header.component'
-import { HomePageComponent } from './home-page/home-page.component'
-import { LoadingPanelComponent } from './loading-panel/loading-panel.component'
-import { MetricsComponent } from './metrics/metrics.component'
-import { NavBarComponent } from './nav-bar/nav-bar.component'
-import { ScorecardComponent } from './scorecard/scorecard.component'
+import { FooterComponent } from './components/widgets/footer/footer.component'
+import { HeaderComponent } from './components/widgets/header/header.component'
+import { HomePageComponent } from './components/pages/home-page/home-page.component'
+import { LoadingPanelComponent } from './components/widgets/loading-panel/loading-panel.component'
+import { MetricsComponent } from './components/pages/metrics/metrics.component'
+import { NavBarComponent } from './components/widgets/nav-bar/nav-bar.component'
+import { ScorecardComponent } from './components/pages/scorecard/scorecard.component'
 import { AuthInterceptor } from './services/auth-interceptor.interceptor'
 import { MetricsService } from './services/metrics.service'
-import { TeamComponent } from './team/team.component'
-import { ViewScoreComponent } from './view-score/view-score.component';
-import { LabsComponent } from './labs/labs.component'
+import { ViewScoreComponent } from './components/pages/view-score/view-score.component'
+import { LabsComponent } from './components/pages/labs/labs.component'
 
 @NgModule({
   declarations: [
@@ -38,7 +37,6 @@ import { LabsComponent } from './labs/labs.component'
     ViewScoreComponent,
     ScorecardComponent,
     LoadingPanelComponent,
-    TeamComponent,
     FooterComponent,
     AgileTeamComponent,
     LabsComponent
@@ -78,7 +76,6 @@ import { LabsComponent } from './labs/labs.component'
       { path: 'scorecard', component: ScorecardComponent },
       { path: 'metrics', component: MetricsComponent },
       { path: 'view-score', component: ViewScoreComponent },
-      { path: 'team', component: TeamComponent },
       { path: '**', redirectTo: 'home' }
 
     ]),
