@@ -10,6 +10,10 @@ import { WorkUser } from '../entities/work_user'
 import { WorkDailyHours } from '../entities/work_dailyhours'
 import { Request, Response } from 'express'
 import { getManager, In } from 'typeorm'
+import { AgileEvaluations } from '../entities/agile_evaluations'
+import { AgileEvaluationSession } from '../entities/agile_evaluation_session'
+import { AgileEvaluationScores } from '../entities/agile_evaluations_scores'
+import { AgileStage } from '../entities/agile_stage'
 
 /**
  * Represents some Type of the Object.
@@ -28,7 +32,11 @@ const EntityType = {
   'AgileSystemUsers': AgileSystemUser,
   'WorkTeamMembers': WorkTeamMember,
   'WorkUsers': WorkUser,
-  'WorkDailyHours': WorkDailyHours
+  'WorkDailyHours': WorkDailyHours,
+  'AgileEvaluations': AgileEvaluations,
+  'AgileEvaluationSessions': AgileEvaluationSession,
+  'AgileEvaluationScores': AgileEvaluationScores,
+  'AgileStages': AgileStage
 }
 
 // Controller methods

@@ -9,7 +9,7 @@ import { MatTableModule } from '@angular/material/table'
 import { BrowserModule } from '@angular/platform-browser'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { RouterModule } from '@angular/router'
-import { DxButtonModule, DxCheckBoxModule, DxDataGridModule, DxDropDownBoxModule, DxFormModule, DxListModule, DxLoadPanelModule, DxNumberBoxModule, DxPieChartModule, DxPopupModule, DxSelectBoxModule, DxTemplateModule, DxTextBoxModule } from 'devextreme-angular'
+import { DxButtonModule, DxCheckBoxModule, DxTextAreaModule, DxDataGridModule, DxRadioGroupModule, DxRadioGroupComponent, DxDropDownBoxModule, DxFormModule, DxListModule, DxLoadPanelModule, DxNumberBoxModule, DxPieChartModule, DxPopupModule, DxSelectBoxModule, DxTemplateModule, DxTextBoxModule } from 'devextreme-angular'
 import { ChartsModule } from 'ng2-charts'
 import { ModalModule } from 'ngx-bootstrap/modal'
 import 'rxjs/add/operator/map'
@@ -26,6 +26,10 @@ import { AuthInterceptor } from './services/auth-interceptor.interceptor'
 import { MetricsService } from './services/metrics.service'
 import { ViewScoreComponent } from './components/pages/view-score/view-score.component'
 import { LabsComponent } from './components/pages/labs/labs.component'
+import { EvaluationComponent } from './components/pages/evaluation/evaluation.component'
+import { EvaluationAdminComponent } from './components/pages/evaluation-admin/evaluation-admin.component'
+import { EvaluationManagementComponent } from './components/pages/evaluation-management/evaluation-management.component'
+import { AngularFontAwesomeModule } from 'angular-font-awesome'
 
 @NgModule({
   declarations: [
@@ -39,11 +43,15 @@ import { LabsComponent } from './components/pages/labs/labs.component'
     LoadingPanelComponent,
     FooterComponent,
     AgileTeamComponent,
-    LabsComponent
+    LabsComponent,
+    EvaluationComponent,
+    EvaluationAdminComponent,
+    EvaluationManagementComponent
   ],
 
   imports: [
     BrowserModule,
+    AngularFontAwesomeModule,
     MatSelectModule,
     MatFormFieldModule,
     BrowserAnimationsModule,
@@ -58,10 +66,13 @@ import { LabsComponent } from './components/pages/labs/labs.component'
     MatTableModule,
     DxDataGridModule,
     MatSelectModule,
+    DxTextAreaModule,
     DxButtonModule,
     DxPieChartModule,
     DxCheckBoxModule,
     DxSelectBoxModule,
+    DxRadioGroupModule,
+    // DxRadioGroupComponent,
     DxNumberBoxModule,
     DxFormModule,
     DxTextBoxModule,
@@ -76,6 +87,9 @@ import { LabsComponent } from './components/pages/labs/labs.component'
       { path: 'scorecard', component: ScorecardComponent },
       { path: 'metrics', component: MetricsComponent },
       { path: 'view-score', component: ViewScoreComponent },
+      { path: 'evaluation', component: EvaluationComponent },
+      { path: 'evaluationManagement', component: EvaluationManagementComponent },
+      { path: 'evaluationAdmin', component: EvaluationAdminComponent },
       { path: '**', redirectTo: 'home' }
 
     ]),

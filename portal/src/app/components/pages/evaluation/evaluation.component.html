@@ -1,0 +1,248 @@
+<div class="row">
+  <div class="col-lg-12">
+    <header headername="Associate Evaluation"></header>
+  </div>
+</div>
+
+<div id="evaluationContent">
+  <div class="row">
+    <div class="col-2">
+      <dx-select-box id="selectPresenterDropDown" class="editFields evalSelect" placeholder="Presenter" [dataSource]="presenterSelectBoxDataSource"
+        displayExpr="lastname" valueExpr="" [searchEnabled]="true" [(ngModel)]="presenterDropDownValue"></dx-select-box>
+    </div>
+    <div class="col-2">
+      <dx-select-box id="selectAppraiserDropDown" class="editFields evalSelect" placeholder="Appraiser" [dataSource]="appraiserSelectBoxDataSource"
+        displayExpr="lastname" valueExpr="" [searchEnabled]="true" [(ngModel)]="appraiserDropDownValue"></dx-select-box>
+    </div>
+    <div class="col-2">
+      <dx-select-box id="selectStageDropDown" class="editFields evalSelect" placeholder="Stage" [dataSource]="stageList" displayExpr=""
+        valueExpr="agileStageName" [searchEnabled]="true" [(ngModel)]="stageDropDownValue" (onValueChanged)="onValueChangedStage($event)"></dx-select-box>
+    </div>
+    <div class="col-4">
+       
+    </div>
+    <div id="totalCnt" class="col-2">
+      <div id="totalLbl">Total</div>
+      <div id="totalDiv">{{total}}</div>
+    </div>
+  </div>
+
+  <hr>
+    
+  <div class="row">
+    <div class="col-12 tooltp">
+      Associate Consultant is well-versed in his/her technology stack. &nbsp;<i class="fa fa-asterisk" aria-hidden="true"></i>
+      <span class="tooltiptext" [innerHTML]="technicalTitle"></span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 disagreeCnt">
+      Strongly Disagree
+    </div>
+    <div class="col-6">
+      <div class="radioCnt">
+        <dx-radio-group [items]="ratings" layout="horizontal" (onValueChanged)="onValueChangedTechical($event)">
+        </dx-radio-group>
+      </div>
+    </div>
+    <div class="col-3">
+      Strongly Agree
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      Please provide reasoning for your rating. &nbsp;<i class="fa fa-asterisk" aria-hidden="true"></i>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <dx-text-area placeholder="Your Answer" [height]="70" [(ngModel)]="technicalCommentValue">
+      </dx-text-area>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-12 tooltp">
+      Associate Consultant possesses strong communication and presentation skills. &nbsp;<i class="fa fa-asterisk" aria-hidden="true"></i>
+      <!-- <span class="tooltiptext" [innerHTML]="communicationTitle"></span> -->
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 disagreeCnt">
+      Strongly Disagree
+    </div>
+    <div class="col-6">
+      <div class="radioCnt">
+        <dx-radio-group [items]="ratings" layout="horizontal" (onValueChanged)="onValueChangedCommunication($event)">
+        </dx-radio-group>
+      </div>
+    </div>
+    <div class="col-3">
+      Strongly Agree
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      Please provide reasoning for your rating. &nbsp;<i class="fa fa-asterisk" aria-hidden="true"></i>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <dx-text-area placeholder="Your Answer" [height]="70" [(ngModel)]="communicationCommentValue">
+      </dx-text-area>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-12 tooltp">
+      Associate Consultant possesses the appropriate behavioral skills for this stage. &nbsp;<i class="fa fa-asterisk" aria-hidden="true"></i>
+      <span class="tooltiptext" [innerHTML]="behavioralTitle"></span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 disagreeCnt">
+      Strongly Disagree
+    </div>
+    <div class="col-6">
+      <div class="radioCnt">
+        <dx-radio-group [items]="ratings" layout="horizontal" (onValueChanged)="onValueChangedBehavioral($event)">
+        </dx-radio-group>
+      </div>
+    </div>
+    <div class="col-3">
+      Strongly Agree
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      Please provide reasoning for your rating. &nbsp;<i class="fa fa-asterisk" aria-hidden="true"></i>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <dx-text-area placeholder="Your Answer" [height]="70" [(ngModel)]="behavioralCommentValue">
+      </dx-text-area>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-12 tooltp">
+      Based on team metrics, the Associate Consultant is adding value to the team. (Metrics to be provided by Associate's Coach)
+      &nbsp;
+      <i class="fa fa-asterisk" aria-hidden="true"></i>
+      <!-- <span class="tooltiptext" [innerHTML]="metricsTitleTitle"></span> -->
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-3 disagreeCnt">
+      Strongly Disagree
+    </div>
+    <div class="col-6">
+      <div class="radioCnt">
+        <dx-radio-group [items]="ratings" layout="horizontal" (onValueChanged)="onValueChangedMetrics($event)">
+        </dx-radio-group>
+      </div>
+    </div>
+    <div class="col-3">
+      Strongly Agree
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      Please provide reasoning for your rating. &nbsp;<i class="fa fa-asterisk" aria-hidden="true"></i>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <dx-text-area placeholder="Your Answer" [height]="70" [(ngModel)]="metricsCommentValue">
+      </dx-text-area>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-12">
+      What were your key takeaways from this presentation? &nbsp;<i class="fa fa-asterisk" aria-hidden="true"></i>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <dx-text-area placeholder="Your Answer" [height]="70" [(ngModel)]="overallCommentValue">
+      </dx-text-area>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-12">
+      Please list any additional feedback you have regarding the presentation.
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <dx-text-area placeholder="Your Answer" [height]="70" [(ngModel)]="additionalCommentValue">
+      </dx-text-area>
+    </div>
+  </div>
+
+  <hr>
+
+  <div class="row">
+    <div class="col-12">
+      Do you recommend the Associate for advancement to the next stage? &nbsp;<i class="fa fa-asterisk" aria-hidden="true"></i>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <div class="passConfirmation">
+        <dx-radio-group [items]="passConfirmationList" [(value)]="passConfirmationValue"  layout="vertical" (onValueChanged)="onValueChangedYesNo($event)">
+        </dx-radio-group>
+      </div>
+    </div>
+  </div>
+
+  <div id="ifNoLbl" class="row">
+    <div class="col-12">
+      If no, please explain why.
+    </div>
+  </div>
+
+  <div id="ifNoTxtfld" class="row">
+    <div class="col-12">
+      <dx-text-area placeholder="Your Answer" [height]="70" [(ngModel)]="failureReasonCommentValue">
+      </dx-text-area>
+    </div>
+  </div>
+ 
+  <hr>
+
+  <div class="row">
+      <div class="col-12">
+          <dx-button id="submitBtn" text="Submit" [width]="110"></dx-button>
+      </div>
+    </div>
+  
+</div>

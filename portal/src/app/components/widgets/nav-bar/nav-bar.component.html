@@ -78,34 +78,34 @@
                 </li>
 
                  <!-- ----------------------Metrics Dashboard---------------------- -->
-                 <li class="primaryListItem">
+                 <!-- <li class="primaryListItem">
                     <a id="metricsDashboardTab" href='https://datastudio.google.com/reporting/1wH5M3-P3vz4DRvJ-6DJJ0VhVhud6yCvP/page/vEhR' target="_blank">
                         <p id="iconWrapper">
                             <i class="fa fa-user"></i>
                             <span class="navLabels">Fen Who</span>
                         </p>
                     </a>
-                </li>
+                </li> -->
 
                  <!-- ----------------------Metrics Dashboard---------------------- -->
-                 <li class="primaryListItem">
+                 <!-- <li class="primaryListItem">
                     <a id="metricsDashboardTab" href='https://datastudio.google.com/reporting/1wH5M3-P3vz4DRvJ-6DJJ0VhVhud6yCvP/page/vEhR' target="_blank">
                         <p id="iconWrapper">
                             <i class="fa fa-map-marker"></i>
                             <span class="navLabels">Fen Where</span>
                         </p>
                     </a>
-                </li>
+                </li> -->
 
                 <!-- ----------------------Demo Schedule---------------------- -->
-                <li [routerLinkActive]="['link-active']" class="primaryListItem">
+                <!-- <li [routerLinkActive]="['link-active']" class="primaryListItem">
                     <a id="demoTab" [routerLink]="['/demo']">
                         <p id="iconWrapper">
                             <i class="fa fa-calendar"></i>
                             <span class="navLabels">Demo Schedule</span>
                         </p>
                     </a>
-                </li>
+                </li> -->
 
                 <!-- ---------------------- View Score Board ---------------------- -->
                 <!-- <li [routerLinkActive]="['link-active']"  class="primaryListItem">
@@ -159,20 +159,30 @@
 
                 <!-- ---------------------- Associate Stages ---------------------- -->
                 <li [routerLinkActive]="['link-active']" class="primaryListItem">
-                    <a id="viewScorecardTab" [routerLink]="['/evaluations']">
+                    <a id="newEvaluationTab" [routerLink]="['/evaluation']">
                         <p id="iconWrapper">
                             <i class="fas fa-star"></i>
-                            <span class="navLabels">Associate Evaluations</span>
+                            <span class="navLabels">New Evaluation</span>
                         </p>
                     </a>
                 </li>
 
                 <!-- ---------------------- Associate Stages Management ---------------------- -->
                 <li [routerLinkActive]="['link-active']" class="primaryListItem">
-                    <a id="viewScorecardTab" [routerLink]="['/evaluation-management']">
+                    <a id="viewScorecardTab" [routerLink]="['/evaluationManagement']">
                         <p id="iconWrapper">
                             <i class="fal fa-table"></i>
-                            <span class="navLabels">Evaluation Management</span>
+                            <span class="navLabels">Associate's Evaluations</span>
+                        </p>
+                    </a>
+                </li>
+
+                <!-- ---------------------- Associate Stages Management ---------------------- -->
+                <li [routerLinkActive]="['link-active']" class="primaryListItem">
+                    <a id="viewScorecardTab" [routerLink]="['/evaluationAdmin']">
+                        <p id="iconWrapper">
+                            <i class="fal fa-table"></i>
+                            <span class="navLabels">Evaluation Admin</span>
                         </p>
                     </a>
                 </li>

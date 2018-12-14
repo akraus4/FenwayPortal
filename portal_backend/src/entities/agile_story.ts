@@ -21,7 +21,7 @@ export class AgileStory {
   agileSprint: AgileSprint
 
   @OneToMany(type => AgileStoryAgileSystemUser, agileStoryAgileSystemUser => agileStoryAgileSystemUser.agileStory)
-  agileStoryAgileSystemUsers: AgileStoryAgileSystemUser[];
+  agileStoryAgileSystemUsers: AgileStoryAgileSystemUser[]
 
   @Column('varchar', { name: 'story_description' })
   storyDescription: string

@@ -12,7 +12,8 @@ export class NavBarComponent {
   logoPathToggled: string
 
   constructor () {
-    this.logoPath = './assets/FGLogoVer.png'
+    this.logoPath = './assets/logo image.png'
+    // this.logoPath = './assets/FenwayGroup2C.png'
     this.logoPathToggled = './assets/FGLogoCircle.png'
   }
 

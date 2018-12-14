@@ -4,7 +4,13 @@
     left: 0;
     bottom: 0;
     height: 40px;
-    background-color: #1a3b68;
+    background-color: #0A2240;
+}
+
+.footerBtn{
+  background-color: #d7d7d7;
+    color: #0A2240;
+    border-radius: 5px;
 }
 
 #copyright{
@@ -28,24 +34,42 @@
   .logos {
    position: absolute;
    right: 4%;
-   bottom: 5px;
+   bottom: 8px;
+   width: 154px;
   }
   
   .facebook_logo {
-    position: relative;
-    
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
   
   .twitter_logo {
-    position: relative;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
   }
   
   .linkedin_logo {
-    position: relative;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
   }
   
   .fg_logo {
-    position: relative;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  #logo{
+    width: 20px;
+    height: 20px;
+    margin-bottom: 2px;
   }
 
   @media (max-width: 768px){

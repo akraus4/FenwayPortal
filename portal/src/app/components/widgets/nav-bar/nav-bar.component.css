@@ -5,7 +5,7 @@
     top: 89.5px;
     bottom: 40px;
     overflow-y: auto;
-    background-color: #969696;
+    background-color: #d7d7d7;
     -webkit-transition: all 0.9s ease;
     -moz-transition: all 0.9s ease;
     -o-transition: all 0.9s ease;
@@ -57,8 +57,10 @@
   }
 
 img {
-    max-width: 80%;
-    padding-top: 10px;
+    max-width: 57%;
+    margin-top: 10px;
+    /* background: white; */
+    /* border-radius: 50%; */
     display: block;
     margin-left: auto;
     margin-right: auto;
@@ -113,7 +115,7 @@ span {
     margin: 0 !important;
     margin-top: 20px;
     float: right;
-    color: #ffffff;
+    color: #0A2240;
 }
 
 .toggled #menu-toggle {
@@ -166,7 +168,7 @@ i {
             width: 100%;
             text-decoration: none;
             color: #ffffff;
-            background: rgb(207, 16, 45);
+            background:  #CE0E2D;
             -webkit-box-shadow: 0px 0px 2px #303030;
             -moz-box-shadow: 0px 0px 2px #303030;
             box-shadow: 0px 0px 2px #303030;
@@ -175,8 +177,8 @@ i {
 /*Styling for selected menu item*/
 .primaryListItem.link-active {
     width: 108%;
-    background: #1a3b68 !important;
-    border-left: 4px solid rgb(207, 16, 45);
+    background:  #0A2240 !important;
+    border-left: 4px solid  #CE0E2D;
     text-decoration: none;
     -webkit-box-shadow: 0px 0px 2px #303030;
     -moz-box-shadow: 0px 0px 2px #303030;
@@ -260,7 +262,7 @@ li.primaryListItem {
     min-width: 240px;
     width: 100%;
     border-bottom: #666666 solid 1px;
-    background-color: #707070;
+    background-color: #939393;
     /* -webkit-box-shadow: 0px 0px 7px #6d6c6d;
     -moz-box-shadow: 0px 0px 7px #6d6c6d;
     box-shadow: 0px 0px 2px #6d6c6d; */

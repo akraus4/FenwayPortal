@@ -5,8 +5,6 @@ import * as bodyParser from 'body-parser'
 
 let request = require('request')
 
-const config = require('./config/config')
-
 /**
  * Controllers (route handlers).
  */

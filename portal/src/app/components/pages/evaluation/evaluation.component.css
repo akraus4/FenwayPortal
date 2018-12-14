@@ -1,0 +1,102 @@
+#evaluationContent{
+    margin-top: 50px;
+    font-size: 20px;
+    font-family: Monda,'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #333;
+    font-weight: bold;
+    padding-bottom: 100px;
+}
+
+.row{
+    margin-top: 40px;
+}
+
+.disagreeCnt{
+    text-align: right
+}
+
+.agreeCnt{
+    text-align: left
+}
+
+.radioCnt{
+    width: 285px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #333;
+    background-image: linear-gradient(to right, #ccc, #333, #ccc);
+}
+
+.svg-inline--fa.fa-w-16 {
+    color: red;
+    font-size: 13px;
+}
+
+#totalCnt{
+    float: right;
+    font-size: 20px;
+    font-family: Monda,'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #333;
+}
+
+#totalLbl{
+    text-align: center;
+}
+
+#totalDiv{
+    text-align: center;
+}
+
+.evalSelect{
+    margin-top: 20px;
+}
+
+.shadow{
+    -webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.75);
+}
+
+.passConfirmation{
+    font-size: 20px;
+    font-family: Monda,'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #333;
+    font-weight: bold;
+}
+
+#submitBtn{
+    color: white;
+    background-color: #0A2240;
+    float: right;
+}
+
+/deep/ .dx-widget {
+    color: #333;
+    font-weight: bold;
+    font-family: Monda,'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 18px !important;
+}
+
+.tooltp .tooltiptext {
+    visibility: hidden;
+    width: 400px;
+    background-color: #0A2240;
+    color: #fff;
+    text-align: left;
+    font-size: 14px;
+    border-radius: 6px;
+    padding: 10px;
+    line-height: 30px;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+.tooltp:hover .tooltiptext {
+    visibility: visible;
+}
