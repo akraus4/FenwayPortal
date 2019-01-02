@@ -16,6 +16,10 @@ export class EvaluationComponent implements OnInit {
   stageList: any[]
   pressenterList: any[]
   appraiserList: any[]
+  userList: any[]
+  currentPressenter
+  currentAppraiser
+  users: any[] = []
 
   presenterDropDownValue
   appraiserDropDownValue
@@ -133,10 +137,19 @@ export class EvaluationComponent implements OnInit {
   }
 
   getAllUsers () {
-    this.metricsService.getAll('WorkUsers', '', '')
+    this.metricsService.getAll('WorkUsers', '', 'active=1')
       .subscribe((results) => {
-        this.pressenterList = results
-        this.appraiserList = results
+        for (let user of results) {
+          let u = {
+            'workUserId': user.workUserId,
+            'fullname': user.firstname + ' ' + user.lastname
+          }
+          console.log('USERS ===== ' + JSON.stringify(u))
+          this.users.push(u)
+        }
+        this.userList = results
+        this.pressenterList = this.users
+        this.appraiserList = this.users
         console.log('Presenters ===== ' + JSON.stringify(this.pressenterList))
         console.log('Apraisers ===== ' + JSON.stringify(this.appraiserList))
       })
@@ -150,16 +163,33 @@ export class EvaluationComponent implements OnInit {
       })
   }
 
+  getCurrentAppraiser ($event) {
+    for (let u of this.userList) {
+      if (u.workUserId === $event.value.workUserId) {
+        this.currentAppraiser = u
+      }
+    }
+  }
+
+  getCurrentPresenter ($event) {
+    for (let u of this.userList) {
+      if (u.workUserId === $event.value.workUserId) {
+        this.currentPressenter = u
+      }
+    }
+  }
+
   saveEvaluation () {
     this.metricsService.showLoadingPanel()
     let agileEvaluation = {
       'agileStage': this.stageDropDownValue,
       // 'agileEvaluationSession': this.teamValue,
-      'presenterUserId': this.presenterDropDownValue,
+      'presenterUserId': this.currentPressenter,
       'agileEvaluationDate': new Date()
     }
     this.metricsService.save('AgileEvaluations', agileEvaluation)
       .subscribe((results) => {
+        console.log('Evaluation Save Result ===== ' + JSON.stringify(results))
         this.saveEvaluationScore(results)
         this.metricsService.hideLoadingPanel()
       })
@@ -173,9 +203,9 @@ export class EvaluationComponent implements OnInit {
     } else if (this.passConfirmationValue === 'No (Total of 0 - 13pts from above)') {
       passed = 0
     }
-    let agileEvaluation = {
+    let agileEvaluationScore = {
       'agileEvaluation': evaluation,
-      'appraiserUserId': this.appraiserDropDownValue,
+      'appraiserUserId': this.currentAppraiser,
       'technicalScore': this.currentTechnicalValue,
       'technicalComment': this.technicalCommentValue,
       'communicationScore': this.currentCommunicationValue,
@@ -190,10 +220,15 @@ export class EvaluationComponent implements OnInit {
       'failureReasonComment': this.failureReasonCommentValue,
       'passed': passed
     }
-    this.metricsService.save('AgileEvaluations', agileEvaluation)
+    this.metricsService.save('AgileEvaluationScores', agileEvaluationScore)
       .subscribe((results) => {
         this.metricsService.hideLoadingPanel()
       })
+  }
+
+  submitClick () {
+    console.log('_______CLICK_______')
+    this.saveEvaluation()
   }
 
 }

@@ -5,20 +5,21 @@
 </div>
 
 <div id="evaluationContent">
-  <div class="row">
-    <div class="col-2">
-      <dx-select-box id="selectPresenterDropDown" class="editFields evalSelect" placeholder="Presenter" [dataSource]="presenterSelectBoxDataSource"
-        displayExpr="lastname" valueExpr="" [searchEnabled]="true" [(ngModel)]="presenterDropDownValue"></dx-select-box>
+  <div id="evaluationHeader">
+  <div class="row" id="evaluationHeaderRow">
+    <div class="col-3">
+      <dx-select-box id="selectPresenterDropDown" class="editFields evalSelect" placeholder="Presenter" [dataSource]="pressenterList"
+        displayExpr="fullname" valueExpr="" [searchEnabled]="true" [(ngModel)]="presenterDropDownValue" (onValueChanged)="getCurrentPresenter($event)"></dx-select-box>
     </div>
-    <div class="col-2">
-      <dx-select-box id="selectAppraiserDropDown" class="editFields evalSelect" placeholder="Appraiser" [dataSource]="appraiserSelectBoxDataSource"
-        displayExpr="lastname" valueExpr="" [searchEnabled]="true" [(ngModel)]="appraiserDropDownValue"></dx-select-box>
+    <div class="col-3">
+      <dx-select-box id="selectAppraiserDropDown" class="editFields evalSelect" placeholder="Appraiser" [dataSource]="appraiserList"
+        displayExpr="fullname" valueExpr="" [searchEnabled]="true" [(ngModel)]="appraiserDropDownValue" (onValueChanged)="getCurrentAppraiser($event)"></dx-select-box>
     </div>
-    <div class="col-2">
-      <dx-select-box id="selectStageDropDown" class="editFields evalSelect" placeholder="Stage" [dataSource]="stageList" displayExpr=""
-        valueExpr="agileStageName" [searchEnabled]="true" [(ngModel)]="stageDropDownValue" (onValueChanged)="onValueChangedStage($event)"></dx-select-box>
+    <div class="col-3">
+      <dx-select-box id="selectStageDropDown" class="editFields evalSelect" placeholder="Stage" [dataSource]="stageList" displayExpr="agileStageName"
+        valueExpr="" [searchEnabled]="true" [(ngModel)]="stageDropDownValue" (onValueChanged)="onValueChangedStage($event)"></dx-select-box>
     </div>
-    <div class="col-4">
+    <div class="col-1">
        
     </div>
     <div id="totalCnt" class="col-2">
@@ -28,7 +29,10 @@
   </div>
 
   <hr>
-    
+
+  </div>
+
+    <div id="questionsContent">
   <div class="row">
     <div class="col-12 tooltp">
       Associate Consultant is well-versed in his/her technology stack. &nbsp;<i class="fa fa-asterisk" aria-hidden="true"></i>
@@ -241,8 +245,9 @@
 
   <div class="row">
       <div class="col-12">
-          <dx-button id="submitBtn" text="Submit" [width]="110"></dx-button>
+          <dx-button id="submitBtn" text="Submit" [width]="110" (onClick)="submitClick()"></dx-button>
       </div>
     </div>
+  </div>
   
 </div>

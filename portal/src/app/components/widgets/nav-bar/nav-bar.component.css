@@ -169,9 +169,9 @@ i {
             text-decoration: none;
             color: #ffffff;
             background:  #CE0E2D;
-            -webkit-box-shadow: 0px 0px 2px #303030;
+            /* -webkit-box-shadow: 0px 0px 2px #303030;
             -moz-box-shadow: 0px 0px 2px #303030;
-            box-shadow: 0px 0px 2px #303030;
+            box-shadow: 0px 0px 2px #303030; */
         }
 
 /*Styling for selected menu item*/

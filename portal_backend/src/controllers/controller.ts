@@ -44,7 +44,7 @@ export const getAll = async (req: Request, res: Response) => {
   console.log(`Received getAll for ${req.params.entityType} with relations ${req.query.relations} with conditions ${req.query.conditions}`)
 
   return getAllRecords(EntityType[req.params.entityType], req.query.relations, req.query.conditions).then((result) => {
-    console.log(`Result ${JSON.stringify(result)}`)
+    // console.log(`Result ${JSON.stringify(result)}`)
     res.send(result)
   }).catch(error => {
     console.log(`Error: ${error}`)
@@ -66,7 +66,7 @@ export const save = async (req: Request, res: Response) => {
   console.log(`Received save for ${req.params.entityType} of ${JSON.stringify(req.body)}`)
 
   return saveRecord(EntityType[req.params.entityType], req.body).then((result) => {
-    console.log(`Result ${JSON.stringify(result)}`)
+    console.log(`Save Result ${JSON.stringify(result)}`)
     res.send(result)
   }).catch(error => {
     console.log(`Error: ${error}`)

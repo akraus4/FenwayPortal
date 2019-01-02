@@ -7,8 +7,19 @@
     padding-bottom: 100px;
 }
 
+#evaluationHeader{
+    position: fixed;
+    top: 48px;
+    z-index: 1;
+    background: white;
+}
+
+#questionsContent{
+    margin-top: 160px;
+}
+
 .row{
-    margin-top: 40px;
+    margin-top: 39px;
 }
 
 .disagreeCnt{
@@ -53,7 +64,7 @@ hr {
 }
 
 .evalSelect{
-    margin-top: 20px;
+    margin-top: 18px;
 }
 
 .shadow{
