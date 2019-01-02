@@ -37,7 +37,7 @@ public class Rally {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
-		
+		/*
 		//Check to see if a config file was specified - if not, exit out with a message
 		if (args == null || args.length == 0 || args[0] == null || args[0].isEmpty()) {
 			System.out.println("Please specify the associated config file in JSON format");
@@ -45,11 +45,12 @@ public class Rally {
 		}
 		//Set the configuration file as what was specified in the command line
 		File configFile = new File(args[0]);
-		
+		*/
 		/* 
 		* Use for debug purposes only
-		* File configFile = new File("c:\\scripts\\CTL_Salesforce.json");
 		*/
+		File configFile = new File("c:\\scripts\\CTL_Salesforce.json");
+		
 		
 		//Retrieve configuration from specified JSON and set it to the configuration object
 		StringBuilder configSB = new StringBuilder();
@@ -218,6 +219,7 @@ public class Rally {
 		QueryResponse queryResponse = restApi.query(tasks);
 		System.out.println(String.format("\nTotal tasks: %d", queryResponse.getTotalResultCount()));
 		for (JsonElement result : queryResponse.getResults()) {
+			System.out.println(result);
 			Task task = gson.fromJson(result,  Task.class);
 			String story_id = task.getWorkProduct().getFormattedID();
 			
@@ -258,6 +260,9 @@ public class Rally {
 	 * @throws IOException
 	 */
 	private static Story createStory(RallyRestApi restApi, String story_id) throws IOException {
+		if (story_id.equals("DE66576")) {
+			System.out.println("On defect DE66576");
+		}
 		QueryRequest hir = new QueryRequest("hierarchicalrequirement");
 		hir.setFetch(new Fetch("FormattedID", "ScheduleState"));
 		QueryFilter filter = new QueryFilter("FormattedID", "=", story_id);
@@ -299,10 +304,14 @@ public class Rally {
 				
 				//Can now calculate percentage of story points to assign to each person
 				for (AssignedTo currUser : currStory.getAssigned_to()) {
-					Double thisUserPoints = currUser.getUser_points()/totalHours*storyPoints;
-					//Round it to the nearest thousandth
-					thisUserPoints = ((int) ((thisUserPoints * 1000.0) + ((thisUserPoints < 0.0) ? -0.5 : 0.5))) / 1000.0;
-					currUser.setUser_points(thisUserPoints);
+					if (currUser != null && storyPoints != null) {
+						Double thisUserPoints = currUser.getUser_points()/totalHours*storyPoints;
+						//Round it to the nearest thousandth
+						thisUserPoints = ((int) ((thisUserPoints * 1000.0) + ((thisUserPoints < 0.0) ? -0.5 : 0.5))) / 1000.0;
+						currUser.setUser_points(thisUserPoints);
+					} else {
+						System.out.println("There is a problem with " + story_id + ". It may be that there are no story points assigned.");
+					}
 				}
 			}
 		}
