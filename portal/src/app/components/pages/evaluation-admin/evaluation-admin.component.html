@@ -6,15 +6,15 @@
   
   <div class="effect7 gridWidgetContainer">
     <div class="row searchWidgetContainer">
-      <div class="col-4 searchField">
+      <!-- <div class="col-4 searchField"> -->
         <!--  This is the drop down to select the team/teams   -->
-        <mat-form-field class="selectDropDown">
+        <!-- <mat-form-field class="selectDropDown">
           <mat-select placeholder="Select Session" [formControl]="Session" >
             <mat-option *ngFor="let sessionChoice of sessionChoices" [value]="sessionChoice">{{sessionChoice}}
             </mat-option>
           </mat-select>
         </mat-form-field>
-      </div>
+      </div> -->
   
       <!-- <div class="col-4 searchField">
         <mat-form-field class="selectDropDown">
@@ -27,9 +27,9 @@
   
       <div class="col-3 searchField">
         <!-- This is the button to search the metrics   -->
-        <button mat-button id="searchBtn"   class='searchFieldButton' disabled>
+        <!-- <button mat-button id="searchBtn"   class='searchFieldButton' disabled>
           <i class="fas fa-search"></i>
-        </button>
+        </button> -->
         <button mat-button id="acceptBtn" title="Accept"  class='searchFieldButton' disabled>
           <i class="fa fa-check"></i>
         </button>
@@ -47,14 +47,16 @@
           <dxo-header-filter [visible]="true"></dxo-header-filter>
           <dxo-sorting mode="none"></dxo-sorting>
           <dxo-paging [pageSize]="10"></dxo-paging>
-          <dxi-column dataField="fullName" caption="Name"></dxi-column>
+          <dxi-column dataField="lname" caption="Last Name"></dxi-column>
+          <dxi-column dataField="fname" caption="First Name"></dxi-column>
+          <dxi-column dataField="Evaluation Date" caption="Date"></dxi-column>
           <dxi-column dataField="stage" caption="Stage"></dxi-column>
-          <dxi-column dataField="technical" caption="Technical"></dxi-column>
+          <!-- <dxi-column dataField="technical" caption="Technical"></dxi-column>
           <dxi-column dataField="presentation" caption="Presentation"></dxi-column>
           <dxi-column dataField="behavioral" caption="Behavioarl"></dxi-column>
-          <dxi-column dataField="metrics" caption="Metrics/Value"></dxi-column>
-          <dxi-column dataField="total" caption="Total"></dxi-column>
-          <dxi-column dataField="leadTotal" caption="Lead"></dxi-column>
+          <dxi-column dataField="metrics" caption="Metrics/Value"></dxi-column> -->
+          <dxi-column dataField="total" caption="Average Total"></dxi-column>
+          <!-- <dxi-column dataField="leadTotal" caption="Lead"></dxi-column> -->
           
         </dx-data-grid>
       </div>
