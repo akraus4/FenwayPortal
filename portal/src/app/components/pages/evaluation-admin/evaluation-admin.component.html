@@ -30,6 +30,9 @@
         <!-- <button mat-button id="searchBtn"   class='searchFieldButton' disabled>
           <i class="fas fa-search"></i>
         </button> -->
+        <dx-button id="createNewEvaluationButton" title="Create New Evaluation" class="searchFieldButton"
+            (onClick)="togglePopupVisible()" hoverStateEnabled="true" icon="fa fa-plus">
+        </dx-button>
         <button mat-button id="acceptBtn" title="Accept"  class='searchFieldButton' disabled>
           <i class="fa fa-check"></i>
         </button>
@@ -38,10 +41,33 @@
         </button>
       </div>
     </div>
+
+    <dx-popup
+        class="popup"
+        [width]="400"
+        [height]="200"
+        [showTitle]="true"
+        title="Create New Evaluation"
+        [dragEnabled]="false"
+        [closeOnOutsideClick]="true"
+        [(visible)]="popupVisible">
+        <div *dxTemplate="let data of 'content'">
+          <div class="row">
+            <div class="col-6">
+              <dx-select-box id="selectPresenterDropDown" class="editFields evalSelect" placeholder="Presenter" [dataSource]="presenterList"
+                displayExpr="fullname" valueExpr="" [searchEnabled]="true" [(ngModel)]="presenterDropDownValue" (onValueChanged)="getCurrentPresenter($event)"></dx-select-box>
+            </div>
+            <div class="col-6">
+              <dx-select-box id="selectStageDropDown" class="editFields evalSelect" placeholder="Stage" [dataSource]="stageList" displayExpr="agileStageName"
+              valueExpr="" [searchEnabled]="true" [(ngModel)]="stageDropDownValue"></dx-select-box>
+            </div>
+          </div>
+        </div>
+    </dx-popup>
   
     <div class="row" id="metricsPageGridDiv">
       <div class="col-12">
-        <dx-data-grid id="gridContainer"  [showRowLines]="true" [showBorders]="true">
+        <dx-data-grid id="gridContainer" [dataSource]="averageScores" [showRowLines]="true" [showBorders]="true">
           <dxo-export [enabled]="true" fileName="Evaluations" [allowExportSelectedData]="true"></dxo-export>
           <dxo-selection mode="multiple"></dxo-selection>
           <dxo-header-filter [visible]="true"></dxo-header-filter>
@@ -49,13 +75,13 @@
           <dxo-paging [pageSize]="10"></dxo-paging>
           <dxi-column dataField="lname" caption="Last Name"></dxi-column>
           <dxi-column dataField="fname" caption="First Name"></dxi-column>
-          <dxi-column dataField="evaluationDate" caption="Date"></dxi-column>
-          <dxi-column dataField="stage" caption="Stage"></dxi-column>
+          <dxi-column dataField="agileEvaluationDate" caption="Date"></dxi-column>
+          <dxi-column dataField="agileStage" caption="Stage"></dxi-column>
           <!-- <dxi-column dataField="technical" caption="Technical"></dxi-column>
           <dxi-column dataField="presentation" caption="Presentation"></dxi-column>
           <dxi-column dataField="behavioral" caption="Behavioarl"></dxi-column>
           <dxi-column dataField="metrics" caption="Metrics/Value"></dxi-column> -->
-          <dxi-column dataField="total" caption="Average Total"></dxi-column>
+          <dxi-column dataField="avgTotal" caption="Average Total"></dxi-column>
           <!-- <dxi-column dataField="leadTotal" caption="Lead"></dxi-column> -->
           
         </dx-data-grid>

@@ -51,6 +51,23 @@ export const getAll = async (req: Request, res: Response) => {
   })
 }
 
+export const getNullEvaluations = async (req: Request, res: Response) => {
+  console.log(`Received getNullEvaluations for ${req.params.entityType}`)
+  const manager = getManager()
+
+  return manager.createQueryBuilder()
+    .select()
+    .from(AgileEvaluations, "agileEvaluations")
+    .where("agileEvaluations.passed is NULL")
+    .getMany()
+    .then((result) => {
+    // console.log(`Result ${JSON.stringify(result)}`)
+    res.send(result)
+  }).catch(error => {
+    console.log(`Error: ${error}`)
+  })
+}
+
 export const get = async (req: Request, res: Response) => {
   console.log(`Received get for ${req.params.entityType} with id ${req.params.id} with relations ${req.query.relations}`)
 

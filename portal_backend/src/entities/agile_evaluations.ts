@@ -28,7 +28,7 @@ export class AgileEvaluations {
   @Column('varchar', { name: 'agile_evaluation_date' })
   agileEvaluationDate: Date
 
-  @Column('tinyint', { name: 'passed' })
+  @Column('tinyint', { name: 'passed', nullable: true })
   passed: boolean
 
 }

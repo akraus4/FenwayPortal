@@ -22,6 +22,12 @@ export class MetricsService {
     return result
   }
 
+  getNullEvaluations (entity) {
+    console.log(`URL ====  ${this.url}/api/${entity}`)
+    let result = this.http.get(`${this.url}/api/${entity}`)
+    return result
+  }
+
   save (entity, object) {
     console.log(`URL Post ====  ${this.url}/api/${entity}`)
     let body = JSON.stringify(object)
