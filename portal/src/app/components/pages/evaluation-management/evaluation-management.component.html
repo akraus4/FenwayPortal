@@ -2,20 +2,20 @@
   <div class="col-sm-12">
     <header headername="Associate's Evaluations"></header>
   </div>
-</div>
-
-<div class="effect7 gridWidgetContainer">
+ </div>
+ 
+ <div class="effect7 gridWidgetContainer">
   <div class="row searchWidgetContainer">
     <div class="col-4 searchField">
       <!--  This is the drop down to select the team/teams   -->
       <mat-form-field class="selectDropDown">
-        <mat-select placeholder="Select Associate" [formControl]="Associate">
-          <mat-option *ngFor="let associateChoice of associateChoices" [value]="associateChoice">{{associateChoices}}
+        <mat-select placeholder="Select Associate" [formControl]="Associate" (change)="onAssociateChange($event.value)">
+          <mat-option *ngFor="let user of users" [value]="user">{{user.fullname}}
           </mat-option>
         </mat-select>
       </mat-form-field>
     </div>
-
+ 
     <!-- <div class="col-4 searchField">
         <mat-form-field class="selectDropDown">
           <mat-select placeholder='Select Sprints' [formControl]="Sprint" (change)="storeSprintId($event.value)" multiple>
@@ -24,27 +24,56 @@
           </mat-select>
         </mat-form-field>
       </div> -->
-
+ 
     <div class="col-3 searchField">
       <!-- This is the button to search the metrics   -->
-      <button mat-button id="metricsSearchBtn"  class='searchFieldButton' disabled>
+      <!-- <button mat-button id="metricsSearchBtn"  class='searchFieldButton' (click)="" disabled>
         <i class="fas fa-search"></i>
-      </button>
+      </button> -->
     </div>
   </div>
-
-  <div class="row" id="metricsPageGridDiv">
+ 
+  <div class="row" id="evaluationManagmentPageGridDiv" style="margin-bottom: 60px;">
     <div class="col-12">
-      <dx-data-grid id="gridContainer"  [showRowLines]="true" [showBorders]="true">
+      <dx-data-grid id="gridContainer" [dataSource]= "evaluationList" [showRowLines]="true" [showBorders]="true" (onRowClick)="getAllEvaluationScoresByUser($event)">
         <dxo-export [enabled]="true" fileName="Associate's Evaluations" [allowExportSelectedData]="true"></dxo-export>
         <dxo-selection mode="multiple"></dxo-selection>
         <dxo-header-filter [visible]="true"></dxo-header-filter>
         <dxo-sorting mode="none"></dxo-sorting>
         <dxo-paging [pageSize]="10"></dxo-paging>
-        <dxi-column dataField="stage" caption="Stage"></dxi-column>
-        <dxi-column dataField="session" caption="Session"></dxi-column>
-        <dxi-column dataField="total" caption="Total"></dxi-column>
-        <dxi-column dataField="passFail" caption="Pass/Fail"></dxi-column>
+        <dxi-column dataField="agileStage.agileStageName" caption="Stage"></dxi-column>
+        <dxi-column dataField="agileEvaluationDate" caption="Date"></dxi-column>
+        <dxi-column dataField="passed" caption="Pass/Fail"></dxi-column>
+      </dx-data-grid>
+      <dx-data-grid id="sub-gridContainer" [dataSource]= "scoreList"  [showRowLines]="true" [showBorders]="true">
+        <dxo-export [enabled]="true" fileName="Associate's Evaluations" [allowExportSelectedData]="true"></dxo-export>
+        <dxo-selection mode="multiple"></dxo-selection>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+        <dxo-sorting mode="none"></dxo-sorting>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxi-column dataField="appraiserUserId.fullname" caption="Appraiser"></dxi-column>
+        <dxi-column dataField="technicalScore" caption="Technical Score">
+          <dxo-tooltip [enabled]="false" [customizeTooltip]="technicalTitle">
+          </dxo-tooltip>
+          <span class="tooltiptext" [innerHTML]="technicalTitle"></span> 
+        </dxi-column>
+        <dxi-column dataField="communicationScore" caption="Communication Score">
+          <span class="tooltiptext" [innerHTML]="behavioralTitle"></span>
+        </dxi-column>
+        <dxi-column dataField="behavioralScore" caption="Behavioral Score">
+          <span class="tooltiptext" [innerHTML]="communicationTitle"></span>
+        </dxi-column>
+        <dxi-column dataField="metricScore" caption="Metric Score">
+          <span class="tooltiptext" [innerHTML]="metricsTitle"></span>
+        </dxi-column>
+        <dxi-column dataField="totalScore" caption="Total Score">
+          <span class="tooltiptext" [innerHTML]="overallCommentTitle"></span>
+        </dxi-column>
+        <dxi-column dataField="passed" caption="Pass">
+          <span class="tooltiptext" [innerHTML]="failureReasonTitle"></span>
+        </dxi-column>
       </dx-data-grid>
     </div>
   </div>
+ 
+ 
