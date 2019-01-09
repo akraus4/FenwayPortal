@@ -1,22 +1,22 @@
 <div class="row">
-    <div class="col-sm-12">
-      <header headername="Evaluation Admin"></header>
-    </div>
+  <div class="col-sm-12">
+    <header headername="Evaluation Admin"></header>
   </div>
-  
-  <div class="effect7 gridWidgetContainer">
-    <div class="row searchWidgetContainer">
-      <!-- <div class="col-4 searchField"> -->
-        <!--  This is the drop down to select the team/teams   -->
-        <!-- <mat-form-field class="selectDropDown">
+</div>
+
+<div class="effect7 gridWidgetContainer">
+  <div class="row searchWidgetContainer">
+    <!-- <div class="col-4 searchField"> -->
+    <!--  This is the drop down to select the team/teams   -->
+    <!-- <mat-form-field class="selectDropDown">
           <mat-select placeholder="Select Session" [formControl]="Session" >
             <mat-option *ngFor="let sessionChoice of sessionChoices" [value]="sessionChoice">{{sessionChoice}}
             </mat-option>
           </mat-select>
         </mat-form-field>
       </div> -->
-  
-      <!-- <div class="col-4 searchField">
+
+    <!-- <div class="col-4 searchField">
         <mat-form-field class="selectDropDown">
           <mat-select placeholder='Select Sprints' [formControl]="Sprint" (change)="storeSprintId($event.value)" multiple>
             <mat-option *ngFor="let SprintChoice of SprintChoices" [value]="SprintChoice">{{ SprintChoice.agileSprintName }}
@@ -24,66 +24,64 @@
           </mat-select>
         </mat-form-field>
       </div> -->
-  
-      <div class="col-3 searchField">
-        <!-- This is the button to search the metrics   -->
-        <!-- <button mat-button id="searchBtn"   class='searchFieldButton' disabled>
+
+    <div class="col-3 searchField">
+      <!-- This is the button to search the metrics   -->
+      <!-- <button mat-button id="searchBtn"   class='searchFieldButton' disabled>
           <i class="fas fa-search"></i>
         </button> -->
-        <dx-button id="createNewEvaluationButton" title="Create New Evaluation" class="searchFieldButton"
-            (onClick)="togglePopupVisible()" hoverStateEnabled="true" icon="fa fa-plus">
-        </dx-button>
-        <button mat-button id="acceptBtn" title="Accept"  class='searchFieldButton' disabled>
-          <i class="fa fa-check"></i>
-        </button>
-        <button mat-button id="denyBtn" title="Deny"  class='searchFieldButton' disabled>
-          <i class="fa fa-ban"></i>
-        </button>
-      </div>
+      <button mat-button id="createNewEvaluationButton" title="Create New Evaluation" (click)='addEvaluation()' class='searchFieldButton'>
+        <i class="fa fa-plus"></i>
+      </button>
+      <button mat-button id="acceptBtn" title="Pass" class='searchFieldButton' disabled>
+        <i class="fa fa-check"></i>
+      </button>
+      <button mat-button id="denyBtn" title="Fail" class='searchFieldButton' disabled>
+        <i class="fa fa-ban"></i>
+      </button>
     </div>
+  </div>
 
-    <dx-popup
-        class="popup"
-        [width]="400"
-        [height]="200"
-        [showTitle]="true"
-        title="Create New Evaluation"
-        [dragEnabled]="false"
-        [closeOnOutsideClick]="true"
-        [(visible)]="popupVisible">
-        <div *dxTemplate="let data of 'content'">
-          <div class="row">
-            <div class="col-6">
-              <dx-select-box id="selectPresenterDropDown" class="editFields evalSelect" placeholder="Presenter" [dataSource]="presenterList"
-                displayExpr="fullname" valueExpr="" [searchEnabled]="true" [(ngModel)]="presenterDropDownValue" (onValueChanged)="getCurrentPresenter($event)"></dx-select-box>
-            </div>
-            <div class="col-6">
-              <dx-select-box id="selectStageDropDown" class="editFields evalSelect" placeholder="Stage" [dataSource]="stageList" displayExpr="agileStageName"
-              valueExpr="" [searchEnabled]="true" [(ngModel)]="stageDropDownValue"></dx-select-box>
-            </div>
-          </div>
-        </div>
-    </dx-popup>
-  
-    <div class="row" id="metricsPageGridDiv">
-      <div class="col-12">
-        <dx-data-grid id="gridContainer" [dataSource]="averageScores" [showRowLines]="true" [showBorders]="true">
-          <dxo-export [enabled]="true" fileName="Evaluations" [allowExportSelectedData]="true"></dxo-export>
-          <dxo-selection mode="multiple"></dxo-selection>
-          <dxo-header-filter [visible]="true"></dxo-header-filter>
-          <dxo-sorting mode="none"></dxo-sorting>
-          <dxo-paging [pageSize]="10"></dxo-paging>
-          <dxi-column dataField="lname" caption="Last Name"></dxi-column>
-          <dxi-column dataField="fname" caption="First Name"></dxi-column>
-          <dxi-column dataField="agileEvaluationDate" caption="Date"></dxi-column>
-          <dxi-column dataField="agileStage" caption="Stage"></dxi-column>
-          <!-- <dxi-column dataField="technical" caption="Technical"></dxi-column>
+  <div class="row" id="metricsPageGridDiv">
+    <div class="col-12">
+      <dx-data-grid id="gridContainer" [dataSource]="averageScores" [showRowLines]="true" [showBorders]="true">
+        <dxo-export [enabled]="true" fileName="Evaluations" [allowExportSelectedData]="true"></dxo-export>
+        <dxo-selection mode="multiple"></dxo-selection>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>
+        <dxo-sorting mode="none"></dxo-sorting>
+        <dxo-paging [pageSize]="10"></dxo-paging>
+        <dxi-column dataField="presenterUserId.lname" caption="Last Name"></dxi-column>
+        <dxi-column dataField="presenterUserId.fname" caption="First Name"></dxi-column>
+        <dxi-column dataField="agileEvaluationDate" caption="Date"></dxi-column>
+        <dxi-column dataField="agileStage" caption="Stage"></dxi-column>
+        <!-- <dxi-column dataField="technical" caption="Technical"></dxi-column>
           <dxi-column dataField="presentation" caption="Presentation"></dxi-column>
           <dxi-column dataField="behavioral" caption="Behavioarl"></dxi-column>
           <dxi-column dataField="metrics" caption="Metrics/Value"></dxi-column> -->
-          <dxi-column dataField="avgTotal" caption="Average Total"></dxi-column>
-          <!-- <dxi-column dataField="leadTotal" caption="Lead"></dxi-column> -->
-          
-        </dx-data-grid>
+        <dxi-column dataField="avgTotal" caption="Average Total"></dxi-column>
+        <!-- <dxi-column dataField="leadTotal" caption="Lead"></dxi-column> -->
+
+      </dx-data-grid>
+    </div>
+  </div>
+</div>
+
+<dx-popup class="popup" [width]="400" [height]="200" [showTitle]="true" title="Create New Evaluation" [dragEnabled]="false"
+  [closeOnOutsideClick]="true" [(visible)]="popupVisible">
+  <div *dxTemplate="let data of 'content'">
+    <div class="row">
+      <div class="col-6">
+        <dx-select-box id="selectPresenterDropDown" class="editFields evalSelect" placeholder="Presenter" [dataSource]="presenterList"
+          displayExpr="fullname" valueExpr="" [searchEnabled]="true" [(ngModel)]="presenterDropDownValue" (onValueChanged)="getCurrentPresenter($event)"></dx-select-box>
+      </div>
+      <div class="col-6">
+        <dx-select-box id="selectStageDropDown" class="editFields evalSelect" placeholder="Stage" [dataSource]="stageList" displayExpr="agileStageName"
+          valueExpr="" [searchEnabled]="true" [(ngModel)]="stageDropDownValue"></dx-select-box>
       </div>
     </div>
+    <div class="row"></div>
+    <div id="popupSubmitDiv" class="col-12">
+      <dx-button id="submitBtn" class="submitBtn" text="Submit" [width]="110" (onClick)="submitClick()"></dx-button>
+    </div>
+  </div>
+</dx-popup>

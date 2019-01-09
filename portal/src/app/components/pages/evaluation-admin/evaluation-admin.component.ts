@@ -1,5 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core'
 import { MetricsService } from '../../../services/metrics.service'
+import notify from 'devextreme/ui/notify'
+import { confirm } from 'devextreme/ui/dialog'
 
 @Component({
   selector: 'app-evaluation-admin',
@@ -32,7 +34,7 @@ export class EvaluationAdminComponent {
       for (let evaluation of results) {
         this.getEvaluationScores(evaluation)
       }
-      //console.log('Stages ===== ' + JSON.stringify(results))
+      // console.log('Stages ===== ' + JSON.stringify(results))
     })
   }
 
@@ -41,7 +43,7 @@ export class EvaluationAdminComponent {
     let condition = `agileEvalutation=${evaluation.agileEvaluationsId}`
     this.metricsService.getAll('AgileEvaluationScores', 'agileEvaluation,appraiserUserId', condition)
       .subscribe((results) => {
-        //console.log(results)
+        // console.log(results)
         let total = 0
         for (let score of results) {
           total += score.totalScore
@@ -55,7 +57,7 @@ export class EvaluationAdminComponent {
           avgTotal: total
         }
         this.averageScores.push(s)
-        //console.log('Stages ===== ' + JSON.stringify(this.averageScores))
+        // console.log('Stages ===== ' + JSON.stringify(this.averageScores))
       })
   }
 
@@ -92,9 +94,48 @@ export class EvaluationAdminComponent {
     }
   }
 
-  togglePopupVisible() {
-    this.popupVisible = !this.popupVisible
-    console.log("Found")
+  addEvaluation () {
+    console.log('Click')
+    this.popupVisible = true
+  }
+
+  saveEvaluation () {
+    this.metricsService.showLoadingPanel()
+    let agileEvaluation = {
+      'agileStage': this.stageDropDownValue,
+      // 'agileEvaluationSession': this.teamValue,
+      'presenterUserId': this.currentPresenter,
+      'agileEvaluationDate': new Date()
+    }
+    this.metricsService.save('AgileEvaluations', agileEvaluation)
+      .subscribe((results) => {
+        console.log('Evaluation Save Result ===== ' + JSON.stringify(results))
+        this.metricsService.hideLoadingPanel()
+        this.clearPopup()
+        this.getEvaluations()
+      })
+  }
+
+  submitClick () {
+    // Create Pop-Up Dialog
+    let that = this
+    if (this.presenterDropDownValue !== undefined && this.stageDropDownValue !== undefined) {
+      const result = confirm('Are you sure you want to save Evaluation?', 'Confirm changes')
+      result.then(function (dialogResult) {
+        if (dialogResult) {
+          that.saveEvaluation()
+          console.log('Mission Complete')
+        }
+      })
+    } else {
+      notify('All fields must have a value!', 'error', 600)
+    }
+  }
+
+  clearPopup () {
+    this.presenterDropDownValue = undefined
+    this.stageDropDownValue = undefined
+    this.popupVisible = false
   }
 
 }
