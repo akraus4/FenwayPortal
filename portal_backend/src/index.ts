@@ -107,6 +107,8 @@ app.listen(app.get('port'), () => {
 })
 
 // Routes for entity CRUD
+// Getting evaulations that have a null pass value
+app.get('/api/getNullEvaluations', controller.getNullEvaluations)
 // Index
 app.get('/api/:entityType', controller.getAll)
 // Create
@@ -117,8 +119,6 @@ app.get('/api/:entityType/:id', controller.get)
 app.put('/api/:entityType/:id', controller.update)
 // Delete
 app.delete('/api/:entityType/:id', controller.remove)
-// Getting evaulations that have a null pass value
-app.get('/api/:entityType', controller.getNullEvaluations)
 
 /**
  * Create connection to DB using configuration provided in

@@ -29,12 +29,13 @@ export class EvaluationAdminComponent {
   }
 
   getEvaluations () {
-    this.metricsService.getNullEvaluations('AgileEvaluations')
+    this.averageScores = []
+    this.metricsService.getNullEvaluations()
     .subscribe((results) => {
       for (let evaluation of results) {
         this.getEvaluationScores(evaluation)
       }
-      // console.log('Stages ===== ' + JSON.stringify(results))
+      console.log('Null Evaluations ===== ' + JSON.stringify(results))
     })
   }
 
@@ -69,12 +70,12 @@ export class EvaluationAdminComponent {
             'workUserId': user.workUserId,
             'fullname': user.firstname + ' ' + user.lastname
           }
-          console.log('USERS ===== ' + JSON.stringify(u))
+          // console.log('USERS ===== ' + JSON.stringify(u))
           this.users.push(u)
         }
         this.userList = results
         this.presenterList = this.users
-        console.log('Presenters ===== ' + JSON.stringify(this.presenterList))
+        // console.log('Presenters ===== ' + JSON.stringify(this.presenterList))
       })
   }
 

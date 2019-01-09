@@ -8,8 +8,8 @@
   <div id="evaluationHeader">
   <div class="row" id="evaluationHeaderRow">
     <div class="col-3">
-      <dx-select-box id="selectPresenterDropDown" class="editFields evalSelect" placeholder="Presenter" [dataSource]="pressenterList"
-        displayExpr="fullname" valueExpr="" [searchEnabled]="true" [(ngModel)]="presenterDropDownValue" (onValueChanged)="getCurrentPresenter($event)"></dx-select-box>
+      <dx-select-box id="selectPresenterDropDown" class="editFields evalSelect" placeholder="Presenter" [dataSource]="evaluationList"
+        displayExpr="fullname" valueExpr="" [searchEnabled]="true" [(ngModel)]="evaluationDropDownValue"></dx-select-box>
     </div>
     <div class="col-3">
       <dx-select-box id="selectAppraiserDropDown" class="editFields evalSelect" placeholder="Appraiser" [dataSource]="appraiserList"

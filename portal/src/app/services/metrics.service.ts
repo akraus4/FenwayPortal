@@ -22,9 +22,9 @@ export class MetricsService {
     return result
   }
 
-  getNullEvaluations (entity) {
-    console.log(`URL ====  ${this.url}/api/${entity}`)
-    let result = this.http.get(`${this.url}/api/${entity}`)
+  getNullEvaluations () {
+    console.log(`URL ====  ${this.url}/api/getNullEvaluations`)
+    let result = this.http.get(`${this.url}/api/getNullEvaluations`)
     return result
   }
 

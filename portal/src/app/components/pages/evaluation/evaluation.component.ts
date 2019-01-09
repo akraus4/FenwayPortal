@@ -21,8 +21,9 @@ export class EvaluationComponent implements OnInit {
  appraiserList: any[]
  userList: any[]
  users: any[] = []
+ evaluationList: any[]
 
- presenterDropDownValue
+ evaluationDropDownValue
  appraiserDropDownValue
  currentPressenter
  currentAppraiser
@@ -57,6 +58,7 @@ export class EvaluationComponent implements OnInit {
  constructor (@Inject(MetricsService) metricsService) {
    this.metricsService = metricsService
    this.getAllStages()
+   this.getEvaluations()
    this.getAllUsers()
    this.ratings = [1, 2, 3, 4, 5]
    this.passConfirmationList = ['Yes (Total of 14 - 20pts from above)', 'No (Total of 0 - 13pts from above)']
@@ -148,6 +150,26 @@ export class EvaluationComponent implements OnInit {
    }
  }
 
+ getEvaluations () {
+  this.metricsService.getNullEvaluations()
+  .subscribe((results) => {
+    let evaluation = []
+    for (let evalu of results) {
+      let e = {
+        'agileEvaluationsId': evalu.agileEvaluationsId,
+        'agileStage': evalu.agileStage,
+        'presenterUserId': evalu.presenterUserId,
+        'agileEvaluationDate': evalu.agileEvaluationDate,
+        'fullname': evalu.presenterUserId.firstname + ' ' + evalu.presenterUserId.lastname
+      }
+      // console.log('USERS ===== ' + JSON.stringify(e))
+      evaluation.push(e)
+    }
+    this.evaluationList = evaluation
+    console.log('Null Evaluations ===== ' + JSON.stringify(results))
+  })
+}
+
  getAllUsers () {
    this.metricsService.getAll('WorkUsers', '', 'active=1')
      .subscribe((results) => {
@@ -191,24 +213,24 @@ export class EvaluationComponent implements OnInit {
    }
  }
 
- saveEvaluation () {
-   this.metricsService.showLoadingPanel()
-   let agileEvaluation = {
-     'agileStage': this.stageDropDownValue,
-     // 'agileEvaluationSession': this.teamValue,
-     'presenterUserId': this.currentPressenter,
-     'agileEvaluationDate': new Date()
-   }
-   this.metricsService.save('AgileEvaluations', agileEvaluation)
-     .subscribe((results) => {
-       console.log('Evaluation Save Result ===== ' + JSON.stringify(results))
-       this.saveEvaluationScore(results)
-       this.metricsService.hideLoadingPanel()
-       this.clearAll()
-     })
- }
+//  saveEvaluation () {
+//    this.metricsService.showLoadingPanel()
+//    let agileEvaluation = {
+//      'agileStage': this.stageDropDownValue,
+//      // 'agileEvaluationSession': this.teamValue,
+//      'presenterUserId': this.evaluationDropDownValue,
+//      'agileEvaluationDate': new Date()
+//    }
+//    this.metricsService.save('AgileEvaluations', agileEvaluation)
+//      .subscribe((results) => {
+//        console.log('Evaluation Save Result ===== ' + JSON.stringify(results))
+//        this.saveEvaluationScore(results)
+//        this.metricsService.hideLoadingPanel()
+//        this.clearAll()
+//      })
+//  }
 
- saveEvaluationScore (evaluation) {
+ saveEvaluationScore () {
    this.metricsService.showLoadingPanel()
    let passed: number
    if (this.passConfirmationValue === 'Yes (Total of 14 - 20pts from above)') {
@@ -216,9 +238,9 @@ export class EvaluationComponent implements OnInit {
    } else if (this.passConfirmationValue === 'No (Total of 0 - 13pts from above)') {
      passed = 0
    }
-   console.log('Evaluation Id Save Result ===== ' + JSON.stringify(evaluation.identifiers[0].agileEvaluationsId))
+   console.log('Evaluation Id Save Result ===== ' + JSON.stringify(this.evaluationDropDownValue))
    let agileEvaluationScore = {
-     'agileEvaluation': evaluation.identifiers[0].agileEvaluationsId,
+     'agileEvaluation': this.evaluationDropDownValue,
      'appraiserUserId': this.currentAppraiser,
      'technicalScore': this.currentTechnicalValue,
      'technicalComment': this.technicalCommentValue,
@@ -250,7 +272,7 @@ export class EvaluationComponent implements OnInit {
    this.currentBehavioralValueSet = 0
    this.currentMetricValueSet = 0
    this.total = 0
-   this.presenterDropDownValue = undefined
+   this.evaluationDropDownValue = undefined
    this.currentPressenter = undefined
    this.stageDropDownValue = undefined
    this.technicalCommentValue = ''
@@ -268,7 +290,7 @@ export class EvaluationComponent implements OnInit {
  }
 
  constructCommentArray () {
-   this.commentValueArray = [this.currentPressenter, this.currentAppraiser, this.stageDropDownValue, this.technicalCommentValue, this.communicationCommentValue, this.behavioralCommentValue, this.metricsCommentValue, this.overallCommentValue]
+   this.commentValueArray = [this.evaluationDropDownValue, this.currentAppraiser, this.stageDropDownValue, this.technicalCommentValue, this.communicationCommentValue, this.behavioralCommentValue, this.metricsCommentValue, this.overallCommentValue]
  }
 
  submitClick () {
@@ -304,7 +326,7 @@ export class EvaluationComponent implements OnInit {
      const result = confirm('Are you sure you want to save System User?', 'Confirm changes')
      result.then(function (dialogResult) {
        if (dialogResult) {
-         that.saveEvaluation()
+         that.saveEvaluationScore()
          console.log('Mission Complete')
        }
      })

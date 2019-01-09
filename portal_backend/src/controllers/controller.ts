@@ -14,6 +14,7 @@ import { AgileEvaluations } from '../entities/agile_evaluations'
 import { AgileEvaluationSession } from '../entities/agile_evaluation_session'
 import { AgileEvaluationScores } from '../entities/agile_evaluations_scores'
 import { AgileStage } from '../entities/agile_stage'
+import { isNull } from 'util';
 
 /**
  * Represents some Type of the Object.
@@ -52,16 +53,9 @@ export const getAll = async (req: Request, res: Response) => {
 }
 
 export const getNullEvaluations = async (req: Request, res: Response) => {
-  console.log(`Received getNullEvaluations for ${req.params.entityType}`)
-  const manager = getManager()
 
-  return manager.createQueryBuilder()
-    .select()
-    .from(AgileEvaluations, "agileEvaluations")
-    .where("agileEvaluations.passed is NULL")
-    .getMany()
-    .then((result) => {
-    // console.log(`Result ${JSON.stringify(result)}`)
+  return getNullEvaluation().then((result) => {
+    console.log('Null Passed Value ===== ' + JSON.stringify(result))
     res.send(result)
   }).catch(error => {
     console.log(`Error: ${error}`)
@@ -155,4 +149,12 @@ function removeRecord <T> (entity: ObjectType<T>, id: string) {
   const manager = getManager()
   let options: any = {}
   return manager.delete(entity, id, options)
+}
+
+function getNullEvaluation <T> () {
+  return getManager().find(
+    AgileEvaluations,
+    {relations: ['presenterUserId','agileStage'],
+      where: { 'passed': null } }
+  )
 }
