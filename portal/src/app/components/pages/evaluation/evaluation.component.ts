@@ -267,6 +267,7 @@ setCurrentStage ($event) {
    this.metricsService.save('AgileEvaluationScores', agileEvaluationScore)
      .subscribe((results) => {
        this.metricsService.hideLoadingPanel()
+       this.clearAll()
      })
  }
 
