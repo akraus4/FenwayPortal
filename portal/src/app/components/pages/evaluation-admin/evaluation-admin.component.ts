@@ -137,18 +137,25 @@ export class EvaluationAdminComponent {
 
   determineEvaluation (evaluationResult) {
     let selectedData = this.dataGrid.instance.getSelectedRowsData()
-    for (let row of selectedData) {
-      this.metricsService.getAll('AgileEvaluations', '', `agileEvaluationsId=${row.agileEvaluationId}`)
-      .subscribe((results) => {
-        results[0].passed = evaluationResult
-        this.metricsService.update('AgileEvaluations', results[0].agileEvaluationsId, results[0])
-        .subscribe((results) => {
-          console.log('Evaluation Save Result ===== ' + JSON.stringify(results))
-          this.metricsService.hideLoadingPanel()
-          this.getEvaluations()
-        })
-      })
-    }
+    let evalText = evaluationResult > 0 ? "pass" : "fail"
+    let confirmText = selectedData.length > 1 ? "these evaluations" : "this evaluation"
+    const result = confirm(`Are you sure you want to ${evalText} ${confirmText}?`, 'Confirm changes')
+    result.then(function (dialogResult) {
+      if(dialogResult) {
+        for (let row of selectedData) {
+          this.metricsService.getAll('AgileEvaluations', '', `agileEvaluationsId=${row.agileEvaluationId}`)
+          .subscribe((results) => {
+            results[0].passed = evaluationResult
+            this.metricsService.update('AgileEvaluations', results[0].agileEvaluationsId, results[0])
+            .subscribe((results) => {
+              console.log('Evaluation Save Result ===== ' + JSON.stringify(results))
+              this.metricsService.hideLoadingPanel()
+              this.getEvaluations()
+            })
+          })
+        }
+      }
+    })
   }
 
   clearPopup () {
