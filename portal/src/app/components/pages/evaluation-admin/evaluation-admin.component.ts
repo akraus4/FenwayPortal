@@ -1,7 +1,8 @@
-import { Component, OnInit, Inject } from '@angular/core'
+import { Component, OnInit, Inject, ViewChild } from '@angular/core'
 import { MetricsService } from '../../../services/metrics.service'
 import notify from 'devextreme/ui/notify'
 import { confirm } from 'devextreme/ui/dialog'
+import { DxDataGridComponent } from 'devextreme-angular'
 
 @Component({
   selector: 'app-evaluation-admin',
@@ -9,6 +10,7 @@ import { confirm } from 'devextreme/ui/dialog'
   styleUrls: ['./evaluation-admin.component.css']
 })
 export class EvaluationAdminComponent {
+  @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent
   averageScores: any[] = []
   presenterList: any[]
   stageList: any[]
@@ -41,7 +43,7 @@ export class EvaluationAdminComponent {
 
   getEvaluationScores (evaluation) {
     console.log(JSON.stringify(evaluation))
-    let condition = `agileEvalutation=${evaluation.agileEvaluationsId}`
+    let condition = `agileEvaluation=${evaluation.agileEvaluationsId}`
     this.metricsService.getAll('AgileEvaluationScores', 'agileEvaluation,appraiserUserId', condition)
       .subscribe((results) => {
         // console.log(results)
@@ -49,7 +51,7 @@ export class EvaluationAdminComponent {
         for (let score of results) {
           total += score.totalScore
         }
-        total = total / results.length
+        total = Math.round(total / results.length)
         let s = {
           agileEvaluationId: evaluation.agileEvaluationsId,
           presenterUserId: evaluation.presenterUserId,
@@ -130,6 +132,22 @@ export class EvaluationAdminComponent {
       })
     } else {
       notify('All fields must have a value!', 'error', 600)
+    }
+  }
+
+  determineEvaluation (evaluationResult) {
+    let selectedData = this.dataGrid.instance.getSelectedRowsData()
+    for (let row of selectedData) {
+      this.metricsService.getAll('AgileEvaluations', '', `agileEvaluationsId=${row.agileEvaluationId}`)
+      .subscribe((results) => {
+        results[0].passed = evaluationResult
+        this.metricsService.update('AgileEvaluations', results[0].agileEvaluationsId, results[0])
+        .subscribe((results) => {
+          console.log('Evaluation Save Result ===== ' + JSON.stringify(results))
+          this.metricsService.hideLoadingPanel()
+          this.getEvaluations()
+        })
+      })
     }
   }
 

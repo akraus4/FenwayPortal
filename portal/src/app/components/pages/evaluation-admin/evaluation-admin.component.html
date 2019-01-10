@@ -33,10 +33,10 @@
       <button mat-button id="createNewEvaluationButton" title="Create New Evaluation" (click)='addEvaluation()' class='searchFieldButton'>
         <i class="fa fa-plus"></i>
       </button>
-      <button mat-button id="acceptBtn" title="Pass" class='searchFieldButton' disabled>
+      <button mat-button id="acceptBtn" title="Pass" class='searchFieldButton' (click)='determineEvaluation(1)'>
         <i class="fa fa-check"></i>
       </button>
-      <button mat-button id="denyBtn" title="Fail" class='searchFieldButton' disabled>
+      <button mat-button id="denyBtn" title="Fail" class='searchFieldButton' (click)='determineEvaluation(0)'>
         <i class="fa fa-ban"></i>
       </button>
     </div>
