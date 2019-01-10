@@ -1,0 +1,20 @@
+.tooltp .tooltiptext {
+    visibility: hidden;
+    width: 400px;
+    background-color: #0A2240;
+    color: #fff;
+    text-align: left;
+    font-size: 14px;
+    border-radius: 6px;
+    padding: 10px;
+    line-height: 30px;
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+
+
+.tooltp:hover .tooltiptext {
+    visibility: visible;
+}

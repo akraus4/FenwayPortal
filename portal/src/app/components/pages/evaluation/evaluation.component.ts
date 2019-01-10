@@ -170,6 +170,14 @@ export class EvaluationComponent implements OnInit {
   })
 }
 
+setCurrentStage ($event) {
+  console.log('Selected Evaluation Stage ===== ' + JSON.stringify($event.value.agileStage))
+  this.stageDropDownValue = $event.value.agileStage.agileStageId
+  this.technicalTitle = $event.value.agileStage.agileStageTechnicalRrequirements
+  this.behavioralTitle = $event.value.agileStage.agileStageBehavioralRrequirements
+  console.log('Stage Drop Down Value ===== ' + JSON.stringify(this.stageDropDownValue))
+}
+
  getAllUsers () {
    this.metricsService.getAll('WorkUsers', '', 'active=1')
      .subscribe((results) => {
@@ -205,13 +213,13 @@ export class EvaluationComponent implements OnInit {
    }
  }
 
- getCurrentPresenter ($event) {
-   for (let u of this.userList) {
-     if (u.workUserId === $event.value.workUserId) {
-       this.currentPressenter = u
-     }
-   }
- }
+//  getCurrentPresenter ($event) {
+//    for (let u of this.userList) {
+//      if (u.workUserId === $event.value.workUserId) {
+//        this.currentPressenter = u
+//      }
+//    }
+//  }
 
 //  saveEvaluation () {
 //    this.metricsService.showLoadingPanel()
@@ -290,7 +298,7 @@ export class EvaluationComponent implements OnInit {
  }
 
  constructCommentArray () {
-   this.commentValueArray = [this.evaluationDropDownValue, this.currentAppraiser, this.stageDropDownValue, this.technicalCommentValue, this.communicationCommentValue, this.behavioralCommentValue, this.metricsCommentValue, this.overallCommentValue]
+   this.commentValueArray = [this.evaluationDropDownValue, this.currentAppraiser, this.technicalCommentValue, this.communicationCommentValue, this.behavioralCommentValue, this.metricsCommentValue, this.overallCommentValue]
  }
 
  submitClick () {

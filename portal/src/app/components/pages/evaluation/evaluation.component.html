@@ -9,15 +9,15 @@
   <div class="row" id="evaluationHeaderRow">
     <div class="col-3">
       <dx-select-box id="selectPresenterDropDown" class="editFields evalSelect" placeholder="Presenter" [dataSource]="evaluationList"
-        displayExpr="fullname" valueExpr="" [searchEnabled]="true" [(ngModel)]="evaluationDropDownValue"></dx-select-box>
+        displayExpr="fullname" valueExpr="" [searchEnabled]="true" [(ngModel)]="evaluationDropDownValue" (onValueChanged)="setCurrentStage($event)"></dx-select-box>
     </div>
     <div class="col-3">
       <dx-select-box id="selectAppraiserDropDown" class="editFields evalSelect" placeholder="Appraiser" [dataSource]="appraiserList"
         displayExpr="fullname" valueExpr="" [searchEnabled]="true" [(ngModel)]="appraiserDropDownValue" (onValueChanged)="getCurrentAppraiser($event)"></dx-select-box>
     </div>
     <div class="col-3">
-      <dx-select-box id="selectStageDropDown" class="editFields evalSelect" placeholder="Stage" [dataSource]="stageList" displayExpr="agileStageName"
-        valueExpr="" [searchEnabled]="true" [(ngModel)]="stageDropDownValue" (onValueChanged)="onValueChangedStage($event)"></dx-select-box>
+      <dx-select-box id="selectStageDropDown" class="editFields evalSelect" placeholder="Stage" [dataSource]="stageList" displayExpr="agileStageName" [readOnly]="true"
+        valueExpr="agileStageId" [searchEnabled]="true" [(ngModel)]="stageDropDownValue" (onValueChanged)="onValueChangedStage($event)"></dx-select-box>
     </div>
     <div class="col-1">
       

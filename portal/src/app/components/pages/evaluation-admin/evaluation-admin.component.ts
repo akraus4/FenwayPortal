@@ -20,6 +20,7 @@ export class EvaluationAdminComponent {
   presenterDropDownValue
   stageDropDownValue
   currentPresenter
+  currentEvaluation
 
   popupVisible: boolean = false
   metricsService: any
@@ -100,6 +101,24 @@ export class EvaluationAdminComponent {
   addEvaluation () {
     console.log('Click')
     this.popupVisible = true
+  }
+
+  updateEvaluation () {
+    this.metricsService.showLoadingPanel()
+    let agileEvaluation = {
+      'agileEvaluationsId': this.currentEvaluation.agileEvaluationsId,
+      'agileStage': this.stageDropDownValue,
+      // 'agileEvaluationSession': this.teamValue,
+      'presenterUserId': this.currentPresenter,
+      'agileEvaluationDate': new Date()
+    }
+    this.metricsService.update('AgileEvaluations', agileEvaluation.agileEvaluationsId, agileEvaluation)
+      .subscribe((results) => {
+        console.log('Evaluation Save Result ===== ' + JSON.stringify(results))
+        this.metricsService.hideLoadingPanel()
+        this.clearPopup()
+        this.getEvaluations()
+      })
   }
 
   saveEvaluation () {

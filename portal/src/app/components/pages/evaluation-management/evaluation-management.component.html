@@ -53,24 +53,54 @@
         <dxo-paging [pageSize]="10"></dxo-paging>
         <dxi-column dataField="appraiserUserId.fullname" caption="Appraiser"></dxi-column>
         <dxi-column dataField="technicalScore" caption="Technical Score">
-          <dxo-tooltip [enabled]="false" [customizeTooltip]="technicalTitle">
-          </dxo-tooltip>
-          <span class="tooltiptext" [innerHTML]="technicalTitle"></span> 
+          <!-- <dxo-tooltip [enabled]="false" [customizeTooltip]="technicalTitle">
+          </dxo-tooltip> -->
+          <!-- <span class="tooltiptext" [innerHTML]="technicalTitle"></span>  -->
+        </dxi-column>
+        <dxi-column dataField="technicalComment" caption="Technical Comment">
+          <!-- <dxo-tooltip [enabled]="false" [customizeTooltip]="technicalTitle">
+          </dxo-tooltip> -->
+          <!-- <span class="tooltiptext" [innerHTML]="technicalTitle"></span>  -->
         </dxi-column>
         <dxi-column dataField="communicationScore" caption="Communication Score">
-          <span class="tooltiptext" [innerHTML]="behavioralTitle"></span>
+          <!-- <span class="tooltiptext" [innerHTML]="behavioralTitle"></span> -->
+        </dxi-column>
+        <dxi-column dataField="communicationComment" caption="Communication Comment">
+          <!-- <dxo-tooltip [enabled]="false" [customizeTooltip]="technicalTitle">
+          </dxo-tooltip> -->
+          <!-- <span class="tooltiptext" [innerHTML]="technicalTitle"></span>  -->
         </dxi-column>
         <dxi-column dataField="behavioralScore" caption="Behavioral Score">
-          <span class="tooltiptext" [innerHTML]="communicationTitle"></span>
+          <!-- <span class="tooltiptext" [innerHTML]="communicationTitle"></span> -->
+        </dxi-column>
+        <dxi-column dataField="behavioralComment" caption="Behavioral Comment">
+          <!-- <dxo-tooltip [enabled]="false" [customizeTooltip]="technicalTitle">
+          </dxo-tooltip> -->
+          <!-- <span class="tooltiptext" [innerHTML]="technicalTitle"></span>  -->
         </dxi-column>
         <dxi-column dataField="metricScore" caption="Metric Score">
-          <span class="tooltiptext" [innerHTML]="metricsTitle"></span>
+          <!-- <span class="tooltiptext" [innerHTML]="metricsTitle"></span> -->
+        </dxi-column>
+        <dxi-column dataField="metricComment" caption="Metrics Comment">
+          <!-- <dxo-tooltip [enabled]="false" [customizeTooltip]="technicalTitle">
+          </dxo-tooltip> -->
+          <!-- <span class="tooltiptext" [innerHTML]="technicalTitle"></span>  -->
         </dxi-column>
         <dxi-column dataField="totalScore" caption="Total Score">
-          <span class="tooltiptext" [innerHTML]="overallCommentTitle"></span>
+          <!-- <span class="tooltiptext" [innerHTML]="overallCommentTitle"></span> -->
+        </dxi-column>
+        <dxi-column dataField="overallComment" caption="Overall Comment">
+          <!-- <dxo-tooltip [enabled]="false" [customizeTooltip]="technicalTitle">
+          </dxo-tooltip> -->
+          <!-- <span class="tooltiptext" [innerHTML]="technicalTitle"></span>  -->
         </dxi-column>
         <dxi-column dataField="passed" caption="Pass">
-          <span class="tooltiptext" [innerHTML]="failureReasonTitle"></span>
+          <!-- <span class="tooltiptext" [innerHTML]="failureReasonTitle"></span> -->
+        </dxi-column>
+        <dxi-column dataField="failureReasonComment" caption="Failure Reason">
+          <!-- <dxo-tooltip [enabled]="false" [customizeTooltip]="technicalTitle">
+          </dxo-tooltip> -->
+          <!-- <span class="tooltiptext" [innerHTML]="technicalTitle"></span>  -->
         </dxi-column>
       </dx-data-grid>
     </div>
