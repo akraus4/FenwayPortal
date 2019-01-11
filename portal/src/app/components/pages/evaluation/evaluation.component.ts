@@ -36,8 +36,6 @@ export class EvaluationComponent implements OnInit {
  additionalCommentValue
  failureReasonCommentValue
 
- commentValueArray: any[]
-
  technicalTitle: string = 'Technical'
  behavioralTitle: string = 'Behavioral'
  communicationTitle: string = 'Communication'
@@ -54,6 +52,8 @@ export class EvaluationComponent implements OnInit {
  currentMetricValueSet: number = 0
 
  currentRatedValueArray: number[]
+ commentValueArray: string[]
+ evaluationDetailsArray: any[]
 
  constructor (@Inject(MetricsService) metricsService) {
    this.metricsService = metricsService
@@ -299,7 +299,11 @@ setCurrentStage ($event) {
  }
 
  constructCommentArray () {
-   this.commentValueArray = [this.evaluationDropDownValue, this.currentAppraiser, this.technicalCommentValue, this.communicationCommentValue, this.behavioralCommentValue, this.metricsCommentValue, this.overallCommentValue]
+   this.commentValueArray = [this.technicalCommentValue, this.communicationCommentValue, this.behavioralCommentValue, this.metricsCommentValue, this.overallCommentValue]
+ }
+
+ constructEvaluationDetailsArray () {
+   this.evaluationDetailsArray = [this.evaluationDropDownValue, this.currentAppraiser]
  }
 
  submitClick () {
@@ -307,6 +311,7 @@ setCurrentStage ($event) {
    let formcompletion = false
    this.constructScoreArray()
    this.constructCommentArray()
+   this.constructEvaluationDetailsArray()
    let scored = true
    let comments = true
    this.currentRatedValueArray.forEach(element => {
@@ -316,12 +321,17 @@ setCurrentStage ($event) {
      }
    })
    this.commentValueArray.forEach(element => {
-     if (element === '' || element === undefined || element === null) {
+     if (element === '' || element === undefined || element === null || /^\s*$/.test(element)) {
        comments = false
        // break
      }
    })
-   if (this.passConfirmationValue.includes("No") && (this.failureReasonCommentValue === '' || this.failureReasonCommentValue === undefined || this.failureReasonCommentValue === null)) {
+   this.evaluationDetailsArray.forEach(element => {
+     if(element == undefined || element == null)
+       comments = false
+       // break
+   })
+   if (this.passConfirmationValue.includes("No") && (this.failureReasonCommentValue === '' || this.failureReasonCommentValue === undefined || this.failureReasonCommentValue === null || /^\s*$/.test(this.failureReasonCommentValue))) {
      comments = false
    }
    if (scored && comments) {

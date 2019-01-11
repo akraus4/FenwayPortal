@@ -24,6 +24,8 @@ export class EvaluationAdminComponent {
 
   popupVisible: boolean = false
   metricsService: any
+  evaluationModeSave: boolean
+  presenterDropDownReadOnly: boolean
   constructor (@Inject(MetricsService) metricsService) {
     this.metricsService = metricsService
     this.getAllStages()
@@ -101,6 +103,21 @@ export class EvaluationAdminComponent {
   addEvaluation () {
     console.log('Click')
     this.popupVisible = true
+    this.evaluationModeSave = true
+    this.presenterDropDownReadOnly = false
+  }
+
+  onRowClick (e){
+    let component = e.component
+    let prevClickTime = component.lastClickTime
+    component.lastClickTime = new Date()
+    if (prevClickTime && (component.lastClickTime - prevClickTime < 300))
+      this.evaluationModeSave = false
+      this.presenterDropDownReadOnly = true
+      this.currentEvaluation =  e.data.agileEvaluationId
+      this.presenterDropDownValue = e.data.presenterUserId.workUserId
+      this.stageDropDownValue = e.data.agileStage.agileStageId
+      this.popupVisible = true
   }
 
   updateEvaluation () {
@@ -144,9 +161,13 @@ export class EvaluationAdminComponent {
     if (this.presenterDropDownValue !== undefined && this.stageDropDownValue !== undefined) {
       const result = confirm('Are you sure you want to save Evaluation?', 'Confirm changes')
       result.then(function (dialogResult) {
-        if (dialogResult) {
+        if (dialogResult && this.evaluationModeSave) {
           that.saveEvaluation()
-          console.log('Mission Complete')
+          console.log('Saved evaluation session successfully')
+        }
+        else if(dialogResult && !this.evaluationModeSave) {
+          that.updateEvaluation()
+          console.log('Updated evaluation session successfully')
         }
       })
     } else {
