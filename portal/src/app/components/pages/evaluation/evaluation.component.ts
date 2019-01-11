@@ -321,7 +321,7 @@ setCurrentStage ($event) {
        // break
      }
    })
-   if (this.total < 14 && (this.failureReasonCommentValue === '' || this.failureReasonCommentValue === undefined || this.failureReasonCommentValue === null)) {
+   if (this.passConfirmationValue.includes("No") && (this.failureReasonCommentValue === '' || this.failureReasonCommentValue === undefined || this.failureReasonCommentValue === null)) {
      comments = false
    }
    if (scored && comments) {
@@ -332,7 +332,7 @@ setCurrentStage ($event) {
    // Create Pop-Up Dialog
    let that = this
    if (formcompletion) {
-     const result = confirm('Are you sure you want to save System User?', 'Confirm changes')
+     const result = confirm('Are you sure you want to save this scorecard?', 'Confirm changes')
      result.then(function (dialogResult) {
        if (dialogResult) {
          that.saveEvaluationScore()
