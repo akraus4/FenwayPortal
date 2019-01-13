@@ -92,32 +92,35 @@ export class EvaluationAdminComponent {
       })
   }
 
-  getCurrentPresenter ($event) {
-    for (let u of this.userList) {
-      if (u.workUserId === $event.value.workUserId) {
-        this.currentPresenter = u
-      }
-    }
-  }
+  // getCurrentPresenter ($event) {
+  //   for (let u of this.userList) {
+  //     if (u.workUserId === $event.value.workUserId) {
+  //       this.currentPresenter = u
+  //     }
+  //   }
+  // }
 
   addEvaluation () {
-    console.log('Click')
-    this.popupVisible = true
+    // console.log('Click')
     this.evaluationModeSave = true
     this.presenterDropDownReadOnly = false
+    this.popupVisible = true
   }
 
-  onRowClick (e){
+  onRowClick (e) {
+    console.log('Click')
     let component = e.component
     let prevClickTime = component.lastClickTime
     component.lastClickTime = new Date()
-    if (prevClickTime && (component.lastClickTime - prevClickTime < 300))
+    if (prevClickTime && (component.lastClickTime - prevClickTime < 300)) {
+      console.log('Double Click')
       this.evaluationModeSave = false
       this.presenterDropDownReadOnly = true
-      this.currentEvaluation =  e.data.agileEvaluationId
+      this.currentEvaluation = e.data.agileEvaluationId
       this.presenterDropDownValue = e.data.presenterUserId.workUserId
       this.stageDropDownValue = e.data.agileStage.agileStageId
       this.popupVisible = true
+    }
   }
 
   updateEvaluation () {
@@ -143,7 +146,7 @@ export class EvaluationAdminComponent {
     let agileEvaluation = {
       'agileStage': this.stageDropDownValue,
       // 'agileEvaluationSession': this.teamValue,
-      'presenterUserId': this.currentPresenter,
+      'presenterUserId': this.presenterDropDownValue,
       'agileEvaluationDate': new Date()
     }
     this.metricsService.save('AgileEvaluations', agileEvaluation)
@@ -161,14 +164,18 @@ export class EvaluationAdminComponent {
     if (this.presenterDropDownValue !== undefined && this.stageDropDownValue !== undefined) {
       const result = confirm('Are you sure you want to save Evaluation?', 'Confirm changes')
       result.then(function (dialogResult) {
-        if (dialogResult && this.evaluationModeSave) {
+        console.log(this.evaluationModeSave)
+        // if (dialogResult && this.evaluationModeSave) {
+        if (dialogResult) {
+          console.log('Save Eval')
           that.saveEvaluation()
           console.log('Saved evaluation session successfully')
         }
-        else if(dialogResult && !this.evaluationModeSave) {
-          that.updateEvaluation()
-          console.log('Updated evaluation session successfully')
-        }
+        // else if (dialogResult && !this.evaluationModeSave) {
+        //   console.log('Update Eval')
+        //   that.updateEvaluation()
+        //   console.log('Updated evaluation session successfully')
+        // }
       })
     } else {
       notify('All fields must have a value!', 'error', 600)

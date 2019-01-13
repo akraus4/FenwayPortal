@@ -6,89 +6,89 @@ import notify from 'devextreme/ui/notify'
 import { confirm } from 'devextreme/ui/dialog'
 
 @Component({
- selector: 'app-evaluation',
- templateUrl: './evaluation.component.html',
- styleUrls: ['./evaluation.component.css']
+  selector: 'app-evaluation',
+  templateUrl: './evaluation.component.html',
+  styleUrls: ['./evaluation.component.css']
 })
 export class EvaluationComponent implements OnInit {
- metricsService: any
- ratings: number[]
- passConfirmationList: string[]
- passConfirmationValue: string
- total: number = 0
- stageList: any[]
- pressenterList: any[]
- appraiserList: any[]
- userList: any[]
- users: any[] = []
- evaluationList: any[]
+  metricsService: any
+  ratings: number[]
+  passConfirmationList: string[]
+  passConfirmationValue: string
+  total: number = 0
+  stageList: any[]
+  pressenterList: any[]
+  appraiserList: any[]
+  userList: any[]
+  users: any[] = []
+  evaluationList: any[]
 
- evaluationDropDownValue
- appraiserDropDownValue
- currentPressenter
- currentAppraiser
- stageDropDownValue
- technicalCommentValue
- communicationCommentValue
- behavioralCommentValue
- metricsCommentValue
- overallCommentValue
- additionalCommentValue
- failureReasonCommentValue
+  evaluationDropDownValue
+  appraiserDropDownValue
+  currentPressenter
+  currentAppraiser
+  stageDropDownValue
+  technicalCommentValue
+  communicationCommentValue
+  behavioralCommentValue
+  metricsCommentValue
+  overallCommentValue
+  additionalCommentValue
+  failureReasonCommentValue
 
- technicalTitle: string = 'Technical'
- behavioralTitle: string = 'Behavioral'
- communicationTitle: string = 'Communication'
- metricsTitle: string = 'Metrics'
+  technicalTitle: string = 'Technical'
+  behavioralTitle: string = 'Behavioral'
+  communicationTitle: string = 'Communication'
+  metricsTitle: string = 'Metrics'
 
- currentTechnicalValue: number = 0
- currentCommunicationValue: number = 0
- currentBehavioralValue: number = 0
- currentMetricValue: number = 0
+  currentTechnicalValue: number = 0
+  currentCommunicationValue: number = 0
+  currentBehavioralValue: number = 0
+  currentMetricValue: number = 0
 
- currentTechnicalValueSet: number = 0
- currentCommunicationValueSet: number = 0
- currentBehavioralValueSet: number = 0
- currentMetricValueSet: number = 0
+  currentTechnicalValueSet: number = 0
+  currentCommunicationValueSet: number = 0
+  currentBehavioralValueSet: number = 0
+  currentMetricValueSet: number = 0
 
- currentRatedValueArray: number[]
- commentValueArray: string[]
- evaluationDetailsArray: any[]
+  currentRatedValueArray: number[]
+  commentValueArray: string[]
+  evaluationDetailsArray: any[]
 
- constructor (@Inject(MetricsService) metricsService) {
-   this.metricsService = metricsService
-   this.getAllStages()
-   this.getEvaluations()
-   this.getAllUsers()
-   this.ratings = [1, 2, 3, 4, 5]
-   this.passConfirmationList = ['Yes (Total of 14 - 20pts from above)', 'No (Total of 0 - 13pts from above)']
- }
+  constructor (@Inject(MetricsService) metricsService) {
+    this.metricsService = metricsService
+    this.getAllStages()
+    this.getEvaluations()
+    this.getAllUsers()
+    this.ratings = [1, 2, 3, 4, 5]
+    this.passConfirmationList = ['Yes (Total of 14 - 20pts from above)', 'No (Total of 0 - 13pts from above)']
+  }
 
- ngOnInit () {
-   $('#ifNoLbl').addClass('remove')
-   $('#ifNoTxtfld').addClass('remove')
- }
+  ngOnInit () {
+    $('#ifNoLbl').addClass('remove')
+    $('#ifNoTxtfld').addClass('remove')
+  }
 
- onValueChangedStage ($event) {
-   if ($event.value === 'Appentice') {
-     this.technicalTitle = '- An Apprentice is undergoing instruction beyond the Novice Stage where an Associate is introduced and exposed to technologies and methodology. <br> - An Apprentice is familiar and proficient in the use of technologies and methodology <br> - Inquisitively immerses herself/himself into the assigned domain <br> - Associate successfully applies required skills as determined by scope of services per engagement under the direction of a mentor'
-     this.behavioralTitle = '- An Apprentice experiments on their own. <br> - An Apprentice shows respect for other employees. <br> - An Apprentice volunteers for engagement  activities. <br> - An Apprentice is reliable and dependable. <br> - An Apprentice displays strong communication with their Coach and among their peers. <br> - An Apprentice proactively offers support to other pod members.'
-     // this.communicationTitle = 'test'
-     // this.metricsTitle = 'test'
-   } else if ($event.value === 'Practitioner') {
-     this.technicalTitle = '- A Practitioner applies acquired skill on real-world engagements but needs regular reviews by a Coach. '
-     this.behavioralTitle = '- A Practitioner consistently  displays attributes of a team player as determined, noted and confirmed by a Coach and the Coaches request of other pod members regarding the Practitioner. <br> - A Practitioner applies problem solving capabilities with confidence observed, noted and confirmed by a Coach and peers.'
-     // this.communicationTitle = 'test'
-     // this.metricsTitle = 'test'
-   } else if ($event.value === 'Journeyman') {
-     this.behavioralTitle = '- A Journeyman performs tasks unsupervised. <br> - A Journeyman is self-sufficient, more often the source of advice than the recipient. <br> - A Journeyman actively provides guidance to Associates in preceding stages, and other pods. '
-     this.technicalTitle = '- A Journeyman uses techniques naturally and automatically with minimal guidance '
-     // this.communicationTitle = 'test'
-     // this.metricsTitle = 'test'
-   }
- }
+  onValueChangedStage ($event) {
+    if ($event.value === 'Appentice') {
+      this.technicalTitle = '- An Apprentice is undergoing instruction beyond the Novice Stage where an Associate is introduced and exposed to technologies and methodology. <br> - An Apprentice is familiar and proficient in the use of technologies and methodology <br> - Inquisitively immerses herself/himself into the assigned domain <br> - Associate successfully applies required skills as determined by scope of services per engagement under the direction of a mentor'
+      this.behavioralTitle = '- An Apprentice experiments on their own. <br> - An Apprentice shows respect for other employees. <br> - An Apprentice volunteers for engagement  activities. <br> - An Apprentice is reliable and dependable. <br> - An Apprentice displays strong communication with their Coach and among their peers. <br> - An Apprentice proactively offers support to other pod members.'
+      // this.communicationTitle = 'test'
+      // this.metricsTitle = 'test'
+    } else if ($event.value === 'Practitioner') {
+      this.technicalTitle = '- A Practitioner applies acquired skill on real-world engagements but needs regular reviews by a Coach. '
+      this.behavioralTitle = '- A Practitioner consistently  displays attributes of a team player as determined, noted and confirmed by a Coach and the Coaches request of other pod members regarding the Practitioner. <br> - A Practitioner applies problem solving capabilities with confidence observed, noted and confirmed by a Coach and peers.'
+      // this.communicationTitle = 'test'
+      // this.metricsTitle = 'test'
+    } else if ($event.value === 'Journeyman') {
+      this.behavioralTitle = '- A Journeyman performs tasks unsupervised. <br> - A Journeyman is self-sufficient, more often the source of advice than the recipient. <br> - A Journeyman actively provides guidance to Associates in preceding stages, and other pods. '
+      this.technicalTitle = '- A Journeyman uses techniques naturally and automatically with minimal guidance '
+      // this.communicationTitle = 'test'
+      // this.metricsTitle = 'test'
+    }
+  }
 
- onValueChangedYesNo ($event) {
+  onValueChangedYesNo ($event) {
    if ($event.value === 'No (Total of 0 - 13pts from above)') {
      $('#ifNoLbl').removeClass('remove')
      $('#ifNoTxtfld').removeClass('remove')
@@ -262,6 +262,7 @@ setCurrentStage ($event) {
      'overallComment': this.overallCommentValue,
      'additionalComment': this.additionalCommentValue,
      'failureReasonComment': this.failureReasonCommentValue,
+     'agileEvaluationScoreDate': new Date(),
      'passed': passed
    }
    this.metricsService.save('AgileEvaluationScores', agileEvaluationScore)
@@ -294,9 +295,9 @@ setCurrentStage ($event) {
    this.passConfirmationValue = undefined
  }
 
- constructScoreArray () {
-   this.currentRatedValueArray = [this.currentTechnicalValue, this.currentCommunicationValue, this.currentBehavioralValue, this.currentMetricValue]
- }
+  constructScoreArray () {
+    this.currentRatedValueArray = [this.currentTechnicalValue, this.currentCommunicationValue, this.currentBehavioralValue, this.currentMetricValue]
+  }
 
  constructCommentArray () {
    this.commentValueArray = [this.technicalCommentValue, this.communicationCommentValue, this.behavioralCommentValue, this.metricsCommentValue, this.overallCommentValue]

@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@angular/core'
 import { Http, Headers, RequestOptions } from '@angular/http'
 import { HttpClient } from '@angular/common/http'
 import { BehaviorSubject } from 'rxjs/BehaviorSubject'
+import { Subject } from 'rxjs/Subject'
 // import { config } from './Config/config'
 
 @Injectable()
@@ -11,6 +12,7 @@ export class MetricsService {
   productionURL = ''
   url = this.developmentURL
   loadingVisible = new BehaviorSubject<boolean>(false)
+  currentUser = new Subject<any>()
 
   constructor (public http: HttpClient) {
   }

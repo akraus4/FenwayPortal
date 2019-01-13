@@ -25,10 +25,21 @@ export class AgileEvaluations {
   @JoinColumn({ name: 'presenter_user_id' })
   presenterUserId: WorkUser
 
+  @ManyToOne(type => WorkUser)
+  @JoinColumn({ name: 'created_by' })
+  createdBy: WorkUser
+
+  @ManyToOne(type => WorkUser)
+  @JoinColumn({ name: 'last_updated_by' })
+  lastUpdatedBy: WorkUser
+
   @Column('varchar', { name: 'agile_evaluation_date' })
   agileEvaluationDate: Date
 
-  @Column('tinyint', { name: 'passed', nullable: true })
+  @Column('varchar', { name: 'last_updated_date' })
+  lastUpdatedDate: Date
+
+  @Column('tinyint', { name: 'passed' })
   passed: boolean
 
 }

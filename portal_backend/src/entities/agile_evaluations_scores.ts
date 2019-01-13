@@ -56,6 +56,9 @@ export class AgileEvaluationScores {
   @Column('text', { name: 'failure_reason_comment' })
   failureReasonComment: string
 
+  @Column('varchar', { name: 'agile_evaluation_score_date' })
+  agileEvaluationScoreDate: Date
+
   @Column('tinyint', { name: 'passed' })
   passed: boolean
 

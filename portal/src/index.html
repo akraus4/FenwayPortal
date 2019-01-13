@@ -48,6 +48,7 @@
             var profile = googleUser.getBasicProfile();
             var id_token = googleUser.getAuthResponse().id_token;
             localStorage.setItem("profile", profile);
+            localStorage.setItem("userEmail", profile.getEmail());
             localStorage.setItem("id_token", id_token);
             console.log(`Token ID === ${id_token}`);
             $("#app").show();
