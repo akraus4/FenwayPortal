@@ -58,6 +58,8 @@ export class EvaluationComponent implements OnInit {
   constructor (@Inject(MetricsService) metricsService) {
     this.metricsService = metricsService
     this.getAllStages()
+    this.currentAppraiser = this.metricsService.currentUser[0]
+    this. appraiserDropDownValue = this.metricsService.currentUser[0].workUserId
     this.getEvaluations()
     this.getAllUsers()
     this.ratings = [1, 2, 3, 4, 5]
@@ -69,24 +71,24 @@ export class EvaluationComponent implements OnInit {
     $('#ifNoTxtfld').addClass('remove')
   }
 
-  onValueChangedStage ($event) {
-    if ($event.value === 'Appentice') {
-      this.technicalTitle = '- An Apprentice is undergoing instruction beyond the Novice Stage where an Associate is introduced and exposed to technologies and methodology. <br> - An Apprentice is familiar and proficient in the use of technologies and methodology <br> - Inquisitively immerses herself/himself into the assigned domain <br> - Associate successfully applies required skills as determined by scope of services per engagement under the direction of a mentor'
-      this.behavioralTitle = '- An Apprentice experiments on their own. <br> - An Apprentice shows respect for other employees. <br> - An Apprentice volunteers for engagement  activities. <br> - An Apprentice is reliable and dependable. <br> - An Apprentice displays strong communication with their Coach and among their peers. <br> - An Apprentice proactively offers support to other pod members.'
-      // this.communicationTitle = 'test'
-      // this.metricsTitle = 'test'
-    } else if ($event.value === 'Practitioner') {
-      this.technicalTitle = '- A Practitioner applies acquired skill on real-world engagements but needs regular reviews by a Coach. '
-      this.behavioralTitle = '- A Practitioner consistently  displays attributes of a team player as determined, noted and confirmed by a Coach and the Coaches request of other pod members regarding the Practitioner. <br> - A Practitioner applies problem solving capabilities with confidence observed, noted and confirmed by a Coach and peers.'
-      // this.communicationTitle = 'test'
-      // this.metricsTitle = 'test'
-    } else if ($event.value === 'Journeyman') {
-      this.behavioralTitle = '- A Journeyman performs tasks unsupervised. <br> - A Journeyman is self-sufficient, more often the source of advice than the recipient. <br> - A Journeyman actively provides guidance to Associates in preceding stages, and other pods. '
-      this.technicalTitle = '- A Journeyman uses techniques naturally and automatically with minimal guidance '
-      // this.communicationTitle = 'test'
-      // this.metricsTitle = 'test'
-    }
-  }
+  // onValueChangedStage ($event) {
+  //   if ($event.value === 'Appentice') {
+  //     this.technicalTitle = '- An Apprentice is undergoing instruction beyond the Novice Stage where an Associate is introduced and exposed to technologies and methodology. <br> - An Apprentice is familiar and proficient in the use of technologies and methodology <br> - Inquisitively immerses herself/himself into the assigned domain <br> - Associate successfully applies required skills as determined by scope of services per engagement under the direction of a mentor'
+  //     this.behavioralTitle = '- An Apprentice experiments on their own. <br> - An Apprentice shows respect for other employees. <br> - An Apprentice volunteers for engagement  activities. <br> - An Apprentice is reliable and dependable. <br> - An Apprentice displays strong communication with their Coach and among their peers. <br> - An Apprentice proactively offers support to other pod members.'
+  //     // this.communicationTitle = 'test'
+  //     // this.metricsTitle = 'test'
+  //   } else if ($event.value === 'Practitioner') {
+  //     this.technicalTitle = '- A Practitioner applies acquired skill on real-world engagements but needs regular reviews by a Coach. '
+  //     this.behavioralTitle = '- A Practitioner consistently  displays attributes of a team player as determined, noted and confirmed by a Coach and the Coaches request of other pod members regarding the Practitioner. <br> - A Practitioner applies problem solving capabilities with confidence observed, noted and confirmed by a Coach and peers.'
+  //     // this.communicationTitle = 'test'
+  //     // this.metricsTitle = 'test'
+  //   } else if ($event.value === 'Journeyman') {
+  //     this.behavioralTitle = '- A Journeyman performs tasks unsupervised. <br> - A Journeyman is self-sufficient, more often the source of advice than the recipient. <br> - A Journeyman actively provides guidance to Associates in preceding stages, and other pods. '
+  //     this.technicalTitle = '- A Journeyman uses techniques naturally and automatically with minimal guidance '
+  //     // this.communicationTitle = 'test'
+  //     // this.metricsTitle = 'test'
+  //   }
+  // }
 
   onValueChangedYesNo ($event) {
    if ($event.value === 'No (Total of 0 - 13pts from above)') {
@@ -241,9 +243,9 @@ setCurrentStage ($event) {
  saveEvaluationScore () {
    this.metricsService.showLoadingPanel()
    let passed: number
-   if (this.passConfirmationValue === 'Yes (Total of 14 - 20pts from above)') {
+   if (this.passConfirmationValue === 'Yes (Total of 14 - 20pts)') {
      passed = 1
-   } else if (this.passConfirmationValue === 'No (Total of 0 - 13pts from above)') {
+   } else if (this.passConfirmationValue === 'No (Total of 4 - 13pts)') {
      passed = 0
    }
    console.log('Evaluation Id Save Result ===== ' + JSON.stringify(this.evaluationDropDownValue))

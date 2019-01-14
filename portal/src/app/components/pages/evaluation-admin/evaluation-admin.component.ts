@@ -130,6 +130,8 @@ export class EvaluationAdminComponent {
       'agileStage': this.stageDropDownValue,
       // 'agileEvaluationSession': this.teamValue,
       'presenterUserId': this.currentPresenter,
+      'lastUpdatedBy': this.metricsService.currentUser[0].workUserId,
+      'lastUpdatedDate': new Date(),
       'agileEvaluationDate': new Date()
     }
     this.metricsService.update('AgileEvaluations', agileEvaluation.agileEvaluationsId, agileEvaluation)
@@ -143,10 +145,15 @@ export class EvaluationAdminComponent {
 
   saveEvaluation () {
     this.metricsService.showLoadingPanel()
+    console.log(`Current User === ${JSON.stringify(this.metricsService.currentUser)}`)
+
     let agileEvaluation = {
       'agileStage': this.stageDropDownValue,
       // 'agileEvaluationSession': this.teamValue,
       'presenterUserId': this.presenterDropDownValue,
+      'createdBy': this.metricsService.currentUser[0].workUserId,
+      'lastUpdatedBy': this.metricsService.currentUser[0].workUserId,
+      'lastUpdatedDate': new Date(),
       'agileEvaluationDate': new Date()
     }
     this.metricsService.save('AgileEvaluations', agileEvaluation)

@@ -20,8 +20,8 @@ export class AppComponent {
     let condition = `email=${currentUser}`
     this.metricsService.getAll('WorkUsers', '', condition)
       .subscribe((results) => {
-        this.metricsService.currentUser.next(results)
-        console.log(`Current User === ${JSON.stringify(results)}`)
+        this.metricsService.currentUser = results
+        // console.log(`Current User === ${JSON.stringify(this.metricsService.currentUser)}`)
       })
   }
 
