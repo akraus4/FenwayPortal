@@ -21,6 +21,7 @@ export class EvaluationAdminComponent {
   stageDropDownValue
   currentPresenter
   currentEvaluation
+  popupTitle
 
   popupVisible: boolean = false
   metricsService: any
@@ -51,10 +52,11 @@ export class EvaluationAdminComponent {
       .subscribe((results) => {
         // console.log(results)
         let total = 0
+        let n = results.length != 0 ? results.length : 1
         for (let score of results) {
           total += score.totalScore
         }
-        total = Math.round(total / results.length)
+        total = +((total / n).toFixed(2))
         let s = {
           agileEvaluationId: evaluation.agileEvaluationsId,
           presenterUserId: evaluation.presenterUserId,
@@ -101,9 +103,11 @@ export class EvaluationAdminComponent {
   // }
 
   addEvaluation () {
-    // console.log('Click')
     this.evaluationModeSave = true
     this.presenterDropDownReadOnly = false
+    this.stageDropDownValue = null
+    this.presenterDropDownValue = null
+    this.popupTitle = "Create New Evaluation"
     this.popupVisible = true
   }
 
@@ -119,6 +123,7 @@ export class EvaluationAdminComponent {
       this.currentEvaluation = e.data.agileEvaluationId
       this.presenterDropDownValue = e.data.presenterUserId.workUserId
       this.stageDropDownValue = e.data.agileStage.agileStageId
+      this.popupTitle = "Edit Evaluation"
       this.popupVisible = true
     }
   }
@@ -126,10 +131,10 @@ export class EvaluationAdminComponent {
   updateEvaluation () {
     this.metricsService.showLoadingPanel()
     let agileEvaluation = {
-      'agileEvaluationsId': this.currentEvaluation.agileEvaluationsId,
+      'agileEvaluationsId': this.currentEvaluation,
       'agileStage': this.stageDropDownValue,
       // 'agileEvaluationSession': this.teamValue,
-      'presenterUserId': this.currentPresenter,
+      'presenterUserId': this.presenterDropDownValue,
       'agileEvaluationDate': new Date()
     }
     this.metricsService.update('AgileEvaluations', agileEvaluation.agileEvaluationsId, agileEvaluation)
@@ -161,21 +166,20 @@ export class EvaluationAdminComponent {
   submitClick () {
     // Create Pop-Up Dialog
     let that = this
+    let shouldSave = this.evaluationModeSave
     if (this.presenterDropDownValue !== undefined && this.stageDropDownValue !== undefined) {
       const result = confirm('Are you sure you want to save Evaluation?', 'Confirm changes')
       result.then(function (dialogResult) {
-        console.log(this.evaluationModeSave)
-        // if (dialogResult && this.evaluationModeSave) {
-        if (dialogResult) {
+        if (dialogResult && shouldSave) {
           console.log('Save Eval')
           that.saveEvaluation()
           console.log('Saved evaluation session successfully')
         }
-        // else if (dialogResult && !this.evaluationModeSave) {
-        //   console.log('Update Eval')
-        //   that.updateEvaluation()
-        //   console.log('Updated evaluation session successfully')
-        // }
+        else if (dialogResult && !shouldSave) {
+          console.log('Update Eval')
+          that.updateEvaluation()
+          console.log('Updated evaluation session successfully')
+        }
       })
     } else {
       notify('All fields must have a value!', 'error', 600)
