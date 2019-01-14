@@ -9,7 +9,7 @@ var config = {
     'jeanmarc.hanemann@centurylink.com',
     'jonathan.lester@centurylink.com',
     'kevin.sumner@centurylink.com',
-	'paul.linder@centurylink.com'
+    'paul.linder@centurylink.com'
   ]
 }
 
