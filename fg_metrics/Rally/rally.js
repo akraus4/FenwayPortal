@@ -1,13 +1,13 @@
-// Usage: node ./rally.js {Team}
+// Usage: node ./rally.js [Teamname]
 // Example: node ./rally.js CDMMS
 
 const team = process.argv[2]
-const config = require('./config/'+team+'.js')
+const config = require('./config/' + team + '.js')
 const moment = require('moment')
 const axios = require('axios')
 const path = require('path')
 const fs = require('fs')
-const exportFile = moment().format('YYYYMMDD_HHmmss')+'_CTL_'+team+'.json'
+const exportFile = moment().format('YYYYMMDD_HHmmss') + '_CTL_' + team + '.json'
 const exec = require('child_process').exec
 
 let startDate = moment().subtract(28, 'days').format()
@@ -40,20 +40,16 @@ axios({
   }
 
   // Write JSON results to result.json file
-  fs.writeFile('C:/RallyStories/'+exportFile, JSON.stringify(result), function()
-    {
-      const child = exec('cmd /c C:/scripts/winscp.bat C:\\RallyStories\\'+ exportFile,
-        (error, stdout, stderr) => {
-            console.log(`stdout: ${stdout}`);
-            console.log(`stderr: ${stderr}`);
-            if (error !== null) {
-                console.log(`exec error: ${error}`);
-            }
-      })
-    }
-  )
+  fs.writeFile('C:/RallyStories/' + exportFile, JSON.stringify(result), function () {
+    const child = exec('cmd /c C:/scripts/winscp.bat C:\\RallyStories\\' + exportFile, (error, stdout, stderr) => {
+      console.log(`stdout: ${stdout}`)
+      console.log(`stderr: ${stderr}`)
 
-  
+      if (error != null) {
+        console.error(`exec error: ${error}`)
+      }
+    })
+  })
 }).catch(error => {
   console.error(error.stack)
 })
@@ -112,7 +108,7 @@ function buildResults (sprintName) {
 
       if (userResult[each].WorkProduct.FormattedID.indexOf('DE') > -1 && defects.indexOf(userResult[each].WorkProduct.FormattedID) === -1) {
         defects.push(userResult[each].WorkProduct.FormattedID)
-      } else if (userResult[each].WorkProduct.FormattedID.indexOf('US') > -1 && defects.indexOf(userResult[each].WorkProduct.FormattedID) === -1) {
+      } else if (userResult[each].WorkProduct.FormattedID.indexOf('US') > -1 && userStories.indexOf(userResult[each].WorkProduct.FormattedID) === -1) {
         userStories.push(userResult[each].WorkProduct.FormattedID)
       }
     }
@@ -127,7 +123,7 @@ function buildResults (sprintName) {
       var defectList = await getDefects(defects)
       startDate = moment(defectList[0].Iteration.StartDate).format('YYYY-MM-DD')
       endDate = moment(defectList[0].Iteration.EndDate).format('YYYY-MM-DD')
-      stories = generateResults(defectList, hashArr)
+      stories = stories.concat(generateResults(defectList, hashArr))
     }
 
     // Pull the user stories from Rally, get the start and end dates, and generate the results
@@ -135,7 +131,7 @@ function buildResults (sprintName) {
       var userStoryList = await getUserStories(userStories)
       startDate = moment(userStoryList[0].Iteration.StartDate).format('YYYY-MM-DD')
       endDate = moment(userStoryList[0].Iteration.EndDate).format('YYYY-MM-DD')
-      stories = generateResults(userStoryList, hashArr)
+      stories = stories.concat(generateResults(userStoryList, hashArr))
     }
 
     resolve({
