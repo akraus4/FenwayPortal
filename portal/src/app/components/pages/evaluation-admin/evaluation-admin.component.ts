@@ -181,8 +181,7 @@ export class EvaluationAdminComponent {
           console.log('Save Eval')
           that.saveEvaluation()
           console.log('Saved evaluation session successfully')
-        }
-        else if (dialogResult && !shouldSave) {
+        } else if (dialogResult && !shouldSave) {
           console.log('Update Eval')
           that.updateEvaluation()
           console.log('Updated evaluation session successfully')
