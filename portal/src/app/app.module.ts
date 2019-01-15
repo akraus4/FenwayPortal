@@ -24,6 +24,7 @@ import { NavBarComponent } from './components/widgets/nav-bar/nav-bar.component'
 import { ScorecardComponent } from './components/pages/scorecard/scorecard.component'
 import { AuthInterceptor } from './services/auth-interceptor.interceptor'
 import { MetricsService } from './services/metrics.service'
+import { EvaluationService } from './services/evaluation.service'
 import { ViewScoreComponent } from './components/pages/view-score/view-score.component'
 import { LabsComponent } from './components/pages/labs/labs.component'
 import { EvaluationComponent } from './components/pages/evaluation/evaluation.component'
@@ -106,7 +107,7 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome'
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }, MetricsService],
+    }, MetricsService, EvaluationService],
   bootstrap: [AppComponent]
 })
 

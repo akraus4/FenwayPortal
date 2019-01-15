@@ -63,7 +63,7 @@
  
   <div class="row">
     <div class="col-12">
-      <dx-text-area placeholder="Your Answer" [height]="70" [(ngModel)]="technicalCommentValue" >
+      <dx-text-area placeholder="Your Answer" [height]="70" [(ngModel)]="technicalCommentValue" (onValueChanged)="onValueChangedTechComment($event)">
       </dx-text-area>
     </div>
   </div>
@@ -100,7 +100,7 @@
  
   <div class="row">
     <div class="col-12">
-      <dx-text-area placeholder="Your Answer" [height]="70" [(ngModel)]="communicationCommentValue">
+      <dx-text-area placeholder="Your Answer" [height]="70" [(ngModel)]="communicationCommentValue" (onValueChanged)="onValueChangedCommunicationComment($event)">
       </dx-text-area>
     </div>
   </div>
@@ -137,7 +137,7 @@
  
   <div class="row">
     <div class="col-12">
-      <dx-text-area placeholder="Your Answer" [height]="70" [(ngModel)]="behavioralCommentValue">
+      <dx-text-area placeholder="Your Answer" [height]="70" [(ngModel)]="behavioralCommentValue" (onValueChanged)="onValueChangedBehavioralComment($event)">
       </dx-text-area>
     </div>
   </div>
@@ -176,7 +176,7 @@
  
   <div class="row">
     <div class="col-12">
-      <dx-text-area placeholder="Your Answer" [height]="70" [(ngModel)]="metricsCommentValue">
+      <dx-text-area placeholder="Your Answer" [height]="70" [(ngModel)]="metricsCommentValue" (onValueChanged)="onValueChangedMetricComment($event)">
       </dx-text-area>
     </div>
   </div>
@@ -191,7 +191,7 @@
  
   <div class="row">
     <div class="col-12">
-      <dx-text-area placeholder="Your Answer" [height]="70" [(ngModel)]="overallCommentValue">
+      <dx-text-area placeholder="Your Answer" [height]="70" [(ngModel)]="overallCommentValue" (onValueChanged)="onValueChangedOverallComment($event)">
       </dx-text-area>
     </div>
   </div>
@@ -206,7 +206,7 @@
  
   <div class="row">
     <div class="col-12">
-      <dx-text-area placeholder="Your Answer" [height]="70" [(ngModel)]="additionalCommentValue">
+      <dx-text-area placeholder="Your Answer" [height]="70" [(ngModel)]="additionalCommentValue" (onValueChanged)="onValueChangedAdditionalComment($event)">
       </dx-text-area>
     </div>
   </div>
@@ -236,7 +236,7 @@
  
   <div id="ifNoTxtfld" class="row">
     <div class="col-12">
-      <dx-text-area placeholder="Your Answer" [height]="70" [(ngModel)]="failureReasonCommentValue">
+      <dx-text-area placeholder="Your Answer" [height]="70" [(ngModel)]="failureReasonCommentValue" (onValueChanged)="onValueChangedFailureComment($event)">
       </dx-text-area>
     </div>
   </div>

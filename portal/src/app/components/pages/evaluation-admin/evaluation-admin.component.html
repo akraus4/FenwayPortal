@@ -66,7 +66,7 @@
   </div>
 </div>
 
-<dx-popup class="popup" [width]="400" [height]="200" [showTitle]="true" title="Create New Evaluation" [dragEnabled]="false"
+<dx-popup class="popup" [width]="400" [height]="200" [showTitle]="true" [(title)]="popupTitle" [dragEnabled]="false"
   [closeOnOutsideClick]="true" [(visible)]="popupVisible">
   <div *dxTemplate="let data of 'content'">
     <div class="row">
