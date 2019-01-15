@@ -255,7 +255,7 @@ function generateResults (arr, hashArr) {
     }
 
     for (let j in hashArr[arr[i].FormattedID]) {
-      let points = +(((hashArr[arr[i].FormattedID][j].Actuals / totalHours) * arr[i].PlanEstimate).toFixed(3))
+      let points = +(((hashArr[arr[i].FormattedID][j].Actuals / totalHours) * arr[i].PlanEstimate).toFixed(3)) || 0
       assignedTo.push({ user: hashArr[arr[i].FormattedID][j].User, user_points: points })
     }
 
