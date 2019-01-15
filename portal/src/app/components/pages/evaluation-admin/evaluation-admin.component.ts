@@ -52,7 +52,7 @@ export class EvaluationAdminComponent {
       .subscribe((results) => {
         // console.log(results)
         let total = 0
-        let n = results.length != 0 ? results.length : 1
+        let n = results.length !== 0 ? results.length : 1
         for (let score of results) {
           total += score.totalScore
         }
@@ -107,7 +107,7 @@ export class EvaluationAdminComponent {
     this.presenterDropDownReadOnly = false
     this.stageDropDownValue = null
     this.presenterDropDownValue = null
-    this.popupTitle = "Create New Evaluation"
+    this.popupTitle = 'Create New Evaluation'
     this.popupVisible = true
   }
 
@@ -123,7 +123,7 @@ export class EvaluationAdminComponent {
       this.currentEvaluation = e.data.agileEvaluationId
       this.presenterDropDownValue = e.data.presenterUserId.workUserId
       this.stageDropDownValue = e.data.agileStage.agileStageId
-      this.popupTitle = "Edit Evaluation"
+      this.popupTitle = 'Edit Evaluation'
       this.popupVisible = true
     }
   }
@@ -134,7 +134,9 @@ export class EvaluationAdminComponent {
       'agileEvaluationsId': this.currentEvaluation,
       'agileStage': this.stageDropDownValue,
       // 'agileEvaluationSession': this.teamValue,
-      'presenterUserId': this.presenterDropDownValue,
+      'presenterUserId': this.currentPresenter,
+      'lastUpdatedBy': this.metricsService.currentUser[0].workUserId,
+      'lastUpdatedDate': new Date(),
       'agileEvaluationDate': new Date()
     }
     this.metricsService.update('AgileEvaluations', agileEvaluation.agileEvaluationsId, agileEvaluation)
@@ -148,10 +150,15 @@ export class EvaluationAdminComponent {
 
   saveEvaluation () {
     this.metricsService.showLoadingPanel()
+    console.log(`Current User === ${JSON.stringify(this.metricsService.currentUser)}`)
+
     let agileEvaluation = {
       'agileStage': this.stageDropDownValue,
       // 'agileEvaluationSession': this.teamValue,
       'presenterUserId': this.presenterDropDownValue,
+      'createdBy': this.metricsService.currentUser[0].workUserId,
+      'lastUpdatedBy': this.metricsService.currentUser[0].workUserId,
+      'lastUpdatedDate': new Date(),
       'agileEvaluationDate': new Date()
     }
     this.metricsService.save('AgileEvaluations', agileEvaluation)

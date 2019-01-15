@@ -12,7 +12,7 @@ export class MetricsService {
   productionURL = ''
   url = this.developmentURL
   loadingVisible = new BehaviorSubject<boolean>(false)
-  currentUser = new Subject<any>()
+  currentUser
 
   constructor (public http: HttpClient) {
   }
