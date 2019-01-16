@@ -11,7 +11,6 @@ export class EvaluationManagementComponent {
   @ViewChild(DxDataGridComponent) dataGrid: DxDataGridComponent
   associateChoices: any
   metricsService: any
-  users = []
   evaluations = []
   scores = []
   userList: any[]
@@ -34,13 +33,6 @@ export class EvaluationManagementComponent {
   getAllUsers () {
     this.metricsService.getAll('WorkUsers', '', 'active=1')
       .subscribe((results) => {
-        for (let user of results) {
-          let u = {
-            'workUserId': user.workUserId,
-            'fullname': user.firstname + ' ' + user.lastname
-          }
-          this.users.push(u)
-        }
         this.userList = results
       })
   }
@@ -107,5 +99,11 @@ export class EvaluationManagementComponent {
 
   onAssociateChange ($event) {
     this.getAllEvaluationsByUser($event)
+  }
+
+  associateDisplayExpr(item) {
+    if(!item)
+      return "";
+    return item.firstname + " " + item.lastname; 
   }
 }
