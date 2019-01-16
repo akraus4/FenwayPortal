@@ -50,6 +50,7 @@ axios({
       }
     })
   })
+  // fs.writeFileSync('./' + exportFile, JSON.stringify(result))
 }).catch(error => {
   console.error(error.stack)
 })
@@ -121,17 +122,21 @@ function buildResults (sprintName) {
     // Pull the defects from Rally, get the start and end dates, and generate the results
     if (defects[0]) {
       var defectList = await getDefects(defects)
-      startDate = moment(defectList[0].Iteration.StartDate).format('YYYY-MM-DD')
-      endDate = moment(defectList[0].Iteration.EndDate).format('YYYY-MM-DD')
-      stories = stories.concat(generateResults(defectList, hashArr))
+      if (defectList[0]) {
+        startDate = moment(defectList[0].Iteration.StartDate).format('YYYY-MM-DD')
+        endDate = moment(defectList[0].Iteration.EndDate).format('YYYY-MM-DD')
+        stories = stories.concat(generateResults(defectList, hashArr))
+      }
     }
 
     // Pull the user stories from Rally, get the start and end dates, and generate the results
     if (userStories[0]) {
       var userStoryList = await getUserStories(userStories)
-      startDate = moment(userStoryList[0].Iteration.StartDate).format('YYYY-MM-DD')
-      endDate = moment(userStoryList[0].Iteration.EndDate).format('YYYY-MM-DD')
-      stories = stories.concat(generateResults(userStoryList, hashArr))
+      if (userStoryList[0]) {
+        startDate = moment(userStoryList[0].Iteration.StartDate).format('YYYY-MM-DD')
+        endDate = moment(userStoryList[0].Iteration.EndDate).format('YYYY-MM-DD')
+        stories = stories.concat(generateResults(userStoryList, hashArr))
+      }
     }
 
     resolve({
