@@ -61,12 +61,12 @@ export class EvaluationComponent implements OnInit {
     this.metricsService = metricsService
     this.evaluationService = evaluationService
     this.getAllStages()
-    try {
+    // try {
       this.currentAppraiser = this.metricsService.currentUser[0]
       this.appraiserDropDownValue = this.metricsService.currentUser[0].workUserId
-    } catch (e) {
-      console.log(e)
-    }
+    // } catch (e) {
+    //   console.log(e)
+    // }
     this.getEvaluations()
     this.getAllUsers()
     this.ratings = [1, 2, 3, 4, 5]
