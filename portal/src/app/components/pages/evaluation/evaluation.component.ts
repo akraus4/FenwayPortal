@@ -59,11 +59,12 @@ export class EvaluationComponent implements OnInit {
 
   constructor (@Inject(MetricsService) metricsService, @Inject(EvaluationService) evaluationService) {
     this.metricsService = metricsService
+    this.getCurrentUser()
     this.evaluationService = evaluationService
     this.getAllStages()
     // try {
-      this.currentAppraiser = this.metricsService.currentUser[0]
-      this.appraiserDropDownValue = this.metricsService.currentUser[0].workUserId
+    this.currentAppraiser = this.metricsService.currentUser[0]
+    this.appraiserDropDownValue = this.metricsService.currentUser[0].workUserId
     // } catch (e) {
     //   console.log(e)
     // }
@@ -223,6 +224,16 @@ export class EvaluationComponent implements OnInit {
     this.evaluationService.passedValue = this.passConfirmationValue
   }
 
+  getCurrentUser () {
+    const currentUser = localStorage.getItem('userEmail')
+    let condition = `email=${currentUser}`
+    this.metricsService.getAll('WorkUsers', '', condition)
+      .subscribe((results) => {
+        this.metricsService.currentUser = results
+        // console.log(`Current User === ${JSON.stringify(this.metricsService.currentUser)}`)
+      })
+  }
+
   getEvaluations () {
     this.metricsService.getNullEvaluations()
       .subscribe((results) => {
@@ -342,6 +353,7 @@ export class EvaluationComponent implements OnInit {
       this.metricsService.save('AgileEvaluationScores', agileEvaluationScore)
         .subscribe((results) => {
           this.metricsService.hideLoadingPanel()
+          notify('Evaluatuation Saved!', 'success', 600)
           this.clearAll()
         })
     } catch (e) {

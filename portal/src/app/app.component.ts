@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core'
 import { MetricsService } from './services/metrics.service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-root',
@@ -10,9 +11,11 @@ import { MetricsService } from './services/metrics.service'
 export class AppComponent {
   metricsService: any
 
-  constructor (@Inject(MetricsService) metricsService) {
+  constructor (@Inject(MetricsService) metricsService, private router: Router) {
     this.metricsService = metricsService
     this.getCurrentUser()
+    // Routes app to home page when browser refreshes.
+    this.router.navigate([''])
   }
 
   getCurrentUser () {
