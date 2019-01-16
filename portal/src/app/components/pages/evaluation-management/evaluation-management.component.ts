@@ -46,8 +46,8 @@ export class EvaluationManagementComponent {
   }
 
   getAllEvaluationsByUser ($event) {
-    console.log('user ==== ' + $event.value.workUserId)
-    this.metricsService.getAll('AgileEvaluations', 'agileStage,presenterUserId', `presenterUserId=${$event.value.workUserId}`)
+    console.log('user ==== ' + $event.value)
+    this.metricsService.getAll('AgileEvaluations', 'agileStage,presenterUserId', `presenterUserId=${$event.value}`)
       .subscribe((results) => {
         this.scoreList = []
         for (let evaluation of results) {
