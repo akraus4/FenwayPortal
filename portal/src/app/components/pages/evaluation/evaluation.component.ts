@@ -19,10 +19,8 @@ export class EvaluationComponent implements OnInit {
   passConfirmationValue: string
   total: number = 0
   stageList: any[]
-  pressenterList: any[]
   appraiserList: any[]
   userList: any[]
-  users: any[] = []
   evaluationList: any[]
 
   evaluationDropDownValue
@@ -237,19 +235,7 @@ export class EvaluationComponent implements OnInit {
   getEvaluations () {
     this.metricsService.getNullEvaluations()
       .subscribe((results) => {
-        let evaluation = []
-        for (let evalu of results) {
-          let e = {
-            'agileEvaluationsId': evalu.agileEvaluationsId,
-            'agileStage': evalu.agileStage,
-            'presenterUserId': evalu.presenterUserId,
-            'agileEvaluationDate': evalu.agileEvaluationDate,
-            'fullname': evalu.presenterUserId.firstname + ' ' + evalu.presenterUserId.lastname
-          }
-          // console.log('USERS ===== ' + JSON.stringify(e))
-          evaluation.push(e)
-        }
-        this.evaluationList = evaluation
+        this.evaluationList = results
         console.log('Null Evaluations ===== ' + JSON.stringify(results))
       })
   }
@@ -265,18 +251,8 @@ export class EvaluationComponent implements OnInit {
   getAllUsers () {
     this.metricsService.getAll('WorkUsers', '', 'active=1')
       .subscribe((results) => {
-        for (let user of results) {
-          let u = {
-            'workUserId': user.workUserId,
-            'fullname': user.firstname + ' ' + user.lastname
-          }
-          console.log('USERS ===== ' + JSON.stringify(u))
-          this.users.push(u)
-        }
         this.userList = results
-        this.pressenterList = this.users
-        this.appraiserList = this.users
-        console.log('Presenters ===== ' + JSON.stringify(this.pressenterList))
+        this.appraiserList = results
         console.log('Apraisers ===== ' + JSON.stringify(this.appraiserList))
       })
   }
@@ -460,6 +436,18 @@ export class EvaluationComponent implements OnInit {
     } else {
       notify('All fields must have a value!', 'error', 600)
     }
+  }
+
+  fullNameDisplayExpr (item) {
+    if(!item)
+      return "";
+    return item.firstname + " " + item.lastname; 
+  }
+
+  evaluationDisplayExpr (item) {
+    if(!item)
+      return "";
+    return item.presenterUserId.firstname + " " + item.presenterUserId.lastname; 
   }
 
 }

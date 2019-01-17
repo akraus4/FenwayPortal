@@ -10,7 +10,7 @@
       <!--  This is the drop down to select the team/teams   -->
       <!-- <mat-form-field class="selectDropDown"> -->
           <dx-select-box id="selectAssociateDropDown" class="editFields evalSelect" placeholder="Associate" [dataSource]="userList"
-          [displayExpr]="associateDisplayExpr" valueExpr="workUserId" [searchEnabled]="true" [(ngModel)]="associateDropDownValue" (onValueChanged)="getAllEvaluationsByUser($event)"></dx-select-box>
+          [displayExpr]="fullNameDisplayExpr" valueExpr="workUserId" [searchEnabled]="true" [(ngModel)]="associateDropDownValue" (onValueChanged)="getAllEvaluationsByUser($event)"></dx-select-box>
         <!-- <mat-select placeholder="Select Associate" [formControl]="Associate" (change)="onAssociateChange($event.value)"> -->
           <!-- <mat-option *ngFor="let user of users" [value]="user">{{user.fullname}}
           </mat-option> -->

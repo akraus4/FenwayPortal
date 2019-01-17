@@ -15,7 +15,6 @@ export class EvaluationAdminComponent {
   presenterList: any[]
   stageList: any[]
   userList: any[]
-  users: any[] = []
 
   presenterDropDownValue
   stageDropDownValue
@@ -72,17 +71,8 @@ export class EvaluationAdminComponent {
   getAllUsers () {
     this.metricsService.getAll('WorkUsers', '', 'active=1')
       .subscribe((results) => {
-        for (let user of results) {
-          let u = {
-            'workUserId': user.workUserId,
-            'fullname': user.firstname + ' ' + user.lastname
-          }
-          // console.log('USERS ===== ' + JSON.stringify(u))
-          this.users.push(u)
-        }
         this.userList = results
-        this.presenterList = this.users
-        // console.log('Presenters ===== ' + JSON.stringify(this.presenterList))
+        this.presenterList = results
       })
   }
 
@@ -222,6 +212,12 @@ export class EvaluationAdminComponent {
     this.presenterDropDownValue = undefined
     this.stageDropDownValue = undefined
     this.popupVisible = false
+  }
+
+  fullNameDisplayExpr (item) {
+    if(!item)
+      return "";
+    return item.firstname + " " + item.lastname; 
   }
 
 }

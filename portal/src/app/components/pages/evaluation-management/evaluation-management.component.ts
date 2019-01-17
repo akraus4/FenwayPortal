@@ -101,7 +101,7 @@ export class EvaluationManagementComponent {
     this.getAllEvaluationsByUser($event)
   }
 
-  associateDisplayExpr(item) {
+  fullNameDisplayExpr(item) {
     if(!item)
       return "";
     return item.firstname + " " + item.lastname; 
