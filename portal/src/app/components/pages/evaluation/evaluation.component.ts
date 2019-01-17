@@ -25,8 +25,6 @@ export class EvaluationComponent implements OnInit {
 
   evaluationDropDownValue
   appraiserDropDownValue
-  currentPressenter
-  currentAppraiser
   stageDropDownValue
   technicalCommentValue
   communicationCommentValue
@@ -61,7 +59,6 @@ export class EvaluationComponent implements OnInit {
     this.evaluationService = evaluationService
     this.getAllStages()
     // try {
-    this.currentAppraiser = this.metricsService.currentUser[0]
     this.appraiserDropDownValue = this.metricsService.currentUser[0].workUserId
     // } catch (e) {
     //   console.log(e)
@@ -265,22 +262,6 @@ export class EvaluationComponent implements OnInit {
       })
   }
 
-  getCurrentAppraiser ($event) {
-    for (let u of this.userList) {
-      if (u.workUserId === $event.value.workUserId) {
-        this.currentAppraiser = u
-      }
-    }
-  }
-
-//  getCurrentPresenter ($event) {
-//    for (let u of this.userList) {
-//      if (u.workUserId === $event.value.workUserId) {
-//        this.currentPressenter = u
-//      }
-//    }
-//  }
-
 //  saveEvaluation () {
 //    this.metricsService.showLoadingPanel()
 //    let agileEvaluation = {
@@ -310,7 +291,7 @@ export class EvaluationComponent implements OnInit {
       console.log('Evaluation Id Save Result ===== ' + JSON.stringify(this.evaluationDropDownValue))
       let agileEvaluationScore = {
         'agileEvaluation': this.evaluationDropDownValue,
-        'appraiserUserId': this.currentAppraiser,
+        'appraiserUserId': this.appraiserDropDownValue,
         'technicalScore': this.currentTechnicalValue,
         'technicalComment': this.technicalCommentValue,
         'communicationScore': this.currentCommunicationValue,
@@ -349,7 +330,6 @@ export class EvaluationComponent implements OnInit {
     this.currentMetricValueSet = 0
     this.total = 0
     this.evaluationDropDownValue = undefined
-    this.currentPressenter = undefined
     this.stageDropDownValue = undefined
     this.technicalCommentValue = ''
     this.communicationCommentValue = ''
@@ -386,7 +366,7 @@ export class EvaluationComponent implements OnInit {
   }
 
   constructEvaluationDetailsArray () {
-    this.evaluationDetailsArray = [this.evaluationDropDownValue, this.currentAppraiser]
+    this.evaluationDetailsArray = [this.evaluationDropDownValue, this.appraiserDropDownValue]
   }
 
   submitClick () {
@@ -422,7 +402,6 @@ export class EvaluationComponent implements OnInit {
       formcompletion = true
     }
 
-    console.log(this.currentAppraiser)
     // Create Pop-Up Dialog
     let that = this
     if (formcompletion) {

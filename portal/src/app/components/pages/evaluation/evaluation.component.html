@@ -13,7 +13,7 @@
     </div>
     <div class="col-3">
       <dx-select-box id="selectAppraiserDropDown" class="editFields evalSelect" placeholder="Appraiser" [dataSource]="appraiserList"
-        [displayExpr]="fullNameDisplayExpr" valueExpr="workUserId" [searchEnabled]="true" [(ngModel)]="appraiserDropDownValue" (onValueChanged)="getCurrentAppraiser($event)"></dx-select-box>
+        [displayExpr]="fullNameDisplayExpr" valueExpr="workUserId" [searchEnabled]="true" [(ngModel)]="appraiserDropDownValue"></dx-select-box>
     </div>
     <div class="col-3">
       <dx-select-box id="selectStageDropDown" class="editFields evalSelect" placeholder="Stage" [dataSource]="stageList" displayExpr="agileStageName" [readOnly]="true"
