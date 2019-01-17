@@ -164,7 +164,9 @@ export class EvaluationAdminComponent {
     // Create Pop-Up Dialog
     let that = this
     let shouldSave = this.evaluationModeSave
-    if (this.presenterDropDownValue !== undefined && this.stageDropDownValue !== undefined) {
+    if (this.presenterDropDownValue !== undefined && this.stageDropDownValue !== undefined
+          && this.presenterDropDownValue !== null && this.stageDropDownValue !== null) 
+    {
       const result = confirm('Are you sure you want to save Evaluation?', 'Confirm changes')
       result.then(function (dialogResult) {
         if (dialogResult && shouldSave) {
