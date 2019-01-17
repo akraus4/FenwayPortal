@@ -187,6 +187,14 @@ export class EvaluationAdminComponent {
   determineEvaluation (evaluationResult) {
     let selectedData = this.dataGrid.instance.getSelectedRowsData()
     if (selectedData.length > 0) {
+      // Make sure the evaluation(s) being judged has/have actually been scored
+      for(let row of selectedData)  {
+        if(row.avgTotal == 0) {
+          let evalType = evaluationResult > 0 ? "pass" : "fail"
+          notify(`You are trying to ${evalType} an evaluation that hasn't been scored yet`, 'error', 600)
+          return
+        }
+      }
       let that = this
       let evalText = evaluationResult > 0 ? "pass" : "fail"
       let confirmText = selectedData.length > 1 ? "these evaluations" : "this evaluation"
