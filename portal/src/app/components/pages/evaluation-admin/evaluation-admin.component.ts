@@ -164,24 +164,30 @@ export class EvaluationAdminComponent {
     // Create Pop-Up Dialog
     let that = this
     let shouldSave = this.evaluationModeSave
-    if (this.presenterDropDownValue !== undefined && this.stageDropDownValue !== undefined
-          && this.presenterDropDownValue !== null && this.stageDropDownValue !== null) 
-    {
-      const result = confirm('Are you sure you want to save Evaluation?', 'Confirm changes')
-      result.then(function (dialogResult) {
-        if (dialogResult && shouldSave) {
-          console.log('Save Eval')
-          that.saveEvaluation()
-          console.log('Saved evaluation session successfully')
-        } else if (dialogResult && !shouldSave) {
-          console.log('Update Eval')
-          that.updateEvaluation()
-          console.log('Updated evaluation session successfully')
+    this.metricsService.getNullEvaluations().subscribe((results) => {
+      for(let evaluation of results) {
+        if(evaluation.presenterUserId.workUserId == this.presenterDropDownValue) {
+          notify('You cannot make another evaluation for someone who is still waiting to be scored', 'error', 3000)
+          return
         }
-      })
-    } else {
-      notify('All fields must have a value!', 'error', 600)
-    }
+        if (this.presenterDropDownValue !== undefined && this.stageDropDownValue !== undefined
+          && this.presenterDropDownValue !== null && this.stageDropDownValue !== null) 
+        {
+          const result = confirm('Are you sure you want to save Evaluation?', 'Confirm changes')
+          result.then(function (dialogResult) {
+            if (dialogResult && shouldSave) {
+              that.saveEvaluation()
+              console.log('Saved evaluation session successfully')
+            } else if (dialogResult && !shouldSave) {
+              that.updateEvaluation()
+              console.log('Updated evaluation session successfully')
+            }
+          })
+        } 
+        else
+          notify('All fields must have a value!', 'error', 1000)
+      }
+    })
   }
 
   determineEvaluation (evaluationResult) {
@@ -191,7 +197,7 @@ export class EvaluationAdminComponent {
       for(let row of selectedData)  {
         if(row.avgTotal == 0) {
           let evalType = evaluationResult > 0 ? "pass" : "fail"
-          notify(`You are trying to ${evalType} an evaluation that hasn't been scored yet`, 'error', 600)
+          notify(`You are trying to ${evalType} an evaluation that hasn't been scored yet`, 'error', 3000)
           return
         }
       }
